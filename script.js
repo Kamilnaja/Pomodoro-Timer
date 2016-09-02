@@ -1,8 +1,8 @@
 (function () {
     "use strict";
     var pomodoro = 0;
-    var pomoTime = 25;
-    var breakTime = 10;
+    var pomoTime = 25 * 60;
+    var breakTime = 5 * 60;
     function startTimer(count) {
         $("#toggle").html("przerwij")
             .on('click', function () {
