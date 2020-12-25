@@ -3,7 +3,9 @@
   background-color: $bgColor;
   color: $color;
   cursor: pointer;
+  font-size: 20px;
   padding: 10px 20px;
+  text-transform: uppercase;
   transition: 0.2s ease-in-out;
 
   &--dimmed {
