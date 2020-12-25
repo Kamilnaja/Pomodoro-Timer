@@ -1,7 +1,7 @@
 import React from "react";
 
 function Header() {
-  return <header className="header">header</header>;
+  return <header className="header">Pomik</header>;
 }
 
 export default Header;

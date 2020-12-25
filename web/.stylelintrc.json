@@ -1,0 +1,39 @@
+{
+  "extends": "stylelint-config-recommended",
+  "plugins": ["stylelint-order", "stylelint-scss"],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
+    "color-hex-case": "lower",
+    "color-hex-length": "short",
+    "custom-property-empty-line-before": "never",
+    "declaration-empty-line-before": "never",
+    "length-zero-no-unit": true,
+    "max-nesting-depth": [
+      2,
+      {
+        "ignore": ["pseudo-classes"]
+      }
+    ],
+    "no-empty-first-line": true,
+    "order/order": ["custom-properties", "declarations"],
+    "order/properties-alphabetical-order": true,
+    "selector-max-pseudo-class": 2,
+    "selector-max-specificity": [
+      "0,3,0",
+      {
+        "ignoreSelectors": [
+          ":hover",
+          ":focus",
+          ":host-context",
+          "::after",
+          "::before",
+          ":after",
+          ":before",
+          ":last-child"
+        ]
+      }
+    ],
+    "string-quotes": "single"
+  }
+}

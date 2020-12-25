@@ -1,8 +1,34 @@
 @import "../../shared/styles/variables.scss";
 
 .timer {
-  background-color: $bgSecondary;
-  height: 500px;
-  max-width: 500px;
+  background-color: $Beijing-3-hex;
   display: grid;
+  padding: 20px;
+  margin: 0 auto;
+  max-width: 900px;
+
+  & &__button-wrapper {
+    display: flex;
+    text-align: center;
+    justify-content: space-evenly;
+  }
+}
+
+.timer__button {
+  background-color: $Beijing-2-hex;
+  border: none;
+  color: $text-primary;
+  padding: 10px 20px;
+
+  &--stop {
+    margin: 0 auto;
+  }
+}
+
+.time {
+  align-items: center;
+  display: flex;
+  font-size: 40px;
+  justify-content: center;
+  min-height: 300px;
 }

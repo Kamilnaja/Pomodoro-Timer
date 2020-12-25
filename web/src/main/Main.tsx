@@ -8,7 +8,10 @@ function Main() {
   return (
     <div className="app">
       <Header></Header>
-      <Timer></Timer>
+      <main>
+        <Timer></Timer>
+      </main>
+      <footer>Hellom I'm footer</footer>
     </div>
   );
 }
