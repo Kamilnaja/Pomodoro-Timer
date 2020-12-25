@@ -2,6 +2,8 @@
 @import "../../node_modules/normalize-scss/sass/normalize/import-now";
 
 .app {
-    background-color: $bgPrimary;
-    height: 100%;
+  background-color: $bgPrimary;
+  display: flex;
+  height: 100%;
+  justify-content: center;
 }

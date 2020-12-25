@@ -1,0 +1,10 @@
+{
+  "htmlWhitespaceSensitivity": "strict",
+  "semi": true,
+  "singleQuote": true,
+  "printWidth": 140,
+  "tabWidth": 2,
+  "trailingComma": "none",
+  "arrowParens": "avoid",
+  "endOfLine": "auto"
+}
