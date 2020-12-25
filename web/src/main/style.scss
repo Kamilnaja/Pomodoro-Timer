@@ -1,0 +1,7 @@
+@import "./../shared/styles/variables.scss";
+@import "../../node_modules/normalize-scss/sass/normalize/import-now";
+
+.app {
+    background-color: $bgPrimary;
+    height: 100%;
+}
