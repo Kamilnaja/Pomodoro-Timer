@@ -1,5 +1,6 @@
 import React from "react";
 import { msToTime } from "../../shared/scripts/utils";
+import { Counter } from "../components/counter/Counter";
 import { Info } from "../components/info/Info";
 import { Time } from "../components/time/Time";
 import { initialState } from "./initialState";
@@ -81,6 +82,7 @@ class Timer extends React.Component<{}, State> {
       this.setState({
         timerState: TimerState.POMODORO_END,
         timerTime: this.state.shortBreakTime,
+        pomodorosInSession: this.state.pomodorosInSession + 1,
       });
     } else if (this.state.timerState === TimerState.BREAK_RUNNING) {
       this.setState({
@@ -94,7 +96,6 @@ class Timer extends React.Component<{}, State> {
   render() {
     return (
       <div className="timer">
-        {this.state.timerState}
         <div className="timer__button-wrapper">
           <button
             className={"timer__button timer__button--mode "}
@@ -115,7 +116,6 @@ class Timer extends React.Component<{}, State> {
             Long Break
           </button>
         </div>
-        <Info currentState={this.state.timerState}></Info>
         <Time time={msToTime(this.state.timerTime)}></Time>
         <button
           className="timer__button timer__button--stop"
@@ -123,6 +123,8 @@ class Timer extends React.Component<{}, State> {
         >
           {this.isAnyTimerRunning() ? "stop" : "start"}
         </button>
+        <Info currentState={this.state.timerState}></Info>
+        <Counter amount={this.state.pomodorosInSession}></Counter>
       </div>
     );
   }
