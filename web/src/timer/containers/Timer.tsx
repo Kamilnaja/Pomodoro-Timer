@@ -1,12 +1,15 @@
 import React from "react";
-import "./style.scss";
-import { State } from "./state";
 import { Time } from "../components/Time/Time";
 import { initialState } from "./initialState";
+import { State } from "./state";
+import "./style.scss";
 
 class Timer extends React.Component<{}, State> {
   interval: any;
   refreshRate = 100;
+  pomodoroTime = 25 * 60 * 1000;
+  shortBreakTime = 5 * 60 * 1000;
+  longBreakTime = 15 * 60 * 1000;
 
   constructor(props: any) {
     super(props);
@@ -24,7 +27,27 @@ class Timer extends React.Component<{}, State> {
     if (this.state.isRunning) {
       this.setState({ isRunning: false });
     }
+    this.clearIntervalAndSetTime();
+  };
+
+  clickPomodoro = () => {
+    this.clearIntervalAndSetTime(this.pomodoroTime);
+  };
+
+  clickShortBreak = () => {
+    this.clearIntervalAndSetTime(this.shortBreakTime);
+  };
+
+  clickLongBreak = () => {
+    this.clearIntervalAndSetTime(this.longBreakTime);
+  };
+
+  clearIntervalAndSetTime = (time?: number) => {
     clearInterval(this.interval);
+    if (time) {
+      this.setState({ time });
+    }
+    this.setState({ isRunning: false });
   };
 
   count = () => {
@@ -42,13 +65,20 @@ class Timer extends React.Component<{}, State> {
               "timer__button timer__button--mode " +
               (this.state.isRunning ? "timer__button--dimmed" : "")
             }
+            onClick={this.clickPomodoro}
           >
             Pomodoro
           </button>
-          <button className="timer__button timer__button--mode">
+          <button
+            className="timer__button timer__button--mode"
+            onClick={this.clickShortBreak}
+          >
             Short Break
           </button>
-          <button className="timer__button timer__button--mode">
+          <button
+            className="timer__button timer__button--mode"
+            onClick={this.clickLongBreak}
+          >
             Long Break
           </button>
         </div>
