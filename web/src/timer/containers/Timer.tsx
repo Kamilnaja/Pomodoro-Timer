@@ -29,9 +29,9 @@ class Timer extends React.Component<{}, State> {
   };
 
   startCounter = () => {
-    if (this.state.timerState !== TimerState.POMODORO_RUNNING) {
+    if (this.state.timerState === TimerState.BREAK_END) {
       this.setState({ timerState: TimerState.POMODORO_RUNNING });
-    } else {
+    } else if (this.state.timerState === TimerState.POMODORO_END) {
       this.setState({ timerState: TimerState.BREAK_RUNNING });
     }
     this.count();
@@ -65,9 +65,17 @@ class Timer extends React.Component<{}, State> {
     });
   };
 
-  isAnyTimerRunning = () =>
-    this.state.timerState === TimerState.BREAK_RUNNING ||
-    this.state.timerState === TimerState.POMODORO_RUNNING;
+  isAnyTimerRunning = () => {
+    console.log(
+      this.state.timerState === TimerState.BREAK_RUNNING ||
+        this.state.timerState === TimerState.POMODORO_RUNNING
+    );
+
+    return (
+      this.state.timerState === TimerState.BREAK_RUNNING ||
+      this.state.timerState === TimerState.POMODORO_RUNNING
+    );
+  };
 
   clearIntervalAndSetTime = (time?: number) => {
     clearInterval(this.interval);
@@ -104,6 +112,7 @@ class Timer extends React.Component<{}, State> {
   render() {
     return (
       <div className="timer">
+        {this.state.timerState}
         <div className="timer__button-wrapper">
           <button
             className={"timer__button timer__button--mode "}
