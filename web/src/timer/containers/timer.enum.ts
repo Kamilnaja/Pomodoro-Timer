@@ -1,0 +1,6 @@
+export enum TimerState {
+  POMODORO_RUNNING,
+  BREAK_RUNNING,
+  POMODORO_END,
+  BREAK_END,
+}
