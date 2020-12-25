@@ -1,0 +1,8 @@
+@mixin button($color: false, $bgColor: false) {
+  border: none;
+  background-color: $bgColor;
+  color: $bgColor;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: 1s ease-in-out;
+}

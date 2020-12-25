@@ -1,4 +1,4 @@
-@import "../../shared/styles/variables.scss";
+@import "../../shared/styles/mixins/mixins.scss";
 
 .timer {
   background-color: $Beijing-3-hex;
@@ -15,10 +15,8 @@
 }
 
 .timer__button {
-  background-color: $Beijing-2-hex;
-  border: none;
+  @include button($color: $text-primary, $bgColor: $button-bg);
   color: $text-primary;
-  padding: 10px 20px;
 
   &--stop {
     margin: 0 auto;
@@ -26,9 +24,9 @@
 }
 
 .time {
+  @include font-fira-sans($size: 70px);
   align-items: center;
   display: flex;
-  font-size: 40px;
   justify-content: center;
   min-height: 300px;
 }
