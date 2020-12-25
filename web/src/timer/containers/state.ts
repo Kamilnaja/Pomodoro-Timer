@@ -1,4 +1,10 @@
+import { TimerState } from "./timer.enum";
+
 export interface State {
-  isRunning: boolean;
-  time: number;
+  timerState: TimerState;
+  pomodorosInSession: 0;
+  pomodoroTime: number;
+  shortBreakTime: number;
+  longBreakTime: number;
+  timerTime: number;
 }
