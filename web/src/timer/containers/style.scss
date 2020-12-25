@@ -14,19 +14,12 @@
   }
 }
 
-.timer__button {
-  @include button($color: $text-primary, $bgColor: $button-bg);
-  color: $text-primary;
+.timer {
+  & &__button {
+    @include button($color: $text-primary, $bgColor: $button-bg);
 
-  &--stop {
-    margin: 0 auto;
+    &--stop {
+      margin: 0 auto;
+    }
   }
-}
-
-.time {
-  @include font-fira-sans($size: 70px);
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  min-height: 300px;
 }

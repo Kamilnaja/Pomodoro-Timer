@@ -1,8 +1,12 @@
 @mixin button($color: false, $bgColor: false) {
   border: none;
   background-color: $bgColor;
-  color: $bgColor;
+  color: $color;
   cursor: pointer;
   padding: 10px 20px;
-  transition: 1s ease-in-out;
+  transition: 0.2s ease-in-out;
+
+  &--dimmed {
+    background-color: darken($color: $bgColor, $amount: 0.5);
+  }
 }
