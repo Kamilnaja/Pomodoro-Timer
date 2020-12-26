@@ -1,7 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { initialState } from "../store/state/initialState";
-import { savePomodoroThunk } from "../../main/store/thunk/asyncFnMiddleware";
+import {
+  getPomodorosThunk,
+  savePomodoroThunk,
+} from "../../main/store/thunk/main.thunk";
 import { msToTime } from "../../shared/scripts/utils";
 import { Counter } from "../components/counter/Counter";
 import { Info } from "../components/info/Info";
@@ -18,6 +21,10 @@ class Timer extends React.Component<TimerProps, State> {
   constructor(props: any) {
     super(props);
     this.state = initialState;
+  }
+
+  componentDidMount() {
+    this.props.handleGetPomodoros();
   }
 
   componentDidUpdate = () => {
@@ -87,7 +94,7 @@ class Timer extends React.Component<TimerProps, State> {
         timerTime: this.state.shortBreakTime,
         pomodorosInSession: this.state.pomodorosInSession + 1,
       });
-      this.props.handleSetPomi();
+      this.props.handleSavePomodoro();
     } else if (this.state.timerState === TimerState.BREAK_RUNNING) {
       this.setState({
         timerState: TimerState.BREAK_END,
@@ -135,7 +142,8 @@ class Timer extends React.Component<TimerProps, State> {
 }
 
 const mapDispatchToProps = {
-  handleSetPomi: savePomodoroThunk,
+  handleSavePomodoro: savePomodoroThunk,
+  handleGetPomodoros: getPomodorosThunk,
 };
 
 export default connect(null, mapDispatchToProps)(Timer);

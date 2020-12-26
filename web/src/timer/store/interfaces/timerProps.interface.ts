@@ -1,5 +1,6 @@
 export interface TimerProps {
   dispatch?: Function;
   store: any;
-  handleSetPomi: Function;
+  handleSavePomodoro: Function;
+  handleGetPomodoros: Function;
 }
