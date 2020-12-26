@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 import Main from "./main/Main";
 import reportWebVitals from "./reportWebVitals";
-import { Provider } from "react-redux";
 import { store } from "./shared/store/reducers/reducer";
 
 ReactDOM.render(

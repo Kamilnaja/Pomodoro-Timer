@@ -1,14 +1,16 @@
 import React from "react";
+import { connect } from "react-redux";
 import { msToTime } from "../../shared/scripts/utils";
 import { Counter } from "../components/counter/Counter";
 import { Info } from "../components/info/Info";
 import { Time } from "../components/time/Time";
+import { MainActions } from "./../../main/store/actions/actions";
 import { initialState } from "./initialState";
 import { State } from "./state";
 import "./style.scss";
 import { TimerState } from "./timer.enum";
 
-class Timer extends React.Component<{}, State> {
+class Timer extends React.Component<{ store: any }, State> {
   interval: any;
   refreshRate = 500;
 
@@ -84,6 +86,9 @@ class Timer extends React.Component<{}, State> {
         timerTime: this.state.shortBreakTime,
         pomodorosInSession: this.state.pomodorosInSession + 1,
       });
+      this.props.store.dispatch({
+        type: MainActions.SAVE_POMODORO,
+      });
     } else if (this.state.timerState === TimerState.BREAK_RUNNING) {
       this.setState({
         timerState: TimerState.BREAK_END,
@@ -93,8 +98,8 @@ class Timer extends React.Component<{}, State> {
     this.clearIntervalAndSetTime(0);
   }
 
-  render() {
-    return (
+  render = () => (
+    <main>
       <div className="timer">
         <div className="timer__button-wrapper">
           <button
@@ -126,8 +131,8 @@ class Timer extends React.Component<{}, State> {
         <Info currentState={this.state.timerState}></Info>
         <Counter amount={this.state.pomodorosInSession}></Counter>
       </div>
-    );
-  }
+    </main>
+  );
 }
 
-export default Timer;
+export default connect()(Timer);
