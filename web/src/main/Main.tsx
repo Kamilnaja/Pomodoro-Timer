@@ -3,8 +3,7 @@ import Header from "../header/Header";
 import "./style.scss";
 import { store } from "./../shared/store/reducers/reducer";
 import { State } from "../timer/store/interfaces/state.interface";
-import Timer from "../timer/containers/timer";
-
+import Timer from "../timer/containers/Timer";
 // Wrapper for whole app
 class Main extends React.Component<{}, State> {
   componentDidMount() {

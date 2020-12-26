@@ -1,16 +1,9 @@
-import express from "express";
-const app = express();
+import express from 'express';
+export const app = express();
 const port = 8080; // default port to listen
+import { router as pomodoroRoutes } from './controllers/pomodoro.controller';
 
-app.get("/", (req, res) => {
-  res.send("Hello world!");
-});
-
-// add new pomodoro
-app.post("/pomodoros", (req, res) => {});
-
-// get all pomodoros
-app.get("/pomodoros", (req, res) => {});
+app.use('/', pomodoroRoutes);
 
 // start the Express server
 app.listen(port, () => {
