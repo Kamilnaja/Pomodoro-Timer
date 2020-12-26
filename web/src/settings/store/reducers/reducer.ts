@@ -1,4 +1,4 @@
-import { Action } from "../../../shared/store/interfaces/action";
+import { Action } from "../../../shared/store/interfaces/action.interface";
 import { SettingsActions } from "../actions/actions";
 
 interface State {

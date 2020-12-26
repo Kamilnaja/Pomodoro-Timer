@@ -1,11 +1,11 @@
-import { Action } from "../../../shared/store/interfaces/action";
+import { Action } from "../../../shared/store/interfaces/action.interface";
 import { MainActions } from "../actions/actions";
 import { Reducer } from "../interfaces/reducer.interface";
 
 export const initialState: Reducer = {
   isLoading: false,
-  isError: false,
-  data: [],
+  error: "",
+  pomodoros: [],
 };
 
 export const main = (state = initialState, action: Action) => {
@@ -19,13 +19,30 @@ export const main = (state = initialState, action: Action) => {
       return {
         ...state,
         isLoading: false,
-        isError: false,
         data: action.payload,
       };
     case MainActions.SAVE_POMODORO_ERROR:
       return {
         ...state,
-        isError: true,
+        error: action.payload,
+        isLoading: false,
+      };
+
+    case MainActions.GET_POMODOROS:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case MainActions.GET_POMODOROS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        data: action.payload,
+      };
+    case MainActions.GET_POMODOROS_ERROR:
+      return {
+        ...state,
+        error: action.payload,
         isLoading: false,
       };
     default:
