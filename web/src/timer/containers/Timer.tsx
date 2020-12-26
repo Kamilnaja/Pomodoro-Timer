@@ -10,7 +10,13 @@ import { State } from "./state";
 import "./style.scss";
 import { TimerState } from "./timer.enum";
 
-class Timer extends React.Component<{ store: any }, State> {
+interface TimerProps {
+  dispatch?: any;
+  store: any;
+  buy: () => any;
+}
+
+class Timer extends React.Component<TimerProps, State> {
   interval: any;
   refreshRate = 500;
 
@@ -47,6 +53,7 @@ class Timer extends React.Component<{ store: any }, State> {
   };
 
   startNewBreak = (time: number) => {
+    this.props.buy();
     this.clearIntervalAndSetTime(time);
     this.setState({
       timerState: TimerState.POMODORO_END,
@@ -135,4 +142,9 @@ class Timer extends React.Component<{ store: any }, State> {
   );
 }
 
-export default connect()(Timer);
+const mapDispatchToProps = (dispatch: any, ownProps: any) => {
+  const dispatchFunction = () => dispatch(MainActions.SAVE_POMODORO);
+  return { buy: dispatchFunction };
+};
+
+export default connect(null, mapDispatchToProps)(Timer);

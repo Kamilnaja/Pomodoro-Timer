@@ -1,12 +1,16 @@
 import React from "react";
-import { combineReducers } from "redux";
 import Header from "../header/Header";
 import Timer from "../timer/containers/Timer";
 import "./style.scss";
 import { store } from "./../shared/store/reducers/reducer";
+import { State } from "../timer/containers/state";
 
 // Wrapper for whole app
-class Main extends React.Component {
+class Main extends React.Component<{}, State> {
+  componentDidMount() {
+    // this.props.fetchStats();
+  }
+
   render = () => (
     <div className="app">
       <Header></Header>
