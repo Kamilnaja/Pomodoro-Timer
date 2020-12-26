@@ -1,5 +1,5 @@
 export interface TimerProps {
-  dispatch?: any;
+  dispatch?: Function;
   store: any;
   handleSetPomi: Function;
 }

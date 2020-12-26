@@ -1,5 +1,5 @@
-import { State } from "./state";
-import { TimerState } from "./timer.enum";
+import { TimerState } from "../enums/timer.enum";
+import { State } from "../interfaces/state.interface";
 
 export const initialState: State = {
   timerState: TimerState.BREAK_END,

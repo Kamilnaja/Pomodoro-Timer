@@ -1,9 +1,9 @@
 import React from "react";
 import Header from "../header/Header";
-import Timer from "../timer/containers/Timer";
 import "./style.scss";
 import { store } from "./../shared/store/reducers/reducer";
-import { State } from "../timer/containers/state";
+import { State } from "../timer/store/interfaces/state.interface";
+import Timer from "../timer/containers/timer";
 
 // Wrapper for whole app
 class Main extends React.Component<{}, State> {

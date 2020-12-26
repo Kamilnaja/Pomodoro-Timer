@@ -7,7 +7,7 @@ import {
 
 const API_URL = "/pomodoros/";
 
-export function fetchStats(dispatch: any, getState: any) {
+export function fetchStats(dispatch: any) {
   fetch(API_URL)
     .then((response) => response.json())
     .then((data) => dispatch({ type: "todos/todosLoaded", payload: data }));
@@ -27,7 +27,7 @@ function handleErrors(response: any) {
 }
 
 export function savePomodoroThunk() {
-  return (dispatch: any) => {
+  return (dispatch: Function) => {
     dispatch(savePomodoro());
     return fetchPomodoros()
       .then(handleErrors)

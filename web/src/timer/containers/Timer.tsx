@@ -1,15 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
+import { initialState } from "../store/state/initialState";
 import { savePomodoroThunk } from "../../main/store/thunk/asyncFnMiddleware";
 import { msToTime } from "../../shared/scripts/utils";
 import { Counter } from "../components/counter/Counter";
 import { Info } from "../components/info/Info";
 import { Time } from "../components/time/Time";
-import { initialState } from "./initialState";
-import { State } from "./state";
-import "./style.scss";
-import { TimerState } from "./timer.enum";
-import { TimerProps } from "./TimerProps.interface";
+import { TimerState } from "../store/enums/timer.enum";
+import { State } from "../store/interfaces/state.interface";
+import { TimerProps } from "../store/interfaces/timerProps.interface";
+import "./timer.scss";
 
 class Timer extends React.Component<TimerProps, State> {
   interval: any;
