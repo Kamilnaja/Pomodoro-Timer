@@ -1,20 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
+import { savePomodoroThunk } from "../../main/store/thunk/asyncFnMiddleware";
 import { msToTime } from "../../shared/scripts/utils";
 import { Counter } from "../components/counter/Counter";
 import { Info } from "../components/info/Info";
 import { Time } from "../components/time/Time";
-import { MainActions } from "./../../main/store/actions/actions";
 import { initialState } from "./initialState";
 import { State } from "./state";
 import "./style.scss";
 import { TimerState } from "./timer.enum";
-
-interface TimerProps {
-  dispatch?: any;
-  store: any;
-  buy: () => any;
-}
+import { TimerProps } from "./TimerProps.interface";
 
 class Timer extends React.Component<TimerProps, State> {
   interval: any;
@@ -53,7 +48,6 @@ class Timer extends React.Component<TimerProps, State> {
   };
 
   startNewBreak = (time: number) => {
-    this.props.buy();
     this.clearIntervalAndSetTime(time);
     this.setState({
       timerState: TimerState.POMODORO_END,
@@ -93,9 +87,7 @@ class Timer extends React.Component<TimerProps, State> {
         timerTime: this.state.shortBreakTime,
         pomodorosInSession: this.state.pomodorosInSession + 1,
       });
-      this.props.store.dispatch({
-        type: MainActions.SAVE_POMODORO,
-      });
+      this.props.handleSetPomi();
     } else if (this.state.timerState === TimerState.BREAK_RUNNING) {
       this.setState({
         timerState: TimerState.BREAK_END,
@@ -142,9 +134,8 @@ class Timer extends React.Component<TimerProps, State> {
   );
 }
 
-const mapDispatchToProps = (dispatch: any, ownProps: any) => {
-  const dispatchFunction = () => dispatch(MainActions.SAVE_POMODORO);
-  return { buy: dispatchFunction };
+const mapDispatchToProps = {
+  handleSetPomi: savePomodoroThunk,
 };
 
 export default connect(null, mapDispatchToProps)(Timer);
