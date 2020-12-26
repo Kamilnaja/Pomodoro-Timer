@@ -1,14 +1,14 @@
-@mixin button($color: false, $bgColor: false) {
+@mixin button($color: false, $bgColor: false, $size: false) {
   border: none;
   background-color: $bgColor;
   color: $color;
   cursor: pointer;
-  font-size: 20px;
+  font-size: $size;
   padding: 10px 20px;
   text-transform: uppercase;
   transition: 0.2s ease-in-out;
 
   &--dimmed {
-    background-color: darken($color: $bgColor, $amount: 0.5);
+    background-color: grey;
   }
 }
