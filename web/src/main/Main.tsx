@@ -11,7 +11,7 @@ function Main() {
       <main>
         <Timer></Timer>
       </main>
-      <footer>Hellom I'm footer</footer>
+      <footer>Hello I'm footer</footer>
     </div>
   );
 }
