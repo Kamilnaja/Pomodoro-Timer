@@ -1,6 +1,7 @@
 import express from 'express';
 import router from './controllers/pomodoro.controller';
 import cors from 'cors';
+import db from './db/db';
 export const app = express();
 
 const port = 8080; // default port to listen

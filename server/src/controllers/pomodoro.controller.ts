@@ -3,7 +3,7 @@ import { Pomodoro } from '../business/pomodoro';
 import TodayStatistics from '../../../web/src/shared/store/interfaces/todayStatistics.interface';
 const router = express.Router();
 
-// todo - naive implementation
+// todo - naive implementation, fix me
 let id = 0;
 const pomodoros: Pomodoro[] = [];
 
