@@ -1,31 +1,27 @@
 import React from "react";
+import { connect } from "react-redux";
+import { savePomodoroThunk } from "../../main/store/thunk/main.thunk";
 import { msToTime } from "../../shared/scripts/utils";
 import { Info } from "../components/info/Info";
-import { Time } from "../components/Time/Time";
-import { initialState } from "./initialState";
-import { State } from "./state";
-import "./style.scss";
-import { TimerState } from "./timer.enum";
+import { Time } from "../components/time/Time";
+import { TimerState } from "../store/enums/timer.enum";
+import { State } from "../store/interfaces/state.interface";
+import { TimerProps } from "../store/interfaces/timerProps.interface";
+import { timerState } from "../store/state/timerState";
+import "./timer.scss";
+import "../../shared/settings/initialConfig";
+import { initialConfig } from "../../shared/settings/initialConfig";
 
-class Timer extends React.Component<{}, State> {
+class Timer extends React.Component<TimerProps, State> {
   interval: any;
-  refreshRate = 500;
 
   constructor(props: any) {
     super(props);
-    this.state = initialState;
+    this.state = timerState;
   }
 
   componentDidUpdate = () => {
-    let info: string;
-    if (this.state.timerState === TimerState.POMODORO_RUNNING) {
-      info = "Time to work";
-    } else if (this.state.timerState === TimerState.BREAK_RUNNING) {
-      info = "Rest";
-    } else {
-      info = "";
-    }
-    document.title = `${info}: ${msToTime(this.state.timerTime)}`;
+    document.title = `${msToTime(this.state.timerTime)}`;
   };
 
   startCounter = () => {
@@ -44,33 +40,21 @@ class Timer extends React.Component<{}, State> {
     this.clearIntervalAndSetTime();
   };
 
-  clickNewPomodoro = () => {
-    this.clearIntervalAndSetTime(this.state.pomodoroTime);
+  startNewPomodoro = () => {
+    this.clearIntervalAndSetTime(initialConfig.pomodoroTime);
     this.setState({
       timerState: TimerState.BREAK_END,
     });
   };
 
-  clickNewShortBreak = () => {
-    this.clearIntervalAndSetTime(this.state.shortBreakTime);
-    this.setState({
-      timerState: TimerState.POMODORO_END,
-    });
-  };
-
-  clickNewLongBreak = () => {
-    this.clearIntervalAndSetTime(this.state.longBreakTime);
+  startNewBreak = (time: number) => {
+    this.clearIntervalAndSetTime(time);
     this.setState({
       timerState: TimerState.POMODORO_END,
     });
   };
 
   isAnyTimerRunning = () => {
-    console.log(
-      this.state.timerState === TimerState.BREAK_RUNNING ||
-        this.state.timerState === TimerState.POMODORO_RUNNING
-    );
-
     return (
       this.state.timerState === TimerState.BREAK_RUNNING ||
       this.state.timerState === TimerState.POMODORO_RUNNING
@@ -88,52 +72,53 @@ class Timer extends React.Component<{}, State> {
     this.interval = setInterval(() => {
       if (this.state.timerTime !== 0) {
         this.setState({
-          timerTime: this.state.timerTime - this.refreshRate,
+          timerTime: this.state.timerTime - initialConfig.refreshRate,
         });
       } else {
         this.stopCounting();
       }
-    }, this.refreshRate);
+    }, initialConfig.refreshRate);
   };
 
   private stopCounting() {
     if (this.state.timerState === TimerState.POMODORO_RUNNING) {
       this.setState({
         timerState: TimerState.POMODORO_END,
+        timerTime: initialConfig.shortBreakTime,
       });
+      this.props.handleSavePomodoro();
     } else if (this.state.timerState === TimerState.BREAK_RUNNING) {
       this.setState({
         timerState: TimerState.BREAK_END,
+        timerTime: initialConfig.pomodoroTime,
       });
     }
     this.clearIntervalAndSetTime(0);
   }
 
-  render() {
-    return (
+  render = () => (
+    <main>
       <div className="timer">
-        {this.state.timerState}
         <div className="timer__button-wrapper">
           <button
             className={"timer__button timer__button--mode "}
-            onClick={this.clickNewPomodoro}
+            onClick={this.startNewPomodoro}
           >
             Pomodoro
           </button>
           <button
             className="timer__button timer__button--mode"
-            onClick={this.clickNewShortBreak}
+            onClick={() => this.startNewBreak(initialConfig.shortBreakTime)}
           >
             Short Break
           </button>
           <button
             className="timer__button timer__button--mode"
-            onClick={this.clickNewLongBreak}
+            onClick={() => this.startNewBreak(initialConfig.longBreakTime)}
           >
             Long Break
           </button>
         </div>
-        <Info currentState={this.state.timerState}></Info>
         <Time time={msToTime(this.state.timerTime)}></Time>
         <button
           className="timer__button timer__button--stop"
@@ -141,9 +126,14 @@ class Timer extends React.Component<{}, State> {
         >
           {this.isAnyTimerRunning() ? "stop" : "start"}
         </button>
+        <Info currentState={this.state.timerState}></Info>
       </div>
-    );
-  }
+    </main>
+  );
 }
 
-export default Timer;
+const mapDispatchToProps = {
+  handleSavePomodoro: savePomodoroThunk,
+};
+
+export default connect(null, mapDispatchToProps)(Timer);

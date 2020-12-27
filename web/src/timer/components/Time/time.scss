@@ -1,0 +1,9 @@
+@import "../../../shared/styles/mixins/mixins.scss";
+
+.time {
+  @include font-fira-sans($size: 70px);
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 150px;
+}

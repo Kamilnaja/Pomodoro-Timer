@@ -1,0 +1,10 @@
+@import "../../node_modules/normalize-scss/sass/normalize/import-now";
+@import "../shared/styles/mixins/mixins.scss";
+
+body {
+  background-color: $bg-primary;
+}
+
+.app {
+  height: 100vh;
+}

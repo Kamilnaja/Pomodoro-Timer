@@ -1,0 +1,17 @@
+@import "./../shared/styles/mixins/mixins.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  margin: 10px auto 0;
+  max-width: 960px;
+
+  & &__title {
+    @include font-fira-sans($colour: $button-bg, $size: 20px);
+  }
+}
+
+.button {
+  @include button($color: white, $bgColor: transparent);
+}
