@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { initialState } from "../store/state/initialState";
 import { savePomodoroThunk } from "../../main/store/thunk/main.thunk";
 import { msToTime } from "../../shared/scripts/utils";
 import { Info } from "../components/info/Info";
@@ -8,15 +7,17 @@ import { Time } from "../components/time/Time";
 import { TimerState } from "../store/enums/timer.enum";
 import { State } from "../store/interfaces/state.interface";
 import { TimerProps } from "../store/interfaces/timerProps.interface";
+import { timerState } from "../store/state/timerState";
 import "./timer.scss";
+import "../../shared/settings/initialConfig";
+import { initialConfig } from "../../shared/settings/initialConfig";
 
 class Timer extends React.Component<TimerProps, State> {
   interval: any;
-  refreshRate = 500;
 
   constructor(props: any) {
     super(props);
-    this.state = initialState;
+    this.state = timerState;
   }
 
   componentDidUpdate = () => {
@@ -40,7 +41,7 @@ class Timer extends React.Component<TimerProps, State> {
   };
 
   startNewPomodoro = () => {
-    this.clearIntervalAndSetTime(this.state.pomodoroTime);
+    this.clearIntervalAndSetTime(initialConfig.pomodoroTime);
     this.setState({
       timerState: TimerState.BREAK_END,
     });
@@ -71,26 +72,25 @@ class Timer extends React.Component<TimerProps, State> {
     this.interval = setInterval(() => {
       if (this.state.timerTime !== 0) {
         this.setState({
-          timerTime: this.state.timerTime - this.refreshRate,
+          timerTime: this.state.timerTime - initialConfig.refreshRate,
         });
       } else {
         this.stopCounting();
       }
-    }, this.refreshRate);
+    }, initialConfig.refreshRate);
   };
 
   private stopCounting() {
     if (this.state.timerState === TimerState.POMODORO_RUNNING) {
       this.setState({
         timerState: TimerState.POMODORO_END,
-        timerTime: this.state.shortBreakTime,
-        pomodorosInSession: this.state.pomodorosInSession + 1,
+        timerTime: initialConfig.shortBreakTime,
       });
       this.props.handleSavePomodoro();
     } else if (this.state.timerState === TimerState.BREAK_RUNNING) {
       this.setState({
         timerState: TimerState.BREAK_END,
-        timerTime: this.state.pomodoroTime,
+        timerTime: initialConfig.pomodoroTime,
       });
     }
     this.clearIntervalAndSetTime(0);
@@ -108,13 +108,13 @@ class Timer extends React.Component<TimerProps, State> {
           </button>
           <button
             className="timer__button timer__button--mode"
-            onClick={() => this.startNewBreak(this.state.shortBreakTime)}
+            onClick={() => this.startNewBreak(initialConfig.shortBreakTime)}
           >
             Short Break
           </button>
           <button
             className="timer__button timer__button--mode"
-            onClick={() => this.startNewBreak(this.state.longBreakTime)}
+            onClick={() => this.startNewBreak(initialConfig.longBreakTime)}
           >
             Long Break
           </button>
