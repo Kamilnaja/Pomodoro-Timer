@@ -36,7 +36,7 @@ export const main = (state = initialState, action: Action) => {
       return {
         ...state,
         isLoading: false,
-        pomodorosDoneToday: action.payload.quantity,
+        pomodorosDoneToday: action.payload.pomodorosDoneToday,
       };
     case MainActions.GET_TODAY_STATISTICS_ERROR:
       return {
