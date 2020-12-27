@@ -2,3 +2,4 @@ node_modules
 web/.eslintcache
 package-lock.json
 server/dist/
+server/pomodoros1.sqlite
