@@ -3,18 +3,13 @@ import { connect } from "react-redux";
 import { MainState } from "../../main/store/interfaces/mainState.interface";
 import { StatsComponent } from "../components/StatsComponent";
 
-// Wrapper for whole app
-class StatsContainer extends React.Component<{ pomodorosDoneToday: number }> {
-  render = () => (
-    <StatsComponent
-      pomodorosDoneToday={this.props.pomodorosDoneToday}
-    ></StatsComponent>
-  );
+class StatsContainer extends React.Component<{ stats: MainState }> {
+  render = () => <StatsComponent stats={this.props.stats}></StatsComponent>;
 }
 
 function mapStateToProps(state: { main: MainState }) {
-  const { pomodorosDoneToday } = state.main;
-  return { pomodorosDoneToday };
+  const stats = state.main;
+  return { stats };
 }
 
 export default connect(mapStateToProps)(StatsContainer);
