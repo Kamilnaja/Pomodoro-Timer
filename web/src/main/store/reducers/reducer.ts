@@ -1,11 +1,11 @@
 import { Action } from "../../../shared/store/interfaces/action.interface";
 import { MainActions } from "../actions/actions";
-import { Reducer } from "../interfaces/reducer.interface";
+import { MainReducer } from "../interfaces/mainReducer.interface";
 
-export const initialState: Reducer = {
+export const initialState: MainReducer = {
   isLoading: false,
   error: "",
-  pomodoros: [],
+  quantity: 0,
 };
 
 export const main = (state = initialState, action: Action) => {
@@ -27,19 +27,18 @@ export const main = (state = initialState, action: Action) => {
         error: action.payload,
         isLoading: false,
       };
-
-    case MainActions.GET_POMODOROS:
+    case MainActions.GET_TODAY_STATISTICS:
       return {
         ...state,
         isLoading: true,
       };
-    case MainActions.GET_POMODOROS_SUCCESS:
+    case MainActions.GET_TODAY_STATISTICS_SUCCESS:
       return {
         ...state,
         isLoading: false,
         data: action.payload,
       };
-    case MainActions.GET_POMODOROS_ERROR:
+    case MainActions.GET_TODAY_STATISTICS_ERROR:
       return {
         ...state,
         error: action.payload,

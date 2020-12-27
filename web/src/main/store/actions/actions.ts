@@ -1,11 +1,13 @@
+import TodayStatistics from "./../../../shared/store/interfaces/todayStatistics.interface";
+
 export enum MainActions {
   SAVE_POMODORO = "SAVE_POMODORO",
   SAVE_POMODORO_SUCCESS = "SAVE_POMODORO_SUCCESS",
   SAVE_POMODORO_ERROR = "SAVE_POMODORO_ERROR",
 
-  GET_POMODOROS = "GET_POMODOROS",
-  GET_POMODOROS_SUCCESS = "GET_POMODOROS_SUCCESS",
-  GET_POMODOROS_ERROR = "GET_POMODOROS_ERROR",
+  GET_TODAY_STATISTICS = "GET_TODAY_STATISTICS",
+  GET_TODAY_STATISTICS_SUCCESS = "GET_TODAY_STATISTICS_SUCCESS",
+  GET_TODAY_STATISTICS_ERROR = "GET_TODAY_STATISTICS_ERROR",
 }
 
 export function savePomodoro() {
@@ -27,21 +29,22 @@ export function savePomodoroError(error: any) {
   };
 }
 
-export function getPomodoros() {
+export function getTodayStatistics() {
   return {
-    type: MainActions.GET_POMODOROS,
+    type: MainActions.GET_TODAY_STATISTICS,
   };
 }
 
-export function getPomodorosSuccess() {
+export function getTodayStatisticsSuccess(payload: TodayStatistics) {
   return {
-    type: MainActions.GET_POMODOROS_SUCCESS,
+    type: MainActions.GET_TODAY_STATISTICS_SUCCESS,
+    payload,
   };
 }
 
-export function getPomodorosError(error: any) {
+export function getTodayStatisticsError(error: any) {
   return {
-    type: MainActions.GET_POMODOROS_ERROR,
+    type: MainActions.GET_TODAY_STATISTICS_ERROR,
     error,
   };
 }

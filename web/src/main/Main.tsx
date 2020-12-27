@@ -1,23 +1,31 @@
 import React from "react";
 import Header from "../header/Header";
-import "./main.scss";
-import { store } from "./../shared/store/reducers/reducer";
-import { State } from "../timer/store/interfaces/state.interface";
 import Timer from "../timer/containers/Timer";
+import { State } from "../timer/store/interfaces/state.interface";
+import "./main.scss";
+import StatsContainer from "../stats/containers/StatsContainer";
+import { connect } from "react-redux";
+import { getPomodorosThunk } from "./store/thunk/main.thunk";
+import { MainProps } from "./store/interfaces/mainProps.interface";
 
 // Wrapper for whole app
-class Main extends React.Component<{}, State> {
+class Main extends React.Component<MainProps, State> {
   componentDidMount() {
-    // this.props.fetchStats();
+    this.props.handleGetTodayStats();
   }
 
   render = () => (
     <div className="app">
       <Header></Header>
-      <Timer store={store}></Timer>
+      <Timer></Timer>
+      <StatsContainer></StatsContainer>
       <footer>Hello I'm footer</footer>
     </div>
   );
 }
 
-export default Main;
+const mapDispatchToProps = {
+  handleGetTodayStats: getPomodorosThunk,
+};
+
+export default connect(null, mapDispatchToProps)(Main);

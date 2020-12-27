@@ -1,14 +1,11 @@
 import express from 'express';
 import { Pomodoro } from '../business/pomodoro';
+import TodayStatistics from '../../../web/src/shared/store/interfaces/todayStatistics.interface';
 export const router = express.Router();
 
 // todo - naive implementation
 let id = 0;
 const pomodoros: Pomodoro[] = [];
-
-router.get('/', (req, res) => {
-  res.send('Hello world!');
-});
 
 // add new pomodoro
 router.post('/pomodoros', (req, res) => {
@@ -18,7 +15,10 @@ router.post('/pomodoros', (req, res) => {
   res.send('SUCCES');
 });
 
-// get all pomodoros
+// get number of pomodoros
 router.get('/pomodoros', (req, res) => {
-  res.json(pomodoros);
+  const response: TodayStatistics = {
+    quantity: pomodoros.length
+  };
+  res.json(response);
 });

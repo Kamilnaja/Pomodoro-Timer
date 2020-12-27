@@ -1,12 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { initialState } from "../store/state/initialState";
-import {
-  getPomodorosThunk,
-  savePomodoroThunk,
-} from "../../main/store/thunk/main.thunk";
+import { savePomodoroThunk } from "../../main/store/thunk/main.thunk";
 import { msToTime } from "../../shared/scripts/utils";
-import { Counter } from "../components/counter/Counter";
 import { Info } from "../components/info/Info";
 import { Time } from "../components/time/Time";
 import { TimerState } from "../store/enums/timer.enum";
@@ -21,10 +17,6 @@ class Timer extends React.Component<TimerProps, State> {
   constructor(props: any) {
     super(props);
     this.state = initialState;
-  }
-
-  componentDidMount() {
-    this.props.handleGetPomodoros();
   }
 
   componentDidUpdate = () => {
@@ -135,7 +127,6 @@ class Timer extends React.Component<TimerProps, State> {
           {this.isAnyTimerRunning() ? "stop" : "start"}
         </button>
         <Info currentState={this.state.timerState}></Info>
-        <Counter amount={this.state.pomodorosInSession}></Counter>
       </div>
     </main>
   );
@@ -143,7 +134,6 @@ class Timer extends React.Component<TimerProps, State> {
 
 const mapDispatchToProps = {
   handleSavePomodoro: savePomodoroThunk,
-  handleGetPomodoros: getPomodorosThunk,
 };
 
 export default connect(null, mapDispatchToProps)(Timer);

@@ -1,7 +1,8 @@
+import TodayStatistics from "../../../shared/store/interfaces/todayStatistics.interface";
 import {
-  getPomodoros,
-  getPomodorosError,
-  getPomodorosSuccess,
+  getTodayStatistics,
+  getTodayStatisticsError,
+  getTodayStatisticsSuccess,
   savePomodoro,
   savePomodoroError,
   savePomodoroSuccess,
@@ -39,11 +40,13 @@ export function savePomodoroThunk() {
 
 export function getPomodorosThunk() {
   return (dispatch: Function) => {
-    dispatch(getPomodoros());
+    dispatch(getTodayStatistics());
 
     return makeGetRequest()
       .then(handleErrors)
-      .then(() => dispatch(getPomodorosSuccess()))
-      .catch((error) => dispatch(getPomodorosError(error)));
+      .then((payload: TodayStatistics) =>
+        dispatch(getTodayStatisticsSuccess(payload))
+      )
+      .catch((error) => dispatch(getTodayStatisticsError(error)));
   };
 }
