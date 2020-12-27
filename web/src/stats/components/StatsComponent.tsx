@@ -1,7 +1,8 @@
 import "./stats.component.scss";
-export const StatsComponent = (props: any) => (
+
+export const StatsComponent = (props: { pomodorosDoneToday: number }) => (
   <div className="stats">
-    <p>Today you have made: {props.amount} pomodoros</p>
-    <p>Finished pomodoros: 0</p>
+    <p>Today you have made: {props.pomodorosDoneToday} pomodoros</p>
+    <p>All finished pomodoros: 0</p>
   </div>
 );

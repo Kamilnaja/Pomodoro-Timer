@@ -44,9 +44,10 @@ export function getPomodorosThunk() {
 
     return makeGetRequest()
       .then(handleErrors)
-      .then((payload: TodayStatistics) =>
-        dispatch(getTodayStatisticsSuccess(payload))
-      )
+      .then((response) => response.json())
+      .then((payload: TodayStatistics) => {
+        return dispatch(getTodayStatisticsSuccess(payload));
+      })
       .catch((error) => dispatch(getTodayStatisticsError(error)));
   };
 }

@@ -1,12 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
 import Header from "../header/Header";
+import StatsContainer from "../stats/containers/StatsContainer";
 import Timer from "../timer/containers/Timer";
 import { State } from "../timer/store/interfaces/state.interface";
 import "./main.scss";
-import StatsContainer from "../stats/containers/StatsContainer";
-import { connect } from "react-redux";
-import { getPomodorosThunk } from "./store/thunk/main.thunk";
 import { MainProps } from "./store/interfaces/mainProps.interface";
+import { getPomodorosThunk } from "./store/thunk/main.thunk";
 
 // Wrapper for whole app
 class Main extends React.Component<MainProps, State> {

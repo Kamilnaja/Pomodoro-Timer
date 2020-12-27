@@ -1,7 +1,7 @@
 import express from 'express';
 import { Pomodoro } from '../business/pomodoro';
 import TodayStatistics from '../../../web/src/shared/store/interfaces/todayStatistics.interface';
-export const router = express.Router();
+const router = express.Router();
 
 // todo - naive implementation
 let id = 0;
@@ -22,3 +22,5 @@ router.get('/pomodoros', (req, res) => {
   };
   res.json(response);
 });
+
+export default router;
