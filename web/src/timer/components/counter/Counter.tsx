@@ -1,7 +1,8 @@
-import "./style.scss";
+import "./counter.scss";
 
 export const Counter = (props: { amount: number }) => (
   <div className="counter">
-    <span>Today you have made: {props.amount} pomodoros</span>
+    <p>Today you have made: {props.amount} pomodoros</p>
+    <p>Finished pomodoros: 0</p>
   </div>
 );

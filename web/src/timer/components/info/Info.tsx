@@ -1,5 +1,5 @@
 import { TimerState } from "../../store/enums/timer.enum";
-import "./style.scss";
+import "./info.scss";
 
 export function Info(props: { currentState: TimerState }) {
   let info = "";
