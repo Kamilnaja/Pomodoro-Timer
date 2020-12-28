@@ -45,7 +45,6 @@ export function getPomodorosThunk() {
     return makeGetRequest()
       .then(handleErrors)
       .then((payload: TodayStatistics) => {
-        console.log(payload);
         return dispatch(getTodayStatisticsSuccess(payload));
       })
       .catch((error) => dispatch(getTodayStatisticsError(error)));
