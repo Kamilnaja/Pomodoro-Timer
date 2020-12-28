@@ -5,7 +5,6 @@ import { MainState } from "../interfaces/mainState.interface";
 export const initialState: MainState = {
   isLoading: false,
   error: "",
-  pomodorosDoneToday: 0,
 };
 
 export const main = (state = initialState, action: Action) => {

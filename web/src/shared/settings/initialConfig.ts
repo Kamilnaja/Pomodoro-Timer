@@ -7,4 +7,5 @@ export const initialConfig: InitialConfig = {
   longBreakTime: 3000,
   pomodoroTime: 3000,
   refreshRate: 1000,
+  apiUrl: "http://localhost:8080/api",
 };

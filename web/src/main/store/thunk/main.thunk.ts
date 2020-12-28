@@ -1,10 +1,8 @@
-import {
-  savePomodoro,
-  savePomodoroError,
-  savePomodoroSuccess,
-} from "../actions/actions";
+import { initialConfig } from "../../../shared/settings/initialConfig";
+import { incrementPomodoros } from "../../../stats/store/actions/stats.actions";
+import { savePomodoro, savePomodoroError } from "../actions/actions";
 // todo - different versions for prod etc
-const API_URL = "http://localhost:8080/api";
+const API_URL = initialConfig.apiUrl;
 
 const makePostRequest = () =>
   fetch(API_URL + "/pomodoros", {
@@ -23,6 +21,8 @@ export const savePomodoroThunk = () => (dispatch: Function) => {
 
   return makePostRequest()
     .then(handleErrors)
-    .then(() => dispatch(savePomodoroSuccess()))
+    .then(() => {
+      dispatch(incrementPomodoros());
+    })
     .catch((error) => dispatch(savePomodoroError(error)));
 };

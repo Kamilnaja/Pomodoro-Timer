@@ -28,6 +28,11 @@ export const stats = (state = initialState, action: Action) => {
         error: "something went wrong",
         isLoading: false,
       };
+    case StatsActions.INCREMENT_POMODOROS:
+      return {
+        ...state,
+        pomodorosDoneToday: state.pomodorosDoneToday + 1,
+      };
     default:
       return state;
   }

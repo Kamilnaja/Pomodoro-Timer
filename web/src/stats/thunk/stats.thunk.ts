@@ -1,4 +1,5 @@
 import { handleErrors } from "../../main/store/thunk/main.thunk";
+import { initialConfig } from "../../shared/settings/initialConfig";
 import TodayStatistics from "../../shared/store/interfaces/todayStatistics.interface";
 import {
   getTodayStatistics,
@@ -6,9 +7,9 @@ import {
   getTodayStatisticsSuccess,
 } from "../store/actions/stats.actions";
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = initialConfig.apiUrl;
 
-export const makeGetRequest = () => fetch(API_URL + "/pomodoros_done_today");
+const makeGetRequest = () => fetch(API_URL + "/pomodoros_done_today");
 
 export const getPomodorosThunk = () => (dispatch: Function) => {
   dispatch(getTodayStatistics());
