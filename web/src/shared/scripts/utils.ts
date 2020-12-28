@@ -12,5 +12,5 @@ export const msToTime = (s: number): string => {
   var mins = s % 60;
   var hrs = (s - mins) / 60;
 
-  return pad(hrs) + ":" + pad(mins) + ":" + pad(secs) + "." + pad(ms, 3);
+  return pad(hrs) + ":" + pad(mins) + ":" + pad(secs);
 };

@@ -24,7 +24,7 @@ function handleErrors(response: any): Promise<any> {
   if (!response.ok) {
     throw Error(response.statusText);
   }
-  return response.json;
+  return response;
 }
 
 export function savePomodoroThunk() {
@@ -44,8 +44,8 @@ export function getPomodorosThunk() {
 
     return makeGetRequest()
       .then(handleErrors)
+      .then((response) => response.json())
       .then((payload: TodayStatistics) => {
-        console.log(payload);
         return dispatch(getTodayStatisticsSuccess(payload));
       })
       .catch((error) => dispatch(getTodayStatisticsError(error)));

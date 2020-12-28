@@ -6,5 +6,5 @@ export const initialConfig: InitialConfig = {
   // longBreakTime: 15 * 60 * 1000,
   longBreakTime: 3000,
   pomodoroTime: 3000,
-  refreshRate: 500,
+  refreshRate: 1000,
 };
