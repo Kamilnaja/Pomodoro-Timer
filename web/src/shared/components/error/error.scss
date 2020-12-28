@@ -1,13 +1,8 @@
 @import "../../styles/shared.scss";
 
 .error {
-  @include font-fira-sans($colour: $text-primary, $size: 15px);
+  @include font-fira-sans($colour: $text-secondary, $size: 15px);
+  @include small-bar;
 
   background-color: $error-bg;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 20px;
-  margin: 0 auto;
-  width: 960px;
 }

@@ -1,11 +1,6 @@
 @import "../../../shared/styles/shared.scss";
 .loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 20px;
-  margin: 0 auto;
-  width: 960px;
+  @include small-bar;
 
   background: linear-gradient(
     135deg,
