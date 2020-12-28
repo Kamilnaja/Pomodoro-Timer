@@ -8,16 +8,16 @@ import {
   savePomodoroSuccess,
 } from "../actions/actions";
 // todo - different versions for prod etc
-const API_URL = "http://localhost:8080/pomodoros";
+const API_URL = "http://localhost:8080/api";
 
 function makePostRequest() {
-  return fetch(API_URL, {
+  return fetch(API_URL + "/pomodoros", {
     method: "POST",
   });
 }
 
 export function makeGetRequest() {
-  return fetch(API_URL);
+  return fetch(API_URL + "/pomodoros_done_today");
 }
 
 function handleErrors(response: any): Promise<any> {

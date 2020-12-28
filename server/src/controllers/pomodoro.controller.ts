@@ -1,15 +1,15 @@
 import express from 'express';
-import { handlePost, handleGet } from '../services/service';
+import { handleAddPomodoro, handleGetTodaysPomodoros } from '../services/service';
 const router = express.Router();
 
 // add new pomodoro
 router.post('/pomodoros', (req, res) => {
-  handlePost(res);
+  handleAddPomodoro(res);
 });
 
-// get number of pomodoros
-router.get('/pomodoros', (req, res) => {
-  handleGet(res);
+// get number of pomodoros done today
+router.get('/pomodoros_done_today', (req, res) => {
+  handleGetTodaysPomodoros(res);
 });
 
 router.use(function (req, res) {

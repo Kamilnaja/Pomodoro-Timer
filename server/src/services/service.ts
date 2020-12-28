@@ -1,6 +1,6 @@
 import db from '../db/db';
 
-export function handlePost(res: any) {
+export function handleAddPomodoro(res: any) {
   const sql = 'INSERT INTO pomodoros (userID, date) VALUES (?,?)';
   const params = ['kamil naja', new Date()];
 
@@ -17,7 +17,7 @@ export function handlePost(res: any) {
   });
 }
 
-export function handleGet(res: any) {
+export function handleGetTodaysPomodoros(res: any) {
   const sql = 'SELECT COUNT(*) as pomodorosDoneToday FROM pomodoros';
 
   db.all(sql, (err: any, result: any) => {
