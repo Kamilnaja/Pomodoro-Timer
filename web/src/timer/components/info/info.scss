@@ -1,4 +1,4 @@
-@import "./../../../shared/styles/mixins/mixins.scss";
+@import "./../../../shared/styles/shared.scss";
 
 .info {
   @include font-fira-sans($colour: $text-primary, $size: 18px);

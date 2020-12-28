@@ -6,7 +6,7 @@ export const app = express();
 const port = 8080; // default port to listen
 
 app.use(cors());
-app.use('/', router);
+app.use('/api', router);
 
 // start the Express server
 app.listen(port, () => {

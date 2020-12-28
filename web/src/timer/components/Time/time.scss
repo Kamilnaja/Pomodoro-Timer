@@ -1,4 +1,4 @@
-@import "../../../shared/styles/mixins/mixins.scss";
+@import "../../../shared/styles/shared.scss";
 
 .time {
   @include font-fira-sans($size: 70px);

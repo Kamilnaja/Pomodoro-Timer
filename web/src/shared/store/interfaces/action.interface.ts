@@ -1,6 +1,7 @@
 export interface Action {
   type: string;
   payload: {
-    quantity: number;
+    pomodorosDoneToday: number;
+    allPomodoros: number;
   };
 }

@@ -1,11 +1,16 @@
-import React from "react";
 import "./header.scss";
 
-function Header() {
+function Header(props: { handleOpenStats: Function }) {
   return (
     <header className="header">
       <h1 className="header__title">Pomik</h1>
-      <button className="button">Settings</button>
+      <div>
+        <button className="button">Settings</button>
+        <button className="button" onClick={() => props.handleOpenStats()}>
+          Stats
+        </button>
+        <button className="button">Login</button>
+      </div>
     </header>
   );
 }
