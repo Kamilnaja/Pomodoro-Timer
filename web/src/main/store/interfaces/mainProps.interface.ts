@@ -1,4 +1,3 @@
-export interface MainProps {
-  dispatch?: Function;
+export interface StatsProps {
   handleGetTodayStats: Function;
 }

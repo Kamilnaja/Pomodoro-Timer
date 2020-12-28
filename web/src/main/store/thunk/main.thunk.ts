@@ -1,8 +1,4 @@
-import TodayStatistics from "../../../shared/store/interfaces/todayStatistics.interface";
 import {
-  getTodayStatistics,
-  getTodayStatisticsError,
-  getTodayStatisticsSuccess,
   savePomodoro,
   savePomodoroError,
   savePomodoroSuccess,
@@ -10,44 +6,23 @@ import {
 // todo - different versions for prod etc
 const API_URL = "http://localhost:8080/api";
 
-function makePostRequest() {
-  return fetch(API_URL + "/pomodoros", {
+const makePostRequest = () =>
+  fetch(API_URL + "/pomodoros", {
     method: "POST",
   });
-}
 
-export function makeGetRequest() {
-  return fetch(API_URL + "/pomodoros_done_today");
-}
-
-function handleErrors(response: any): Promise<any> {
+export const handleErrors = (response: any): Promise<any> => {
   if (!response.ok) {
     throw Error(response.statusText);
   }
   return response;
-}
+};
 
-export function savePomodoroThunk() {
-  return (dispatch: Function) => {
-    dispatch(savePomodoro());
+export const savePomodoroThunk = () => (dispatch: Function) => {
+  dispatch(savePomodoro());
 
-    return makePostRequest()
-      .then(handleErrors)
-      .then(() => dispatch(savePomodoroSuccess()))
-      .catch((error) => dispatch(savePomodoroError(error)));
-  };
-}
-
-export function getPomodorosThunk() {
-  return (dispatch: Function) => {
-    dispatch(getTodayStatistics());
-
-    return makeGetRequest()
-      .then(handleErrors)
-      .then((response) => response.json())
-      .then((payload: TodayStatistics) => {
-        return dispatch(getTodayStatisticsSuccess(payload));
-      })
-      .catch((error) => dispatch(getTodayStatisticsError(error)));
-  };
-}
+  return makePostRequest()
+    .then(handleErrors)
+    .then(() => dispatch(savePomodoroSuccess()))
+    .catch((error) => dispatch(savePomodoroError(error)));
+};

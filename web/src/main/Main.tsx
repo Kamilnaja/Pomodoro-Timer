@@ -1,21 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
 import Header from "../header/Header";
 import StatisticsContainer from "../statistics/container/StatisticsContainer";
 import StatsContainer from "../stats/containers/StatsContainer";
 import Timer from "../timer/containers/Timer";
-import { State } from "../timer/store/interfaces/state.interface";
 import "./main.scss";
-import { MainProps } from "./store/interfaces/mainProps.interface";
-import { getPomodorosThunk } from "./store/thunk/main.thunk";
 
 // Wrapper for whole app
-class Main extends React.Component<MainProps, State> {
+class Main extends React.Component {
   isStatsVisible: boolean = false;
-
-  componentDidMount() {
-    this.props.handleGetTodayStats();
-  }
 
   handleOpenStats = () => {
     this.isStatsVisible = !this.isStatsVisible;
@@ -34,8 +26,4 @@ class Main extends React.Component<MainProps, State> {
   );
 }
 
-const mapDispatchToProps = {
-  handleGetTodayStats: getPomodorosThunk,
-};
-
-export default connect(null, mapDispatchToProps)(Main);
+export default Main;

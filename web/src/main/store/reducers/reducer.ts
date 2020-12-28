@@ -19,29 +19,11 @@ export const main = (state = initialState, action: Action) => {
       return {
         ...state,
         isLoading: false,
-        pomodorosDoneToday: state.pomodorosDoneToday + 1,
       };
     case MainActions.SAVE_POMODORO_ERROR:
       return {
         ...state,
         error: "Something went wrong",
-        isLoading: false,
-      };
-    case MainActions.GET_TODAY_STATISTICS:
-      return {
-        ...state,
-        isLoading: true,
-      };
-    case MainActions.GET_TODAY_STATISTICS_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        pomodorosDoneToday: action.payload.pomodorosDoneToday,
-      };
-    case MainActions.GET_TODAY_STATISTICS_ERROR:
-      return {
-        ...state,
-        error: "something went wrong",
         isLoading: false,
       };
     default:
