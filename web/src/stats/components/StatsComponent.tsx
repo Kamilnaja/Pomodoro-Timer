@@ -9,7 +9,7 @@ export const StatsComponent = (props: { stats: MainState }) => {
   let error = props.stats.error;
   if (isLoading) {
     return <Loader></Loader>;
-  } else if (!error) {
+  } else if (error) {
     return <Error></Error>;
   } else {
     return (

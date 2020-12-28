@@ -30,8 +30,7 @@ export const main = (state = initialState, action: Action) => {
     case MainActions.GET_TODAY_STATISTICS:
       return {
         ...state,
-        isLoading: false,
-        error: "something went wrong", // todo - remove me
+        isLoading: true,
       };
     case MainActions.GET_TODAY_STATISTICS_SUCCESS:
       return {
