@@ -24,13 +24,14 @@ export const main = (state = initialState, action: Action) => {
     case MainActions.SAVE_POMODORO_ERROR:
       return {
         ...state,
-        error: action.payload,
+        error: "Something went wrong",
         isLoading: false,
       };
     case MainActions.GET_TODAY_STATISTICS:
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
+        error: "something went wrong", // todo - remove me
       };
     case MainActions.GET_TODAY_STATISTICS_SUCCESS:
       return {
@@ -41,7 +42,8 @@ export const main = (state = initialState, action: Action) => {
     case MainActions.GET_TODAY_STATISTICS_ERROR:
       return {
         ...state,
-        error: action.payload,
+        error: "something went wrong",
+
         isLoading: false,
       };
     default:
