@@ -42,7 +42,6 @@ export const main = (state = initialState, action: Action) => {
       return {
         ...state,
         error: "something went wrong",
-
         isLoading: false,
       };
     default:

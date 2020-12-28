@@ -24,7 +24,7 @@ function handleErrors(response: any): Promise<any> {
   if (!response.ok) {
     throw Error(response.statusText);
   }
-  return response.json();
+  return response.json;
 }
 
 export function savePomodoroThunk() {
