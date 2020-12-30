@@ -1,14 +1,19 @@
+import { settings } from '../settings/settings';
+
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const passport = require('passport');
 
 passport.use(
   new GoogleStrategy(
     {
-      clientID: '886593305800-nao4tibu5v7uu03lve140sf254dcb93j.apps.googleusercontent.com',
-      clientSecret: 'LMmEQjtL2BLNagJcN-x5DNrG',
-      callbackURL: 'http://www.example.com/auth/google/callback'
+      clientID: settings.clientID,
+      clientSecret: settings.clientSecret,
+      callbackURL: 'mywebsite.co3'
     },
-    (accessToken, refreshToken, profile, done) => {}
+    (accessToken: any, refreshToken: any, profile: { id: any }, done: (arg0: any, arg1: any) => any) => {
+      console.log('done');
+      // save user
+    }
   )
 );
 
