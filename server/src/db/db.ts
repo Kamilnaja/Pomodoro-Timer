@@ -31,10 +31,12 @@ function createPomodorosTable() {
 function createUsersTable() {
   db.run(
     `CREATE TABLE IF NOT EXISTS users(
-    userID text UNIQUE, 
-    dateCreated date, 
-    name string, 
-    email string UNIQUE)`,
+      userID text UNIQUE, 
+      dateCreated date, 
+      name string, 
+      email string UNIQUE,
+      password string
+    )`,
     err => {
       if (err) {
         console.log(err);

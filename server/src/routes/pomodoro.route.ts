@@ -1,6 +1,5 @@
 import express from 'express';
 import { handleAddPomodoro, handleGetTodaysPomodoros } from '../services/service';
-import passport from '../auth/auth';
 
 const router = express.Router();
 
