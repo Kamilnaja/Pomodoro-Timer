@@ -8,9 +8,12 @@ passport.use(
     {
       clientID: settings.clientID,
       clientSecret: settings.clientSecret,
-      callbackURL: 'http://www.example.com/auth/google/callback'
+      callbackURL: 'mywebsite.co3'
     },
-    (accessToken, refreshToken, profile, done) => {}
+    (accessToken: any, refreshToken: any, profile: { id: any }, done: (arg0: any, arg1: any) => any) => {
+      console.log('done');
+      // save user
+    }
   )
 );
 
