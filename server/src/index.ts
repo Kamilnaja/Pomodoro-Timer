@@ -1,6 +1,6 @@
 import express from 'express';
-import pomodorosController from './controllers/pomodoro.controller';
-import loginController from './controllers/login.controller';
+import pomodorosController from './routes/pomodoro.route';
+import loginController from './routes/login.route';
 
 import cors from 'cors';
 export const app = express();
