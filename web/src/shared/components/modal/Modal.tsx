@@ -1,6 +1,6 @@
 import React from "react";
 import ReactModal from "react-modal";
-import { Login } from "../../../login/loginForm/LoginContainer";
+import { LoginContainer } from "../../../login/container/LoginContainer";
 import Settings from "../../../settings/Settings";
 import StatisticsContainer from "../../../statistics/container/StatisticsContainer";
 import { Modal as ModalEnum } from "../../store/enums/modal.enum";
@@ -16,6 +16,8 @@ export const Modal = (props: ModalProps) => (
     isOpen={props.modalType !== ModalEnum.NULL}
     ariaHideApp={false}
     shouldFocusAfterRender={true}
+    shouldCloseOnOverlayClick={true}
+    onRequestClose={props.handleCloseModal}
   >
     <div className="modal">
       <header className="modal__header">
@@ -26,7 +28,7 @@ export const Modal = (props: ModalProps) => (
           ✕
         </button>
       </header>
-      {props.modalType === ModalEnum.LOGIN && <Login></Login>}
+      {props.modalType === ModalEnum.LOGIN && <LoginContainer></LoginContainer>}
       {props.modalType === ModalEnum.STATS && (
         <StatisticsContainer></StatisticsContainer>
       )}
