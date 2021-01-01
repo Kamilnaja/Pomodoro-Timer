@@ -1,6 +1,8 @@
 import express from 'express';
-import db from '../db/db';
-import { User } from '../model/user';
+import bcrypt from 'bcrypt';
+import { User } from '../model/user.interface';
+import { addUserToDB } from '../services/auth.service';
+
 const router = express.Router();
 
 router.get('/login', (req, res) => res.send('login'));
@@ -13,19 +15,14 @@ interface Request {
 
 // Register Handle
 router.post('/register', (req: Request, res) => {
-  console.log(req.body);
-  const { name, email } = req.body;
+  const { name, email, password } = req.body;
   // todo check if exists
-  const insert = 'INSERT INTO users VALUES(?, ?, ?, ?, ?)';
 
-  db.run(insert, ['userID1', 'now', 'name', email, 'password'], err => {
+  bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
-      console.log(err);
-      res.send(err);
-    } else {
-      console.log('users table created or updated');
-      res.send('user registered');
+      throw err;
     }
+    addUserToDB(hash, name, email, res);
   });
 });
 

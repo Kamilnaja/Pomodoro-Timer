@@ -1,5 +1,5 @@
 import express from 'express';
-import { handleAddPomodoro, handleGetTodaysPomodoros } from '../services/service';
+import { handleAddPomodoro, handleGetTodaysPomodoros } from '../services/pomodoro.service';
 
 const router = express.Router();
 
