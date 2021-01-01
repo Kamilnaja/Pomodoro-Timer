@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { Error } from "../../shared/components/error/Error";
 import { Loader } from "../../shared/components/loader/Loader";
 import { StatsComponent } from "../components/StatsComponent";
+import { getTodayStats } from "../store/actions/stats.actions";
 import Stats from "../store/interfaces/stats.interface";
-import { getPomodorosThunk } from "../thunk/stats.thunk";
 
 type StatsProps = {
   handleGetTodayStats: Function;
@@ -33,7 +33,7 @@ const mapStateToProps = (state: { stats: Stats }) => {
 };
 
 const mapDispatchToProps = {
-  handleGetTodayStats: getPomodorosThunk,
+  handleGetTodayStats: getTodayStats,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StatsContainer);

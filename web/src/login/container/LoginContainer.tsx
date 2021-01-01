@@ -1,9 +1,25 @@
 import React from "react";
 import { LoginComponent } from "../component/loginComponent";
-import "./loginContainer.scss";
+// todo - handle error and loading using store!!!
+export interface LoginState {
+  name: string;
+  password: string;
+  email: string;
+}
+export class LoginContainer extends React.Component<{}, LoginState> {
+  handleSubmit = () => {
+    // fetch()
+  };
 
-export class LoginContainer extends React.Component {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      name: "",
+      password: "",
+      email: "",
+    };
+  }
   render() {
-    return <LoginComponent></LoginComponent>;
+    return <LoginComponent handleSubmit={this.handleSubmit}></LoginComponent>;
   }
 }

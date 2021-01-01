@@ -4,14 +4,13 @@ import { User } from '../model/user.interface';
 import { addUserToDB } from '../services/auth.service';
 
 const router = express.Router();
-
-router.get('/login', (req, res) => res.send('login'));
-
-router.get('/register', (req, res) => res.send('login'));
-
 interface Request {
   body: User;
 }
+
+router.get('/hello', (req, res) => {
+  res.send('test data');
+});
 
 // Register Handle
 router.post('/register', (req: Request, res) => {

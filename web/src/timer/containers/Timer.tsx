@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { savePomodoroThunk } from "../../main/store/thunk/main.thunk";
 import { msToTime } from "../../shared/scripts/utils";
 import { Info } from "../components/info/Info";
 import { Time } from "../components/time/Time";
@@ -11,6 +10,7 @@ import { timerState } from "../store/state/timerState";
 import "./timer.scss";
 import "../../shared/settings/initialConfig";
 import { initialConfig } from "../../shared/settings/initialConfig";
+import { savePomodoroAndIncrementCounter } from "../../main/store/actions/main.actions";
 
 class Timer extends React.Component<TimerProps, State> {
   interval: any;
@@ -133,7 +133,7 @@ class Timer extends React.Component<TimerProps, State> {
 }
 
 const mapDispatchToProps = {
-  handleSavePomodoro: savePomodoroThunk,
+  handleSavePomodoro: savePomodoroAndIncrementCounter,
 };
 
 export default connect(null, mapDispatchToProps)(Timer);

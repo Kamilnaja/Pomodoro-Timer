@@ -1,5 +1,6 @@
 import express from 'express';
 import { handleAddPomodoro, handleGetTodaysPomodoros } from '../services/pomodoro.service';
+import authRouter from './auth.route';
 
 const router = express.Router();
 
@@ -11,10 +12,6 @@ router.post('/pomodoros', (req, res) => {
 // get number of pomodoros done today
 router.get('/pomodoros_done_today', (req, res) => {
   handleGetTodaysPomodoros(res);
-});
-
-router.use(function (req, res) {
-  res.status(404);
 });
 
 export default router;

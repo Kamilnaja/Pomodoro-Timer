@@ -1,7 +1,11 @@
-export interface LoginProps {}
+import { FormEvent } from "react";
 
-export const LoginComponent = () => (
-  <form onSubmit={}>
+export interface LoginProps {
+  handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
+}
+
+export const LoginComponent = (props: LoginProps) => (
+  <form onSubmit={props.handleSubmit}>
     <h2>Please sign in</h2>
     <label>
       Imię:

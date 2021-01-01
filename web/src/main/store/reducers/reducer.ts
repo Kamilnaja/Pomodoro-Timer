@@ -1,5 +1,5 @@
 import { Action } from "../../../shared/store/interfaces/action.interface";
-import { MainActions } from "../actions/actions";
+import { MainActions } from "../actions/main.actions";
 import { MainState } from "../interfaces/mainState.interface";
 
 export const initialState: MainState = {
