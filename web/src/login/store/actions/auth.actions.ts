@@ -26,12 +26,14 @@ export const saveRegisterDataError = (error: any) => ({
 export const saveRegisterDataAndHandleError = (form: Registration) => (
   dispatch: Function
 ) => {
-  console.log("dispatching");
-
   dispatch(saveRegisterData(form));
 
-  return fetch(initialConfig.apiUrl + "/stats/pomodoros", {
+  return fetch(initialConfig.apiUrl + "/auth/register", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(form),
   })
     .then(handleErrors)
     .catch((error) => dispatch(saveRegisterDataError(error)));

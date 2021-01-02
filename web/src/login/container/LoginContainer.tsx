@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, MouseEvent } from "react";
 import { connect } from "react-redux";
 import { Registration } from "../../../../types/interfaces";
 import { LoginComponent } from "../component/loginComponent";
@@ -9,7 +9,7 @@ export interface LoginState {
 }
 
 export interface LoginProps {
-  handleSubmit: (arg0: Registration) => void;
+  handleSubmit: (arg: Registration) => void;
 }
 
 class LoginContainer extends React.Component<LoginProps, LoginState> {
@@ -29,12 +29,19 @@ class LoginContainer extends React.Component<LoginProps, LoginState> {
     });
   };
 
-  handleSubmit = () => {
+  handleSubmit = (event: MouseEvent) => {
+    event.preventDefault();
     const { name, password, email } = this.state;
     this.props.handleSubmit({
       name,
       password,
       email,
+    });
+    // todo - only on success
+    this.setState({
+      name: "",
+      password: "",
+      email: "",
     });
   };
 
