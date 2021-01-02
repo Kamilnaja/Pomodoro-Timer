@@ -5,7 +5,6 @@ export interface LoginComponentProps {
   handleSubmit: MouseEventHandler<HTMLButtonElement>;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   formData: LoginState;
-  dispatch?: Function;
 }
 
 export const LoginComponent = (props: LoginComponentProps) => (
@@ -47,6 +46,8 @@ export const LoginComponent = (props: LoginComponentProps) => (
         />
       </label>
     </div>
-    <button value="Wyślij" onClick={props.handleSubmit}></button>
+    <button value="Wyślij" onClick={props.handleSubmit}>
+      Submit
+    </button>
   </form>
 );

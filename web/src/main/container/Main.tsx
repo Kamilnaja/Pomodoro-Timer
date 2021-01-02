@@ -1,9 +1,9 @@
 import React from "react";
-import Header from "../header/Header";
-import { Modal } from "../shared/components/modal/Modal";
-import { Modal as ModalEnum } from "../shared/store/enums/modal.enum";
-import StatsContainer from "../stats/containers/StatsContainer";
-import Timer from "../timer/containers/Timer";
+import Header from "../../header/Header";
+import { Modal } from "../../shared/components/modal/Modal";
+import { Modal as ModalEnum } from "../../shared/store/enums/modal.enum";
+import StatsContainer from "../../stats/containers/StatsContainer";
+import Timer from "../../timer/containers/Timer";
 import "./main.scss";
 
 interface MainState {

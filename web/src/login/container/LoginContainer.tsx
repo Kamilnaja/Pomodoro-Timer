@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { connect } from "react-redux";
+import { Registration } from "../../../../types/interfaces";
 import { LoginComponent } from "../component/loginComponent";
 import { saveRegisterDataAndHandleError } from "../store/actions/auth.actions";
 
@@ -8,8 +9,7 @@ export interface LoginState {
 }
 
 export interface LoginProps {
-  handleSubmit: Function;
-  dispatch?: Function;
+  handleSubmit: (arg0: Registration) => void;
 }
 
 class LoginContainer extends React.Component<LoginProps, LoginState> {
@@ -29,7 +29,7 @@ class LoginContainer extends React.Component<LoginProps, LoginState> {
     });
   };
 
-  handleSubmit = (dispatch: any) => {
+  handleSubmit = () => {
     const { name, password, email } = this.state;
     this.props.handleSubmit({
       name,
