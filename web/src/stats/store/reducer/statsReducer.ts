@@ -1,5 +1,5 @@
-import { Action } from "../../../shared/store/interfaces/action.interface";
 import { StatsActions } from "../actions/stats.actions";
+import { StatsAction } from "../interfaces/statsAction";
 
 export const initialState = {
   isLoading: false,
@@ -8,7 +8,7 @@ export const initialState = {
   allPomodoros: 0,
 };
 
-export const stats = (state = initialState, action: Action) => {
+export const stats = (state = initialState, action: StatsAction) => {
   switch (action.type) {
     case StatsActions.GET_TODAY_STATISTICS:
       return {

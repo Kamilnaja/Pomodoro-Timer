@@ -1,26 +1,18 @@
 import React, { ChangeEvent } from "react";
-import { LoginComponent, LoginProps } from "../component/loginComponent";
-// todo - handle error and loading using store!!!
-
-export type formField = "email" | "name" | "password";
+import { connect } from "react-redux";
+import { LoginComponent } from "../component/loginComponent";
+import { saveRegisterDataAndHandleError } from "../store/actions/auth.actions";
 
 export interface LoginState {
   [key: string]: string;
 }
-export class LoginContainer extends React.Component<{}, LoginState> {
-  handleSubmit = () => {
-    // fetch()
-    console.log("submitting!");
-  };
 
-  handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    const name = event.target.name;
-    this.setState({
-      [name]: value,
-    });
-  };
+export interface LoginProps {
+  handleSubmit: Function;
+  dispatch?: Function;
+}
 
+class LoginContainer extends React.Component<LoginProps, LoginState> {
   constructor(props: LoginProps) {
     super(props);
     this.state = {
@@ -29,6 +21,23 @@ export class LoginContainer extends React.Component<{}, LoginState> {
       email: "",
     };
   }
+
+  handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = event.target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  handleSubmit = (dispatch: any) => {
+    const { name, password, email } = this.state;
+    this.props.handleSubmit({
+      name,
+      password,
+      email,
+    });
+  };
+
   render() {
     return (
       <LoginComponent
@@ -39,3 +48,9 @@ export class LoginContainer extends React.Component<{}, LoginState> {
     );
   }
 }
+
+const mapDispatchToProps = {
+  handleSubmit: saveRegisterDataAndHandleError,
+};
+
+export default connect(null, mapDispatchToProps)(LoginContainer);

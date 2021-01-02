@@ -1,6 +1,6 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import ReactModal from "react-modal";
-import { LoginContainer } from "../../../login/container/LoginContainer";
+import LoginContainer from "../../../login/container/LoginContainer";
 import Settings from "../../../settings/Settings";
 import StatisticsContainer from "../../../statistics/container/StatisticsContainer";
 import { Modal as ModalEnum } from "../../store/enums/modal.enum";
@@ -8,7 +8,7 @@ import "./modal.scss";
 
 export interface ModalProps {
   modalType: ModalEnum;
-  handleCloseModal: React.MouseEventHandler<HTMLButtonElement>;
+  handleCloseModal: MouseEventHandler<HTMLButtonElement>;
 }
 
 export const Modal = (props: ModalProps) => (

@@ -1,14 +1,15 @@
-import { ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, MouseEventHandler } from "react";
 import { LoginState } from "../container/LoginContainer";
 
-export interface LoginProps {
-  handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
+export interface LoginComponentProps {
+  handleSubmit: MouseEventHandler<HTMLButtonElement>;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   formData: LoginState;
+  dispatch?: Function;
 }
 
-export const LoginComponent = (props: LoginProps) => (
-  <form onSubmit={props.handleSubmit}>
+export const LoginComponent = (props: LoginComponentProps) => (
+  <form>
     <h2>Please sign in</h2>
     <div>
       <label>
@@ -46,6 +47,6 @@ export const LoginComponent = (props: LoginProps) => (
         />
       </label>
     </div>
-    <input type="submit" value="Wyślij" />
+    <button value="Wyślij" onClick={props.handleSubmit}></button>
   </form>
 );

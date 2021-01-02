@@ -2,29 +2,31 @@ import { handleErrors } from "../../../shared/scripts/utils";
 import { initialConfig } from "../../../shared/settings/initialConfig";
 import { Registration } from "../../../../../types/interfaces";
 
-export enum registerActions {
+export enum AuthActions {
   SAVE_REGISTER_DATA,
   SAVE_REGISTER_DATA_SUCCESS,
   SAVE_REGISTER_DATA_ERROR,
 }
 
 export const saveRegisterData = (payload: Registration) => ({
-  type: registerActions.SAVE_REGISTER_DATA,
+  type: AuthActions.SAVE_REGISTER_DATA,
   payload: payload,
 });
 
 export const saveRegisterDataSuccess = () => ({
-  type: registerActions.SAVE_REGISTER_DATA_SUCCESS,
+  type: AuthActions.SAVE_REGISTER_DATA_SUCCESS,
 });
 
 export const saveRegisterDataError = (error: any) => ({
-  type: registerActions.SAVE_REGISTER_DATA_ERROR,
+  type: AuthActions.SAVE_REGISTER_DATA_ERROR,
   payload: error,
 });
 
 // thunk
-export const saveRegisterDataAndHandleError = () => (dispatch: Function) => {
-  // dispatch(saveRegisterData());
+export const saveRegisterDataAndHandleError = (form: Registration) => (
+  dispatch: Function
+) => {
+  dispatch(saveRegisterData(form));
 
   return fetch(initialConfig.apiUrl + "/stats/pomodoros", {
     method: "POST",
