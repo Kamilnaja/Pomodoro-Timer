@@ -1,5 +1,4 @@
 import express from 'express';
-import { handleAddPomodoro, handleGetTodaysPomodoros } from '../services/pomodoro.service';
 import authRouter from './auth.route';
 import statsRouter from './stats.route';
 

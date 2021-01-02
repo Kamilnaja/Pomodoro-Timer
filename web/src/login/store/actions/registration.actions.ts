@@ -17,8 +17,9 @@ export const saveRegisterDataSuccess = () => ({
   type: registerActions.SAVE_REGISTER_DATA_SUCCESS,
 });
 
-export const saveRegisterDataError = () => ({
+export const saveRegisterDataError = (error: any) => ({
   type: registerActions.SAVE_REGISTER_DATA_ERROR,
+  payload: error,
 });
 
 // thunk
