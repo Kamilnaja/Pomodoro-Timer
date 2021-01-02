@@ -1,16 +1,11 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
-import { User } from '../model/user.interface';
 import { addUserToDB } from '../services/auth.service';
-
+import { Registration } from '../../../types/interfaces';
 const router = express.Router();
 interface Request {
-  body: User;
+  body: Registration;
 }
-
-router.get('/hello', (req, res) => {
-  res.send('test data');
-});
 
 // Register Handle
 router.post('/register', (req: Request, res) => {

@@ -1,6 +1,5 @@
 import express from 'express';
 import { handleAddPomodoro, handleGetTodaysPomodoros } from '../services/pomodoro.service';
-import authRouter from './auth.route';
 
 const router = express.Router();
 
