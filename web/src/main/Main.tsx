@@ -1,27 +1,45 @@
 import React from "react";
 import Header from "../header/Header";
-import StatisticsContainer from "../statistics/container/StatisticsContainer";
+import { Modal } from "../shared/components/modal/Modal";
+import { Modal as ModalEnum } from "../shared/store/enums/modal.enum";
 import StatsContainer from "../stats/containers/StatsContainer";
 import Timer from "../timer/containers/Timer";
 import "./main.scss";
 
-// Wrapper for whole app
-class Main extends React.Component {
-  isStatsVisible: boolean = false;
+interface MainState {
+  openedModal: ModalEnum;
+}
 
-  handleOpenStats = () => {
-    this.isStatsVisible = !this.isStatsVisible;
-    console.log(this.isStatsVisible);
+// Wrapper for whole app
+class Main extends React.Component<{}, MainState> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      openedModal: ModalEnum.NULL,
+    };
+  }
+
+  handleOpenModal = (modal: ModalEnum) =>
+    this.setState({
+      openedModal: modal,
+    });
+
+  handleCloseModal = () => {
+    this.setState({
+      openedModal: ModalEnum.NULL,
+    });
   };
 
   render = () => (
     <div className="app">
-      {this.isStatsVisible && <StatisticsContainer></StatisticsContainer>}
-      {this.isStatsVisible}
-      <Header handleOpenStats={this.handleOpenStats}></Header>
+      <Header handleOpenModal={this.handleOpenModal}></Header>
       <Timer></Timer>
       <StatsContainer></StatsContainer>
       <footer>Hello I'm footer</footer>
+      <Modal
+        modalType={this.state.openedModal}
+        handleCloseModal={this.handleCloseModal}
+      ></Modal>
     </div>
   );
 }

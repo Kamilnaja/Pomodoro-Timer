@@ -1,0 +1,19 @@
+.modal {
+  & &__header {
+    height: 25px;
+    margin-bottom: 10px;
+  }
+
+  & &__button {
+    &--close {
+      border: none;
+      background: none;
+      cursor: pointer;
+      float: right;
+      font-size: 30px;
+      margin-top: -20px;
+      margin-right: -20px;
+      padding: 15px;
+    }
+  }
+}

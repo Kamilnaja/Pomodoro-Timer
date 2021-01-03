@@ -14,3 +14,10 @@ export const msToTime = (s: number): string => {
 
   return pad(hrs) + ":" + pad(mins) + ":" + pad(secs);
 };
+
+export const handleErrors = (response: any): Promise<any> => {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
+};
