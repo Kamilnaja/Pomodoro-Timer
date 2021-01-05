@@ -19,7 +19,10 @@ export function handleAddPomodoro(res: any) {
 }
 
 export function handleGetTodaysPomodoros(res: any) {
-  const sql = 'SELECT COUNT(*) as pomodorosDoneToday FROM pomodoros';
+  const sql = `
+  SELECT COUNT(*) as pomodorosDoneToday 
+  FROM pomodoros 
+  WHERE date(datetime(date / 1000 , "unixepoch")) = date("now")`;
 
   db.all(sql, (err: any, result: any) => {
     if (err) {
