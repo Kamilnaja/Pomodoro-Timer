@@ -12,14 +12,17 @@ export interface LoginProps {
   handleSubmit: (arg: Registration) => void;
 }
 
+const initialState: LoginState = {
+  name: "",
+  password: "",
+  repeatedPassword: "",
+  email: "",
+};
+
 class LoginContainer extends React.Component<LoginProps, LoginState> {
   constructor(props: LoginProps) {
     super(props);
-    this.state = {
-      name: "",
-      password: "",
-      email: "",
-    };
+    this.state = initialState;
   }
 
   handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -38,21 +41,11 @@ class LoginContainer extends React.Component<LoginProps, LoginState> {
       email,
     });
     // todo - only on success
-    this.setState({
-      name: "",
-      password: "",
-      email: "",
-    });
+    this.setState(initialState);
   };
 
   render() {
-    return (
-      <LoginComponent
-        handleSubmit={this.handleSubmit}
-        handleChange={this.handleChange}
-        formData={this.state}
-      ></LoginComponent>
-    );
+    return <LoginComponent handleSubmit={this.handleSubmit}></LoginComponent>;
   }
 }
 

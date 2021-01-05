@@ -1,5 +1,5 @@
 import React, { MouseEventHandler } from "react";
-import ReactModal from "react-modal";
+import ReactModal, { Styles } from "react-modal";
 import LoginContainer from "../../../login/container/LoginContainer";
 import Settings from "../../../settings/Settings";
 import StatisticsContainer from "../../../statistics/container/StatisticsContainer";
@@ -11,6 +11,20 @@ export interface ModalProps {
   handleCloseModal: MouseEventHandler<HTMLButtonElement>;
 }
 
+const customStyles: Styles = {
+  content: {
+    position: "absolute",
+    width: "50%",
+    height: "50vh",
+    left: "50%",
+    top: "50%",
+    overflow: "auto",
+    backgroundColor: "#fff",
+    transform: "translate(-50%, -50%)",
+    padding: "40px",
+  },
+};
+
 export const Modal = (props: ModalProps) => (
   <ReactModal
     isOpen={props.modalType !== ModalEnum.NULL}
@@ -18,6 +32,7 @@ export const Modal = (props: ModalProps) => (
     shouldFocusAfterRender={true}
     shouldCloseOnOverlayClick={true}
     onRequestClose={props.handleCloseModal}
+    style={customStyles}
   >
     <div className="modal">
       <header className="modal__header">
