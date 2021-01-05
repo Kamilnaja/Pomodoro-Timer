@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import Main from "./main/Main";
+import Main from "./main/container/Main";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./shared/store/reducers/reducer";
 

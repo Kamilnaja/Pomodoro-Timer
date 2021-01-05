@@ -1,4 +1,4 @@
-import { Action } from "../../../shared/store/interfaces/action.interface";
+import { MainAction } from "../interfaces/mainAction.interface";
 import { MainActions } from "../actions/main.actions";
 import { MainState } from "../interfaces/mainState.interface";
 
@@ -7,7 +7,7 @@ export const initialState: MainState = {
   error: "",
 };
 
-export const main = (state = initialState, action: Action) => {
+export const mainReducer = (state = initialState, action: MainAction) => {
   switch (action.type) {
     case MainActions.SAVE_POMODORO:
       return {

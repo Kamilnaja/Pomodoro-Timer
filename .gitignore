@@ -4,3 +4,4 @@ package-lock.json
 server/dist/
 server/pomodoros1.sqlite
 server/src/settings/settings.ts
+.idea

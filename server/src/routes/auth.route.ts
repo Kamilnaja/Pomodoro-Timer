@@ -10,8 +10,8 @@ interface Request {
 // Register Handle
 router.post('/register', (req: Request, res) => {
   const { name, email, password } = req.body;
-  // todo check if exists
 
+  // todo check if exists
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       throw err;

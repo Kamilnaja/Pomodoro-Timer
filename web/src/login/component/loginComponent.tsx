@@ -1,51 +1,66 @@
-import { ChangeEvent, FormEvent } from "react";
-import { LoginState } from "../container/LoginContainer";
+import { useForm } from "react-hook-form";
+import "./loginComponent.scss";
+import { MouseEventHandler } from "react";
 
 export interface LoginProps {
-  handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
-  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  formData: LoginState;
+  handleSubmit: MouseEventHandler<HTMLButtonElement>;
 }
 
-export const LoginComponent = (props: LoginProps) => (
-  <form onSubmit={props.handleSubmit}>
-    <h2>Please sign in</h2>
-    <div>
-      <label>
-        User name
-        <input
-          type="text"
-          name="name"
-          required
-          value={props.formData.name}
-          onChange={props.handleChange}
-        />
-      </label>
+export const LoginComponent = (props: LoginProps) => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data: any) => console.log(data);
+
+  return (
+    <div className="login">
+      <h2 className="login__header">Please sign in</h2>
+      <form className="login__form form" onSubmit={handleSubmit(onSubmit)}>
+        <div className="form__row">
+          <label className="form__label">User name</label>
+          <input
+            className="form__input"
+            type="text"
+            name="name"
+            required
+            ref={register({ min: 3 })}
+          />
+        </div>
+        <div className="form__row">
+          <label className="form__label">Email</label>
+          <input
+            type="email"
+            name="email"
+            required
+            ref={register({
+              min: 3,
+            })}
+          />
+        </div>
+        <div className="form__row">
+          <label className="form__label">Password</label>
+          <input
+            type="password"
+            name="password"
+            required
+            ref={register({
+              min: 3,
+            })}
+          />
+        </div>
+        <div className="form__row">
+          <label className="form__label">Repeat password</label>
+          <input
+            type="password"
+            name="repeatedPassword"
+            required
+            ref={register({
+              min: 3,
+            })}
+          />
+        </div>
+        <button value="Wyślij" onClick={handleSubmit(onSubmit)}>
+          Submit
+        </button>
+      </form>
     </div>
-    <div>
-      <label>
-        Email
-        <input
-          type="text"
-          name="email"
-          required
-          value={props.formData.email}
-          onChange={props.handleChange}
-        />
-      </label>
-    </div>
-    <div>
-      <label>
-        Password
-        <input
-          type="text"
-          name="password"
-          required
-          value={props.formData.password}
-          onChange={props.handleChange}
-        />
-      </label>
-    </div>
-    <input type="submit" value="Wyślij" />
-  </form>
-);
+  );
+};

@@ -1,41 +1,56 @@
-import React, { ChangeEvent } from "react";
-import { LoginComponent, LoginProps } from "../component/loginComponent";
-// todo - handle error and loading using store!!!
-
-export type formField = "email" | "name" | "password";
+import React, { ChangeEvent, MouseEvent } from "react";
+import { connect } from "react-redux";
+import { Registration } from "../../../../types/interfaces";
+import { LoginComponent } from "../component/loginComponent";
+import { saveRegisterDataAndHandleError } from "../store/actions/auth.actions";
 
 export interface LoginState {
   [key: string]: string;
 }
-export class LoginContainer extends React.Component<{}, LoginState> {
-  handleSubmit = () => {
-    // fetch()
-    console.log("submitting!");
-  };
+
+export interface LoginProps {
+  handleSubmit: (arg: Registration) => void;
+}
+
+const initialState: LoginState = {
+  name: "",
+  password: "",
+  repeatedPassword: "",
+  email: "",
+};
+
+class LoginContainer extends React.Component<LoginProps, LoginState> {
+  constructor(props: LoginProps) {
+    super(props);
+    this.state = initialState;
+  }
 
   handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    const name = event.target.name;
+    const { value, name } = event.target;
     this.setState({
       [name]: value,
     });
   };
 
-  constructor(props: LoginProps) {
-    super(props);
-    this.state = {
-      name: "",
-      password: "",
-      email: "",
-    };
-  }
+  handleSubmit = (event: MouseEvent) => {
+    event.preventDefault();
+    const { name, password, email } = this.state;
+    this.props.handleSubmit({
+      name,
+      password,
+      email,
+    });
+    // todo - only on success
+    this.setState(initialState);
+  };
+
   render() {
-    return (
-      <LoginComponent
-        handleSubmit={this.handleSubmit}
-        handleChange={this.handleChange}
-        formData={this.state}
-      ></LoginComponent>
-    );
+    return <LoginComponent handleSubmit={this.handleSubmit}></LoginComponent>;
   }
 }
+
+const mapDispatchToProps = {
+  handleSubmit: saveRegisterDataAndHandleError,
+};
+
+export default connect(null, mapDispatchToProps)(LoginContainer);

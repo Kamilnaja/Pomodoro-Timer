@@ -1,0 +1,10 @@
+@import "../../shared/styles/shared.scss";
+
+body {
+  @include font-fira-sans($size: 18px);
+  background-color: $bg-primary;
+}
+
+.app {
+  height: 100vh;
+}
