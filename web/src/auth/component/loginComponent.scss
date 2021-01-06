@@ -14,4 +14,8 @@
     margin-bottom: 15px;
     width: 100%;
   }
+
+  & &__button {
+    @include button($color: $text-secondary, $bgColor: $button-bg);
+  }
 }

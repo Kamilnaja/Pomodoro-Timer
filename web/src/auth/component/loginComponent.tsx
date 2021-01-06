@@ -1,16 +1,17 @@
-import { MouseEventHandler } from "react";
 import { useForm } from "react-hook-form";
+import { Registration } from "../../../../types/interfaces";
 import { ValidationMessage } from "../../shared/components/validationMessage/ValidationMessage";
+import { AuthState } from "../store/interfaces/auth.state";
 import "./loginComponent.scss";
 
 export interface LoginProps {
-  handleSubmit: MouseEventHandler<HTMLButtonElement>;
+  handleSubmit: (data: Registration) => void;
+  formState: AuthState;
 }
 
 export const LoginComponent = (props: LoginProps) => {
   const { register, errors, handleSubmit } = useForm();
-  const onSubmit = (data: any) => {
-    console.log("submit");
+  const onSubmit = (data: Registration) => {
     props.handleSubmit(data);
   };
 
@@ -25,6 +26,7 @@ export const LoginComponent = (props: LoginProps) => {
             type="text"
             name="name"
             required
+            placeholder="John Doe"
             ref={register({ required: true })}
           />
           <div className="form__error">
@@ -40,7 +42,7 @@ export const LoginComponent = (props: LoginProps) => {
           <label className="form__label">Email</label>
           <input
             type="text"
-            placeholder="email"
+            placeholder="johndoe@gmail.com"
             name="email"
             ref={register({ required: true, pattern: /^\S+@\S+$/i })}
           />
@@ -93,10 +95,16 @@ export const LoginComponent = (props: LoginProps) => {
             )}
           </div>
         </div>
-        <button value="Wyślij" type="submit">
+        <button className="form__button" value="Wyślij" type="submit">
           Submit
         </button>
       </form>
+      {props.formState.isSuccess && (
+        <ValidationMessage
+          message={"success"}
+          type={"success"}
+        ></ValidationMessage>
+      )}
     </div>
   );
 };

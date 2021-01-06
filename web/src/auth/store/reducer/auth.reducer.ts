@@ -5,9 +5,13 @@ import { AuthState } from "../interfaces/auth.state";
 export const initialState: AuthState = {
   isLoading: false,
   error: "",
+  isSuccess: false,
 };
 
-export const authReducer = (state = initialState, action: AuthAction) => {
+export const authReducer = (
+  state = initialState,
+  action: AuthAction
+): AuthState => {
   switch (action.type) {
     case AuthActions.SAVE_REGISTER_DATA:
       return {
@@ -24,6 +28,7 @@ export const authReducer = (state = initialState, action: AuthAction) => {
         ...state,
         error: "Something went wrong",
         isLoading: false,
+        isSuccess: true,
       };
     default:
       return state;

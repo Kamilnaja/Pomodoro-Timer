@@ -3,7 +3,7 @@ import { mainReducer } from "../../../main/store/reducers/main.reducer";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { statsReducer } from "../../../stats/store/reducer/statsReducer";
-import { authReducer } from "../../../login/store/reducer/auth.reducer";
+import { authReducer } from "../../../auth/store/reducer/auth.reducer";
 
 export const rootReducer = combineReducers({
   main: mainReducer,

@@ -4,6 +4,7 @@ import { AuthAction } from "../interfaces/auth.action";
 const initialState = {
   isLoading: false,
   error: false,
+  info: "",
 };
 
 export const loginReducer = (state = initialState, action: AuthAction) => {
@@ -17,6 +18,7 @@ export const loginReducer = (state = initialState, action: AuthAction) => {
       return {
         ...state,
         isLoading: false,
+        info: "Account created",
       };
     case AuthActions.SAVE_REGISTER_DATA_ERROR:
       return {

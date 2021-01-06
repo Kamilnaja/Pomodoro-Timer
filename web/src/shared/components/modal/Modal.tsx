@@ -1,6 +1,6 @@
 import React, { MouseEventHandler } from "react";
 import ReactModal, { Styles } from "react-modal";
-import LoginContainer from "../../../login/container/LoginContainer";
+import LoginContainer from "../../../auth/container/LoginContainer";
 import Settings from "../../../settings/Settings";
 import StatisticsContainer from "../../../statistics/container/StatisticsContainer";
 import { Modal as ModalEnum } from "../../store/enums/modal.enum";
