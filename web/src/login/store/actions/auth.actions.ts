@@ -3,9 +3,9 @@ import { initialConfig } from "../../../shared/settings/initialConfig";
 import { Registration } from "../../../../../types/interfaces";
 
 export enum AuthActions {
-  SAVE_REGISTER_DATA,
-  SAVE_REGISTER_DATA_SUCCESS,
-  SAVE_REGISTER_DATA_ERROR,
+  SAVE_REGISTER_DATA = "SAVE_REGISTER_DATA",
+  SAVE_REGISTER_DATA_SUCCESS = "SAVE_REGISTER_DATA_SUCCESS",
+  SAVE_REGISTER_DATA_ERROR = "SAVE_REGISTER_DATA_ERROR",
 }
 
 export const saveRegisterData = (payload: Registration) => ({
@@ -36,5 +36,8 @@ export const saveRegisterDataAndHandleError = (form: Registration) => (
     body: JSON.stringify(form),
   })
     .then(handleErrors)
+    .then(() => {
+      dispatch(saveRegisterDataSuccess());
+    })
     .catch((error) => dispatch(saveRegisterDataError(error)));
 };

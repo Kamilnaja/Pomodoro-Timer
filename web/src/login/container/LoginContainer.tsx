@@ -33,7 +33,7 @@ class LoginContainer extends React.Component<LoginProps, LoginState> {
   };
 
   handleSubmit = (event: MouseEvent) => {
-    event.preventDefault();
+    console.log("handle submit");
     const { name, password, email } = this.state;
     this.props.handleSubmit({
       name,

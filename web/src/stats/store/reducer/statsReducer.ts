@@ -8,7 +8,7 @@ export const initialState = {
   allPomodoros: 0,
 };
 
-export const stats = (state = initialState, action: StatsAction) => {
+export const statsReducer = (state = initialState, action: StatsAction) => {
   switch (action.type) {
     case StatsActions.GET_TODAY_STATISTICS:
       return {

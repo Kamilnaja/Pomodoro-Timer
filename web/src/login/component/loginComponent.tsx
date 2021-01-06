@@ -9,7 +9,10 @@ export interface LoginProps {
 
 export const LoginComponent = (props: LoginProps) => {
   const { register, errors, handleSubmit } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => {
+    console.log("submit");
+    props.handleSubmit(data);
+  };
 
   return (
     <div className="login">
@@ -90,7 +93,7 @@ export const LoginComponent = (props: LoginProps) => {
             )}
           </div>
         </div>
-        <button value="Wyślij" onClick={handleSubmit(onSubmit)}>
+        <button value="Wyślij" type="submit">
           Submit
         </button>
       </form>

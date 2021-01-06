@@ -2,7 +2,7 @@ import { MainAction } from "../interfaces/mainAction.interface";
 import { MainActions } from "../actions/main.actions";
 import { MainState } from "../interfaces/mainState.interface";
 
-export const initialState: MainState = {
+const initialState: MainState = {
   isLoading: false,
   error: "",
 };
@@ -22,7 +22,7 @@ export const mainReducer = (state = initialState, action: MainAction) => {
     case MainActions.SAVE_POMODORO_ERROR:
       return {
         ...state,
-        error: "Something went wrong",
+        error: "todo handle error",
         isLoading: false,
       };
     default:
