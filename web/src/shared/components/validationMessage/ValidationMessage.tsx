@@ -1,3 +1,5 @@
+import "./validationMessage.scss";
+
 export type ValidationMessageType = "error" | "warn" | "success";
 
 export interface ValidationMessageProps {
@@ -6,5 +8,7 @@ export interface ValidationMessageProps {
 }
 
 export const ValidationMessage = (props: ValidationMessageProps) => (
-  <div>{props.message}</div>
+  <div className="validation-message">
+    <span className="validation-message__text">{props.message}</span>
+  </div>
 );

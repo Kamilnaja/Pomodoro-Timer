@@ -1,13 +1,14 @@
-import { useForm } from "react-hook-form";
-import "./loginComponent.scss";
 import { MouseEventHandler } from "react";
+import { useForm } from "react-hook-form";
+import { ValidationMessage } from "../../shared/components/validationMessage/ValidationMessage";
+import "./loginComponent.scss";
 
 export interface LoginProps {
   handleSubmit: MouseEventHandler<HTMLButtonElement>;
 }
 
 export const LoginComponent = (props: LoginProps) => {
-  const { register, handleSubmit } = useForm();
+  const { register, errors, handleSubmit } = useForm();
   const onSubmit = (data: any) => console.log(data);
 
   return (
@@ -21,19 +22,39 @@ export const LoginComponent = (props: LoginProps) => {
             type="text"
             name="name"
             required
-            ref={register({ min: 3 })}
+            ref={register({ required: true })}
           />
+          <div className="form__error">
+            {errors.name && (
+              <ValidationMessage
+                type={"error"}
+                message={"Name is required"}
+              ></ValidationMessage>
+            )}
+          </div>
         </div>
         <div className="form__row">
           <label className="form__label">Email</label>
           <input
-            type="email"
+            type="text"
+            placeholder="email"
             name="email"
-            required
-            ref={register({
-              min: 3,
-            })}
+            ref={register({ required: true, pattern: /^\S+@\S+$/i })}
           />
+          <div className="form__error">
+            {errors.email?.type === "required" && (
+              <ValidationMessage
+                type={"error"}
+                message={"Email is required"}
+              ></ValidationMessage>
+            )}
+            {errors.email?.type === "pattern" && (
+              <ValidationMessage
+                type={"error"}
+                message={"Please provide correct email"}
+              ></ValidationMessage>
+            )}
+          </div>
         </div>
         <div className="form__row">
           <label className="form__label">Password</label>
@@ -41,10 +62,16 @@ export const LoginComponent = (props: LoginProps) => {
             type="password"
             name="password"
             required
-            ref={register({
-              min: 3,
-            })}
+            ref={register({ required: true })}
           />
+          <div className="form__error">
+            {errors.password && (
+              <ValidationMessage
+                type={"error"}
+                message={"Password is required"}
+              ></ValidationMessage>
+            )}
+          </div>
         </div>
         <div className="form__row">
           <label className="form__label">Repeat password</label>
@@ -52,10 +79,16 @@ export const LoginComponent = (props: LoginProps) => {
             type="password"
             name="repeatedPassword"
             required
-            ref={register({
-              min: 3,
-            })}
+            ref={register({ required: true })}
           />
+          <div className="form__error">
+            {errors.repeatedPassword && (
+              <ValidationMessage
+                type={"error"}
+                message={"Repeated password is required"}
+              ></ValidationMessage>
+            )}
+          </div>
         </div>
         <button value="Wyślij" onClick={handleSubmit(onSubmit)}>
           Submit
