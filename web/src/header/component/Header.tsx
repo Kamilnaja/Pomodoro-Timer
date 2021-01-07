@@ -28,6 +28,12 @@ function Header(props: HeaderProps) {
         >
           Login
         </button>
+        <button
+          className="button"
+          onClick={() => props.handleOpenModal(Modal.REGISTER)}
+        >
+          Register
+        </button>
       </div>
     </header>
   );

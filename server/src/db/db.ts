@@ -33,7 +33,7 @@ function createUsersTable() {
     `CREATE TABLE IF NOT EXISTS users(
       userID text UNIQUE, 
       dateCreated date, 
-      name string, 
+      login string, 
       email string UNIQUE,
       password string
     )`,

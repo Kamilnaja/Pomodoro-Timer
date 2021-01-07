@@ -1,6 +1,7 @@
 import React, { MouseEventHandler } from "react";
 import ReactModal, { Styles } from "react-modal";
-import LoginContainer from "../../../auth/container/LoginContainer";
+import LoginContainer from "../../../auth/login/container/LoginContainer";
+import RegisterContainer from "../../../auth/register/container/RegisterContainer";
 import Settings from "../../../settings/Settings";
 import StatisticsContainer from "../../../statistics/container/StatisticsContainer";
 import { Modal as ModalEnum } from "../../store/enums/modal.enum";
@@ -44,6 +45,9 @@ export const Modal = (props: ModalProps) => (
         </button>
       </header>
       {props.modalType === ModalEnum.LOGIN && <LoginContainer></LoginContainer>}
+      {props.modalType === ModalEnum.REGISTER && (
+        <RegisterContainer></RegisterContainer>
+      )}
       {props.modalType === ModalEnum.STATS && (
         <StatisticsContainer></StatisticsContainer>
       )}
