@@ -1,4 +1,4 @@
-import { Modal } from "../shared/store/enums/modal.enum";
+import { Modal } from "../../shared/store/enums/modal.enum";
 import "./header.scss";
 
 export interface HeaderProps {

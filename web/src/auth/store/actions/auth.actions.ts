@@ -1,6 +1,5 @@
-import { handleErrors } from "../../../shared/scripts/utils";
-import { initialConfig } from "../../../shared/settings/initialConfig";
 import { Registration } from "../../../../../types/interfaces";
+import { initialConfig } from "../../../shared/settings/initialConfig";
 
 export enum AuthActions {
   SAVE_REGISTER_DATA = "SAVE_REGISTER_DATA",
@@ -23,6 +22,7 @@ export const saveRegisterDataError = (error: any) => ({
 });
 
 // thunk
+
 export const saveRegisterDataAndHandleError = (form: Registration) => (
   dispatch: Function
 ) => {
@@ -34,10 +34,11 @@ export const saveRegisterDataAndHandleError = (form: Registration) => (
       "Content-Type": "application/json",
     },
     body: JSON.stringify(form),
-  })
-    .then(handleErrors)
-    .then(() => {
+  }).then((response) => {
+    if (!response.ok) {
+      dispatch(saveRegisterDataError(response.statusText));
+    } else {
       dispatch(saveRegisterDataSuccess());
-    })
-    .catch((error) => dispatch(saveRegisterDataError(error)));
+    }
+  });
 };

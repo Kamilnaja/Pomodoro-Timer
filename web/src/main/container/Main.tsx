@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../../header/Header";
+import Header from "../../header/component/Header";
 import { Modal } from "../../shared/components/modal/Modal";
 import { Modal as ModalEnum } from "../../shared/store/enums/modal.enum";
 import StatsContainer from "../../stats/containers/StatsContainer";

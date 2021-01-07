@@ -3,3 +3,8 @@ export interface Registration {
   email: string;
   password: string;
 }
+
+export interface Error {
+  code: "string";
+  errno: number;
+}

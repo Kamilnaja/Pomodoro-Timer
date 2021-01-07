@@ -5,6 +5,7 @@ import { MainState } from "../interfaces/mainState.interface";
 const initialState: MainState = {
   isLoading: false,
   error: "",
+  isLoggedIn: false,
 };
 
 export const mainReducer = (state = initialState, action: MainAction) => {
