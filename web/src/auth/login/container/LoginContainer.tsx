@@ -1,22 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Registration } from "../../../../../types/interfaces";
-import { saveRegisterDataAndHandleError } from "../../store/actions/auth.actions";
+import { Login } from "../../../../../types/interfaces";
+import { loginAction } from "../../store/actions/auth.actions";
 import { AuthState } from "../../store/interfaces/auth.state";
 import { LoginComponent } from "../component/LoginComponent";
 
 interface LoginProps {
-  handleSubmit: (arg: Registration) => void;
+  handleSubmit: (arg: Login) => void;
   authState: any;
 }
 
 class LoginContainer extends React.Component<LoginProps> {
-  handleSubmit = (data: Registration) => {
-    const { name, password, email } = data;
+  handleSubmit = (data: Login) => {
+    const { login, password } = data;
     this.props.handleSubmit({
-      name,
+      login,
       password,
-      email,
     });
   };
 
@@ -36,7 +35,7 @@ const mapStateToProps = (state: { auth: AuthState }) => {
 };
 
 const mapDispatchToProps = {
-  handleSubmit: saveRegisterDataAndHandleError,
+  handleSubmit: loginAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

@@ -1,17 +1,17 @@
 import { useForm } from "react-hook-form";
-import { Registration } from "../../../../../types/interfaces";
+import { Login } from "../../../../../types/interfaces";
 import { ValidationMessage } from "../../../shared/components/validationMessage/ValidationMessage";
 import { AuthState } from "../../store/interfaces/auth.state";
 import "./loginComponent.scss";
 
 export interface LoginProps {
-  handleSubmit: (data: Registration) => void;
+  handleSubmit: (data: Login) => void;
   formState: AuthState;
 }
 
 export const LoginComponent = (props: LoginProps) => {
   const { register, errors, handleSubmit } = useForm();
-  const onSubmit = (data: Registration) => {
+  const onSubmit = (data: Login) => {
     props.handleSubmit(data);
   };
 
@@ -24,7 +24,7 @@ export const LoginComponent = (props: LoginProps) => {
           <input
             className="form__input"
             type="text"
-            name="name"
+            name="login"
             required
             placeholder="John Doe"
             ref={register({ required: true })}

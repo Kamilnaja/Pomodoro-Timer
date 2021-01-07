@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Registration } from "../../../../../types/interfaces";
 import { RegisterComponent } from "../component/RegisterComponent";
-import { saveRegisterDataAndHandleError } from "../../store/actions/auth.actions";
+import { registerAction } from "../../store/actions/auth.actions";
 import { AuthState } from "../../store/interfaces/auth.state";
 
 interface RegisterProps {
@@ -12,9 +12,9 @@ interface RegisterProps {
 
 class RegisterContainer extends React.Component<RegisterProps> {
   handleSubmit = (data: Registration) => {
-    const { name, password, email } = data;
+    const { login, password, email } = data;
     this.props.handleSubmit({
-      name,
+      login,
       password,
       email,
     });
@@ -36,7 +36,7 @@ const mapStateToProps = (state: { auth: AuthState }) => {
 };
 
 const mapDispatchToProps = {
-  handleSubmit: saveRegisterDataAndHandleError,
+  handleSubmit: registerAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);
