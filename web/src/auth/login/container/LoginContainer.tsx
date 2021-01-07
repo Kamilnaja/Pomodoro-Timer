@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Registration } from "../../../../types/interfaces";
-import { LoginComponent } from "../component/loginComponent";
-import { saveRegisterDataAndHandleError } from "../store/actions/auth.actions";
-import { AuthState } from "../store/interfaces/auth.state";
+import { Registration } from "../../../../../types/interfaces";
+import { saveRegisterDataAndHandleError } from "../../store/actions/auth.actions";
+import { AuthState } from "../../store/interfaces/auth.state";
+import { LoginComponent } from "../component/LoginComponent";
 
 interface LoginProps {
   handleSubmit: (arg: Registration) => void;

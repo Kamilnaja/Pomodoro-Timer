@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
-import { Registration } from "../../../../types/interfaces";
-import { ValidationMessage } from "../../shared/components/validationMessage/ValidationMessage";
-import { AuthState } from "../store/interfaces/auth.state";
-import "./loginComponent.scss";
+import { Registration } from "../../../../../types/interfaces";
+import { ValidationMessage } from "../../../shared/components/validationMessage/ValidationMessage";
+import { AuthState } from "../../store/interfaces/auth.state";
+import "./registerComponent.scss";
 
-export interface LoginProps {
+export interface RegisterProps {
   handleSubmit: (data: Registration) => void;
   formState: AuthState;
 }
 
-export const LoginComponent = (props: LoginProps) => {
+export const RegisterComponent = (props: RegisterProps) => {
   const { register, errors, handleSubmit } = useForm();
   const onSubmit = (data: Registration) => {
     props.handleSubmit(data);
@@ -17,7 +17,7 @@ export const LoginComponent = (props: LoginProps) => {
 
   return (
     <div className="login">
-      <h2 className="login__header">Please sign in</h2>
+      <h2 className="login__header">Enter registration data</h2>
       <form className="login__form form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form__row">
           <label className="form__label">User name</label>
