@@ -7,7 +7,7 @@ import { AuthState } from "../../store/interfaces/auth.state";
 
 interface RegisterProps {
   handleSubmit: (arg: Registration) => void;
-  authState: any;
+  authState: AuthState;
 }
 
 class RegisterContainer extends React.Component<RegisterProps> {

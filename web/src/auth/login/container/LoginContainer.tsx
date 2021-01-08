@@ -7,7 +7,7 @@ import { LoginComponent } from "../component/LoginComponent";
 
 interface LoginProps {
   handleSubmit: (arg: Login) => void;
-  authState: any;
+  authState: AuthState;
 }
 
 class LoginContainer extends React.Component<LoginProps> {

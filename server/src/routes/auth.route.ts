@@ -1,6 +1,6 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
-import { addUserToDB } from '../services/auth.service';
+import { registerUser, loginUser } from '../services/auth.service';
 import { Login as LoginEnum, Registration } from '../../../types/interfaces';
 const router = express.Router();
 
@@ -21,13 +21,16 @@ router.post('/register', (req: Request, res) => {
     if (err) {
       throw err;
     }
-    addUserToDB(hash, login, email, res);
+    registerUser(hash, login, email, res);
   });
 });
 
 router.post('/login', (req: Login, res) => {
   const { login, password } = req.body;
-  console.log(login, password);
+
+  if (login && password) {
+    loginUser(login, password, res);
+  }
 });
 
 export default router;

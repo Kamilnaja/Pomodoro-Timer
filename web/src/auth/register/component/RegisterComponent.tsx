@@ -24,7 +24,7 @@ export const RegisterComponent = (props: RegisterProps) => {
           <input
             className="form__input"
             type="text"
-            name="name"
+            name="login"
             required
             placeholder="John Doe"
             ref={register({ required: true })}

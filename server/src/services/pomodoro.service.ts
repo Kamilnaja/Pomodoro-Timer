@@ -30,6 +30,6 @@ export function handleGetTodaysPomodoros(res: any) {
         error: err.message
       });
     }
-    res.json(result[0]);
+    res.send(result[0]);
   });
 }
