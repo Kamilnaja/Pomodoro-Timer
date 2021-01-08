@@ -8,6 +8,7 @@ export enum AuthAction {
   SAVE_REGISTER_DATA = "SAVE_REGISTER_DATA",
   SAVE_REGISTER_DATA_SUCCESS = "SAVE_REGISTER_DATA_SUCCESS",
   SAVE_REGISTER_DATA_ERROR = "SAVE_REGISTER_DATA_ERROR",
+
   SAVE_LOGIN_DATA = "SAVE_LOGIN_DATA",
   SAVE_LOGIN_DATA_SUCCESS = "SAVE_LOGIN_DATA_SUCCESS",
   SAVE_LOGIN_DATA_ERROR = "SAVE_LOGIN_DATA_ERROR",
@@ -50,15 +51,17 @@ export const saveLoginDataError = (
 });
 
 // thunk
-export const registerAction = (form: Registration) => (dispatch: Function) => {
-  dispatch(saveRegisterData(form));
+export const sendRegisterForm = (formData: Registration) => (
+  dispatch: Function
+) => {
+  dispatch(saveRegisterData(formData));
 
-  return fetch(initialConfig.apiUrl + "/auth/register", {
+  return fetch(`${initialConfig.apiUrl}/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(form),
+    body: JSON.stringify(formData),
   }).then((response) => {
     if (!response.ok) {
       dispatch(saveRegisterDataError(response.statusText));
@@ -68,15 +71,15 @@ export const registerAction = (form: Registration) => (dispatch: Function) => {
   });
 };
 
-export const loginAction = (form: Login) => (dispatch: Function) => {
-  dispatch(saveLoginData(form));
+export const sendLoginForm = (formData: Login) => (dispatch: Function) => {
+  dispatch(saveLoginData(formData));
 
-  return fetch(initialConfig.apiUrl + "/auth/login", {
+  return fetch(`${initialConfig.apiUrl}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(form),
+    body: JSON.stringify(formData),
   })
     .then(handleErrors)
     .then(() => {

@@ -6,6 +6,7 @@ import "./registerComponent.scss";
 
 export interface RegisterProps {
   handleSubmit: (data: Registration) => void;
+  handleClose: () => void;
   formState: AuthState;
 }
 
@@ -13,6 +14,9 @@ export const RegisterComponent = (props: RegisterProps) => {
   const { register, errors, handleSubmit } = useForm();
   const onSubmit = (data: Registration) => {
     props.handleSubmit(data);
+    if (props.formState.isSuccess) {
+      props.handleClose();
+    }
   };
 
   return (

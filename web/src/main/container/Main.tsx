@@ -38,6 +38,7 @@ class Main extends React.Component<{}, MainState> {
       <footer>Hello I'm footer</footer>
       <Modal
         modalType={this.state.openedModal}
+        closeModal={this.handleCloseModal}
         handleCloseModal={this.handleCloseModal}
       ></Modal>
     </div>

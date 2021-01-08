@@ -11,18 +11,19 @@ import "./modal.scss";
 export interface ModalProps {
   modalType: ModalEnum;
   handleCloseModal: MouseEventHandler<HTMLButtonElement>;
+  closeModal: () => void;
 }
 
-const getModal = (modalType: ModalEnum) => {
-  switch (modalType) {
+const getModal = (props: ModalProps) => {
+  switch (props.modalType) {
     case ModalEnum.LOGIN:
       return <LoginContainer />;
     case ModalEnum.REGISTER:
-      return <RegisterContainer />;
+      return <RegisterContainer handleClose={props.closeModal} />;
     case ModalEnum.STATS:
-      return <StatisticsContainer />;
+      return <StatisticsContainer handleClose={props.closeModal} />;
     case ModalEnum.SETTINGS:
-      return <Settings />;
+      return <Settings handleClose={props.closeModal} />;
   }
 };
 
@@ -45,7 +46,7 @@ export const Modal = (props: ModalProps) => {
             ✕
           </button>
         </header>
-        {getModal(props.modalType)}
+        {getModal(props)}
       </div>
     </ReactModal>
   );

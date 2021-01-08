@@ -6,13 +6,17 @@ import "./loginComponent.scss";
 
 export interface LoginProps {
   handleSubmit: (data: Login) => void;
+  handleClose: () => void;
   formState: AuthState;
 }
 
 export const LoginComponent = (props: LoginProps) => {
   const { register, errors, handleSubmit } = useForm();
-  const onSubmit = (data: Login) => {
-    props.handleSubmit(data);
+  const onSubmit = (loginData: Login) => {
+    props.handleSubmit(loginData);
+    setTimeout(() => {
+      closeModal(props);
+    }, 2000);
   };
 
   return (
@@ -68,3 +72,9 @@ export const LoginComponent = (props: LoginProps) => {
     </div>
   );
 };
+
+function closeModal(props: LoginProps) {
+  if (props.formState.isSuccess) {
+    props.handleClose();
+  }
+}

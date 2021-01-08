@@ -1,7 +1,13 @@
 import React from "react";
 
-function Settings() {
-  return <header className="App-header">Settings</header>;
+interface SettingsProps {
+  handleClose: () => void;
+}
+
+export class Settings extends React.Component<SettingsProps> {
+  render() {
+    return <header className="App-header">Settings</header>;
+  }
 }
 
 export default Settings;

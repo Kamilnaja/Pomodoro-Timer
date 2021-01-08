@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Login } from "../../../../../types/interfaces";
-import { loginAction } from "../../store/actions/auth.actions";
+import { sendLoginForm } from "../../store/actions/auth.actions";
 import { AuthState } from "../../store/interfaces/auth.state";
 import { LoginComponent } from "../component/LoginComponent";
 
@@ -19,11 +19,23 @@ class LoginContainer extends React.Component<LoginProps> {
     });
   };
 
+  handleClose = () => {};
+
+  componentDidUpdate = (prevProps: LoginProps) => {
+    if (
+      this.props.authState.isSuccess !== prevProps.authState.isSuccess &&
+      this.props.authState.isSuccess
+    ) {
+      console.log(this.props.authState);
+    }
+  };
+
   render() {
     return (
       <LoginComponent
         handleSubmit={this.handleSubmit}
         formState={this.props.authState}
+        handleClose={this.handleClose}
       ></LoginComponent>
     );
   }
@@ -35,7 +47,7 @@ const mapStateToProps = (state: { auth: AuthState }) => {
 };
 
 const mapDispatchToProps = {
-  handleSubmit: loginAction,
+  handleSubmit: sendLoginForm,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
