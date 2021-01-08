@@ -1,5 +1,8 @@
 import { handleErrors } from "../../../shared/scripts/utils";
 import { initialConfig } from "../../../shared/settings/initialConfig";
+import { ActionWithPayload } from "../../../shared/store/interfaces/actions/action.interface";
+import Stats from "../interfaces/stats.interface";
+import { StatsAction } from "../interfaces/statsAction";
 import TodayStatistics from "./../../../shared/store/interfaces/todayStatistics.interface";
 
 export enum StatsActions {
@@ -9,11 +12,13 @@ export enum StatsActions {
   INCREMENT_POMODOROS = "INCREMENT_POMODOROS", // updates number of pomodoros make today
 }
 
-export const getTodayStatistics = () => ({
+export const getTodayStatistics = (): ActionWithPayload<StatsAction, void> => ({
   type: StatsActions.GET_TODAY_STATISTICS,
 });
 
-export const getTodayStatisticsSuccess = (payload: TodayStatistics) => ({
+export const getTodayStatisticsSuccess = (
+  payload: TodayStatistics
+): ActionWithPayload<TodayStatistics> => ({
   type: StatsActions.GET_TODAY_STATISTICS_SUCCESS,
   payload,
 });

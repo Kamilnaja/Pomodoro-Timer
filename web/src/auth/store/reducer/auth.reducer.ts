@@ -1,5 +1,5 @@
+import { Action } from "redux";
 import { AuthActions } from "../actions/auth.actions";
-import { AuthAction } from "../interfaces/auth.action";
 import { AuthState } from "../interfaces/auth.state";
 
 export const initialState: AuthState = {
@@ -10,7 +10,7 @@ export const initialState: AuthState = {
 
 export const authReducer = (
   state = initialState,
-  action: AuthAction
+  action: Action
 ): AuthState => {
   switch (action.type) {
     case AuthActions.SAVE_REGISTER_DATA:
@@ -30,6 +30,7 @@ export const authReducer = (
         isLoading: false,
         isSuccess: true,
       };
+
     default:
       return state;
   }
