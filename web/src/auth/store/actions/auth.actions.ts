@@ -4,7 +4,7 @@ import { Login, Registration } from "../../../../../types/interfaces";
 import { ActionWithPayload } from "../../../shared/store/interfaces/actions/action.interface";
 import { Action } from "redux";
 
-export enum AuthActions {
+export enum AuthAction {
   SAVE_REGISTER_DATA = "SAVE_REGISTER_DATA",
   SAVE_REGISTER_DATA_SUCCESS = "SAVE_REGISTER_DATA_SUCCESS",
   SAVE_REGISTER_DATA_ERROR = "SAVE_REGISTER_DATA_ERROR",
@@ -15,37 +15,37 @@ export enum AuthActions {
 
 export const saveRegisterData = (
   payload: Registration
-): ActionWithPayload<AuthActions, Registration> => ({
-  type: AuthActions.SAVE_REGISTER_DATA,
+): ActionWithPayload<AuthAction, Registration> => ({
+  type: AuthAction.SAVE_REGISTER_DATA,
   payload: payload,
 });
 
 export const saveRegisterDataSuccess = (): Action => ({
-  type: AuthActions.SAVE_REGISTER_DATA_SUCCESS,
+  type: AuthAction.SAVE_REGISTER_DATA_SUCCESS,
 });
 
 export const saveRegisterDataError = (
   error: any
-): ActionWithPayload<AuthActions, Error> => ({
-  type: AuthActions.SAVE_REGISTER_DATA_ERROR,
+): ActionWithPayload<AuthAction, Error> => ({
+  type: AuthAction.SAVE_REGISTER_DATA_ERROR,
   payload: error,
 });
 
 export const saveLoginData = (
   payload: Login
-): ActionWithPayload<AuthActions, Login> => ({
-  type: AuthActions.SAVE_LOGIN_DATA,
+): ActionWithPayload<AuthAction, Login> => ({
+  type: AuthAction.SAVE_LOGIN_DATA,
   payload: payload,
 });
 
 export const saveLoginDataSuccess = (): Action => ({
-  type: AuthActions.SAVE_LOGIN_DATA_SUCCESS,
+  type: AuthAction.SAVE_LOGIN_DATA_SUCCESS,
 });
 
 export const saveLoginDataError = (
   error: any
-): ActionWithPayload<AuthActions, Error> => ({
-  type: AuthActions.SAVE_LOGIN_DATA_ERROR,
+): ActionWithPayload<AuthAction, Error> => ({
+  type: AuthAction.SAVE_LOGIN_DATA_ERROR,
   payload: error,
 });
 
