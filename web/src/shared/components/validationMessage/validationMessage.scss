@@ -1,0 +1,9 @@
+@import "./../../../shared/styles/shared.scss";
+
+.validation-message {
+  display: block;
+
+  & &__text {
+    color: $text-error;
+  }
+}

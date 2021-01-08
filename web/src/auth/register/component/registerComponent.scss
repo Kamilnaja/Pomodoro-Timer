@@ -1,0 +1,21 @@
+@import "../../../shared/styles/shared.scss";
+
+.form {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+  flex-wrap: wrap;
+
+  & &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  & &__button {
+    @include button($color: $text-secondary, $bgColor: $button-bg);
+  }
+}

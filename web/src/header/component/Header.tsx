@@ -1,4 +1,4 @@
-import { Modal } from "../shared/store/enums/modal.enum";
+import { Modal } from "../../shared/store/enums/modal.enum";
 import "./header.scss";
 
 export interface HeaderProps {
@@ -27,6 +27,12 @@ function Header(props: HeaderProps) {
           onClick={() => props.handleOpenModal(Modal.LOGIN)}
         >
           Login
+        </button>
+        <button
+          className="button"
+          onClick={() => props.handleOpenModal(Modal.REGISTER)}
+        >
+          Register
         </button>
       </div>
     </header>

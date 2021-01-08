@@ -1,24 +1,28 @@
+import { Action } from "redux";
 import { handleErrors } from "../../../shared/scripts/utils";
 import { initialConfig } from "../../../shared/settings/initialConfig";
+import { ActionWithPayload } from "../../../shared/store/interfaces/actions/action.interface";
 import { incrementPomodoros } from "../../../stats/store/actions/stats.actions";
 
-export enum MainActions {
+export enum MainAction {
   SAVE_POMODORO = "SAVE_POMODORO",
   SAVE_POMODORO_SUCCESS = "SAVE_POMODORO_SUCCESS",
   SAVE_POMODORO_ERROR = "SAVE_POMODORO_ERROR",
 }
 
-export const savePomodoro = () => ({
-  type: MainActions.SAVE_POMODORO,
+export const savePomodoro = (): Action<MainAction> => ({
+  type: MainAction.SAVE_POMODORO,
 });
 
-export const savePomodoroSuccess = () => ({
-  type: MainActions.SAVE_POMODORO_SUCCESS,
+export const savePomodoroSuccess = (): Action<MainAction> => ({
+  type: MainAction.SAVE_POMODORO_SUCCESS,
 });
 
-export const savePomodoroError = (error: any) => ({
-  type: MainActions.SAVE_POMODORO_ERROR,
-  error,
+export const savePomodoroError = (
+  error: any
+): ActionWithPayload<MainAction, any> => ({
+  type: MainAction.SAVE_POMODORO_ERROR,
+  payload: error,
 });
 
 // thunk
