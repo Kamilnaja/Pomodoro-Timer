@@ -7,6 +7,7 @@
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
     "sqlite3": "^5.0.0",
+    "ts-node": "^9.1.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -27,7 +28,8 @@
   "scripts": {
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "watch": "tsc -w",
-    "start": "nodemon index.js",
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon -x ts-node src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
