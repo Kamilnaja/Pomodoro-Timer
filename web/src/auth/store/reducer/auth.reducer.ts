@@ -47,7 +47,8 @@ export const authReducer = (
         isLoading: false,
         isSuccess: true,
       };
-
+    case AuthAction.RESET_FORM:
+      return initialState;
     default:
       return state;
   }

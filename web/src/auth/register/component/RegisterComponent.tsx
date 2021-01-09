@@ -14,9 +14,6 @@ export const RegisterComponent = (props: RegisterProps) => {
   const { register, errors, handleSubmit } = useForm();
   const onSubmit = (data: Registration) => {
     props.handleSubmit(data);
-    if (props.formState.isSuccess) {
-      props.handleClose();
-    }
   };
 
   return (

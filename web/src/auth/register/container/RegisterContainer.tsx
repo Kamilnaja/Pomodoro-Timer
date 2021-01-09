@@ -4,16 +4,17 @@ import { Registration } from "../../../../../types/interfaces";
 import { RegisterComponent } from "../component/RegisterComponent";
 import { sendRegisterForm } from "../../store/actions/auth.actions";
 import { AuthState } from "../../store/interfaces/auth.state";
+import { handleCloseModal } from "../../../shared/scripts/utils";
 
-interface RegisterProps {
+export interface RegisterProps {
   handleSubmit: (arg: Registration) => void;
   handleClose: () => void;
   authState: AuthState;
 }
 
 class RegisterContainer extends React.Component<RegisterProps> {
-  handleSubmit = (data: Registration) => {
-    const { login, password, email } = data;
+  handleSubmit = (registrationData: Registration) => {
+    const { login, password, email } = registrationData;
     this.props.handleSubmit({
       login,
       password,
@@ -22,12 +23,7 @@ class RegisterContainer extends React.Component<RegisterProps> {
   };
 
   componentDidUpdate = (prevProps: RegisterProps) => {
-    if (
-      this.props.authState.isSuccess !== prevProps.authState.isSuccess &&
-      this.props.authState.isSuccess
-    ) {
-      this.props.handleClose();
-    }
+    handleCloseModal(prevProps.authState, this.props);
   };
 
   render() {
@@ -42,8 +38,8 @@ class RegisterContainer extends React.Component<RegisterProps> {
 }
 
 const mapStateToProps = (state: { auth: AuthState }) => {
-  const authState = state.auth;
-  return { authState };
+  const formState = state.auth;
+  return { authState: formState };
 };
 
 const mapDispatchToProps = {
