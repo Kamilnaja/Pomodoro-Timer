@@ -1,5 +1,5 @@
-import { Action } from "../../../shared/store/interfaces/action.interface";
-import { SettingsActions } from "../actions/actions";
+import { ActionWithPayload } from "../../../shared/store/interfaces/actions/action.interface";
+import { SettingsAction } from "../actions/actions";
 
 interface State {
   settings: object;
@@ -9,15 +9,17 @@ const initialState: State = {
   settings: [],
 };
 
-export const reducer = (state = initialState, action: Action): State => {
+export const settingsReducer = (
+  state = initialState,
+  action: ActionWithPayload<SettingsAction, any>
+): State => {
   // todo - stub
   switch (action.type) {
-    case SettingsActions.GET_SETTINGS:
+    case SettingsAction.GET_SETTINGS:
       return {
         ...state,
         settings: action.payload,
       };
-
     default:
       return state;
   }

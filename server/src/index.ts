@@ -1,12 +1,20 @@
 import express from 'express';
-import router from './controllers/pomodoro.controller';
 import cors from 'cors';
+import route from './routes/route';
 export const app = express();
 
-const port = 8080; // default port to listen
-
+const port = process.env.PORT || 8080; // default port to listen
 app.use(cors());
-app.use('/api', router);
+app.use(express.json());
+
+// routes
+
+app.use('/api', route);
+
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', function (req, res) {
+  res.status(404).send('what???');
+});
 
 // start the Express server
 app.listen(port, () => {

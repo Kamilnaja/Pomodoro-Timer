@@ -1,18 +1,18 @@
 import sqlite3 from 'sqlite3';
+
 const DBSOURCE = 'pomodoros1.sqlite';
 
 const db = new sqlite3.Database(DBSOURCE, err => {
   if (err) {
-    // Cannot open database
     console.error('error with db: ' + err.message);
     throw err;
   } else {
-    initializeDb();
+    createPomodorosTable();
+    createUsersTable();
   }
 });
 
-const initializeDb = () => {
-  console.log('starting');
+function createPomodorosTable() {
   db.run(
     `CREATE TABLE IF NOT EXISTS pomodoros (
           userID text,
@@ -21,12 +21,30 @@ const initializeDb = () => {
     err => {
       if (err) {
         console.log(err);
-        // Table already created
       } else {
-        console.log('table is working');
+        console.log('pomodoros table created or updated');
       }
     }
   );
-};
+}
+
+function createUsersTable() {
+  db.run(
+    `CREATE TABLE IF NOT EXISTS users(
+      userID text UNIQUE, 
+      dateCreated date, 
+      login string, 
+      email string UNIQUE,
+      password string
+    )`,
+    err => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('users table created or updated');
+      }
+    }
+  );
+}
 
 export default db;

@@ -16,6 +16,12 @@ export function Info(props: { currentState: TimerState }) {
     case TimerState.BREAK_RUNNING:
       info = "Do not work";
       break;
+    case TimerState.POMODORO_PAUSE:
+      info = "Pomodoro pause";
+      break;
+    case TimerState.BREAK_PAUSE:
+      info = "Break pause";
+      break;
   }
   return <div className="info">{info}</div>;
 }

@@ -1,10 +1,15 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
-import { main } from "../../../main/store/reducers/reducer";
+import { mainReducer } from "../../../main/store/reducers/main.reducer";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { stats } from "../../../stats/store/reducer/statsReducer";
+import { statsReducer } from "../../../stats/store/reducer/statsReducer";
+import { authReducer } from "../../../auth/store/reducer/auth.reducer";
 
-export const rootReducer = combineReducers({ main, stats });
+export const rootReducer = combineReducers({
+  main: mainReducer,
+  stats: statsReducer,
+  auth: authReducer,
+});
 export const store = createStore(
   rootReducer,
 

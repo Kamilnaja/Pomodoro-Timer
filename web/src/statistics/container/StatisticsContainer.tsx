@@ -1,16 +1,12 @@
 import React from "react";
-import { connect } from "react-redux";
 import { StatisticsComponent } from "../component/StatisticsComponent";
 // wrapper for all statistics
-class StatisticsContainer extends React.Component {
-  render() {
-    return (
-      <div>
-        STATS TTTT
-        <StatisticsComponent></StatisticsComponent>
-      </div>
-    );
-  }
+interface StatisticsProps {
+  handleClose: () => void;
 }
 
-export default connect(null, null)(StatisticsContainer);
+class StatisticsContainer extends React.Component<StatisticsProps> {
+  render = () => <StatisticsComponent></StatisticsComponent>;
+}
+
+export default StatisticsContainer;
