@@ -25,17 +25,45 @@ class Timer extends React.Component<TimerProps, State> {
   };
 
   startCounter = () => {
-    if (this.state.timerState === TimerState.BREAK_END) {
-      this.setState({ timerState: TimerState.POMODORO_RUNNING });
-    } else if (this.state.timerState === TimerState.POMODORO_END) {
-      this.setState({ timerState: TimerState.BREAK_RUNNING });
+    if (!this.isAnyTimerRunning()) {
+      switch (this.state.timerState) {
+        case TimerState.BREAK_END:
+          this.setState({ timerState: TimerState.POMODORO_RUNNING });
+          break;
+        case TimerState.POMODORO_END:
+          this.setState({
+            timerState: TimerState.BREAK_RUNNING,
+          });
+          break;
+        case TimerState.POMODORO_PAUSE:
+          this.setState({
+            timerState: TimerState.POMODORO_RUNNING,
+          });
+          break;
+        case TimerState.BREAK_PAUSE:
+          this.setState({
+            timerState: TimerState.BREAK_RUNNING,
+          });
+          break;
+      }
+      this.count();
+    } else {
+      console.log("timer is running!");
     }
-    this.count();
   };
 
-  stop = () => {
-    if (this.isAnyTimerRunning()) {
-      this.setState({ timerState: TimerState.POMODORO_RUNNING });
+  pauseCounter = () => {
+    switch (this.state.timerState) {
+      case TimerState.POMODORO_RUNNING:
+        this.setState({
+          timerState: TimerState.POMODORO_PAUSE,
+        });
+        break;
+      case TimerState.BREAK_RUNNING:
+        this.setState({
+          timerState: TimerState.BREAK_PAUSE,
+        });
+        break;
     }
     this.clearIntervalAndSetTime();
   };
@@ -122,7 +150,9 @@ class Timer extends React.Component<TimerProps, State> {
         <Time time={msToTime(this.state.timerTime)}></Time>
         <button
           className="timer__button timer__button--stop"
-          onClick={this.isAnyTimerRunning() ? this.stop : this.startCounter}
+          onClick={
+            this.isAnyTimerRunning() ? this.pauseCounter : this.startCounter
+          }
         >
           {this.isAnyTimerRunning() ? "stop" : "start"}
         </button>
