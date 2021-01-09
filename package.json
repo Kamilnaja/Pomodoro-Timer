@@ -34,6 +34,7 @@
   "scripts": {
     "start": "node dist/src/index.js",
     "postinstall": "tsc",
+    "heroku-postbuild": "cd web && npm install && npm run build",
     "watch-ts": "tsc -w",
     "watch-node": "nodemon dist/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
