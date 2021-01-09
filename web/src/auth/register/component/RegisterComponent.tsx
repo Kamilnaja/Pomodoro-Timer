@@ -6,6 +6,7 @@ import "./registerComponent.scss";
 
 export interface RegisterProps {
   handleSubmit: (data: Registration) => void;
+  handleClose: () => void;
   formState: AuthState;
 }
 

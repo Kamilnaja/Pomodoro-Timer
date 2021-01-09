@@ -6,13 +6,14 @@ import "./loginComponent.scss";
 
 export interface LoginProps {
   handleSubmit: (data: Login) => void;
-  formState: AuthState;
+  handleClose: () => void;
+  authState: AuthState;
 }
 
 export const LoginComponent = (props: LoginProps) => {
   const { register, errors, handleSubmit } = useForm();
-  const onSubmit = (data: Login) => {
-    props.handleSubmit(data);
+  const onSubmit = (loginData: Login) => {
+    props.handleSubmit(loginData);
   };
 
   return (
@@ -59,7 +60,7 @@ export const LoginComponent = (props: LoginProps) => {
           Submit
         </button>
       </form>
-      {props.formState.isSuccess && (
+      {props.authState.isSuccess && (
         <ValidationMessage
           message={"success"}
           type={"success"}

@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+import { resetForm } from "../../auth/store/actions/auth.actions";
 import Header from "../../header/component/Header";
 import { Modal } from "../../shared/components/modal/Modal";
 import { Modal as ModalEnum } from "../../shared/store/enums/modal.enum";
@@ -10,8 +12,11 @@ interface MainState {
   openedModal: ModalEnum;
 }
 
+interface MainProps {
+  resetForm: () => void;
+}
 // Wrapper for whole app
-class Main extends React.Component<{}, MainState> {
+class Main extends React.Component<MainProps, MainState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -28,6 +33,7 @@ class Main extends React.Component<{}, MainState> {
     this.setState({
       openedModal: ModalEnum.NULL,
     });
+    this.props.resetForm();
   };
 
   render = () => (
@@ -38,10 +44,14 @@ class Main extends React.Component<{}, MainState> {
       <footer>Hello I'm footer</footer>
       <Modal
         modalType={this.state.openedModal}
-        handleCloseModal={this.handleCloseModal}
+        closeModal={this.handleCloseModal}
       ></Modal>
     </div>
   );
 }
 
-export default Main;
+const mapDispatchToProps = {
+  resetForm,
+};
+
+export default connect(null, mapDispatchToProps)(Main);

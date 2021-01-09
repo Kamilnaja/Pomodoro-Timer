@@ -1,13 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Login } from "../../../../../types/interfaces";
-import { loginAction } from "../../store/actions/auth.actions";
+import { handleCloseModal } from "../../../shared/scripts/utils";
+import { sendLoginForm } from "../../store/actions/auth.actions";
 import { AuthState } from "../../store/interfaces/auth.state";
 import { LoginComponent } from "../component/LoginComponent";
 
 interface LoginProps {
-  handleSubmit: (arg: Login) => void;
   authState: AuthState;
+  handleSubmit: (arg: Login) => void;
+  handleClose: () => void;
 }
 
 class LoginContainer extends React.Component<LoginProps> {
@@ -19,23 +21,28 @@ class LoginContainer extends React.Component<LoginProps> {
     });
   };
 
+  componentDidUpdate = (prevProps: LoginProps) => {
+    handleCloseModal(prevProps.authState, this.props);
+  };
+
   render() {
     return (
       <LoginComponent
         handleSubmit={this.handleSubmit}
-        formState={this.props.authState}
+        authState={this.props.authState}
+        handleClose={this.props.handleClose}
       ></LoginComponent>
     );
   }
 }
 
 const mapStateToProps = (state: { auth: AuthState }) => {
-  const authState = state.auth;
-  return { authState };
+  const formState = state.auth;
+  return { authState: formState };
 };
 
 const mapDispatchToProps = {
-  handleSubmit: loginAction,
+  handleSubmit: sendLoginForm,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

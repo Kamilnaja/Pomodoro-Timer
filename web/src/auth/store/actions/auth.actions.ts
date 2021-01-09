@@ -1,16 +1,19 @@
+import { Action } from "redux";
+import { Login, Registration } from "../../../../../types/interfaces";
 import { handleErrors } from "../../../shared/scripts/utils";
 import { initialConfig } from "../../../shared/settings/initialConfig";
-import { Login, Registration } from "../../../../../types/interfaces";
 import { ActionWithPayload } from "../../../shared/store/interfaces/actions/action.interface";
-import { Action } from "redux";
 
 export enum AuthAction {
   SAVE_REGISTER_DATA = "SAVE_REGISTER_DATA",
   SAVE_REGISTER_DATA_SUCCESS = "SAVE_REGISTER_DATA_SUCCESS",
   SAVE_REGISTER_DATA_ERROR = "SAVE_REGISTER_DATA_ERROR",
+
   SAVE_LOGIN_DATA = "SAVE_LOGIN_DATA",
   SAVE_LOGIN_DATA_SUCCESS = "SAVE_LOGIN_DATA_SUCCESS",
   SAVE_LOGIN_DATA_ERROR = "SAVE_LOGIN_DATA_ERROR",
+
+  RESET_FORM = "RESET_FORM",
 }
 
 export const saveRegisterData = (
@@ -49,16 +52,22 @@ export const saveLoginDataError = (
   payload: error,
 });
 
-// thunk
-export const registerAction = (form: Registration) => (dispatch: Function) => {
-  dispatch(saveRegisterData(form));
+export const resetForm = () => ({
+  type: AuthAction.RESET_FORM,
+});
 
-  return fetch(initialConfig.apiUrl + "/auth/register", {
+// thunk
+export const sendRegisterForm = (formData: Registration) => (
+  dispatch: Function
+) => {
+  dispatch(saveRegisterData(formData));
+
+  return fetch(`${initialConfig.apiUrl}/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(form),
+    body: JSON.stringify(formData),
   }).then((response) => {
     if (!response.ok) {
       dispatch(saveRegisterDataError(response.statusText));
@@ -68,15 +77,15 @@ export const registerAction = (form: Registration) => (dispatch: Function) => {
   });
 };
 
-export const loginAction = (form: Login) => (dispatch: Function) => {
-  dispatch(saveLoginData(form));
+export const sendLoginForm = (formData: Login) => (dispatch: Function) => {
+  dispatch(saveLoginData(formData));
 
-  return fetch(initialConfig.apiUrl + "/auth/login", {
+  return fetch(`${initialConfig.apiUrl}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(form),
+    body: JSON.stringify(formData),
   })
     .then(handleErrors)
     .then(() => {
