@@ -1,6 +1,6 @@
 node_modules
 web/.eslintcache
 package-lock.json
-server/dist/
-server/*.sqlite
+dist/
+*.sqlite
 .idea/*

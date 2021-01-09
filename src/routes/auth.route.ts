@@ -1,7 +1,7 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
 import { registerUser, loginUser } from '../services/auth.service';
-import { Login as LoginEnum, Registration } from '../../../types/interfaces';
+import { Login as LoginEnum, Registration } from '../../types/interfaces';
 const router = express.Router();
 
 interface Request {
