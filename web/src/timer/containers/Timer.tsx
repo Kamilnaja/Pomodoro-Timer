@@ -10,7 +10,7 @@ import "./timer.scss";
 import "../../shared/settings/initialConfig";
 import { initialConfig } from "../../shared/settings/initialConfig";
 import { savePomodoroAndIncrementCounter } from "../../main/store/actions/main.actions";
-// import { Time } from "./../components/time/Time";
+import { Time } from "../components/time/Time";
 
 class Timer extends React.Component<TimerProps, State> {
   interval: any;
@@ -159,7 +159,7 @@ class Timer extends React.Component<TimerProps, State> {
             Long Break
           </button>
         </div>
-        {/* <Time time={msToTime(this.state.timerTime)}></Time> */}
+        <Time time={msToTime(this.state.timerTime)}></Time>
         <button className="timer__button timer__button--stop" onClick={this.isAnyTimerRunning() ? this.pauseCounter : this.startCounter}>
           {this.isAnyTimerRunning() ? "stop" : "start"}
         </button>
