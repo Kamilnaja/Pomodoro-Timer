@@ -1,11 +1,10 @@
 {
-    "htmlWhitespaceSensitivity": "strict",
-    "semi": true,
-    "singleQuote": true,
-    "printWidth": 140,
-    "tabWidth": 2,
-    "trailingComma": "none",
-    "arrowParens": "avoid",
-    "endOfLine": "auto"
-  }
-  
+  "htmlWhitespaceSensitivity": "strict",
+  "semi": true,
+  "singleQuote": false,
+  "printWidth": 140,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "arrowParens": "avoid",
+  "endOfLine": "auto"
+}

@@ -1,9 +1,9 @@
 @import "../../../shared/styles/shared.scss";
 
 .time {
-  @include font-fira-sans($size: 70px);
+  @include font-fira-sans($size: 80px);
   align-items: center;
   display: flex;
   justify-content: center;
-  min-height: 150px;
+  padding: 40px 0;
 }

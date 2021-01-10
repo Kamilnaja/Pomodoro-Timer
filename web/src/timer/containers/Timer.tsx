@@ -14,18 +14,18 @@ import { savePomodoroAndIncrementCounter } from "../../main/store/actions/main.a
 
 class Timer extends React.Component<TimerProps, State> {
   interval: any;
+  blinkingInterval: any;
 
   constructor(props: any) {
     super(props);
     this.state = timerState;
   }
 
-  componentDidUpdate = () => {
-    document.title = `${msToTime(this.state.timerTime)}`;
-  };
-
   startCounter = () => {
     if (!this.isAnyTimerRunning()) {
+      clearInterval(this.blinkingInterval);
+      this.clickSound();
+
       switch (this.state.timerState) {
         case TimerState.BREAK_END:
           this.setState({ timerState: TimerState.POMODORO_RUNNING });
@@ -47,8 +47,6 @@ class Timer extends React.Component<TimerProps, State> {
           break;
       }
       this.count();
-    } else {
-      console.log("timer is running!");
     }
   };
 
@@ -83,30 +81,53 @@ class Timer extends React.Component<TimerProps, State> {
   };
 
   isAnyTimerRunning = () => {
-    return (
-      this.state.timerState === TimerState.BREAK_RUNNING ||
-      this.state.timerState === TimerState.POMODORO_RUNNING
-    );
+    return this.state.timerState === TimerState.BREAK_RUNNING || this.state.timerState === TimerState.POMODORO_RUNNING;
   };
 
-  clearIntervalAndSetTime = (time?: number) => {
+  private clearIntervalAndSetTime = (time?: number) => {
     clearInterval(this.interval);
     if (time) {
       this.setState({ timerTime: time });
     }
   };
 
-  count = () => {
+  private count = () => {
     this.interval = setInterval(() => {
       if (this.state.timerTime !== 0) {
         this.setState({
           timerTime: this.state.timerTime - initialConfig.refreshRate,
         });
+        document.title = `${msToTime(this.state.timerTime)}`;
       } else {
         this.stopCounting();
+        this.informUser();
       }
     }, initialConfig.refreshRate);
   };
+
+  private makeTitleBlinking() {
+    let isTimeVisible = true;
+    this.blinkingInterval = setInterval(() => {
+      if (isTimeVisible) {
+        document.title = `${msToTime(this.state.timerTime)}`;
+      } else {
+        document.title = `00.00.00`;
+      }
+      isTimeVisible = !isTimeVisible;
+    }, 500);
+  }
+
+  private informUser() {
+    const audio = new Audio("sounds/zapsplat_multimedia_game_sound_positive_award_bonus_bright_warm_synth_001_60698.mp3");
+    audio.play();
+
+    this.makeTitleBlinking();
+  }
+
+  private clickSound() {
+    const audio = new Audio("sounds/zapsplat_multimedia_game_sound_childrens_ping_high_pitched_soft_007_60676.mp3");
+    audio.play();
+  }
 
   private stopCounting() {
     if (this.state.timerState === TimerState.POMODORO_RUNNING) {
@@ -128,32 +149,18 @@ class Timer extends React.Component<TimerProps, State> {
     <main>
       <div className="timer">
         <div className="timer__button-wrapper">
-          <button
-            className={"timer__button timer__button--mode "}
-            onClick={this.startNewPomodoro}
-          >
+          <button className={"timer__button timer__button--mode "} onClick={this.startNewPomodoro}>
             Pomodoro
           </button>
-          <button
-            className="timer__button timer__button--mode"
-            onClick={() => this.startNewBreak(initialConfig.shortBreakTime)}
-          >
+          <button className="timer__button timer__button--mode" onClick={() => this.startNewBreak(initialConfig.shortBreakTime)}>
             Short Break
           </button>
-          <button
-            className="timer__button timer__button--mode"
-            onClick={() => this.startNewBreak(initialConfig.longBreakTime)}
-          >
+          <button className="timer__button timer__button--mode" onClick={() => this.startNewBreak(initialConfig.longBreakTime)}>
             Long Break
           </button>
         </div>
         <Time time={msToTime(this.state.timerTime)}></Time>
-        <button
-          className="timer__button timer__button--stop"
-          onClick={
-            this.isAnyTimerRunning() ? this.pauseCounter : this.startCounter
-          }
-        >
+        <button className="timer__button timer__button--stop" onClick={this.isAnyTimerRunning() ? this.pauseCounter : this.startCounter}>
           {this.isAnyTimerRunning() ? "stop" : "start"}
         </button>
         <Info currentState={this.state.timerState}></Info>
