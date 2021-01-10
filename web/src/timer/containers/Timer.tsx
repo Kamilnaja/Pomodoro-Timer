@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { msToTime } from "../../shared/scripts/utils";
 import { Info } from "../components/info/Info";
+import { Time } from "../components/Time/Time";
 import { TimerState } from "../store/enums/timer.enum";
 import { State } from "../store/interfaces/state.interface";
 import { TimerProps } from "../store/interfaces/timerProps.interface";
@@ -10,7 +11,6 @@ import "./timer.scss";
 import "../../shared/settings/initialConfig";
 import { initialConfig } from "../../shared/settings/initialConfig";
 import { savePomodoroAndIncrementCounter } from "../../main/store/actions/main.actions";
-import { Time } from "../components/time/Time";
 
 class Timer extends React.Component<TimerProps, State> {
   interval: any;
