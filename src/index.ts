@@ -12,10 +12,10 @@ app.use(express.json());
 
 app.use("/api", route);
 
-app.use(express.static(path.join(__dirname, "../web/build"))); // the same directory as below
+app.use(express.static(path.join(__dirname, "../../web/build"))); // the same directory as below
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../web/build/index.html"));
+  res.sendFile(path.join(__dirname, "../../web/build/index.html"));
 });
 
 // start the Express server
