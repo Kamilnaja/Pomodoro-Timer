@@ -1,8 +1,8 @@
 import { Action } from "redux";
 import { Login, Registration } from "../../../../../types/interfaces";
 import { handleErrors } from "../../../shared/scripts/utils";
-import { initialConfig } from "../../../shared/settings/initialConfig";
 import { ActionWithPayload } from "../../../shared/store/interfaces/actions/action.interface";
+import { config } from "../../../shared/settings/initialConfig";
 
 export enum AuthAction {
   SAVE_REGISTER_DATA = "SAVE_REGISTER_DATA",
@@ -16,9 +16,7 @@ export enum AuthAction {
   RESET_FORM = "RESET_FORM",
 }
 
-export const saveRegisterData = (
-  payload: Registration
-): ActionWithPayload<AuthAction, Registration> => ({
+export const saveRegisterData = (payload: Registration): ActionWithPayload<AuthAction, Registration> => ({
   type: AuthAction.SAVE_REGISTER_DATA,
   payload: payload,
 });
@@ -27,16 +25,12 @@ export const saveRegisterDataSuccess = (): Action => ({
   type: AuthAction.SAVE_REGISTER_DATA_SUCCESS,
 });
 
-export const saveRegisterDataError = (
-  error: any
-): ActionWithPayload<AuthAction, Error> => ({
+export const saveRegisterDataError = (error: any): ActionWithPayload<AuthAction, Error> => ({
   type: AuthAction.SAVE_REGISTER_DATA_ERROR,
   payload: error,
 });
 
-export const saveLoginData = (
-  payload: Login
-): ActionWithPayload<AuthAction, Login> => ({
+export const saveLoginData = (payload: Login): ActionWithPayload<AuthAction, Login> => ({
   type: AuthAction.SAVE_LOGIN_DATA,
   payload: payload,
 });
@@ -45,9 +39,7 @@ export const saveLoginDataSuccess = (): Action => ({
   type: AuthAction.SAVE_LOGIN_DATA_SUCCESS,
 });
 
-export const saveLoginDataError = (
-  error: any
-): ActionWithPayload<AuthAction, Error> => ({
+export const saveLoginDataError = (error: any): ActionWithPayload<AuthAction, Error> => ({
   type: AuthAction.SAVE_LOGIN_DATA_ERROR,
   payload: error,
 });
@@ -57,18 +49,16 @@ export const resetForm = () => ({
 });
 
 // thunk
-export const sendRegisterForm = (formData: Registration) => (
-  dispatch: Function
-) => {
+export const sendRegisterForm = (formData: Registration) => (dispatch: Function) => {
   dispatch(saveRegisterData(formData));
 
-  return fetch(`${initialConfig.apiUrl}/auth/register`, {
+  return fetch(`${config.url.API_URL}/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(formData),
-  }).then((response) => {
+  }).then(response => {
     if (!response.ok) {
       dispatch(saveRegisterDataError(response.statusText));
     } else {
@@ -80,7 +70,7 @@ export const sendRegisterForm = (formData: Registration) => (
 export const sendLoginForm = (formData: Login) => (dispatch: Function) => {
   dispatch(saveLoginData(formData));
 
-  return fetch(`${initialConfig.apiUrl}/auth/login`, {
+  return fetch(`${config.url.API_URL}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -91,5 +81,5 @@ export const sendLoginForm = (formData: Login) => (dispatch: Function) => {
     .then(() => {
       dispatch(saveLoginDataSuccess());
     })
-    .catch((error) => dispatch(saveLoginDataError(error)));
+    .catch(error => dispatch(saveLoginDataError(error)));
 };
