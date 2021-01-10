@@ -2,13 +2,13 @@ import { InitialConfig } from "../store/interfaces/initialConfig.interface";
 
 const prod = {
   url: {
-    API_URL: "https://pure-savannah-33150.herokuapp.com/",
+    API_URL: "https://pure-savannah-33150.herokuapp.com/api",
   },
 };
 
 const dev = {
   url: {
-    API_URL: "http://localhost:8080",
+    API_URL: "http://localhost:8080/api",
   },
 };
 
