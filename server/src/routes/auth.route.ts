@@ -1,7 +1,7 @@
-import express from 'express';
-import bcrypt from 'bcrypt';
-import { registerUser, loginUser } from '../services/auth.service';
-import { Login as LoginEnum, Registration } from '../../types/interfaces';
+import express from "express";
+import bcrypt from "bcrypt";
+import { registerUser, loginUser } from "../services/auth.service";
+import { Login as LoginEnum, Registration } from "../../../types/interfaces";
 const router = express.Router();
 
 interface Request {
@@ -13,7 +13,7 @@ interface Login {
 }
 
 // Register Handle
-router.post('/register', (req: Request, res) => {
+router.post("/register", (req: Request, res) => {
   const { login, email, password } = req.body;
 
   // todo check if exists
@@ -25,7 +25,7 @@ router.post('/register', (req: Request, res) => {
   });
 });
 
-router.post('/login', (req: Login, res) => {
+router.post("/login", (req: Login, res) => {
   const { login, password } = req.body;
 
   if (login && password) {

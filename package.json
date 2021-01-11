@@ -9,9 +9,6 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "md5": "^2.3.0",
-    "passport": "^0.4.1",
-    "passport-google-oauth": "^2.0.0",
-    "sqlite3": "^5.0.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -32,10 +29,10 @@
   ],
   "types": "../types.d.ts",
   "scripts": {
-    "start": "node dist/src/index.js",
-    "postinstall": "tsc",
+    "start": "node dist/server/src/index.js",
+    "postinstall": "cd server && tsc",
     "heroku-postbuild": "tsc & cd web/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-    "watch-ts": "tsc -w",
+    "watch-ts": "cd server && tsc -w",
     "watch-node": "nodemon dist/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "git add . && git commit -m Heroku && git push heroku master"
