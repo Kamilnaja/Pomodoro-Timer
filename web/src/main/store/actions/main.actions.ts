@@ -1,6 +1,6 @@
 import { Action } from "redux";
 import { handleErrors } from "../../../shared/scripts/utils";
-import { initialConfig } from "../../../shared/settings/initialConfig";
+import { config } from "../../../shared/settings/initialConfig";
 import { ActionWithPayload } from "../../../shared/store/interfaces/actions/action.interface";
 import { incrementPomodoros } from "../../../stats/store/actions/stats.actions";
 
@@ -18,9 +18,7 @@ export const savePomodoroSuccess = (): Action<MainAction> => ({
   type: MainAction.SAVE_POMODORO_SUCCESS,
 });
 
-export const savePomodoroError = (
-  error: any
-): ActionWithPayload<MainAction, any> => ({
+export const savePomodoroError = (error: any): ActionWithPayload<MainAction, any> => ({
   type: MainAction.SAVE_POMODORO_ERROR,
   payload: error,
 });
@@ -30,12 +28,12 @@ export const savePomodoroError = (
 export const savePomodoroAndIncrementCounter = () => (dispatch: Function) => {
   dispatch(savePomodoro());
 
-  return fetch(initialConfig.apiUrl + "/stats/pomodoros", {
+  return fetch(config.url.API_URL + "/stats/pomodoros", {
     method: "POST",
   })
     .then(handleErrors)
     .then(() => {
       dispatch(incrementPomodoros());
     })
-    .catch((error) => dispatch(savePomodoroError(error)));
+    .catch(error => dispatch(savePomodoroError(error)));
 };

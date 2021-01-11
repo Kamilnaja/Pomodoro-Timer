@@ -1,5 +1,4 @@
 export interface InitialConfig {
-  apiUrl: string;
   shortBreakTime: number;
   longBreakTime: number;
   pomodoroTime: number;
