@@ -6,7 +6,7 @@ export function authenticateToken(req: any, res: any, next: () => void) {
   const token = authHeader && authHeader.split(" ")[1];
   if (token == null) return res.sendStatus(401); // if there isn't any token
 
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET || ("DFGADDDDAD" as string), (err: any, user: any) => {
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET || "DFGADDDDAD", (err: any, user: any) => {
     console.log("error when verify " + err);
     if (err) return res.sendStatus(403);
     req.user = user;

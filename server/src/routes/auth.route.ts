@@ -2,11 +2,9 @@ import express from "express";
 import bcrypt from "bcrypt";
 import { registerUser, loginUser } from "../services/auth.service";
 import { Login as LoginEnum, Registration } from "../../../types/interfaces";
-const router = express.Router();
+import { Request } from "../models/auth/request.interface";
 
-interface Request {
-  body: Registration;
-}
+const router = express.Router();
 
 interface Login {
   body: LoginEnum;
@@ -14,15 +12,10 @@ interface Login {
 
 // Register Handle
 router.post("/register", (req: Request, res) => {
-  const { login, email, password } = req.body;
-
   // todo check if exists
-  bcrypt.hash(password, 10, (err, hash) => {
-    if (err) {
-      throw err;
-    }
-    registerUser(hash, login, email, res);
-  });
+
+  const hash = bcrypt.hashSync(req.body.password, 10);
+  registerUser(hash, req, res);
 });
 
 router.post("/login", (req: Login, res) => {
@@ -31,7 +24,7 @@ router.post("/login", (req: Login, res) => {
   if (login && password) {
     loginUser(login, password, res);
   } else {
-    res.status(422).send("error while login");
+    res.status(422).send("error while login, no password or login");
   }
 });
 
