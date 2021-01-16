@@ -1,4 +1,3 @@
 export default interface TodayStatistics {
-  pomodorosDoneToday: number;
-  allPomodoros: number;
+  result: number;
 }

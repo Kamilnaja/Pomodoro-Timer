@@ -9,10 +9,7 @@ export const initialState = {
   allPomodoros: 0,
 };
 
-export const statsReducer = (
-  state = initialState,
-  action: ActionWithPayload<StatsAction, TodayStatistics>
-) => {
+export const statsReducer = (state = initialState, action: ActionWithPayload<StatsAction, TodayStatistics>) => {
   switch (action.type) {
     case StatsAction.GET_TODAY_STATISTICS:
       return {
@@ -23,8 +20,7 @@ export const statsReducer = (
       return {
         ...state,
         isLoading: false,
-        pomodorosDoneToday: action.payload?.pomodorosDoneToday,
-        allPomodoros: action.payload?.allPomodoros,
+        pomodorosDoneToday: action.payload?.result,
       };
     case StatsAction.GET_TODAY_STATISTICS_ERROR:
       return {
@@ -35,7 +31,7 @@ export const statsReducer = (
     case StatsAction.INCREMENT_POMODOROS:
       return {
         ...state,
-        pomodorosDoneToday: state.pomodorosDoneToday + 1,
+        pomodorosDoneToday: Number(state.pomodorosDoneToday) + 1,
       };
     default:
       return state;
