@@ -9,6 +9,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "md5": "^2.3.0",
+    "pg": "^8.5.1",
+    "postgresql": "0.0.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -17,6 +19,7 @@
     "@types/express": "^4.17.9",
     "@types/md5": "^2.2.1",
     "@types/node": "^14.14.20",
+    "@types/pg": "^7.14.7",
     "@types/sqlite3": "^3.1.6",
     "@types/uuid": "^8.3.0",
     "ts-node": "^9.1.1",
@@ -33,7 +36,7 @@
     "postinstall": "cd server && tsc",
     "heroku-postbuild": "tsc & cd web/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "watch-ts": "cd server && tsc -w",
-    "watch-node": "nodemon dist/src/index.js",
+    "watch-node": "nodemon dist/server/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "git add . && git commit -m Heroku && git push heroku master"
   }

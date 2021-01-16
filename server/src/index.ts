@@ -8,6 +8,8 @@ const port = process.env.PORT || 8080; // default port to listen
 app.use(cors());
 app.use(express.json());
 
+console.log(process.env.PORT);
+
 // routes
 
 app.use("/api", route);
@@ -18,7 +20,6 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../../../web/build/index.html"));
 });
 
-// start the Express server
 app.listen(port, () => {
   console.log(`server started at http://localhost:${port}`);
 });

@@ -1,19 +1,19 @@
-import db from '../db/db';
+import client from "../db/db";
 
 export function handleAddPomodoro(res: any) {
-  const sql = 'INSERT INTO pomodoros (userID, date) VALUES (?,?)';
+  const sql = "INSERT INTO pomodoros (userID, date) VALUES (?,?)";
   // todo - get user
-  const params = ['kamil naja', new Date()];
+  const params = ["kamil naja", new Date()];
 
-  db.run(sql, params, (err: any, result: any) => {
+  client.query(sql, params, (err: Error, result: any) => {
     if (err) {
       res.status(400).json({
-        error: err.message
+        error: err.message,
       });
     }
     console.log(result);
     res.json({
-      message: 'success'
+      message: "success",
     });
   });
 }
@@ -24,10 +24,10 @@ export function handleGetTodaysPomodoros(res: any) {
   FROM pomodoros 
   WHERE date(datetime(date / 1000 , "unixepoch")) = date("now")`;
 
-  db.all(sql, (err: any, result: any) => {
+  client.query(sql, (err: Error, result: any) => {
     if (err) {
       res.status(400).json({
-        error: err.message
+        error: err.message,
       });
     }
     res.send(result[0]);
