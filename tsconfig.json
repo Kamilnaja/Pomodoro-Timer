@@ -10,8 +10,9 @@
     "baseUrl": "",
     "paths": {
       "*": ["server/node_modules/*"]
-    }
+    },
+    "removeComments": true
   },
-  "include": ["server/src/**/*.ts"],
+  "include": ["server/src/**/*"],
   "common/*": ["../types/*"]
 }

@@ -33,7 +33,7 @@ export async function handleGetAllPomodoros(res: any) {
     const dbResponse = await client.query(sql);
     res.json({ result: dbResponse.rows[0].count });
   } catch (err) {
-    console.log(err.stack);
+    console.log("handleGetAllPomodoros " + err.stack);
     res.sendStatus(400).json(err.stack);
   }
 }

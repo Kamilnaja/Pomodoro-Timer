@@ -1,16 +1,17 @@
-import express from "express";
 import cors from "cors";
-import route from "./routes/route";
+import express from "express";
+import morgan from "morgan";
 import path from "path";
+import route from "./routes/route";
 export const app = express();
 
 const port = process.env.PORT || 8080; // default port to listen
+
 app.use(cors());
 app.use(express.json());
 
-console.log(process.env.PORT);
-
 // routes
+app.use(morgan("combined"));
 
 app.use("/api", route);
 

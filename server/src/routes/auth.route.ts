@@ -30,6 +30,8 @@ router.post("/login", (req: Login, res) => {
 
   if (login && password) {
     loginUser(login, password, res);
+  } else {
+    res.status(422).send("error while login");
   }
 });
 
