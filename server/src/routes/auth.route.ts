@@ -22,7 +22,7 @@ router.post("/login", (req: Login, res) => {
   const { login, password } = req.body;
 
   if (login && password) {
-    loginUser(login, password, res);
+    loginUser(req.body, res);
   } else {
     res.status(422).send("error while login, no password or login");
   }

@@ -8,6 +8,13 @@ export interface Login {
 }
 
 export interface Error {
-  code: "string";
-  errno: number;
+  code: ErrorCodes;
+  message: string;
+}
+
+export enum ErrorCodes {
+  USER_NOT_FOUND,
+  USER_CURRENTLY_EXISTS,
+  PASSWORD_INCORRECT,
+  OTHER_ERROR,
 }

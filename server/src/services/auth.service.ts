@@ -3,37 +3,71 @@ import { QueryResult } from "pg";
 import { v4 as uuidv4 } from "uuid";
 import pool from "../db/db";
 import { Request } from "../models/auth/request.interface";
-import { generateAccessToken } from "./authenticateToken";
+import { Error, ErrorCodes, Login, Registration } from "../../../types/interfaces";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
-export async function registerUser(userHash: string, req: Request, res: Response<string | Error, number>) {
-  // const insert = "INSERT INTO users VALUES(?, ?, ?, ?, ?)";
-  const insert = "select * from pomodoros";
+export async function registerUser(userHash: string, req: Request, res: Response<string | Error>) {
+  const insert = "INSERT INTO users VALUES($1, $2, $3, $4, $5)";
 
   try {
-    await pool.query(insert, [uuidv4(), Date(), req.body.login, req.body.email, userHash]);
-    // check if exists
+    const now = new Date();
+    const { email, login } = req.body;
+    await pool.query(insert, [uuidv4(), now, login, email, userHash]);
+    console.log("user registered");
     res.send("user registered");
   } catch (err: any) {
-    console.log(err.stack);
-    res.status(422).send(err);
+    handleError(err, res);
   }
 }
 
-export async function loginUser(login: string, password: string, res: Response<string | Error, number>) {
-  const query = "SELECT * FROM users where login = $1";
+function handleError(err: any, res: Response<Error>) {
+  console.log(err.stack);
+  res.status(422).send({
+    code: ErrorCodes.USER_CURRENTLY_EXISTS,
+    message: err.detail,
+  } as Error);
+}
 
+export async function loginUser(req: Login, res: Response<any | Error>): Promise<void> {
+  const query = "SELECT * FROM users where login = $1 LIMIT 1";
   try {
-    // wybierz usera z bazy
-
+    const { password, login } = req;
     const dbResult: QueryResult<any> = await pool.query(query, [login]);
-
-    console.log(dbResult.rows);
-    // const token = generateAccessToken(login);
-    // console.log(dbResult);
-    // console.log("token " + token);
-    // res.json(token);
+    if (!dbResult.rows.length) {
+      res.status(401).send({
+        code: ErrorCodes.USER_NOT_FOUND,
+        message: "user not found",
+      });
+    } else {
+      await handleCorrectUser(password, dbResult, res);
+    }
   } catch (err: any) {
     console.log("error when login: " + err.stack);
     res.send(err.stack);
+  }
+}
+
+async function handleCorrectUser(currentPassword: string, dbResult: QueryResult, res: Response<any | Error>) {
+  try {
+    const { password, email, login } = dbResult.rows[0];
+    const isPasswordCorrect = await bcrypt.compare(currentPassword, password);
+    if (isPasswordCorrect) {
+      console.log("password correct!!!");
+      res.json({
+        token: jwt.sign({ login, email }, process.env.ACCESS_TOKEN_SECRET || "loremipsumdolorsitamet"),
+      });
+    } else {
+      res.status(401).send({
+        code: ErrorCodes.PASSWORD_INCORRECT,
+        message: "password is incorrect gerrarahia!!!",
+      });
+    }
+  } catch (err: any) {
+    console.log("Error while comparing passord" + err);
+    res.status(401).send({
+      code: ErrorCodes.OTHER_ERROR,
+      message: "Error while comparing your password",
+    });
   }
 }

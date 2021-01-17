@@ -12,7 +12,7 @@ client.query(
   `CREATE TABLE IF NOT EXISTS users(
           userID text UNIQUE,
           dateCreated date,
-          login text,
+          login text UNIQUE,
           email text UNIQUE,
           password text
         )`,
