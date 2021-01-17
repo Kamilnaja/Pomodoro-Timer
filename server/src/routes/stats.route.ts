@@ -1,20 +1,23 @@
 import express from "express";
 import { handleAddPomodoro, handleGetAllPomodoros, handleGetTodaysPomodoros } from "../services/stats.service";
+import { authenticateJWT } from "./auth.route";
+import { Login } from "../../../types/interfaces";
 
 const router = express.Router();
 
 // get number of all pomodoros
-router.get("/pomodoros", (req, res) => {
-  handleGetAllPomodoros(res);
-});
-
-// add new pomodoro
-router.post("/pomodoros", (req, res) => {
-  handleAddPomodoro(res);
-});
+router
+  .route("/pomodoros")
+  .get(authenticateJWT, (req: Login, res: any) => {
+    handleGetAllPomodoros(res);
+  })
+  .post(authenticateJWT, (req, res) => {
+    handleAddPomodoro(res);
+  });
 
 // get number of pomodoros done today
-router.get("/pomodoros_done_today", (req, res) => {
+// pomodoros since day ?
+router.route("/pomodoros_done_today").get(authenticateJWT, (req, res) => {
   handleGetTodaysPomodoros(res);
 });
 
