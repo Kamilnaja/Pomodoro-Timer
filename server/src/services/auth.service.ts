@@ -5,7 +5,7 @@ import pool from "../db/db";
 import { Request } from "../models/auth/request.interface";
 import { Error, ErrorCodes, Login, Registration } from "../../../types/interfaces";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import jwt, { JsonWebTokenError, NotBeforeError, TokenExpiredError } from "jsonwebtoken";
 
 export async function registerUser(userHash: string, req: Request, res: Response<string | Error>) {
   const insert = "INSERT INTO users VALUES($1, $2, $3, $4, $5)";
@@ -71,3 +71,26 @@ async function handleCorrectUser(currentPassword: string, dbResult: QueryResult,
     });
   }
 }
+
+export const authenticateJWT = (req: any, res: any, next: () => void) => {
+  const authHeader = req.headers.authorization;
+
+  if (authHeader) {
+    const token = authHeader.split(" ")[1];
+
+    jwt.verify(
+      token,
+      process.env.ACCESS_TOKEN_SECRET || "loremipsumdolorsitamet",
+      (err: JsonWebTokenError | NotBeforeError | TokenExpiredError | null, user: any) => {
+        if (err) {
+          return res.sendStatus(403);
+        }
+
+        req.user = user;
+        next();
+      },
+    );
+  } else {
+    res.sendStatus(401);
+  }
+};

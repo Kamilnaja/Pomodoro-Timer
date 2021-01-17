@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // routes
-app.use(morgan("combined"));
+app.use(morgan("dev"));
 
 app.use("/api", route);
 
