@@ -1,15 +1,15 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Registration } from "../../../../../types/interfaces";
-import { RegisterComponent } from "../component/RegisterComponent";
-import { sendRegisterForm } from "../../store/actions/auth.actions";
-import { AuthState } from "../../store/interfaces/auth.state";
-import { handleCloseModal } from "../../../shared/scripts/utils";
+import {connect} from "react-redux";
+import {Registration} from "../../../../../types/interfaces";
+import {RegisterComponent} from "../component/RegisterComponent";
+import {sendRegisterForm} from "../../store/actions/auth.actions";
+import {AuthState} from "../../store/interfaces/auth.state";
+import {handleCloseModal} from "../../../shared/scripts/utils";
 
 export interface RegisterProps {
   handleSubmit: (arg: Registration) => void;
   handleClose: () => void;
-  authState: AuthState;
+  auth: AuthState;
 }
 
 class RegisterContainer extends React.Component<RegisterProps> {
@@ -23,23 +23,17 @@ class RegisterContainer extends React.Component<RegisterProps> {
   };
 
   componentDidUpdate = (prevProps: RegisterProps) => {
-    handleCloseModal(prevProps.authState, this.props);
+    handleCloseModal(prevProps.auth, this.props);
   };
 
   render() {
-    return (
-      <RegisterComponent
-        handleSubmit={this.handleSubmit}
-        formState={this.props.authState}
-        handleClose={this.props.handleClose}
-      ></RegisterComponent>
-    );
+    return <RegisterComponent handleSubmit={this.handleSubmit} formState={this.props.auth} handleClose={this.props.handleClose} />;
   }
 }
 
 const mapStateToProps = (state: { auth: AuthState }) => {
   const formState = state.auth;
-  return { authState: formState };
+  return { auth: formState };
 };
 
 const mapDispatchToProps = {

@@ -1,12 +1,12 @@
 import React from "react";
-import { connect } from "react-redux";
-import { resetForm } from "../../auth/store/actions/auth.actions";
-import Header from "../../header/component/Header";
-import { Modal } from "../../shared/components/modal/Modal";
-import { Modal as ModalEnum } from "../../shared/store/enums/modal.enum";
+import {connect} from "react-redux";
+import {resetForm} from "../../auth/store/actions/auth.actions";
+import {Modal} from "../../shared/components/modal/Modal";
+import {Modal as ModalEnum} from "../../shared/store/enums/modal.enum";
 import StatsContainer from "../../stats/containers/StatsContainer";
 import Timer from "../../timer/containers/Timer";
 import "./main.scss";
+import HeaderContainer from "../../header/container/HeaderContainer";
 
 interface MainState {
   openedModal: ModalEnum;
@@ -38,14 +38,11 @@ class Main extends React.Component<MainProps, MainState> {
 
   render = () => (
     <div className="app">
-      <Header handleOpenModal={this.handleOpenModal}></Header>
-      <Timer></Timer>
-      <StatsContainer></StatsContainer>
+      <HeaderContainer handleOpenModal={this.handleOpenModal} />
+      <Timer />
+      <StatsContainer />
       <footer>Hello I'm footer</footer>
-      <Modal
-        modalType={this.state.openedModal}
-        closeModal={this.handleCloseModal}
-      ></Modal>
+      <Modal modalType={this.state.openedModal} closeModal={this.handleCloseModal} />
     </div>
   );
 }

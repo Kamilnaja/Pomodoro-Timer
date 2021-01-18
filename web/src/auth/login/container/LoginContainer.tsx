@@ -1,15 +1,15 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Login } from "../../../../../types/interfaces";
-import { handleCloseModal } from "../../../shared/scripts/utils";
-import { sendLoginForm } from "../../store/actions/auth.actions";
-import { AuthState } from "../../store/interfaces/auth.state";
-import { LoginComponent } from "../component/LoginComponent";
+import {connect} from "react-redux";
+import {Login} from "../../../../../types/interfaces";
+import {handleCloseModal} from "../../../shared/scripts/utils";
+import {sendLoginForm} from "../../store/actions/auth.actions";
+import {AuthState} from "../../store/interfaces/auth.state";
+import {LoginComponent} from "../component/LoginComponent";
 
 interface LoginProps {
-  authState: AuthState;
   handleSubmit: (arg: Login) => void;
   handleClose: () => void;
+  auth: AuthState;
 }
 
 class LoginContainer extends React.Component<LoginProps> {
@@ -22,23 +22,17 @@ class LoginContainer extends React.Component<LoginProps> {
   };
 
   componentDidUpdate = (prevProps: LoginProps) => {
-    handleCloseModal(prevProps.authState, this.props);
+    handleCloseModal(prevProps.auth, this.props);
   };
 
   render() {
-    return (
-      <LoginComponent
-        handleSubmit={this.handleSubmit}
-        authState={this.props.authState}
-        handleClose={this.props.handleClose}
-      ></LoginComponent>
-    );
+    return <LoginComponent handleSubmit={this.handleSubmit} auth={this.props.auth} handleClose={this.props.handleClose} />;
   }
 }
 
 const mapStateToProps = (state: { auth: AuthState }) => {
   const formState = state.auth;
-  return { authState: formState };
+  return { auth: formState };
 };
 
 const mapDispatchToProps = {

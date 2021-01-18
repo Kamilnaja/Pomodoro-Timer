@@ -7,6 +7,10 @@ export interface Login {
   password: string;
 }
 
+export interface LoginResponse {
+  token: string;
+}
+
 export interface Error {
   code: ErrorCodes;
   message: string;

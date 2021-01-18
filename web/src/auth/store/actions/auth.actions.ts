@@ -1,46 +1,46 @@
-import { Action } from "redux";
-import { Login, Registration } from "../../../../../types/interfaces";
-import { handleErrors } from "../../../shared/scripts/utils";
-import { ActionWithPayload } from "../../../shared/store/interfaces/actions/action.interface";
-import { config } from "../../../shared/settings/initialConfig";
+import {Action} from "redux";
+import {Login, LoginResponse, Registration} from "../../../../../types/interfaces";
+import {handleErrors} from "../../../shared/scripts/utils";
+import {ActionWithPayload} from "../../../shared/store/interfaces/actions/action.interface";
+import {config} from "../../../shared/settings/initialConfig";
 
 export enum AuthAction {
-  SAVE_REGISTER_DATA = "SAVE_REGISTER_DATA",
-  SAVE_REGISTER_DATA_SUCCESS = "SAVE_REGISTER_DATA_SUCCESS",
-  SAVE_REGISTER_DATA_ERROR = "SAVE_REGISTER_DATA_ERROR",
+  REGISTER = "REGISTER",
+  REGISTER_SUCCESS = "REGISTER_SUCCESS",
+  REGISTER_ERROR = "REGISTER_ERROR",
 
-  SAVE_LOGIN_DATA = "SAVE_LOGIN_DATA",
-  SAVE_LOGIN_DATA_SUCCESS = "SAVE_LOGIN_DATA_SUCCESS",
-  SAVE_LOGIN_DATA_ERROR = "SAVE_LOGIN_DATA_ERROR",
+  LOGIN = "LOGIN",
+  LOGIN_SUCCESS = "LOGIN_SUCCESS",
+  LOGIN_ERROR = "LOGIN_ERROR",
 
   RESET_FORM = "RESET_FORM",
 }
 
-export const saveRegisterData = (payload: Registration): ActionWithPayload<AuthAction, Registration> => ({
-  type: AuthAction.SAVE_REGISTER_DATA,
-  payload: payload,
+export const register = (payload: Registration): ActionWithPayload<AuthAction, Registration> => ({
+  type: AuthAction.REGISTER,
+  payload,
 });
 
-export const saveRegisterDataSuccess = (): Action => ({
-  type: AuthAction.SAVE_REGISTER_DATA_SUCCESS,
+export const registerSuccess = (): Action => ({
+  type: AuthAction.REGISTER_SUCCESS,
 });
 
-export const saveRegisterDataError = (error: any): ActionWithPayload<AuthAction, Error> => ({
-  type: AuthAction.SAVE_REGISTER_DATA_ERROR,
+export const registerError = (error: any): ActionWithPayload<AuthAction, Error> => ({
+  type: AuthAction.REGISTER_ERROR,
   payload: error,
 });
 
-export const saveLoginData = (payload: Login): ActionWithPayload<AuthAction, Login> => ({
-  type: AuthAction.SAVE_LOGIN_DATA,
-  payload: payload,
+export const login = (payload: Login): ActionWithPayload<AuthAction, Login> => ({
+  type: AuthAction.LOGIN,
+  payload,
 });
 
-export const saveLoginDataSuccess = (): Action => ({
-  type: AuthAction.SAVE_LOGIN_DATA_SUCCESS,
+export const loginSuccess = (): Action => ({
+  type: AuthAction.LOGIN_SUCCESS,
 });
 
-export const saveLoginDataError = (error: any): ActionWithPayload<AuthAction, Error> => ({
-  type: AuthAction.SAVE_LOGIN_DATA_ERROR,
+export const loginError = (error: Error): ActionWithPayload<AuthAction, Error> => ({
+  type: AuthAction.LOGIN_ERROR,
   payload: error,
 });
 
@@ -49,8 +49,8 @@ export const resetForm = () => ({
 });
 
 // thunk
-export const sendRegisterForm = (formData: Registration) => (dispatch: Function) => {
-  dispatch(saveRegisterData(formData));
+export const sendRegisterForm = (formData: Registration) => (dispatch: (arg0: Action<any>) => void) => {
+  dispatch(register(formData));
 
   return fetch(`${config.url.API_URL}/auth/register`, {
     method: "POST",
@@ -60,15 +60,15 @@ export const sendRegisterForm = (formData: Registration) => (dispatch: Function)
     body: JSON.stringify(formData),
   }).then(response => {
     if (!response.ok) {
-      dispatch(saveRegisterDataError(response.statusText));
+      dispatch(registerError(response));
     } else {
-      dispatch(saveRegisterDataSuccess());
+      dispatch(registerSuccess());
     }
   });
 };
 
-export const sendLoginForm = (formData: Login) => (dispatch: Function) => {
-  dispatch(saveLoginData(formData));
+export const sendLoginForm = (formData: Login) => (dispatch: (action: Action<any>) => void) => {
+  dispatch(login(formData));
 
   return fetch(`${config.url.API_URL}/auth/login`, {
     method: "POST",
@@ -78,8 +78,11 @@ export const sendLoginForm = (formData: Login) => (dispatch: Function) => {
     body: JSON.stringify(formData),
   })
     .then(handleErrors)
-    .then(() => {
-      dispatch(saveLoginDataSuccess());
+    .then(response => response.json())
+    .then((response: LoginResponse) => {
+      // todo - cookie
+      localStorage.setItem("token", response.token);
+      dispatch(loginSuccess());
     })
-    .catch(error => dispatch(saveLoginDataError(error)));
+    .catch(error => dispatch(loginError(error)));
 };

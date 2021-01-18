@@ -1,12 +1,13 @@
 import React from "react";
-import { StatisticsComponent } from "../component/StatisticsComponent";
+import {StatisticsComponent} from "../component/StatisticsComponent";
+
 // wrapper for all statistics
 interface StatisticsProps {
   handleClose: () => void;
 }
 
 class StatisticsContainer extends React.Component<StatisticsProps> {
-  render = () => <StatisticsComponent></StatisticsComponent>;
+  render = () => <StatisticsComponent />;
 }
 
 export default StatisticsContainer;
