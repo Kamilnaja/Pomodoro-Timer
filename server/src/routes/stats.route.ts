@@ -8,7 +8,7 @@ const router = express.Router();
 // get number of all pomodoros
 router
   .route("/pomodoros")
-  .get(authenticateJWT, (req: Request, res: any) => {
+  .get(authenticateJWT, (req: Request, res) => {
     handleGetAllPomodoros(res, req.user.login);
   })
   .post(authenticateJWT, (req: any, res) => handleAddPomodoro(res, req.user.login));

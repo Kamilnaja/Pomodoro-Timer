@@ -5,7 +5,7 @@ import { AuthState } from "../../store/interfaces/auth.state";
 import "./registerComponent.scss";
 
 export interface RegisterProps {
-  handleSubmit: (data: Registration) => void;
+  handleSubmit: (arg: Registration) => void;
   handleClose: () => void;
   formState: AuthState;
 }

@@ -21,7 +21,7 @@ export const getTodayStatisticsSuccess = (payload: TodayStatistics): ActionWithP
   payload,
 });
 
-export const getTodayStatisticsError = (error: any): ActionWithPayload<StatsAction, Error> => ({
+export const getTodayStatisticsError = (error: Error): ActionWithPayload<StatsAction, Error> => ({
   type: StatsAction.GET_TODAY_STATISTICS_ERROR,
   payload: error,
 });

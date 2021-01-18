@@ -17,7 +17,7 @@ interface MainProps {
 }
 // Wrapper for whole app
 class Main extends React.Component<MainProps, MainState> {
-  constructor(props: any) {
+  constructor(props: MainProps) {
     super(props);
     this.state = {
       openedModal: ModalEnum.NULL,

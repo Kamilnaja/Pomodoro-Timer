@@ -13,10 +13,10 @@ import { timerState } from "../store/state/timerState";
 import "./timer.scss";
 
 class Timer extends React.Component<TimerProps, State> {
-  interval: any;
-  blinkingInterval: any;
+  interval = 0;
+  blinkingInterval = 0;
 
-  constructor(props: any) {
+  constructor(props: TimerProps) {
     super(props);
     this.state = timerState;
   }
@@ -92,7 +92,7 @@ class Timer extends React.Component<TimerProps, State> {
   };
 
   private count = () => {
-    this.interval = setInterval(() => {
+    this.interval = window.setInterval(() => {
       if (this.state.timerTime !== 0) {
         this.setState({
           timerTime: this.state.timerTime - initialConfig.refreshRate,
@@ -107,7 +107,7 @@ class Timer extends React.Component<TimerProps, State> {
 
   private makeTitleBlinking() {
     let isTimeVisible = true;
-    this.blinkingInterval = setInterval(() => {
+    this.blinkingInterval = window.setInterval(() => {
       if (isTimeVisible) {
         document.title = `${msToTime(this.state.timerTime)}`;
       } else {
@@ -159,11 +159,11 @@ class Timer extends React.Component<TimerProps, State> {
             Long Break
           </button>
         </div>
-        <Time time={msToTime(this.state.timerTime)}></Time>
+        <Time time={msToTime(this.state.timerTime)}/>
         <button className="timer__button timer__button--stop" onClick={this.isAnyTimerRunning() ? this.pauseCounter : this.startCounter}>
           {this.isAnyTimerRunning() ? "stop" : "start"}
         </button>
-        <Info currentState={this.state.timerState}></Info>
+        <Info currentState={this.state.timerState}/>
       </div>
     </main>
   );
