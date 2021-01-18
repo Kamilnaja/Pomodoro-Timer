@@ -1,9 +1,9 @@
-import { Modal } from "../../shared/store/enums/modal.enum";
-import "./headerContainer.scss";
 import React from "react";
-import { HeaderComponent } from "../component/HeaderComponent";
-import { AuthState } from "../../auth/store/interfaces/auth.state";
 import { connect } from "react-redux";
+import { Modal } from "shared/store/enums/modal.enum";
+import { AuthState } from "../../auth/store/interfaces/auth.state";
+import { HeaderComponent } from "../component/HeaderComponent";
+import "./headerContainer.scss";
 
 export interface HeaderProps {
   handleOpenModal: (arg: Modal) => void;

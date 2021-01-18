@@ -1,4 +1,4 @@
-import { Modal } from "../../shared/store/enums/modal.enum";
+import { Modal } from "shared/store/enums/modal.enum";
 import { AuthState } from "../../auth/store/interfaces/auth.state";
 
 export interface HeaderProps {

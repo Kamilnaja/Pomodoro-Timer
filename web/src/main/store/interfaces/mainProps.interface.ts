@@ -1,3 +1,3 @@
 export interface StatsProps {
-  handleGetTodayStats: Function;
+  handleGetTodayStats: () => void;
 }

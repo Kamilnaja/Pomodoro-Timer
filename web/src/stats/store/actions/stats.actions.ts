@@ -32,7 +32,7 @@ export const incrementPomodoros = (): Action<StatsAction> => ({
 
 // thunk
 
-export const getTodayStats = () => (dispatch: Function) => {
+export const getTodayStats = () => (dispatch: (arg: Action) => void) => {
   dispatch(getTodayStatistics());
 
   return fetch(config.url.API_URL + "/stats/pomodoros_done_today")

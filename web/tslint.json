@@ -5,7 +5,8 @@
   "rules": {
     "trailing-comma": [false],
     "no-console": true,
-    "no-debugger": true
+    "no-debugger": true,
+    "ordered-imports": true
   },
   "rulesDirectory": []
 }

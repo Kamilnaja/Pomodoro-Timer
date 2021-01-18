@@ -25,7 +25,7 @@ export const savePomodoroError = (error: any): ActionWithPayload<MainAction, any
 
 // thunk
 
-export const savePomodoroAndIncrementCounter = () => (dispatch: Function) => {
+export const savePomodoroAndIncrementCounter = () => (dispatch: (arg: Action) => void) => {
   dispatch(savePomodoro());
 
   return fetch(config.url.API_URL + "/stats/pomodoros", {

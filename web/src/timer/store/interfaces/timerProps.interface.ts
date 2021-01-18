@@ -1,4 +1,6 @@
+import { Action } from "redux";
+
 export interface TimerProps {
-  dispatch?: Function;
-  handleSavePomodoro: Function;
+  dispatch?: (args: Action) => void;
+  handleSavePomodoro: () => void;
 }

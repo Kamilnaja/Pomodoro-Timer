@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { handleCloseModal } from "shared/scripts/utils";
 import { Login } from "../../../../../types/interfaces";
-import { handleCloseModal } from "../../../shared/scripts/utils";
 import { sendLoginForm } from "../../store/actions/auth.actions";
 import { AuthState } from "../../store/interfaces/auth.state";
 import { LoginComponent } from "../component/LoginComponent";
