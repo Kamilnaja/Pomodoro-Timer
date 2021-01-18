@@ -1,7 +1,7 @@
-import {useForm} from "react-hook-form";
-import {Registration} from "../../../../../types/interfaces";
-import {ValidationMessage} from "../../../shared/components/validationMessage/ValidationMessage";
-import {AuthState} from "../../store/interfaces/auth.state";
+import { useForm } from "react-hook-form";
+import { Registration } from "../../../../../types/interfaces";
+import { ValidationMessage } from "../../../shared/components/validationMessage/ValidationMessage";
+import { AuthState } from "../../store/interfaces/auth.state";
 import "./registerComponent.scss";
 
 export interface RegisterProps {

@@ -8,10 +8,7 @@ const initialState: MainState = {
   isLoggedIn: false,
 };
 
-export const mainReducer = (
-  state = initialState,
-  action: Action<MainAction>
-) => {
+export const mainReducer = (state = initialState, action: Action<MainAction>) => {
   switch (action.type) {
     case MainAction.SAVE_POMODORO:
       return {

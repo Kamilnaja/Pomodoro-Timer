@@ -9,10 +9,7 @@ const initialState: State = {
   settings: [],
 };
 
-export const settingsReducer = (
-  state = initialState,
-  action: ActionWithPayload<SettingsAction, any>
-): State => {
+export const settingsReducer = (state = initialState, action: ActionWithPayload<SettingsAction, any>): State => {
   // todo - stub
   switch (action.type) {
     case SettingsAction.GET_SETTINGS:

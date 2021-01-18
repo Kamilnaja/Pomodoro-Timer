@@ -1,8 +1,8 @@
-import {Action} from "redux";
-import {Login, LoginResponse, Registration} from "../../../../../types/interfaces";
-import {handleErrors} from "../../../shared/scripts/utils";
-import {ActionWithPayload} from "../../../shared/store/interfaces/actions/action.interface";
-import {config} from "../../../shared/settings/initialConfig";
+import { Action } from "redux";
+import { Login, LoginResponse, Registration } from "../../../../../types/interfaces";
+import { handleErrors } from "../../../shared/scripts/utils";
+import { ActionWithPayload } from "../../../shared/store/interfaces/actions/action.interface";
+import { config } from "../../../shared/settings/initialConfig";
 
 export enum AuthAction {
   REGISTER = "REGISTER",

@@ -1,5 +1,5 @@
-import {Modal} from "../../shared/store/enums/modal.enum";
-import {AuthState} from "../../auth/store/interfaces/auth.state";
+import { Modal } from "../../shared/store/enums/modal.enum";
+import { AuthState } from "../../auth/store/interfaces/auth.state";
 
 export interface HeaderProps {
   handleOpenModal: (arg: Modal) => void;

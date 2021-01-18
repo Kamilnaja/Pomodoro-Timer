@@ -1,5 +1,5 @@
 import React from "react";
-import {StatisticsComponent} from "../component/StatisticsComponent";
+import { StatisticsComponent } from "../component/StatisticsComponent";
 
 // wrapper for all statistics
 interface StatisticsProps {

@@ -1,7 +1,7 @@
-import {useForm} from "react-hook-form";
-import {Login} from "../../../../../types/interfaces";
-import {ValidationMessage} from "../../../shared/components/validationMessage/ValidationMessage";
-import {AuthState} from "../../store/interfaces/auth.state";
+import { useForm } from "react-hook-form";
+import { Login } from "../../../../../types/interfaces";
+import { ValidationMessage } from "../../../shared/components/validationMessage/ValidationMessage";
+import { AuthState } from "../../store/interfaces/auth.state";
 import "./loginComponent.scss";
 
 export interface LoginProps {

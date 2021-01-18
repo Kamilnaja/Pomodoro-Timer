@@ -1,19 +1,8 @@
-@mixin font-fira-sans(
-  $size: false,
-  $colour: false,
-  $weight: false,
-  $lh: false
-) {
+@mixin font-fira-sans($size: false, $colour: false, $weight: false, $lh: false) {
   @include font("Fira Sans", $size, $colour, $weight, $lh);
 }
 
-@mixin font(
-  $font-family: false,
-  $size: false,
-  $colour: false,
-  $weight: false,
-  $lh: false
-) {
+@mixin font($font-family: false, $size: false, $colour: false, $weight: false, $lh: false) {
   font-family: $font-family, sans-serif;
   @if $size {
     font-size: $size;

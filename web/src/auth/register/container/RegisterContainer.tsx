@@ -1,10 +1,10 @@
 import React from "react";
-import {connect} from "react-redux";
-import {Registration} from "../../../../../types/interfaces";
-import {RegisterComponent} from "../component/RegisterComponent";
-import {sendRegisterForm} from "../../store/actions/auth.actions";
-import {AuthState} from "../../store/interfaces/auth.state";
-import {handleCloseModal} from "../../../shared/scripts/utils";
+import { connect } from "react-redux";
+import { Registration } from "../../../../../types/interfaces";
+import { RegisterComponent } from "../component/RegisterComponent";
+import { sendRegisterForm } from "../../store/actions/auth.actions";
+import { AuthState } from "../../store/interfaces/auth.state";
+import { handleCloseModal } from "../../../shared/scripts/utils";
 
 export interface RegisterProps {
   handleSubmit: (arg: Registration) => void;

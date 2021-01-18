@@ -1,6 +1,6 @@
-import {Action} from "redux";
-import {AuthAction} from "../actions/auth.actions";
-import {AuthState} from "../interfaces/auth.state";
+import { Action } from "redux";
+import { AuthAction } from "../actions/auth.actions";
+import { AuthState } from "../interfaces/auth.state";
 
 export const initialState: AuthState = {
   isLoading: false,

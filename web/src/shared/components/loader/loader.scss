@@ -2,15 +2,7 @@
 .loader {
   @include small-bar;
 
-  background: linear-gradient(
-    135deg,
-    $bg-primary 25%,
-    $bg-accent 25%,
-    $bg-accent 50%,
-    $bg-primary 50%,
-    $bg-primary 75%,
-    $bg-accent 75%
-  );
+  background: linear-gradient(135deg, $bg-primary 25%, $bg-accent 25%, $bg-accent 50%, $bg-primary 50%, $bg-primary 75%, $bg-accent 75%);
 
   background-size: 50px 50px;
   animation: bar-animation 3s linear infinite;
