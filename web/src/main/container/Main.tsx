@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import { Modal } from "shared/components/modal/Modal";
 import { Modal as ModalEnum } from "shared/store/enums/modal.enum";
-import { resetForm } from "../../auth/store/actions/auth.actions";
-import HeaderContainer from "../../header/container/HeaderContainer";
-import StatsContainer from "../../stats/containers/StatsContainer";
-import Timer from "../../timer/containers/Timer";
+import { resetForm, setUserIsLoggedIn } from "auth/store/actions/auth.actions";
+import HeaderContainer from "header/container/HeaderContainer";
+import StatsContainer from "stats/containers/StatsContainer";
+import Timer from "timer/containers/Timer";
 import "./main.scss";
 
 interface MainState {
@@ -14,6 +14,7 @@ interface MainState {
 
 interface MainProps {
   resetForm: () => void;
+  setUserIsLoggedIn: () => void;
 }
 // Wrapper for whole app
 class Main extends React.Component<MainProps, MainState> {
@@ -22,6 +23,10 @@ class Main extends React.Component<MainProps, MainState> {
     this.state = {
       openedModal: ModalEnum.NULL,
     };
+  }
+
+  componentDidMount() {
+    this.props.setUserIsLoggedIn();
   }
 
   handleOpenModal = (modal: ModalEnum) =>
@@ -49,6 +54,7 @@ class Main extends React.Component<MainProps, MainState> {
 
 const mapDispatchToProps = {
   resetForm,
+  setUserIsLoggedIn,
 };
 
 export default connect(null, mapDispatchToProps)(Main);

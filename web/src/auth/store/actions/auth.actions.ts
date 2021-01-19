@@ -1,8 +1,10 @@
 import { Action } from "redux";
 import { Login, LoginResponse, Registration } from "../../../../../types/interfaces";
-import { handleErrors } from "../../../shared/scripts/utils";
-import { config } from "../../../shared/settings/initialConfig";
-import { ActionWithPayload } from "../../../shared/store/interfaces/actions/action.interface";
+import { handleErrors } from "shared/scripts/utils";
+import { config } from "shared/settings/initialConfig";
+import { ActionWithPayload } from "shared/store/interfaces/actions/action.interface";
+
+const localStorageKey = "token";
 
 export enum AuthAction {
   REGISTER = "REGISTER",
@@ -14,6 +16,8 @@ export enum AuthAction {
   LOGIN_ERROR = "LOGIN_ERROR",
 
   RESET_FORM = "RESET_FORM",
+
+  SET_LOGGED_IN = "SET_LOGGED_IN",
 }
 
 export const register = (payload: Registration): ActionWithPayload<AuthAction, Registration> => ({
@@ -48,8 +52,12 @@ export const resetForm = () => ({
   type: AuthAction.RESET_FORM,
 });
 
+export const setLoggedIn = () => ({
+  type: AuthAction.SET_LOGGED_IN,
+});
+
 // thunk
-export const sendRegisterForm = (formData: Registration) => (dispatch: (arg0: Action<any>) => void) => {
+export const sendRegisterForm = (formData: Registration) => (dispatch: (action: Action<any>) => void) => {
   dispatch(register(formData));
 
   return fetch(`${config.url.API_URL}/auth/register`, {
@@ -81,8 +89,15 @@ export const sendLoginForm = (formData: Login) => (dispatch: (action: Action<any
     .then(response => response.json())
     .then((response: LoginResponse) => {
       // todo - cookie
-      localStorage.setItem("token", response.token);
+      localStorage.setItem(localStorageKey, response.token);
       dispatch(loginSuccess());
     })
     .catch(error => dispatch(loginError(error)));
+};
+
+export const setUserIsLoggedIn = () => (dispatch: (action: Action<any>) => void) => {
+  const token = localStorage.getItem(localStorageKey);
+  if (token) {
+    dispatch(loginSuccess());
+  }
 };
