@@ -39,7 +39,7 @@ export const login = (payload: Login): ActionWithPayload<AuthAction, Login> => (
   payload,
 });
 
-export const loginSuccess = (): Action => ({
+export const loginSuccess = (payload: string): Action => ({
   type: AuthAction.LOGIN_SUCCESS,
 });
 
@@ -90,7 +90,7 @@ export const sendLoginForm = (formData: Login) => (dispatch: (action: Action<any
     .then((response: LoginResponse) => {
       // todo - cookie
       localStorage.setItem(localStorageKey, response.token);
-      dispatch(loginSuccess());
+      dispatch(loginSuccess(response.token));
     })
     .catch(error => dispatch(loginError(error)));
 };
@@ -98,6 +98,6 @@ export const sendLoginForm = (formData: Login) => (dispatch: (action: Action<any
 export const setUserIsLoggedIn = () => (dispatch: (action: Action<any>) => void) => {
   const token = localStorage.getItem(localStorageKey);
   if (token) {
-    dispatch(loginSuccess());
+    dispatch(loginSuccess(token));
   }
 };

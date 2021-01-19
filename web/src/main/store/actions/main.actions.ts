@@ -1,8 +1,8 @@
 import { Action } from "redux";
-import { handleErrors } from "../../../shared/scripts/utils";
-import { config } from "../../../shared/settings/initialConfig";
-import { ActionWithPayload } from "../../../shared/store/interfaces/actions/action.interface";
-import { incrementPomodoros } from "../../../stats/store/actions/stats.actions";
+import { handleErrors } from "shared/scripts/utils";
+import { config } from "shared/settings/initialConfig";
+import { ActionWithPayload } from "shared/store/interfaces/actions/action.interface";
+import { incrementPomodoros } from "stats/store/actions/stats.actions";
 
 export enum MainAction {
   SAVE_POMODORO = "SAVE_POMODORO",
@@ -27,9 +27,13 @@ export const savePomodoroError = (error: any): ActionWithPayload<MainAction, any
 
 export const savePomodoroAndIncrementCounter = () => (dispatch: (arg: Action) => void) => {
   dispatch(savePomodoro());
+  let token = "Bearer " + localStorage.getItem("token");
 
   return fetch(config.url.API_URL + "/stats/pomodoros", {
     method: "POST",
+    headers: {
+      Authorization: token,
+    },
   })
     .then(handleErrors)
     .then(() => {

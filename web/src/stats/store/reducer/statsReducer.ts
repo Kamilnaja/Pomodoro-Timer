@@ -1,5 +1,5 @@
-import { ActionWithPayload } from "../../../shared/store/interfaces/actions/action.interface";
-import TodayStatistics from "../../../shared/store/interfaces/todayStatistics.interface";
+import { ActionWithPayload } from "shared/store/interfaces/actions/action.interface";
+import TodayStatistics from "shared/store/interfaces/todayStatistics.interface";
 import { StatsAction } from "../actions/stats.actions";
 
 export const initialState = {
