@@ -7,7 +7,6 @@ export const initialState: AuthState = {
   error: "",
   isSuccess: false,
   isLoggedIn: false,
-  token: "",
 };
 
 export const authReducer = (state = initialState, action: Action): AuthState => {
