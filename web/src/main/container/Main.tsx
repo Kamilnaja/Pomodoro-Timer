@@ -23,9 +23,6 @@ class Main extends React.Component<MainProps, MainState> {
     this.state = {
       openedModal: ModalEnum.NULL,
     };
-  }
-
-  componentDidMount() {
     this.props.setUserIsLoggedIn();
   }
 

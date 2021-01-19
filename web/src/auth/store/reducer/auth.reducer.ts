@@ -1,4 +1,4 @@
-import { Action } from "redux";
+import { ActionWithPayload } from "../../../shared/store/interfaces/actions/action.interface";
 import { AuthAction } from "../actions/auth.actions";
 import { AuthState } from "../interfaces/auth.state";
 
@@ -7,9 +7,10 @@ export const initialState: AuthState = {
   error: "",
   isSuccess: false,
   isLoggedIn: false,
+  token: "",
 };
 
-export const authReducer = (state = initialState, action: Action): AuthState => {
+export const authReducer = (state = initialState, action: ActionWithPayload<AuthAction, string>): AuthState => {
   switch (action.type) {
     case AuthAction.REGISTER:
       return {
@@ -45,6 +46,7 @@ export const authReducer = (state = initialState, action: Action): AuthState => 
         isLoading: false,
         isSuccess: true,
         isLoggedIn: true,
+        token: action.payload,
       };
     case AuthAction.RESET_FORM:
       return {

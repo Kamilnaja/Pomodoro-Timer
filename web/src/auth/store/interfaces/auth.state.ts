@@ -3,4 +3,5 @@ export interface AuthState {
   error: string;
   isSuccess: boolean;
   isLoggedIn: boolean;
+  token: string;
 }

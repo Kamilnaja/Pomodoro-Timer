@@ -1,9 +1,10 @@
 import { Action } from "redux";
-import { Error } from "../../../../../types/interfaces";
 import { handleErrors } from "shared/scripts/utils";
 import { config } from "shared/settings/initialConfig";
 import { ActionWithPayload } from "shared/store/interfaces/actions/action.interface";
 import TodayStatistics from "shared/store/interfaces/todayStatistics.interface";
+import { Error } from "../../../../../types/interfaces";
+import { store } from "shared/store/reducers/reducer";
 
 export enum StatsAction {
   GET_TODAY_STATISTICS = "GET_TODAY_STATISTICS",
@@ -33,11 +34,10 @@ export const incrementPomodoros = (): Action<StatsAction> => ({
 // thunk
 export const getTodayStats = () => (dispatch: (arg: Action) => void) => {
   dispatch(getTodayStatistics());
-  let token = "Bearer " + localStorage.getItem("token");
-
+  const token = store.getState().auth.token;
   return fetch(config.url.API_URL + "/stats/pomodoros_done_today", {
     headers: {
-      Authorization: token,
+      Authorization: "Bearer " + token,
     },
   })
     .then(handleErrors)

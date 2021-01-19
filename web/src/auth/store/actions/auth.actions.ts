@@ -39,8 +39,9 @@ export const login = (payload: Login): ActionWithPayload<AuthAction, Login> => (
   payload,
 });
 
-export const loginSuccess = (payload: string): Action => ({
+export const loginSuccess = (payload: string): ActionWithPayload<AuthAction, string> => ({
   type: AuthAction.LOGIN_SUCCESS,
+  payload,
 });
 
 export const loginError = (error: Error): ActionWithPayload<AuthAction, Error> => ({
@@ -97,6 +98,7 @@ export const sendLoginForm = (formData: Login) => (dispatch: (action: Action<any
 
 export const setUserIsLoggedIn = () => (dispatch: (action: Action<any>) => void) => {
   const token = localStorage.getItem(localStorageKey);
+
   if (token) {
     dispatch(loginSuccess(token));
   }

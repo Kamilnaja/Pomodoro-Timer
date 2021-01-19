@@ -10,8 +10,5 @@ export const rootReducer = combineReducers({
   stats: statsReducer,
   auth: authReducer,
 });
-export const store = createStore(
-  rootReducer,
 
-  composeWithDevTools(applyMiddleware(thunkMiddleware)),
-);
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunkMiddleware)));
