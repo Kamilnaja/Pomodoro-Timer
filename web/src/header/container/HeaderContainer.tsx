@@ -3,16 +3,18 @@ import { connect } from "react-redux";
 import { Modal } from "shared/store/enums/modal.enum";
 import { AuthState } from "../../auth/store/interfaces/auth.state";
 import { HeaderComponent } from "../component/HeaderComponent";
-import "./headerContainer.scss";
 
 export interface HeaderProps {
   handleOpenModal: (arg: Modal) => void;
+  handleLogout: () => void;
   auth?: AuthState;
 }
 
 class HeaderContainer extends React.Component<HeaderProps> {
   render() {
-    return <HeaderComponent handleOpenModal={this.props.handleOpenModal} authState={this.props.auth!} />;
+    return (
+      <HeaderComponent handleLogout={this.props.handleLogout} handleOpenModal={this.props.handleOpenModal} authState={this.props.auth!} />
+    );
   }
 }
 

@@ -1,9 +1,9 @@
+import { resetForm, setUserIsLoggedIn, setUserIsLoggedOut } from "auth/store/actions/auth.actions";
+import HeaderContainer from "header/container/HeaderContainer";
 import React from "react";
 import { connect } from "react-redux";
 import { Modal } from "shared/components/modal/Modal";
 import { Modal as ModalEnum } from "shared/store/enums/modal.enum";
-import { resetForm, setUserIsLoggedIn } from "auth/store/actions/auth.actions";
-import HeaderContainer from "header/container/HeaderContainer";
 import StatsContainer from "stats/containers/StatsContainer";
 import Timer from "timer/containers/Timer";
 import "./main.scss";
@@ -15,6 +15,7 @@ interface MainState {
 interface MainProps {
   resetForm: () => void;
   setUserIsLoggedIn: () => void;
+  setUserIsLoggedOut: () => void;
 }
 // Wrapper for whole app
 class Main extends React.Component<MainProps, MainState> {
@@ -38,9 +39,13 @@ class Main extends React.Component<MainProps, MainState> {
     this.props.resetForm();
   };
 
+  handleLogout = () => {
+    this.props.setUserIsLoggedOut();
+  };
+
   render = () => (
     <div className="app">
-      <HeaderContainer handleOpenModal={this.handleOpenModal} />
+      <HeaderContainer handleLogout={this.handleLogout} handleOpenModal={this.handleOpenModal} />
       <Timer />
       <StatsContainer />
       <footer>Hello I'm footer</footer>
@@ -52,6 +57,7 @@ class Main extends React.Component<MainProps, MainState> {
 const mapDispatchToProps = {
   resetForm,
   setUserIsLoggedIn,
+  setUserIsLoggedOut,
 };
 
 export default connect(null, mapDispatchToProps)(Main);

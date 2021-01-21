@@ -18,6 +18,7 @@ export enum AuthAction {
   RESET_FORM = "RESET_FORM",
 
   SET_LOGGED_IN = "SET_LOGGED_IN",
+  SET_LOGGED_OUT = "SET_LOGGED_OUT",
 }
 
 export const register = (payload: Registration): ActionWithPayload<AuthAction, Registration> => ({
@@ -49,12 +50,16 @@ export const loginError = (error: Error): ActionWithPayload<AuthAction, Error> =
   payload: error,
 });
 
-export const resetForm = () => ({
+export const resetForm = (): Action => ({
   type: AuthAction.RESET_FORM,
 });
 
-export const setLoggedIn = () => ({
+export const setLoggedIn = (): Action => ({
   type: AuthAction.SET_LOGGED_IN,
+});
+
+export const setLoggedOut = (): Action => ({
+  type: AuthAction.SET_LOGGED_OUT,
 });
 
 // thunk
@@ -102,4 +107,10 @@ export const setUserIsLoggedIn = () => (dispatch: (action: Action<any>) => void)
   if (token) {
     dispatch(loginSuccess(token));
   }
+};
+
+export const setUserIsLoggedOut = () => (dispatch: (action: Action<any>) => void) => {
+  localStorage.removeItem(localStorageKey);
+
+  dispatch(setLoggedOut());
 };

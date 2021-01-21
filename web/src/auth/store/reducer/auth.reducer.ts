@@ -54,6 +54,12 @@ export const authReducer = (state = initialState, action: ActionWithPayload<Auth
         isLoading: initialState.isLoading,
         isSuccess: initialState.isSuccess,
       };
+    case AuthAction.SET_LOGGED_OUT:
+      return {
+        ...state,
+        isLoggedIn: false,
+        token: "",
+      };
     default:
       return state;
   }
