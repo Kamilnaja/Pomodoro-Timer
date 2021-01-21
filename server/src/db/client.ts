@@ -8,6 +8,12 @@ const client = new Client({
   database: process.env.DATABASE_DATABASE || "pomodoros",
 });
 
-client.connect();
+client.connect(err => {
+  if (err) {
+    console.error(`connection error ${err.stack}`);
+  } else {
+    console.log("connected!");
+  }
+});
 
 export default client;
