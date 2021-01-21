@@ -50,7 +50,6 @@ class Main extends React.Component<MainProps, MainState> {
       <HeaderContainer handleLogout={this.handleLogout} handleOpenModal={this.handleOpenModal} isLoggedIn={this.props.auth.isLoggedIn} />
       <Timer />
       {this.props.auth.isLoggedIn && <StatsContainer />}
-      <footer>Hello I'm footer</footer>
       <Modal modalType={this.state.openedModal} closeModal={this.handleCloseModal} />
     </div>
   );
