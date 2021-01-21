@@ -10,7 +10,6 @@ const initialState: State = {
 };
 
 export const settingsReducer = (state = initialState, action: ActionWithPayload<SettingsAction, any>): State => {
-  // todo - stub
   switch (action.type) {
     case SettingsAction.GET_SETTINGS:
       return {
