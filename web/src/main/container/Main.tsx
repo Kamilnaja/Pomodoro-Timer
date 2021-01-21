@@ -6,6 +6,7 @@ import { Modal } from "shared/components/modal/Modal";
 import { Modal as ModalEnum } from "shared/store/enums/modal.enum";
 import StatsContainer from "stats/containers/StatsContainer";
 import Timer from "timer/containers/Timer";
+import { AuthState } from "../../auth/store/interfaces/auth.state";
 import "./main.scss";
 
 interface MainState {
@@ -16,8 +17,9 @@ interface MainProps {
   resetForm: () => void;
   setUserIsLoggedIn: () => void;
   setUserIsLoggedOut: () => void;
+  auth: AuthState;
 }
-// Wrapper for whole app
+
 class Main extends React.Component<MainProps, MainState> {
   constructor(props: MainProps) {
     super(props);
@@ -45,9 +47,9 @@ class Main extends React.Component<MainProps, MainState> {
 
   render = () => (
     <div className="app">
-      <HeaderContainer handleLogout={this.handleLogout} handleOpenModal={this.handleOpenModal} />
+      <HeaderContainer handleLogout={this.handleLogout} handleOpenModal={this.handleOpenModal} isLoggedIn={this.props.auth.isLoggedIn} />
       <Timer />
-      <StatsContainer />
+      {this.props.auth.isLoggedIn && <StatsContainer />}
       <footer>Hello I'm footer</footer>
       <Modal modalType={this.state.openedModal} closeModal={this.handleCloseModal} />
     </div>
@@ -60,4 +62,9 @@ const mapDispatchToProps = {
   setUserIsLoggedOut,
 };
 
-export default connect(null, mapDispatchToProps)(Main);
+const mapStateToProps = (state: { auth: AuthState }) => {
+  const authState = state.auth;
+  return { auth: authState };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

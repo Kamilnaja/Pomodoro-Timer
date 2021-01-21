@@ -1,24 +1,17 @@
 import { Modal } from "shared/store/enums/modal.enum";
-import { AuthState } from "../../auth/store/interfaces/auth.state";
 import "./headerComponent.scss";
 
 export interface HeaderProps {
   handleOpenModal: (arg: Modal) => void;
   handleLogout: () => void;
-  authState: AuthState;
+  isLoggedIn: boolean;
 }
 
 export const HeaderComponent = (props: HeaderProps) => (
   <header className="header">
     <h1 className="header__title">Pomik</h1>
     <div>
-      <button className="button" onClick={() => props.handleOpenModal(Modal.SETTINGS)}>
-        Settings
-      </button>
-      <button className="button" onClick={() => props.handleOpenModal(Modal.STATS)}>
-        Stats
-      </button>
-      {!props.authState?.isLoggedIn ? (
+      {!props.isLoggedIn ? (
         <>
           <button className="button" onClick={() => props.handleOpenModal(Modal.LOGIN)}>
             Login
@@ -28,9 +21,17 @@ export const HeaderComponent = (props: HeaderProps) => (
           </button>
         </>
       ) : (
-        <button className="button" onClick={() => props.handleLogout()}>
-          Logout
-        </button>
+        <>
+          <button className="button" onClick={() => props.handleOpenModal(Modal.SETTINGS)}>
+            Settings
+          </button>
+          <button className="button" onClick={() => props.handleOpenModal(Modal.STATS)}>
+            Stats
+          </button>
+          <button className="button" onClick={() => props.handleLogout()}>
+            Logout
+          </button>
+        </>
       )}
     </div>
   </header>
