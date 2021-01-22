@@ -6,7 +6,6 @@ import Settings from "../../../settings/Settings";
 import StatisticsContainer from "../../../statistics/container/StatisticsContainer";
 import { Modal as ModalEnum } from "../../store/enums/modal.enum";
 import "./modal.scss";
-import { customStyles } from "./styles";
 
 export interface ModalProps {
   modalType: ModalEnum;
@@ -34,9 +33,10 @@ export const Modal = (props: ModalProps) => {
       shouldFocusAfterRender={true}
       shouldCloseOnOverlayClick={true}
       onRequestClose={props.closeModal}
-      style={customStyles}
+      className="modal__content"
+      overlayClassName="modal"
     >
-      <div className="modal">
+      <div className="modal__wrapper">
         <header className="modal__header">
           <button className="modal__button--close" onClick={props.closeModal}>
             ✕

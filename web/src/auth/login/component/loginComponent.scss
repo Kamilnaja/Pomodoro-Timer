@@ -5,7 +5,6 @@
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  max-width: 75%;
 
   & &__row {
     display: grid;
@@ -17,5 +16,11 @@
 
   & &__button {
     @include button($color: $text-secondary, $bgColor: $button-bg);
+  }
+}
+
+.login {
+  & &__header {
+    margin-bottom: 10px;
   }
 }

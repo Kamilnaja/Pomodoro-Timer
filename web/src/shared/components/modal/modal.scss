@@ -1,6 +1,6 @@
 @import "../../../shared/styles/shared.scss";
 
-.ReactModal__Overlay {
+.modal {
   background-color: rgba(0, 0, 0, 0.7) !important;
   bottom: 0;
   left: 0;
@@ -8,9 +8,7 @@
   right: 0;
   top: 0;
   z-index: 999;
-}
 
-.modal {
   & &__header {
     height: 25px;
     margin-bottom: 10px;
@@ -26,6 +24,26 @@
       margin-right: -20px;
       margin-top: -20px;
       padding: 15px;
+    }
+  }
+
+  & &__content {
+    background-color: #fff;
+    left: 50%;
+    overflow: auto;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+  }
+}
+
+@media (max-width: $xs) {
+  .modal {
+    & &__content {
+      padding: 20px;
+      width: 100%;
     }
   }
 }

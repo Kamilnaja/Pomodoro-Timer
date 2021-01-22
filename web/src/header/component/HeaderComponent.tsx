@@ -10,7 +10,7 @@ export interface HeaderProps {
 export const HeaderComponent = (props: HeaderProps) => (
   <header className="header">
     <h1 className="header__title">Pomik</h1>
-    <div>
+    <div className="header__buttons-wrapper">
       {!props.isLoggedIn ? (
         <>
           <button className="button" onClick={() => props.handleOpenModal(Modal.LOGIN)}>

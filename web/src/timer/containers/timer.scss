@@ -5,7 +5,7 @@
   display: grid;
   margin: 0 auto;
   max-width: 900px;
-  padding: 30px;
+  padding-top: 30px;
 
   & &__button-wrapper {
     display: flex;
@@ -19,6 +19,20 @@
     &--stop {
       margin: 0 auto;
       padding: 15px 30px;
+    }
+  }
+}
+
+@media (max-width: $xs) {
+  .timer {
+    & &__button-wrapper {
+      align-items: center;
+      flex-direction: column;
+    }
+
+    & &__button {
+      margin-bottom: 10px;
+      width: calc(100% - 20px);
     }
   }
 }
