@@ -3,18 +3,16 @@
 .timer {
   background-color: $bg-accent;
   display: grid;
-  padding: 30px;
   margin: 0 auto;
   max-width: 900px;
+  padding: 30px;
 
   & &__button-wrapper {
     display: flex;
-    text-align: center;
     justify-content: space-evenly;
+    text-align: center;
   }
-}
 
-.timer {
   & &__button {
     @include button($color: $text-primary, $bgColor: $button-bg);
 

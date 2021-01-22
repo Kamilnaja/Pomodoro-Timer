@@ -3,6 +3,5 @@
 .error {
   @include font-fira-sans($colour: $text-secondary, $size: 15px);
   @include small-bar;
-
   background-color: $error-bg;
 }

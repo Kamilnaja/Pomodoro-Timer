@@ -24,7 +24,6 @@
       {
         "ignoreSelectors": [":hover", ":focus", ":host-context", "::after", "::before", ":after", ":before", ":last-child"]
       }
-    ],
-    "string-quotes": "single"
+    ]
   }
 }

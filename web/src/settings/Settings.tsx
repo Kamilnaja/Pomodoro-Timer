@@ -6,7 +6,7 @@ interface SettingsProps {
 
 export class Settings extends React.Component<SettingsProps> {
   render() {
-    return <header className="App-header">Settings</header>;
+    return <header className="settings">Settings</header>;
   }
 }
 

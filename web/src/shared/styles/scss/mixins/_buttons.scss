@@ -1,6 +1,6 @@
 @mixin button($color: false, $bgColor: false, $size: false) {
-  border: none;
   background-color: $bgColor;
+  border: none;
   color: $color;
   cursor: pointer;
   font-size: $size;
