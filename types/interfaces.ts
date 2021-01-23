@@ -19,6 +19,7 @@ export interface AuthError {
 export enum ErrorCodes {
   USER_NOT_FOUND,
   USER_CURRENTLY_EXISTS,
+  EMAIL_CURRENTLY_EXISTS,
   PASSWORD_INCORRECT,
   OTHER_ERROR,
 }

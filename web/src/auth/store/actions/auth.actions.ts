@@ -65,25 +65,33 @@ export const setLoggedOut = (): Action => ({
 export const sendRegisterForm = (formData: Registration) => (dispatch: (action: Action<any>) => void) => {
   dispatch(register(formData));
 
-  return fetch(`${config.url.API_URL}/auth/register`, {
+  makeRegisterRequest(formData)
+    .then(() => {
+      dispatch(registerSuccess());
+    })
+    .catch((response: AuthError) => {
+      dispatch(registerError(response));
+    });
+};
+
+const makeRegisterRequest = async (formData: Registration) => {
+  const response: Response = await fetch(`${config.url.API_URL}/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(formData),
-  }).then(response => {
-    if (!response.ok) {
-      dispatch(registerError(response));
-    } else {
-      dispatch(registerSuccess());
-    }
   });
+
+  const requestBody = await response.json();
+
+  return response.ok ? Promise.resolve(requestBody) : Promise.reject(requestBody);
 };
 
 export const sendLoginForm = (formData: Login) => async (dispatch: (action: Action<any>) => void) => {
   dispatch(login(formData));
 
-  makeRequest(formData)
+  makeLoginRequest(formData)
     .then((response: LoginResponse) => {
       localStorage.setItem(localStorageKey, response.token);
       dispatch(loginSuccess(response.token));
@@ -93,7 +101,7 @@ export const sendLoginForm = (formData: Login) => async (dispatch: (action: Acti
     });
 };
 
-const makeRequest = async (formData: Login) => {
+const makeLoginRequest = async (formData: Login) => {
   const response: Response = await fetch(`${config.url.API_URL}/auth/login`, {
     method: "POST",
     headers: {
@@ -102,9 +110,9 @@ const makeRequest = async (formData: Login) => {
     body: JSON.stringify(formData),
   });
 
-  const jVal = await response.json();
+  const requestBody = await response.json();
 
-  return response.ok ? Promise.resolve(jVal) : Promise.reject(jVal);
+  return response.ok ? Promise.resolve(requestBody) : Promise.reject(requestBody);
 };
 
 export const setUserIsLoggedIn = () => (dispatch: (action: Action<any>) => void) => {

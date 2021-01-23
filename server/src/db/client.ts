@@ -1,6 +1,6 @@
 import { Client } from "pg";
 
-const client = new Client({
+const client: Client = new Client({
   port: 5432,
   host: process.env.DATABASE_HOST || "localhost",
   password: process.env.DATABASE_PASSWORD || "asdf",
@@ -8,7 +8,7 @@ const client = new Client({
   database: process.env.DATABASE_DATABASE || "pomodoros",
 });
 
-client.connect(err => {
+client.connect((err: Error) => {
   if (err) {
     console.error(`connection error ${err.stack}`);
   } else {

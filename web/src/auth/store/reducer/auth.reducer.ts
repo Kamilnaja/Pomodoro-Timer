@@ -28,6 +28,7 @@ export const authReducer = (state = initialState, action: ActionWithPayload<Auth
         ...state,
         isLoading: false,
         isSuccess: true,
+        error: null as any,
       };
     case AuthAction.LOGIN:
       return {
@@ -47,6 +48,7 @@ export const authReducer = (state = initialState, action: ActionWithPayload<Auth
         isSuccess: true,
         isLoggedIn: true,
         token: action.payload,
+        error: null as any,
       };
     case AuthAction.RESET_FORM:
       return {
