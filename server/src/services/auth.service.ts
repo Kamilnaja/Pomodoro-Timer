@@ -7,7 +7,7 @@ import { AuthError, ErrorCodes, Login, LoginResponse } from "../../../types/inte
 import pool from "../db/db";
 import { Request } from "../models/auth/request.interface";
 
-export async function registerUser(userHash: string, req: Request, res: Response<any | AuthError>): Promise<void> {
+export const registerUser = async (userHash: string, req: Request, res: Response<{ message: string } | AuthError>): Promise<void> => {
   const insert = "INSERT INTO users VALUES($1, $2, $3, $4, $5)";
 
   try {
@@ -19,7 +19,7 @@ export async function registerUser(userHash: string, req: Request, res: Response
   } catch (err: any) {
     handleError(err, res);
   }
-}
+};
 
 const handleError = (err: { stack: any; constraint: string }, res: Response<AuthError>): void => {
   console.log(err.stack);
@@ -41,7 +41,7 @@ const handleError = (err: { stack: any; constraint: string }, res: Response<Auth
   }
 };
 
-export async function loginUser(req: Login, res: Response<LoginResponse | AuthError>): Promise<void> {
+export const loginUser = async (req: Login, res: Response<LoginResponse | AuthError>): Promise<void> => {
   const query = "SELECT * FROM users where login = $1 LIMIT 1";
 
   try {
@@ -59,9 +59,9 @@ export async function loginUser(req: Login, res: Response<LoginResponse | AuthEr
     console.log("error when login: " + err.stack);
     res.send(err.stack);
   }
-}
+};
 
-async function handleCorrectUser(currentPassword: string, dbResult: QueryResult, res: Response<LoginResponse | AuthError>) {
+const handleCorrectUser = async (currentPassword: string, dbResult: QueryResult, res: Response<LoginResponse | AuthError>) => {
   try {
     const { password, email, login } = dbResult.rows[0];
     const isPasswordCorrect = await bcrypt.compare(currentPassword, password);
@@ -83,7 +83,7 @@ async function handleCorrectUser(currentPassword: string, dbResult: QueryResult,
       message: "Error while comparing your password",
     });
   }
-}
+};
 
 export const authenticateJWT = (req: any, res: any, next: () => void) => {
   const authHeader = req.headers.authorization;

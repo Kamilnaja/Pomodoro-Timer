@@ -2,9 +2,9 @@ import { Action } from "redux";
 import { handleErrors } from "shared/scripts/utils";
 import { config } from "shared/settings/initialConfig";
 import { ActionWithPayload } from "shared/store/interfaces/actions/action.interface";
-import TodayStatistics from "shared/store/interfaces/todayStatistics.interface";
 import { store } from "shared/store/reducers/reducer";
 import { AuthError } from "../../../../../types/interfaces";
+import TodayStatistics from "../../../../../types/todayStatistics.interface";
 
 export enum StatsAction {
   GET_TODAY_STATISTICS = "GET_TODAY_STATISTICS",
