@@ -9,6 +9,6 @@ export interface ValidationMessageProps {
 
 export const ValidationMessage = (props: ValidationMessageProps) => (
   <div className="validation-message">
-    <span className="validation-message__text">😱{props.message}</span>
+    <span className="validation-message__text">{props.message}</span>
   </div>
 );

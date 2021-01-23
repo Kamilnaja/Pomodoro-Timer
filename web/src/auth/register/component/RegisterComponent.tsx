@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { ValidationMessage } from "shared/components/validationMessage/ValidationMessage";
 import { Registration } from "../../../../../types/interfaces";
@@ -10,8 +11,18 @@ export interface RegisterProps {
   formState: AuthState;
 }
 
+type FormData = {
+  login: string;
+  email: string;
+  password: string;
+  repeatedPassword: string;
+};
+
 export const RegisterComponent = (props: RegisterProps) => {
-  const { register, errors, handleSubmit } = useForm();
+  const { register, errors, handleSubmit, watch } = useForm<FormData>();
+  const password = useRef({});
+  password.current = watch("password", "");
+
   const onSubmit = (data: Registration) => {
     props.handleSubmit(data);
   };
@@ -21,35 +32,53 @@ export const RegisterComponent = (props: RegisterProps) => {
       <h2 className="login__header">Enter registration data</h2>
       <form className="login__form form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form__row">
-          <label className="form__label">User name</label>
-          <input className="form__input" type="text" name="login" required placeholder="John Doe" ref={register({ required: true })} />
-          <div className="form__error">{errors.name && <ValidationMessage type={"error"} message={"Name is required"} />}</div>
+          <label className="form__label">User login</label>
+          <input
+            className="form__input"
+            type="text"
+            name="login"
+            placeholder="John Doe"
+            ref={register({ required: "😱Login is required" })}
+          />
+          <div className="form__error">{errors.login && <ValidationMessage type={"error"} message={errors.login.message as string} />}</div>
         </div>
         <div className="form__row">
           <label className="form__label">Email</label>
           <input type="text" placeholder="johndoe@gmail.com" name="email" ref={register({ required: true, pattern: /^\S+@\S+$/i })} />
           <div className="form__error">
-            {errors.email?.type === "required" && <ValidationMessage type={"error"} message={"Email is required"} />}
-            {errors.email?.type === "pattern" && <ValidationMessage type={"error"} message={"Please provide correct email"} />}
+            {errors.email?.type === "required" && <ValidationMessage type={"error"} message={"😓Email is required"} />}
+            {errors.email?.type === "pattern" && <ValidationMessage type={"error"} message={"🤥Please provide correct email"} />}
           </div>
         </div>
         <div className="form__row">
           <label className="form__label">Password</label>
-          <input type="password" name="password" required ref={register({ required: true })} />
-          <div className="form__error">{errors.password && <ValidationMessage type={"error"} message={"Password is required"} />}</div>
+          <input
+            name="password"
+            type="password"
+            ref={register({
+              required: "🤯You must specify a password",
+              minLength: { value: 8, message: "😱Password must have at least 8 characters" },
+            })}
+          />
+          <div className="form__error">
+            {errors.password && <ValidationMessage type={"error"} message={errors.password.message as string} />}
+          </div>
         </div>
         <div className="form__row">
           <label className="form__label">Repeat password</label>
-          <input type="password" name="repeatedPassword" required ref={register({ required: true })} />
+          <input
+            name="repeatedPassword"
+            type="password"
+            ref={register({ validate: value => value === password.current || "😨The passwords do not match" })}
+          />
           <div className="form__error">
-            {errors.repeatedPassword && <ValidationMessage type={"error"} message={"Repeated password is required"} />}
+            {errors.repeatedPassword && <ValidationMessage type={"error"} message={errors.repeatedPassword.message as string} />}
           </div>
         </div>
         <button className="form__button" value="Wyślij" type="submit">
           Submit
         </button>
       </form>
-      {props.formState.isSuccess && <ValidationMessage message={"success"} type={"success"} />}
     </div>
   );
 };

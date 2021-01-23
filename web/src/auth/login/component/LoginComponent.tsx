@@ -10,8 +10,13 @@ export interface LoginProps {
   auth: AuthState;
 }
 
+type FormData = {
+  login: string;
+  password: string;
+};
+
 export const LoginComponent = (props: LoginProps) => {
-  const { register, errors, handleSubmit } = useForm();
+  const { register, errors, handleSubmit } = useForm<FormData>();
   const onSubmit = (loginData: Login) => {
     props.handleSubmit(loginData);
   };
@@ -22,20 +27,19 @@ export const LoginComponent = (props: LoginProps) => {
       {props.auth.error?.message && <ValidationMessage type={"error"} message={props.auth.error.message} />}
       <form className="login__form form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form__row">
-          <label className="form__label">User name</label>
+          <label className="form__label">User login</label>
           <input className="form__input" type="text" name="login" required placeholder="John Doe" ref={register({ required: true })} />
-          <div className="form__error">{errors.name && <ValidationMessage type={"error"} message={"Name is required"} />}</div>
+          <div className="form__error">{errors.login && <ValidationMessage type={"error"} message={"😰Login is required"} />}</div>
         </div>
         <div className="form__row">
           <label className="form__label">Password</label>
           <input type="password" name="password" required ref={register({ required: true })} />
-          <div className="form__error">{errors.password && <ValidationMessage type={"error"} message={"Password is required"} />}</div>
+          <div className="form__error">{errors.password && <ValidationMessage type={"error"} message={"😱Password is required"} />}</div>
         </div>
         <button className="form__button" value="Wyślij" type="submit">
           Submit
         </button>
       </form>
-      {props.auth.isSuccess && <ValidationMessage message={"success"} type={"success"} />}
     </div>
   );
 };
