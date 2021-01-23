@@ -3,11 +3,11 @@ import { QueryResult } from "pg";
 import { v4 as uuidv4 } from "uuid";
 import pool from "../db/db";
 import { Request } from "../models/auth/request.interface";
-import { Error, ErrorCodes, Login, Registration } from "../../../types/interfaces";
+import { AuthError, ErrorCodes, Login, LoginResponse, Registration } from "../../../types/interfaces";
 import bcrypt from "bcrypt";
 import jwt, { JsonWebTokenError, NotBeforeError, TokenExpiredError } from "jsonwebtoken";
 
-export async function registerUser(userHash: string, req: Request, res: Response<string | Error>) {
+export async function registerUser(userHash: string, req: Request, res: Response<string | AuthError>) {
   const insert = "INSERT INTO users VALUES($1, $2, $3, $4, $5)";
 
   try {
@@ -21,15 +21,15 @@ export async function registerUser(userHash: string, req: Request, res: Response
   }
 }
 
-function handleError(err: any, res: Response<Error>) {
+function handleError(err: any, res: Response<AuthError>) {
   console.log(err.stack);
   res.status(422).send({
     code: ErrorCodes.USER_CURRENTLY_EXISTS,
     message: err.detail,
-  } as Error);
+  } as AuthError);
 }
 
-export async function loginUser(req: Login, res: Response<any | Error>): Promise<void> {
+export async function loginUser(req: Login, res: Response<LoginResponse | AuthError>): Promise<void> {
   const query = "SELECT * FROM users where login = $1 LIMIT 1";
   try {
     const { password, login } = req;
@@ -48,7 +48,7 @@ export async function loginUser(req: Login, res: Response<any | Error>): Promise
   }
 }
 
-async function handleCorrectUser(currentPassword: string, dbResult: QueryResult, res: Response<any | Error>) {
+async function handleCorrectUser(currentPassword: string, dbResult: QueryResult, res: Response<any | AuthError>) {
   try {
     const { password, email, login } = dbResult.rows[0];
     const isPasswordCorrect = await bcrypt.compare(currentPassword, password);
@@ -60,7 +60,7 @@ async function handleCorrectUser(currentPassword: string, dbResult: QueryResult,
     } else {
       res.status(401).send({
         code: ErrorCodes.PASSWORD_INCORRECT,
-        message: "password is incorrect gerrarahia!!!",
+        message: "password is incorrect!!!",
       });
     }
   } catch (err: any) {

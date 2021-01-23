@@ -1,6 +1,8 @@
+import { AuthError } from "../../../../../types/interfaces";
+
 export interface AuthState {
   isLoading: boolean;
-  error: string;
+  error: AuthError;
   isSuccess: boolean;
   isLoggedIn: boolean;
   token: string;

@@ -1,8 +1,7 @@
 import { Action } from "redux";
-import { Login, LoginResponse, Registration } from "../../../../../types/interfaces";
-import { handleErrors } from "shared/scripts/utils";
 import { config } from "shared/settings/initialConfig";
 import { ActionWithPayload } from "shared/store/interfaces/actions/action.interface";
+import { AuthError, Login, LoginResponse, Registration } from "../../../../../types/interfaces";
 
 const localStorageKey = "token";
 
@@ -30,7 +29,7 @@ export const registerSuccess = (): Action => ({
   type: AuthAction.REGISTER_SUCCESS,
 });
 
-export const registerError = (error: any): ActionWithPayload<AuthAction, Error> => ({
+export const registerError = (error: any): ActionWithPayload<AuthAction, AuthError> => ({
   type: AuthAction.REGISTER_ERROR,
   payload: error,
 });
@@ -45,7 +44,7 @@ export const loginSuccess = (payload: string): ActionWithPayload<AuthAction, str
   payload,
 });
 
-export const loginError = (error: Error): ActionWithPayload<AuthAction, Error> => ({
+export const loginError = (error: AuthError): ActionWithPayload<AuthAction, AuthError> => ({
   type: AuthAction.LOGIN_ERROR,
   payload: error,
 });
@@ -81,24 +80,31 @@ export const sendRegisterForm = (formData: Registration) => (dispatch: (action: 
   });
 };
 
-export const sendLoginForm = (formData: Login) => (dispatch: (action: Action<any>) => void) => {
+export const sendLoginForm = (formData: Login) => async (dispatch: (action: Action<any>) => void) => {
   dispatch(login(formData));
 
-  return fetch(`${config.url.API_URL}/auth/login`, {
+  makeRequest(formData)
+    .then((response: LoginResponse) => {
+      localStorage.setItem(localStorageKey, response.token);
+      dispatch(loginSuccess(response.token));
+    })
+    .catch((response: AuthError) => {
+      dispatch(loginError(response));
+    });
+};
+
+const makeRequest = async (formData: Login) => {
+  const response: Response = await fetch(`${config.url.API_URL}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(formData),
-  })
-    .then(handleErrors)
-    .then(response => response.json())
-    .then((response: LoginResponse) => {
-      // todo - cookie
-      localStorage.setItem(localStorageKey, response.token);
-      dispatch(loginSuccess(response.token));
-    })
-    .catch(error => dispatch(loginError(error)));
+  });
+
+  const jVal = await response.json();
+
+  return response.ok ? Promise.resolve(jVal) : Promise.reject(jVal);
 };
 
 export const setUserIsLoggedIn = () => (dispatch: (action: Action<any>) => void) => {

@@ -4,13 +4,13 @@ import { AuthState } from "../interfaces/auth.state";
 
 export const initialState: AuthState = {
   isLoading: false,
-  error: "",
   isSuccess: false,
   isLoggedIn: false,
+  error: null as any,
   token: "",
 };
 
-export const authReducer = (state = initialState, action: ActionWithPayload<AuthAction, string>): AuthState => {
+export const authReducer = (state = initialState, action: ActionWithPayload<AuthAction, any>): AuthState => {
   switch (action.type) {
     case AuthAction.REGISTER:
       return {
@@ -21,7 +21,7 @@ export const authReducer = (state = initialState, action: ActionWithPayload<Auth
       return {
         ...state,
         isLoading: false,
-        error: "something went wrong!",
+        error: action.payload,
       };
     case AuthAction.REGISTER_SUCCESS:
       return {
@@ -38,7 +38,7 @@ export const authReducer = (state = initialState, action: ActionWithPayload<Auth
       return {
         ...state,
         isLoading: false,
-        error: "something went wrong!",
+        error: action.payload,
       };
     case AuthAction.LOGIN_SUCCESS:
       return {
@@ -53,6 +53,7 @@ export const authReducer = (state = initialState, action: ActionWithPayload<Auth
         ...state,
         isLoading: initialState.isLoading,
         isSuccess: initialState.isSuccess,
+        error: null as any,
       };
     case AuthAction.SET_LOGGED_OUT:
       return {

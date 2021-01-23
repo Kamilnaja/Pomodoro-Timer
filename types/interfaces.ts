@@ -11,7 +11,7 @@ export interface LoginResponse {
   token: string;
 }
 
-export interface Error {
+export interface AuthError {
   code: ErrorCodes;
   message: string;
 }
