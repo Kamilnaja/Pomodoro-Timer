@@ -83,9 +83,9 @@ const makeRegisterRequest = async (formData: Registration) => {
     body: JSON.stringify(formData),
   });
 
-  const requestBody = await response.json();
+  const responseBody = await response.json();
 
-  return response.ok ? Promise.resolve(requestBody) : Promise.reject(requestBody);
+  return response.ok ? Promise.resolve(responseBody) : Promise.reject(responseBody);
 };
 
 export const sendLoginForm = (formData: Login) => async (dispatch: (action: Action<any>) => void) => {

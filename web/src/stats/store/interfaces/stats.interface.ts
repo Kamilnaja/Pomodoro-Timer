@@ -1,5 +1,7 @@
+import StatsSearchResult from "../../../../../types/statistics.interfaces";
+
 export default interface Stats {
-  pomodorosDoneToday: number;
+  stats: StatsSearchResult;
   allPomodoros: number;
   error: string;
   isLoading: boolean;

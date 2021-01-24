@@ -1,5 +1,4 @@
 import { Action } from "redux";
-import { handleErrors } from "shared/scripts/utils";
 import { config } from "shared/settings/initialConfig";
 import { ActionWithPayload } from "shared/store/interfaces/actions/action.interface";
 import { store } from "shared/store/reducers/reducer";
@@ -7,45 +6,49 @@ import { AuthError } from "../../../../../types/interfaces";
 import StatsSearchResult from "../../../../../types/statistics.interfaces";
 
 export enum StatsAction {
-  GET_TODAY_STATISTICS = "GET_TODAY_STATISTICS",
-  GET_TODAY_STATISTICS_SUCCESS = "GET_TODAY_STATISTICS_SUCCESS",
-  GET_TODAY_STATISTICS_ERROR = "GET_TODAY_STATISTICS_ERROR",
-  INCREMENT_POMODOROS = "INCREMENT_POMODOROS", // updates number of pomodoros make today
+  GET_LAST_STATISTICS = "GET_LAST_STATISTICS",
+  GET_LAST_STATISTICS_SUCCESS = "GET_LAST_STATISTICS_SUCCESS",
+  GET_LAST_STATISTICS_ERROR = "GET_LAST_STATISTICS_ERROR",
 }
 
-export const getTodayStatistics = (): Action<StatsAction> => ({
-  type: StatsAction.GET_TODAY_STATISTICS,
-});
-
-export const getTodayStatisticsSuccess = (payload: number): ActionWithPayload<StatsAction, number> => ({
-  type: StatsAction.GET_TODAY_STATISTICS_SUCCESS,
+export const getLastStatistics = (payload: number): ActionWithPayload<StatsAction, number> => ({
+  type: StatsAction.GET_LAST_STATISTICS,
   payload,
 });
 
-export const getTodayStatisticsError = (error: AuthError): ActionWithPayload<StatsAction, AuthError> => ({
-  type: StatsAction.GET_TODAY_STATISTICS_ERROR,
+export const getLastStatisticsSuccess = (payload: StatsSearchResult): ActionWithPayload<StatsAction, StatsSearchResult> => ({
+  type: StatsAction.GET_LAST_STATISTICS_SUCCESS,
+  payload,
+});
+
+export const getLastStatisticsError = (error: AuthError): ActionWithPayload<StatsAction, AuthError> => ({
+  type: StatsAction.GET_LAST_STATISTICS_ERROR,
   payload: error,
 });
-
-export const incrementPomodoros = (): Action<StatsAction> => ({
-  type: StatsAction.INCREMENT_POMODOROS,
-});
-
 // thunk
-export const getTodayStats = () => (dispatch: (arg: Action) => void) => {
-  dispatch(getTodayStatistics());
 
+export const getLastStats = (duration: number) => async (dispatch: (args: Action) => void) => {
+  dispatch(getLastStatistics(duration));
+
+  makeGetStatsRequest()
+    .then((payload: StatsSearchResult) => {
+      dispatch(getLastStatisticsSuccess(payload));
+    })
+    .catch(err => {
+      dispatch(getLastStatisticsError(err));
+    });
+};
+
+export const makeGetStatsRequest = async () => {
   const token = store.getState().auth.token;
 
-  return fetch(`${config.url.API_URL}/stats`, {
+  const response = await fetch(`${config.url.API_URL}/stats`, {
     headers: {
-      Authorization: "Bearer " + token,
+      Authorization: `Bearer ${token}`,
     },
-  })
-    .then(handleErrors)
-    .then(response => response.json())
-    .then((payload: StatsSearchResult) => {
-      return dispatch(getTodayStatisticsSuccess(payload.result[0].count));
-    })
-    .catch(error => dispatch(getTodayStatisticsError(error)));
+  });
+
+  const responseBody = await response.json();
+
+  return response.ok ? Promise.resolve(responseBody) : Promise.reject(responseBody);
 };

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { msToTime } from "shared/scripts/utils";
 import "shared/settings/initialConfig";
 import { initialConfig } from "shared/settings/initialConfig";
-import { savePomodoroAndIncrementCounter } from "../../main/store/actions/main.actions";
+import { savePomodoroAndReloadStats } from "../../main/store/actions/main.actions";
 import { Info } from "../components/info/Info";
 import { Time } from "../components/time/Time";
 import { TimerState } from "../store/enums/timer.enum";
@@ -159,18 +159,18 @@ class Timer extends React.Component<TimerProps, State> {
             Long Break
           </button>
         </div>
-        <Time time={msToTime(this.state.timerTime)}/>
+        <Time time={msToTime(this.state.timerTime)} />
         <button className="timer__button timer__button--stop" onClick={this.isAnyTimerRunning() ? this.pauseCounter : this.startCounter}>
           {this.isAnyTimerRunning() ? "stop" : "start"}
         </button>
-        <Info currentState={this.state.timerState}/>
+        <Info currentState={this.state.timerState} />
       </div>
     </main>
   );
 }
 
 const mapDispatchToProps = {
-  handleSavePomodoro: savePomodoroAndIncrementCounter,
+  handleSavePomodoro: savePomodoroAndReloadStats,
 };
 
 export default connect(null, mapDispatchToProps)(Timer);

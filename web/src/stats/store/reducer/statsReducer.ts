@@ -5,33 +5,27 @@ import { StatsAction } from "../actions/stats.actions";
 export const initialState = {
   isLoading: false,
   error: "",
-  pomodorosDoneToday: 0,
-  allPomodoros: 0,
+  stats: null as any,
 };
 
 export const statsReducer = (state = initialState, action: ActionWithPayload<StatsAction, TodayStatistics>) => {
   switch (action.type) {
-    case StatsAction.GET_TODAY_STATISTICS:
+    case StatsAction.GET_LAST_STATISTICS:
       return {
         ...state,
         isLoading: true,
       };
-    case StatsAction.GET_TODAY_STATISTICS_SUCCESS:
+    case StatsAction.GET_LAST_STATISTICS_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        pomodorosDoneToday: action.payload,
+        stats: action.payload,
       };
-    case StatsAction.GET_TODAY_STATISTICS_ERROR:
+    case StatsAction.GET_LAST_STATISTICS_ERROR:
       return {
         ...state,
         error: "something went wrong",
         isLoading: false,
-      };
-    case StatsAction.INCREMENT_POMODOROS:
-      return {
-        ...state,
-        pomodorosDoneToday: Number(state.pomodorosDoneToday) + 1,
       };
     default:
       return state;
