@@ -1,7 +1,9 @@
 import express, { Router } from "express";
-import { handleAddPomodoro, handleGetAllPomodoros, handleGetAllPomodorosByDate, handleGetTodaysPomodoros } from "../services/stats.service";
+import StatsSearchResult from "../../../types/statistics.interfaces";
 import { Request } from "../models/auth/request.interface";
 import { authenticateJWT } from "../services/auth.service";
+import { getStatsBetween, getStatsFrom, getTodayStats, handleAddPomodoro, handleGetAllPomodoros } from "../services/stats.service";
+import { Response } from "express-serve-static-core";
 
 const router: Router = express.Router();
 
@@ -13,10 +15,10 @@ router
   })
   .post(authenticateJWT, (req: any, res) => handleAddPomodoro(res, req.user.login));
 
-// get number of pomodoros done today
-// pomodoros since day ?
-router.route("/pomodoros_done_today").get(authenticateJWT, (req: any, res) => handleGetTodaysPomodoros(res, req.user.login));
+router.route("/").get(authenticateJWT, (req: Request, res: Response<StatsSearchResult>) => getTodayStats(req, res));
 
-router.route("/all").get(authenticateJWT, (req: any, res) => handleGetAllPomodorosByDate(res, req.user.login));
+router.route("/:from").get(authenticateJWT, (req: Request, res: Response<StatsSearchResult>) => getStatsFrom(req, res));
+
+router.route("/:from/:to").get(authenticateJWT, (req: Request, res: Response<StatsSearchResult>) => getStatsBetween(req, res));
 
 export default router;

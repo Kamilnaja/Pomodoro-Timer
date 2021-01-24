@@ -4,7 +4,7 @@ import { config } from "shared/settings/initialConfig";
 import { ActionWithPayload } from "shared/store/interfaces/actions/action.interface";
 import { store } from "shared/store/reducers/reducer";
 import { AuthError } from "../../../../../types/interfaces";
-import TodayStatistics from "../../../../../types/todayStatistics.interface";
+import StatsSearchResult from "../../../../../types/statistics.interfaces";
 
 export enum StatsAction {
   GET_TODAY_STATISTICS = "GET_TODAY_STATISTICS",
@@ -17,7 +17,7 @@ export const getTodayStatistics = (): Action<StatsAction> => ({
   type: StatsAction.GET_TODAY_STATISTICS,
 });
 
-export const getTodayStatisticsSuccess = (payload: TodayStatistics): ActionWithPayload<StatsAction, TodayStatistics> => ({
+export const getTodayStatisticsSuccess = (payload: number): ActionWithPayload<StatsAction, number> => ({
   type: StatsAction.GET_TODAY_STATISTICS_SUCCESS,
   payload,
 });
@@ -34,16 +34,18 @@ export const incrementPomodoros = (): Action<StatsAction> => ({
 // thunk
 export const getTodayStats = () => (dispatch: (arg: Action) => void) => {
   dispatch(getTodayStatistics());
+
   const token = store.getState().auth.token;
-  return fetch(config.url.API_URL + "/stats/pomodoros_done_today", {
+
+  return fetch(`${config.url.API_URL}/stats`, {
     headers: {
       Authorization: "Bearer " + token,
     },
   })
     .then(handleErrors)
     .then(response => response.json())
-    .then((payload: TodayStatistics) => {
-      return dispatch(getTodayStatisticsSuccess(payload));
+    .then((payload: StatsSearchResult) => {
+      return dispatch(getTodayStatisticsSuccess(payload.result[0].count));
     })
     .catch(error => dispatch(getTodayStatisticsError(error)));
 };

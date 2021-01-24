@@ -85,7 +85,7 @@ const handleCorrectUser = async (currentPassword: string, dbResult: QueryResult,
   }
 };
 
-export const authenticateJWT = (req: any, res: any, next: () => void) => {
+export const authenticateJWT = (req: Request, res: any, next: () => void) => {
   const authHeader = req.headers.authorization;
 
   if (authHeader) {

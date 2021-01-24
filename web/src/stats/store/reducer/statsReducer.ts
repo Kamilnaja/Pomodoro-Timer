@@ -1,5 +1,5 @@
 import { ActionWithPayload } from "shared/store/interfaces/actions/action.interface";
-import TodayStatistics from "../../../../../types/todayStatistics.interface";
+import TodayStatistics from "../../../../../types/statistics.interfaces";
 import { StatsAction } from "../actions/stats.actions";
 
 export const initialState = {
@@ -20,7 +20,7 @@ export const statsReducer = (state = initialState, action: ActionWithPayload<Sta
       return {
         ...state,
         isLoading: false,
-        pomodorosDoneToday: action.payload?.result,
+        pomodorosDoneToday: action.payload,
       };
     case StatsAction.GET_TODAY_STATISTICS_ERROR:
       return {
