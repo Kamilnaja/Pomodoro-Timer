@@ -2,18 +2,18 @@ import bcrypt from "bcrypt";
 import { Response } from "express-serve-static-core";
 import jwt, { JsonWebTokenError, NotBeforeError, TokenExpiredError } from "jsonwebtoken";
 import { QueryResult } from "pg";
-import { v4 as uuidv4 } from "uuid";
 import { AuthError, ErrorCodes, Login, LoginResponse } from "../../../types/interfaces";
 import pool from "../db/db";
 import { Request } from "../models/auth/request.interface";
 
 export const registerUser = async (userHash: string, req: Request, res: Response<{ message: string } | AuthError>): Promise<void> => {
-  const insert = "INSERT INTO users VALUES($1, $2, $3, $4, $5)";
+  const insert = "INSERT INTO users (dateCreated, login, email, password) VALUES($1, $2, $3, $4)";
 
   try {
     const now = new Date();
     const { email, login } = req.body;
-    await pool.query(insert, [uuidv4(), now, login, email, userHash]);
+
+    await pool.query(insert, [now, login, email, userHash]);
     console.log("user registered");
     res.json({ message: "success" });
   } catch (err: any) {
