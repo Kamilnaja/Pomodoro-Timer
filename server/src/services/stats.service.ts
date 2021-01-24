@@ -5,7 +5,7 @@ import client from "../db/db";
 import { Request } from "../models/auth/request.interface";
 
 export const handleAddPomodoro = async (res: Response<Error | void, number>, login: string) => {
-  const sql = "INSERT INTO pomodoros (userid, date) VALUES ($1, $2)";
+  const sql = "INSERT INTO pomodoros (userID, date) VALUES ($1, $2)";
 
   const values = [login, new Date()];
   try {
@@ -18,7 +18,7 @@ export const handleAddPomodoro = async (res: Response<Error | void, number>, log
 };
 
 export const handleGetAllStats = async (login: string, res: Response<StatsSearchResult>) => {
-  const sql = `SELECT date, COUNT (date) FROM pomodoros WHERE userid = ($1) GROUP BY date ORDER BY date DESC`;
+  const sql = `SELECT date, COUNT (date) FROM pomodoros WHERE userID = ($1) GROUP BY date ORDER BY date DESC`;
 
   try {
     const queryResult: QueryResult = await client.query(sql, [login]);
@@ -32,7 +32,7 @@ export const handleGetAllStats = async (login: string, res: Response<StatsSearch
 export const getStatsFrom = async (req: Request, res: Response<StatsSearchResult>) => {
   const login = req.user.login;
   const { from } = req.params;
-  const sql = `SELECT date, COUNT (date) FROM pomodoros WHERE userid = ($1) AND DATE >= ($2) GROUP BY date ORDER BY date DESC`;
+  const sql = `SELECT date, COUNT (date) FROM pomodoros WHERE userID = ($1) AND DATE >= ($2) GROUP BY date ORDER BY date DESC`;
 
   try {
     const queryResult = await client.query(sql, [login, from]);
@@ -46,7 +46,7 @@ export const getStatsFrom = async (req: Request, res: Response<StatsSearchResult
 export const getStatsBetween = async (req: Request, res: Response<StatsSearchResult>) => {
   const login = req.user.login;
   const { from, to } = req.params;
-  const sql = `SELECT date, COUNT (date) FROM pomodoros WHERE userid = ($1) AND DATE BETWEEN ($2) AND ($3) GROUP BY date ORDER BY date DESC`;
+  const sql = `SELECT date, COUNT (date) FROM pomodoros WHERE userID = ($1) AND DATE BETWEEN ($2) AND ($3) GROUP BY date ORDER BY date DESC`;
 
   try {
     const queryResult = await client.query(sql, [login, from, to]);

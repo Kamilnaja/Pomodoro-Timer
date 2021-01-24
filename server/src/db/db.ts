@@ -17,7 +17,7 @@ client.query(
   `CREATE TABLE IF NOT EXISTS users (
           id           SERIAL PRIMARY KEY,
           dateCreated  date,
-          login        text,
+          login        text UNIQUE,
           email        text UNIQUE,
           password     text NOT NULL
         )`,

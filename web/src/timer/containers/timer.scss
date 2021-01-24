@@ -4,7 +4,7 @@
   background-color: $bg-accent;
   display: grid;
   margin: 0 auto;
-  max-width: 900px;
+  max-width: $page-width;
   padding-top: 30px;
 
   & &__button-wrapper {
