@@ -17,19 +17,7 @@ export const handleAddPomodoro = async (res: Response<Error | void, number>, log
   }
 };
 
-export const handleGetAllPomodoros = async (res: Response<StatsSearchResult>, login: string) => {
-  const sql = `SELECT COUNT (*) FROM pomodoros WHERE userid = ($1)`;
-
-  try {
-    const queryResult: QueryResult = await client.query(sql, [login]);
-    res.json({ result: queryResult.rows });
-  } catch (err) {
-    console.log(`handleGetAllPomodoros ${err.stack}`);
-    res.sendStatus(500).json(err.stack);
-  }
-};
-
-export const handleGetAllPomodorosByDate = async (res: Response<StatsSearchResult>, login: string) => {
+export const handleGetAllStats = async (login: string, res: Response<StatsSearchResult>) => {
   const sql = `SELECT date, COUNT (date) FROM pomodoros WHERE userid = ($1) GROUP BY date`;
 
   try {

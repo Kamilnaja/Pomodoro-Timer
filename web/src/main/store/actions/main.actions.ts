@@ -30,7 +30,7 @@ export const savePomodoroAndReloadStats = () => (dispatch: (arg: Action | any) =
   dispatch(savePomodoro());
   const token = store.getState().auth.token;
 
-  return fetch(config.url.API_URL + "/stats/pomodoros", {
+  return fetch(`${config.url.API_URL}/stats/`, {
     method: "POST",
     headers: {
       Authorization: "Bearer " + token,
