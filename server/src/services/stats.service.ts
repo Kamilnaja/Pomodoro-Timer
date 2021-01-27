@@ -17,8 +17,10 @@ export const handleAddPomodoro = async (res: Response<Error | void, number>, log
   }
 };
 
+const selectDate = "SELECT TO_CHAR(date, 'DD-MM-YYYY') as date, COUNT (date) FROM pomodoros WHERE userID = ($1) ";
+
 export const handleGetAllStats = async (login: string, res: Response<StatsSearchResult>) => {
-  const sql = `SELECT date, COUNT (date) FROM pomodoros WHERE userID = ($1) GROUP BY date ORDER BY date DESC`;
+  const sql = `${selectDate} GROUP BY date ORDER BY date DESC`;
 
   try {
     const queryResult: QueryResult = await client.query(sql, [login]);
@@ -32,7 +34,7 @@ export const handleGetAllStats = async (login: string, res: Response<StatsSearch
 export const getStatsFrom = async (req: Request, res: Response<StatsSearchResult>) => {
   const login = req.user.login;
   const { from } = req.params;
-  const sql = `SELECT date, COUNT (date) FROM pomodoros WHERE userID = ($1) AND DATE >= ($2) GROUP BY date ORDER BY date DESC`;
+  const sql = `${selectDate} AND DATE >= ($2) GROUP BY date ORDER BY date DESC`;
 
   try {
     const queryResult = await client.query(sql, [login, from]);
@@ -43,10 +45,10 @@ export const getStatsFrom = async (req: Request, res: Response<StatsSearchResult
   }
 };
 
-export const getStatsBetween = async (req: Request, res: Response<StatsSearchResult>) => {
+export const getStatsInGivenPeriod = async (req: Request, res: Response<StatsSearchResult>) => {
   const login = req.user.login;
   const { from, to } = req.params;
-  const sql = `SELECT date, COUNT (date) FROM pomodoros WHERE userID = ($1) AND DATE BETWEEN ($2) AND ($3) GROUP BY date ORDER BY date DESC`;
+  const sql = `${selectDate} AND DATE BETWEEN ($2) AND ($3) GROUP BY date ORDER BY date DESC`;
 
   try {
     const queryResult = await client.query(sql, [login, from, to]);

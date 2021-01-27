@@ -3,7 +3,7 @@ import { Response } from "express-serve-static-core";
 import StatsSearchResult from "../../../types/statistics.interfaces";
 import { Request } from "../models/auth/request.interface";
 import { authenticateJWT } from "../services/auth.service";
-import { getStatsBetween, getStatsFrom, handleAddPomodoro, handleGetAllStats } from "../services/stats.service";
+import { getStatsInGivenPeriod, getStatsFrom, handleAddPomodoro, handleGetAllStats } from "../services/stats.service";
 
 const router: Router = express.Router();
 
@@ -15,6 +15,6 @@ router
 
 router.route("/:from").get(authenticateJWT, (req: Request, res: Response<StatsSearchResult>) => getStatsFrom(req, res));
 
-router.route("/:from/:to").get(authenticateJWT, (req: Request, res: Response<StatsSearchResult>) => getStatsBetween(req, res));
+router.route("/:from/:to").get(authenticateJWT, (req: Request, res: Response<StatsSearchResult>) => getStatsInGivenPeriod(req, res));
 
 export default router;
