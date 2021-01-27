@@ -28,6 +28,8 @@ export const handleErrors = (response: any): Promise<any> => {
 
 export const handleCloseModal = (prevFormState: AuthState, currentFormState: RegisterProps | LoginProps) => {
   if (currentFormState.auth.isSuccess !== prevFormState.isSuccess && currentFormState.auth.isSuccess) {
-    currentFormState.handleClose();
+    setTimeout(() => {
+      currentFormState.handleClose();
+    }, 3000);
   }
 };
