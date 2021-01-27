@@ -6,9 +6,15 @@ type StatsProps = {
 };
 
 export const StatsComponent = (props: { stats: StatsProps }) => {
+  const isLastPomodoroIsDoneToday = (): boolean => {
+    // get last stats days and reverse to allow date comparition
+    const reverseLastStatsDate: string = props.stats.stats?.result[0].date.split("-").reverse().join("-");
+    return new Date(reverseLastStatsDate).toDateString() === new Date().toDateString();
+  };
+
   return (
     <div className="stats">
-      <h3>Today you have made: {props.stats.stats?.result[0]?.count} pomodoros</h3>
+      <h3>Today you have made: {isLastPomodoroIsDoneToday() ? props.stats.stats?.result[0]?.count : 0} pomodoros</h3>
       <table className="stats__table">
         <thead>
           <tr>

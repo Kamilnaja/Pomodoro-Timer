@@ -25,6 +25,7 @@ export const getLastStatisticsError = (error: AuthError): ActionWithPayload<Stat
   type: StatsAction.GET_LAST_STATISTICS_ERROR,
   payload: error,
 });
+
 // thunk
 
 export const getLastStats = (duration: number) => async (dispatch: (args: Action) => void) => {

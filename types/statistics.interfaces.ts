@@ -1,5 +1,5 @@
 interface Result {
-  date: Date;
+  date: string;
   count: number;
 }
 
