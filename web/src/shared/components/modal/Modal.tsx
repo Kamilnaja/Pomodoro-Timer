@@ -3,7 +3,6 @@ import ReactModal from "react-modal";
 import LoginContainer from "../../../auth/login/container/LoginContainer";
 import RegisterContainer from "../../../auth/register/container/RegisterContainer";
 import Settings from "../../../settings/Settings";
-import StatisticsContainer from "../../../statistics/container/StatisticsContainer";
 import { Modal as ModalEnum } from "../../store/enums/modal.enum";
 import "./modal.scss";
 
@@ -18,8 +17,6 @@ const createModalFactory = (props: ModalProps) => {
       return <LoginContainer handleClose={props.closeModal} />;
     case ModalEnum.REGISTER:
       return <RegisterContainer handleClose={props.closeModal} />;
-    case ModalEnum.STATS:
-      return <StatisticsContainer handleClose={props.closeModal} />;
     case ModalEnum.SETTINGS:
       return <Settings handleClose={props.closeModal} />;
   }

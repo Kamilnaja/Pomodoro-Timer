@@ -25,9 +25,6 @@ export const HeaderComponent = (props: HeaderProps) => (
           <button className="button" onClick={() => props.handleOpenModal(Modal.SETTINGS)}>
             Settings
           </button>
-          <button className="button" onClick={() => props.handleOpenModal(Modal.STATS)}>
-            Stats
-          </button>
           <button className="button" onClick={() => props.handleLogout()}>
             Logout
           </button>
