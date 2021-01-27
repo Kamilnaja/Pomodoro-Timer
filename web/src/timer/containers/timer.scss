@@ -6,6 +6,7 @@
   margin: 0 auto;
   max-width: $page-width;
   padding-top: 30px;
+  transition: background-color 0.5s ease-in-out;
 
   & &__button-wrapper {
     display: flex;
@@ -19,6 +20,16 @@
     &--stop {
       margin: 0 auto;
       padding: 15px 30px;
+    }
+  }
+
+  &--dimmed {
+    background-color: $bg-primary;
+
+    .timer__button {
+      background-color: transparent;
+      box-shadow: 0 0 1px 1px white;
+      color: $bg-accent;
     }
   }
 }

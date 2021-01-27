@@ -147,15 +147,15 @@ class Timer extends React.Component<TimerProps, State> {
 
   render = () => (
     <main>
-      <div className="timer">
+      <div className={`timer ${this.isAnyTimerRunning() ? "timer--dimmed" : ""}`}>
         <div className="timer__button-wrapper">
-          <button className={"timer__button timer__button--mode "} onClick={this.startNewPomodoro}>
+          <button className={"timer__button"} onClick={this.startNewPomodoro}>
             Pomodoro
           </button>
-          <button className="timer__button timer__button--mode" onClick={() => this.startNewBreak(initialConfig.shortBreakTime)}>
+          <button className="timer__button" onClick={() => this.startNewBreak(initialConfig.shortBreakTime)}>
             Short Break
           </button>
-          <button className="timer__button timer__button--mode" onClick={() => this.startNewBreak(initialConfig.longBreakTime)}>
+          <button className="timer__button" onClick={() => this.startNewBreak(initialConfig.longBreakTime)}>
             Long Break
           </button>
         </div>
