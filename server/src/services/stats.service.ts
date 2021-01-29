@@ -1,11 +1,11 @@
-import { Response } from "express-serve-static-core";
-import { QueryResult } from "pg";
-import StatsSearchResult from "../../../types/statistics.interfaces";
-import client from "../db/db";
-import { Request } from "../models/auth/request.interface";
+import { Response } from 'express-serve-static-core';
+import { QueryResult } from 'pg';
+import StatsSearchResult from '../../../types/statistics.interfaces';
+import client from '../db/db';
+import { Request } from '../models/auth/request.interface';
 
 export const handleAddPomodoro = async (res: Response<Error | void, number>, login: string) => {
-  const sql = "INSERT INTO pomodoros (userID, date) VALUES ($1, $2)";
+  const sql = 'INSERT INTO pomodoros (userID, date) VALUES ($1, $2)';
 
   const values = [login, new Date()];
   try {

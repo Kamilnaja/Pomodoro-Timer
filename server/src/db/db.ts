@@ -1,4 +1,4 @@
-import client from "./client";
+import client from './client';
 
 client.query(
   `CREATE TABLE IF NOT EXISTS pomodoros (
@@ -8,7 +8,7 @@ client.query(
     if (err) {
       console.log(`error with db: ${err.message}`);
     } else {
-      console.log("table created");
+      console.log('table created');
     }
   },
 );
@@ -25,7 +25,7 @@ client.query(
     if (err) {
       console.log(`error with db: ${err.message}`);
     } else {
-      console.log("users table created or updated");
+      console.log('users table created or updated');
     }
   },
 );

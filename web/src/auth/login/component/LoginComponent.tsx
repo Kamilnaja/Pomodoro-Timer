@@ -1,8 +1,8 @@
-import { useForm } from "react-hook-form";
-import { ValidationMessage } from "shared/components/validationMessage/ValidationMessage";
-import { Login } from "../../../../../types/interfaces";
-import { AuthState } from "../../store/interfaces/auth.state";
-import "./loginComponent.scss";
+import { useForm } from 'react-hook-form';
+import { ValidationMessage } from 'shared/components/validationMessage/ValidationMessage';
+import { Login } from '../../../../../types/interfaces';
+import { AuthState } from '../../store/interfaces/auth.state';
+import './loginComponent.scss';
 
 export interface LoginProps {
   handleSubmit: (data: Login) => void;
@@ -24,17 +24,28 @@ export const LoginComponent = (props: LoginProps) => {
   return (
     <div className="login">
       <h2 className="login__header">Please login</h2>
-      {props.auth.error?.message && <ValidationMessage type={"error"} message={props.auth.error.message} />}
+      {props.auth.error?.message && <ValidationMessage type={'error'} message={props.auth.error.message} />}
       <form className="login__form form" onSubmit={handleSubmit(onSubmit)}>
         <div className="form__row">
           <label className="form__label">User login</label>
-          <input className="form__input" type="text" name="login" required placeholder="John Doe" ref={register({ required: true })} />
-          <div className="form__error">{errors.login && <ValidationMessage type={"error"} message={"😰Login is required"} />}</div>
+          <input
+            className="form__input"
+            type="text"
+            name="login"
+            required
+            placeholder="John Doe"
+            ref={register({ required: true })}
+          />
+          <div className="form__error">
+            {errors.login && <ValidationMessage type={'error'} message={'😰Login is required'} />}
+          </div>
         </div>
         <div className="form__row">
           <label className="form__label">Password</label>
           <input type="password" name="password" required ref={register({ required: true })} />
-          <div className="form__error">{errors.password && <ValidationMessage type={"error"} message={"😱Password is required"} />}</div>
+          <div className="form__error">
+            {errors.password && <ValidationMessage type={'error'} message={'😱Password is required'} />}
+          </div>
         </div>
         <button className="form__button" value="Wyślij" type="submit">
           Submit
