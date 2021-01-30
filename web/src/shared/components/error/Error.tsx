@@ -1,7 +1,7 @@
-import "./error.scss";
+import './error.scss';
 
 export const Error = () => (
   <div className="error">
-    <span>Error while synchronizing</span>
+    <span>Error while trying to synchronize</span>
   </div>
 );

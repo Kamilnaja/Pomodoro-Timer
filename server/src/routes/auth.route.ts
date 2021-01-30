@@ -1,9 +1,8 @@
-import express from 'express';
+import express, { NextFunction } from 'express';
 import bcrypt from 'bcrypt';
 import { loginUser, registerUser } from '../services/auth.service';
 import { Login as LoginEnum } from '../../../types/interfaces';
 import { Request } from '../models/auth/request.interface';
-import { errors } from '../shared/httpStatuses';
 
 const router = express.Router();
 
@@ -12,19 +11,19 @@ interface Login {
 }
 
 // Register Handle
-router.post('/register', (req: Request, res) => {
+router.post('/register', (req: Request, res, next: NextFunction) => {
   const rounds = 10;
   const hash = bcrypt.hashSync(req.body.password, rounds);
-  registerUser(hash, req, res);
+  registerUser(hash, req, res, next);
 });
 
-router.post('/login', (req: Login, res) => {
+router.post('/login', (req: Login, res, next) => {
   const { login, password } = req.body;
 
   if (login && password) {
     loginUser(req.body, res);
   } else {
-    res.status(errors.error500).send('error while login, no password or login');
+    res.status(500).send('error while login, no password or login');
   }
 });
 

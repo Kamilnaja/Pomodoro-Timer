@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import jwt, { JsonWebTokenError, NotBeforeError, TokenExpiredError } from 'jsonwebtoken';
 import { QueryResult } from 'pg';
@@ -10,6 +11,7 @@ export const registerUser = async (
   userHash: string,
   req: Request,
   res: Response<{ message: string } | AuthError>,
+  next: NextFunction,
 ): Promise<void> => {
   const insert = 'INSERT INTO users (dateCreated, login, email, password) VALUES($1, $2, $3, $4)';
 
