@@ -5,9 +5,9 @@ type StatsProps = {
   stats: StatsSearchResult;
 };
 
-export const StatsComponent = (props: { stats: StatsProps }) => {
+export const StatsComponent = (props: { stats: StatsProps; handleGetStats: (date: string) => void }) => {
   const lastResult = props.stats.stats?.result[0];
-  const isLastPomodoroIsDoneToday = (): boolean => {
+  const isAnyPomodoroDoneToday = (): boolean => {
     // get last stats days and reverse to allow date comparition
     const reverseLastStatsDate: string = lastResult?.date.split('-').reverse().join('-');
     return new Date(reverseLastStatsDate).toDateString() === new Date().toDateString();
@@ -16,8 +16,9 @@ export const StatsComponent = (props: { stats: StatsProps }) => {
   return (
     <div className="stats">
       <h3 className="stats__today-result">
-        Today you have made: {isLastPomodoroIsDoneToday() ? lastResult?.count : 0} pomodoros
+        Today you have made: {isAnyPomodoroDoneToday() ? lastResult?.count : 0} pomodoros
       </h3>
+
       <table className="stats__table table">
         <thead className="table__head">
           <tr>
@@ -34,6 +35,14 @@ export const StatsComponent = (props: { stats: StatsProps }) => {
           ))}
         </tbody>
       </table>
+      <div className="stats__navigation navigation">
+        <div className="navigation__arrow" onClick={() => props.handleGetStats('2020-12')}>
+          &lt; prev |
+        </div>
+        <div className="navigation__arrow" onClick={() => props.handleGetStats('2021-2')}>
+          | next &gt;
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-@import "./../../shared/styles/shared.scss";
+@import './../../shared/styles/shared.scss';
 
 .stats {
   @include font-fira-sans($size: 15px, $colour: $text-secondary);
@@ -12,6 +12,19 @@
 
   & &__today-result {
     margin-bottom: 20px;
+  }
+}
+
+.navigation {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  min-width: 200px;
+
+  & &__arrow {
+    cursor: pointer;
+    width: 50%;
   }
 }
 

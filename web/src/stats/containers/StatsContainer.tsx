@@ -8,13 +8,13 @@ import { getStatsInPeriod } from '../store/actions/stats.actions';
 import Stats from '../store/interfaces/stats.interface';
 
 type StatsProps = {
-  handleGetLastStats: (date: string) => void;
+  handleGetStats: (date: string) => void;
   stats: Stats;
 };
 
 class StatsContainer extends React.Component<StatsProps> {
   componentDidMount() {
-    this.props.handleGetLastStats(getYearAndMonth());
+    this.props.handleGetStats(getYearAndMonth());
   }
 
   render = () => {
@@ -23,7 +23,7 @@ class StatsContainer extends React.Component<StatsProps> {
     } else if (this.props.stats.error) {
       return <Error />;
     } else {
-      return <StatsComponent stats={this.props.stats} />;
+      return <StatsComponent stats={this.props.stats} handleGetStats={this.props.handleGetStats} />;
     }
   };
 }
@@ -34,7 +34,7 @@ const mapStateToProps = (state: { stats: Stats }) => {
 };
 
 const mapDispatchToProps = {
-  handleGetLastStats: getStatsInPeriod,
+  handleGetStats: getStatsInPeriod,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StatsContainer);
