@@ -30,7 +30,7 @@ export const getStatisticsInPeriodError = (
 
 // thunk
 
-export const getStatsInPeriod = (year: string, month: string) => async (dispatch: (args: Action) => void) => {
+export const getStatsInPeriod = (year: number, month: number) => async (dispatch: (args: Action) => void) => {
   dispatch(getStatisticsInPeriod());
 
   makeGetStatsRequest(year, month)
@@ -38,7 +38,7 @@ export const getStatsInPeriod = (year: string, month: string) => async (dispatch
     .catch(err => dispatch(getStatisticsInPeriodError(err)));
 };
 
-export const makeGetStatsRequest = async (year: string, month: string) => {
+export const makeGetStatsRequest = async (year: number, month: number) => {
   const token = store.getState().auth.token;
 
   const response = await fetch(`${config.url.API_URL}/stats/${year}/${month}`, {

@@ -27,8 +27,8 @@ export const handleCloseModal = (prevFormState: AuthState, currentFormState: Reg
   }
 };
 
-export const getCurrentMonth = (givenMonth?: string): string => {
-  return givenMonth ? givenMonth : String(new Date().getMonth());
+export const getCurrentMonth = (givenMonth?: number): number => {
+  return givenMonth ? givenMonth : new Date().getMonth();
 };
 
-export const getYear = () => new Date().getFullYear().toString();
+export const getCurrentYear = (): number => new Date().getFullYear();
