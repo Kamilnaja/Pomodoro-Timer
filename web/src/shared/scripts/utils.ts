@@ -19,17 +19,19 @@ export const msToTime = (s: number): string => {
   return pad(hrs) + ':' + pad(mins) + ':' + pad(secs);
 };
 
-export const handleErrors = (response: any): Promise<any> => {
-  if (!response.ok) {
-    throw Error(response.statusText);
-  }
-  return response;
-};
-
 export const handleCloseModal = (prevFormState: AuthState, currentFormState: RegisterProps | LoginProps) => {
   if (currentFormState.auth.isSuccess !== prevFormState.isSuccess && currentFormState.auth.isSuccess) {
     setTimeout(() => {
       currentFormState.handleClose();
     }, 3000);
   }
+};
+
+export const getYearAndMonth = (): string => {
+  const date = new Date();
+  let month = date.getMonth();
+  const monthWithOffset = String(month + 1).length === 1 ? `0${month + 1}` : month;
+  const year = date.getFullYear();
+
+  return `${year}-${monthWithOffset}`;
 };

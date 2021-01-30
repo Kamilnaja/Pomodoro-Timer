@@ -2,18 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Error } from 'shared/components/error/Error';
 import { Loader } from 'shared/components/loader/Loader';
+import { getYearAndMonth } from '../../shared/scripts/utils';
 import { StatsComponent } from '../components/StatsComponent';
-import { getLastStats } from '../store/actions/stats.actions';
+import { getStatsInPeriod } from '../store/actions/stats.actions';
 import Stats from '../store/interfaces/stats.interface';
 
 type StatsProps = {
-  handleGetLastStats: (args: number) => void;
+  handleGetLastStats: (date: string) => void;
   stats: Stats;
 };
 
 class StatsContainer extends React.Component<StatsProps> {
   componentDidMount() {
-    this.props.handleGetLastStats(30);
+    this.props.handleGetLastStats(getYearAndMonth());
   }
 
   render = () => {
@@ -33,7 +34,7 @@ const mapStateToProps = (state: { stats: Stats }) => {
 };
 
 const mapDispatchToProps = {
-  handleGetLastStats: getLastStats,
+  handleGetLastStats: getStatsInPeriod,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StatsContainer);

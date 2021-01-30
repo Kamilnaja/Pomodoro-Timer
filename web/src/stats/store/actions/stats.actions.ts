@@ -2,50 +2,47 @@ import { Action } from 'redux';
 import { config } from 'shared/settings/initialConfig';
 import { ActionWithPayload } from 'shared/store/interfaces/actions/action.interface';
 import { store } from 'shared/store/reducers/reducer';
-import { AuthError } from '../../../../../types/interfaces';
 import StatsSearchResult from '../../../../../types/statistics.interfaces';
 
 export enum StatsAction {
-  GET_LAST_STATISTICS = 'GET_LAST_STATISTICS',
-  GET_LAST_STATISTICS_SUCCESS = 'GET_LAST_STATISTICS_SUCCESS',
-  GET_LAST_STATISTICS_ERROR = 'GET_LAST_STATISTICS_ERROR',
+  GET_STATISTIC_IN_PERIOD = 'GET_STATISTIC_IN_PERIOD',
+  GET_STATISTIC_IN_PERIOD_SUCCESS = 'GET_STATISTIC_IN_PERIOD_SUCCESS',
+  GET_STATISTIC_IN_PERIOD_ERROR = 'GET_STATISTIC_IN_PERIOD_ERROR',
 }
 
-export const getLastStatistics = (payload: number): ActionWithPayload<StatsAction, number> => ({
-  type: StatsAction.GET_LAST_STATISTICS,
+export const getStatisticsInPeriod = (payload: string): ActionWithPayload<StatsAction, string> => ({
+  type: StatsAction.GET_STATISTIC_IN_PERIOD,
   payload,
 });
 
-export const getLastStatisticsSuccess = (
+export const getStatisticsInPeriodSuccess = (
   payload: StatsSearchResult,
 ): ActionWithPayload<StatsAction, StatsSearchResult> => ({
-  type: StatsAction.GET_LAST_STATISTICS_SUCCESS,
+  type: StatsAction.GET_STATISTIC_IN_PERIOD_SUCCESS,
   payload,
 });
 
-export const getLastStatisticsError = (error: AuthError): ActionWithPayload<StatsAction, AuthError> => ({
-  type: StatsAction.GET_LAST_STATISTICS_ERROR,
-  payload: error,
+export const getStatisticsInPeriodError = (
+  payload: StatsSearchResult,
+): ActionWithPayload<StatsAction, StatsSearchResult> => ({
+  type: StatsAction.GET_STATISTIC_IN_PERIOD_ERROR,
+  payload,
 });
 
 // thunk
 
-export const getLastStats = (duration: number) => async (dispatch: (args: Action) => void) => {
-  dispatch(getLastStatistics(duration));
+export const getStatsInPeriod = (date: string) => async (dispatch: (args: Action) => void) => {
+  dispatch(getStatisticsInPeriod(date));
 
-  makeGetStatsRequest()
-    .then((payload: StatsSearchResult) => {
-      dispatch(getLastStatisticsSuccess(payload));
-    })
-    .catch(err => {
-      dispatch(getLastStatisticsError(err));
-    });
+  makeGetStatsRequest(date)
+    .then((payload: StatsSearchResult) => dispatch(getStatisticsInPeriodSuccess(payload)))
+    .catch(err => dispatch(getStatisticsInPeriodError(err)));
 };
 
-export const makeGetStatsRequest = async () => {
+export const makeGetStatsRequest = async (date: string) => {
   const token = store.getState().auth.token;
 
-  const response = await fetch(`${config.url.API_URL}/stats`, {
+  const response = await fetch(`${config.url.API_URL}/stats/${date}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

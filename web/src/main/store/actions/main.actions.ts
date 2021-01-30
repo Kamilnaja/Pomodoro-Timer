@@ -1,9 +1,9 @@
 import { Action } from 'redux';
-import { handleErrors } from 'shared/scripts/utils';
 import { config } from 'shared/settings/initialConfig';
 import { ActionWithPayload } from 'shared/store/interfaces/actions/action.interface';
 import { store } from 'shared/store/reducers/reducer';
-import { getLastStats } from 'stats/store/actions/stats.actions';
+import { getStatsInPeriod } from 'stats/store/actions/stats.actions';
+import { getYearAndMonth } from '../../../shared/scripts/utils';
 
 export enum MainAction {
   SAVE_POMODORO = 'SAVE_POMODORO',
@@ -26,19 +26,23 @@ export const savePomodoroError = (error: any): ActionWithPayload<MainAction, any
 
 // thunk
 
-export const savePomodoroAndReloadStats = () => (dispatch: (arg: Action | any) => void) => {
+export const savePomodoroAndReloadStats = () => async (dispatch: (arg: Action | any) => void) => {
   dispatch(savePomodoro());
+  makePostStatsRequest()
+    .then(() => dispatch(getStatsInPeriod(getYearAndMonth())))
+    .catch(err => dispatch(savePomodoroError(err)));
+};
+
+export const makePostStatsRequest = async () => {
   const token = store.getState().auth.token;
 
-  return fetch(`${config.url.API_URL}/stats/`, {
+  const response = await fetch(`${config.url.API_URL}/stats/`, {
     method: 'POST',
+
     headers: {
       Authorization: 'Bearer ' + token,
     },
-  })
-    .then(handleErrors)
-    .then(() => {
-      dispatch(getLastStats(30));
-    })
-    .catch(error => dispatch(savePomodoroError(error)));
+  });
+
+  return response.ok ? Promise.resolve() : Promise.reject();
 };

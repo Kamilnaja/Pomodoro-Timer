@@ -1,14 +1,13 @@
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
-import { QueryResult } from 'pg';
 import StatsSearchResult from '../../../types/statistics.interfaces';
 import client from '../db/db';
 import { Request } from '../models/auth/request.interface';
 
-export const handleAddPomodoro = async (res: Response<Error | void, number>, login: string) => {
+export const handleAddPomodoro = async (req: Request, res: Response<Error | void, number>) => {
   const sql = 'INSERT INTO pomodoros (userID, date) VALUES ($1, $2)';
 
-  const values = [login, new Date()];
+  const values = [req.user.id, new Date()];
   try {
     await client.query(sql, values);
     res.json();
@@ -18,42 +17,28 @@ export const handleAddPomodoro = async (res: Response<Error | void, number>, log
   }
 };
 
-const selectDate = "SELECT TO_CHAR(date, 'DD-MM-YYYY') as date, COUNT (date) FROM pomodoros WHERE userID = ($1) ";
+const selectDate = "SELECT TO_CHAR(date, 'DD-MM-YYYY') as date, COUNT (date) FROM pomodoros WHERE userID = ($1)";
 const groupAndOrder = 'GROUP BY date ORDER BY date DESC';
 
-export const handleGetAllStats = async (login: string, res: Response<StatsSearchResult>) => {
-  const sql = `${selectDate} ${groupAndOrder}`;
-
-  try {
-    const queryResult: QueryResult = await client.query(sql, [login]);
-    res.json({ result: queryResult.rows });
-  } catch (err) {
-    console.log(`handleGetAllPomodorosByDate${err.stack}`);
-    res.sendStatus(500).json(err.stack);
-  }
-};
-
 export const getStatsInGivenMonth = async (req: Request, res: Response<StatsSearchResult>, next: NextFunction) => {
-  const login = req.user.login;
+  const userId = req.user.id;
   const { date } = req.params;
   const [year, month] = req.params.date.split('-').map((item: string) => Number(item));
 
   if (!isYearCorrect(year)) {
     console.log('error');
-
     setError('year', year, next);
   } else if (!isMonthCorrect(month)) {
     setError('month', month, next);
   } else {
-    await searchResultsInDb(login, date, res);
+    await searchResultsInDb(userId.toString(), date, res);
   }
 };
 
-const searchResultsInDb = async (login: string, date: string, res: Response<StatsSearchResult, number>) => {
+const searchResultsInDb = async (userId: string, date: string, res: Response<StatsSearchResult, number>) => {
   const sql = `${selectDate} and to_char(date, 'YYYY-MM') = ($2) ${groupAndOrder}`;
-
   try {
-    const queryResult = await client.query(sql, [login, date]);
+    const queryResult = await client.query(sql, [userId.toString(), date]);
     res.json({ result: queryResult.rows });
   } catch (err) {
     console.log(`err fetching getStatsInGivenMonth ${err}`);

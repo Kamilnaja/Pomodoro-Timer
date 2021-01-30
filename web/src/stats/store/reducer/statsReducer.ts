@@ -10,18 +10,18 @@ export const initialState = {
 
 export const statsReducer = (state = initialState, action: ActionWithPayload<StatsAction, TodayStatistics>) => {
   switch (action.type) {
-    case StatsAction.GET_LAST_STATISTICS:
+    case StatsAction.GET_STATISTIC_IN_PERIOD:
       return {
         ...state,
         isLoading: true,
       };
-    case StatsAction.GET_LAST_STATISTICS_SUCCESS:
+    case StatsAction.GET_STATISTIC_IN_PERIOD_SUCCESS:
       return {
         ...state,
         isLoading: false,
         stats: action.payload,
       };
-    case StatsAction.GET_LAST_STATISTICS_ERROR:
+    case StatsAction.GET_STATISTIC_IN_PERIOD_ERROR:
       return {
         ...state,
         error: 'something went wrong',
