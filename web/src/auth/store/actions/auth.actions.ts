@@ -1,23 +1,23 @@
-import { Action } from "redux";
-import { config } from "shared/settings/initialConfig";
-import { ActionWithPayload } from "shared/store/interfaces/actions/action.interface";
-import { AuthError, Login, LoginResponse, Registration } from "../../../../../types/interfaces";
+import { Action } from 'redux';
+import { config } from 'shared/settings/initialConfig';
+import { ActionWithPayload } from 'shared/store/interfaces/actions/action.interface';
+import { AuthError, Login, LoginResponse, Registration } from '../../../../../types/interfaces';
 
-const localStorageKey = "token";
+const localStorageKey = 'token';
 
 export enum AuthAction {
-  REGISTER = "REGISTER",
-  REGISTER_SUCCESS = "REGISTER_SUCCESS",
-  REGISTER_ERROR = "REGISTER_ERROR",
+  REGISTER = 'REGISTER',
+  REGISTER_SUCCESS = 'REGISTER_SUCCESS',
+  REGISTER_ERROR = 'REGISTER_ERROR',
 
-  LOGIN = "LOGIN",
-  LOGIN_SUCCESS = "LOGIN_SUCCESS",
-  LOGIN_ERROR = "LOGIN_ERROR",
+  LOGIN = 'LOGIN',
+  LOGIN_SUCCESS = 'LOGIN_SUCCESS',
+  LOGIN_ERROR = 'LOGIN_ERROR',
 
-  RESET_FORM = "RESET_FORM",
+  RESET_FORM = 'RESET_FORM',
 
-  SET_LOGGED_IN = "SET_LOGGED_IN",
-  SET_LOGGED_OUT = "SET_LOGGED_OUT",
+  SET_LOGGED_IN = 'SET_LOGGED_IN',
+  SET_LOGGED_OUT = 'SET_LOGGED_OUT',
 }
 
 export const register = (payload: Registration): ActionWithPayload<AuthAction, Registration> => ({
@@ -76,9 +76,9 @@ export const sendRegisterForm = (formData: Registration) => (dispatch: (action: 
 
 const makeRegisterRequest = async (formData: Registration) => {
   const response: Response = await fetch(`${config.url.API_URL}/auth/register`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(formData),
   });
@@ -103,9 +103,9 @@ export const sendLoginForm = (formData: Login) => async (dispatch: (action: Acti
 
 const makeLoginRequest = async (formData: Login) => {
   const response: Response = await fetch(`${config.url.API_URL}/auth/login`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(formData),
   });

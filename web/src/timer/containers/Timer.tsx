@@ -1,16 +1,16 @@
-import React from "react";
-import { connect } from "react-redux";
-import { msToTime } from "shared/scripts/utils";
-import "shared/settings/initialConfig";
-import { initialConfig } from "shared/settings/initialConfig";
-import { savePomodoroAndReloadStats } from "../../main/store/actions/main.actions";
-import { Info } from "../components/info/Info";
-import { Time } from "../components/time/Time";
-import { TimerState } from "../store/enums/timer.enum";
-import { State } from "../store/interfaces/state.interface";
-import { TimerProps } from "../store/interfaces/timerProps.interface";
-import { timerState } from "../store/state/timerState";
-import "./timer.scss";
+import React from 'react';
+import { connect } from 'react-redux';
+import { msToTime } from 'shared/scripts/utils';
+import 'shared/settings/initialConfig';
+import { initialConfig } from 'shared/settings/initialConfig';
+import { savePomodoroAndReloadStats } from '../../main/store/actions/main.actions';
+import { Info } from '../components/info/Info';
+import { Time } from '../components/time/Time';
+import { TimerState } from '../store/enums/timer.enum';
+import { State } from '../store/interfaces/state.interface';
+import { TimerProps } from '../store/interfaces/timerProps.interface';
+import { timerState } from '../store/state/timerState';
+import './timer.scss';
 
 class Timer extends React.Component<TimerProps, State> {
   interval = 0;
@@ -118,14 +118,16 @@ class Timer extends React.Component<TimerProps, State> {
   }
 
   private informUser() {
-    const audio = new Audio("sounds/zapsplat_multimedia_game_sound_positive_award_bonus_bright_warm_synth_001_60698.mp3");
+    const audio = new Audio(
+      'sounds/zapsplat_multimedia_game_sound_positive_award_bonus_bright_warm_synth_001_60698.mp3',
+    );
     audio.play();
 
     this.makeTitleBlinking();
   }
 
   private clickSound() {
-    const audio = new Audio("sounds/zapsplat_multimedia_game_sound_childrens_ping_high_pitched_soft_007_60676.mp3");
+    const audio = new Audio('sounds/zapsplat_multimedia_game_sound_childrens_ping_high_pitched_soft_007_60676.mp3');
     audio.play();
   }
 
@@ -147,9 +149,9 @@ class Timer extends React.Component<TimerProps, State> {
 
   render = () => (
     <main>
-      <div className={`timer ${this.isAnyTimerRunning() ? "timer--dimmed" : ""}`}>
+      <div className={`timer ${this.isAnyTimerRunning() ? 'timer--dimmed' : ''}`}>
         <div className="timer__button-wrapper">
-          <button className={"timer__button"} onClick={this.startNewPomodoro}>
+          <button className={'timer__button'} onClick={this.startNewPomodoro}>
             Pomodoro
           </button>
           <button className="timer__button" onClick={() => this.startNewBreak(initialConfig.shortBreakTime)}>
@@ -160,8 +162,11 @@ class Timer extends React.Component<TimerProps, State> {
           </button>
         </div>
         <Time time={msToTime(this.state.timerTime)} />
-        <button className="timer__button timer__button--stop" onClick={this.isAnyTimerRunning() ? this.pauseCounter : this.startCounter}>
-          {this.isAnyTimerRunning() ? "stop" : "start"}
+        <button
+          className="timer__button timer__button--stop"
+          onClick={this.isAnyTimerRunning() ? this.pauseCounter : this.startCounter}
+        >
+          {this.isAnyTimerRunning() ? 'stop' : 'start'}
         </button>
         <Info currentState={this.state.timerState} />
       </div>

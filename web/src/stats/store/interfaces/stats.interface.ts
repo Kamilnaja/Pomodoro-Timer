@@ -1,4 +1,4 @@
-import StatsSearchResult from "../../../../../types/statistics.interfaces";
+import StatsSearchResult from '../../../../../types/statistics.interfaces';
 
 export default interface Stats {
   stats: StatsSearchResult;

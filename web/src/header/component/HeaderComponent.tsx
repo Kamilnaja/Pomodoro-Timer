@@ -1,5 +1,5 @@
-import { Modal } from "shared/store/enums/modal.enum";
-import "./headerComponent.scss";
+import { Modal } from 'shared/store/enums/modal.enum';
+import './headerComponent.scss';
 
 export interface HeaderProps {
   handleOpenModal: (arg: Modal) => void;

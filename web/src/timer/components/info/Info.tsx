@@ -1,26 +1,26 @@
-import { TimerState } from "../../store/enums/timer.enum";
-import "./info.scss";
+import { TimerState } from '../../store/enums/timer.enum';
+import './info.scss';
 
 export function Info(props: { currentState: TimerState }) {
-  let info = "";
+  let info = '';
   switch (props.currentState) {
     case TimerState.BREAK_END:
-      info = "Start new pomodoro";
+      info = 'Start new pomodoro';
       break;
     case TimerState.POMODORO_END:
-      info = "Start break";
+      info = 'Start break';
       break;
     case TimerState.POMODORO_RUNNING:
-      info = "Hard work";
+      info = 'Hard work';
       break;
     case TimerState.BREAK_RUNNING:
-      info = "Do not work";
+      info = 'Do not work';
       break;
     case TimerState.POMODORO_PAUSE:
-      info = "Pomodoro pause";
+      info = 'Pomodoro pause';
       break;
     case TimerState.BREAK_PAUSE:
-      info = "Break pause";
+      info = 'Break pause';
       break;
   }
   return <div className="info">{info}</div>;

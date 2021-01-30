@@ -1,10 +1,10 @@
-import { ActionWithPayload } from "shared/store/interfaces/actions/action.interface";
-import TodayStatistics from "../../../../../types/statistics.interfaces";
-import { StatsAction } from "../actions/stats.actions";
+import { ActionWithPayload } from 'shared/store/interfaces/actions/action.interface';
+import TodayStatistics from '../../../../../types/statistics.interfaces';
+import { StatsAction } from '../actions/stats.actions';
 
 export const initialState = {
   isLoading: false,
-  error: "",
+  error: '',
   stats: null as any,
 };
 
@@ -24,7 +24,7 @@ export const statsReducer = (state = initialState, action: ActionWithPayload<Sta
     case StatsAction.GET_LAST_STATISTICS_ERROR:
       return {
         ...state,
-        error: "something went wrong",
+        error: 'something went wrong',
         isLoading: false,
       };
     default:

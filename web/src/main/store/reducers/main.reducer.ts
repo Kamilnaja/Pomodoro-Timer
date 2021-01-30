@@ -1,10 +1,10 @@
-import { Action } from "redux";
-import { MainAction } from "../actions/main.actions";
-import { MainState } from "../interfaces/mainState.interface";
+import { Action } from 'redux';
+import { MainAction } from '../actions/main.actions';
+import { MainState } from '../interfaces/mainState.interface';
 
 const initialState: MainState = {
   isLoading: false,
-  error: "",
+  error: '',
   isLoggedIn: false,
 };
 
@@ -23,7 +23,7 @@ export const mainReducer = (state = initialState, action: Action<MainAction>) =>
     case MainAction.SAVE_POMODORO_ERROR:
       return {
         ...state,
-        error: "todo handle error",
+        error: 'todo handle error',
         isLoading: false,
       };
     default:

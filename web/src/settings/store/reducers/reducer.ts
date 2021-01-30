@@ -1,5 +1,5 @@
-import { ActionWithPayload } from "shared/store/interfaces/actions/action.interface";
-import { SettingsAction } from "../actions/actions";
+import { ActionWithPayload } from 'shared/store/interfaces/actions/action.interface';
+import { SettingsAction } from '../actions/actions';
 
 interface State {
   settings: object;

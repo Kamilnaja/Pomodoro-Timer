@@ -1,10 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Error } from "shared/components/error/Error";
-import { Loader } from "shared/components/loader/Loader";
-import { StatsComponent } from "../components/StatsComponent";
-import { getLastStats } from "../store/actions/stats.actions";
-import Stats from "../store/interfaces/stats.interface";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Error } from 'shared/components/error/Error';
+import { Loader } from 'shared/components/loader/Loader';
+import { StatsComponent } from '../components/StatsComponent';
+import { getLastStats } from '../store/actions/stats.actions';
+import Stats from '../store/interfaces/stats.interface';
 
 type StatsProps = {
   handleGetLastStats: (args: number) => void;

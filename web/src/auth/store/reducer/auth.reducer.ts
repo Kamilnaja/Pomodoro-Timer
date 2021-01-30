@@ -1,13 +1,13 @@
-import { ActionWithPayload } from "../../../shared/store/interfaces/actions/action.interface";
-import { AuthAction } from "../actions/auth.actions";
-import { AuthState } from "../interfaces/auth.state";
+import { ActionWithPayload } from '../../../shared/store/interfaces/actions/action.interface';
+import { AuthAction } from '../actions/auth.actions';
+import { AuthState } from '../interfaces/auth.state';
 
 export const initialState: AuthState = {
   isLoading: false,
   isSuccess: false,
   isLoggedIn: false,
   error: null as any,
-  token: "",
+  token: '',
 };
 
 export const authReducer = (state = initialState, action: ActionWithPayload<AuthAction, any>): AuthState => {
@@ -61,7 +61,7 @@ export const authReducer = (state = initialState, action: ActionWithPayload<Auth
       return {
         ...state,
         isLoggedIn: false,
-        token: "",
+        token: '',
       };
     default:
       return state;

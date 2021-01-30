@@ -1,6 +1,6 @@
-import "./validationMessage.scss";
+import './validationMessage.scss';
 
-export type ValidationMessageType = "error" | "warn" | "success";
+export type ValidationMessageType = 'error' | 'warn' | 'success';
 
 export interface ValidationMessageProps {
   type: ValidationMessageType;

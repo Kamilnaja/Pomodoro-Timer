@@ -1,13 +1,13 @@
-import { resetForm, setUserIsLoggedIn, setUserIsLoggedOut } from "auth/store/actions/auth.actions";
-import HeaderContainer from "header/container/HeaderContainer";
-import React from "react";
-import { connect } from "react-redux";
-import { Modal } from "shared/components/modal/Modal";
-import { Modal as ModalEnum } from "shared/store/enums/modal.enum";
-import StatsContainer from "stats/containers/StatsContainer";
-import Timer from "timer/containers/Timer";
-import { AuthState } from "../../auth/store/interfaces/auth.state";
-import "./main.scss";
+import { resetForm, setUserIsLoggedIn, setUserIsLoggedOut } from 'auth/store/actions/auth.actions';
+import HeaderContainer from 'header/container/HeaderContainer';
+import React from 'react';
+import { connect } from 'react-redux';
+import { Modal } from 'shared/components/modal/Modal';
+import { Modal as ModalEnum } from 'shared/store/enums/modal.enum';
+import StatsContainer from 'stats/containers/StatsContainer';
+import Timer from 'timer/containers/Timer';
+import { AuthState } from '../../auth/store/interfaces/auth.state';
+import './main.scss';
 
 interface MainState {
   openedModal: ModalEnum;
@@ -47,7 +47,11 @@ class Main extends React.Component<MainProps, MainState> {
 
   render = () => (
     <div className="app">
-      <HeaderContainer handleLogout={this.handleLogout} handleOpenModal={this.handleOpenModal} isLoggedIn={this.props.auth.isLoggedIn} />
+      <HeaderContainer
+        handleLogout={this.handleLogout}
+        handleOpenModal={this.handleOpenModal}
+        isLoggedIn={this.props.auth.isLoggedIn}
+      />
       <Timer />
       {this.props.auth.isLoggedIn && <StatsContainer />}
       <Modal modalType={this.state.openedModal} closeModal={this.handleCloseModal} />

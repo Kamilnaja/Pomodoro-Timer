@@ -1,14 +1,14 @@
-import { Action } from "redux";
-import { config } from "shared/settings/initialConfig";
-import { ActionWithPayload } from "shared/store/interfaces/actions/action.interface";
-import { store } from "shared/store/reducers/reducer";
-import { AuthError } from "../../../../../types/interfaces";
-import StatsSearchResult from "../../../../../types/statistics.interfaces";
+import { Action } from 'redux';
+import { config } from 'shared/settings/initialConfig';
+import { ActionWithPayload } from 'shared/store/interfaces/actions/action.interface';
+import { store } from 'shared/store/reducers/reducer';
+import { AuthError } from '../../../../../types/interfaces';
+import StatsSearchResult from '../../../../../types/statistics.interfaces';
 
 export enum StatsAction {
-  GET_LAST_STATISTICS = "GET_LAST_STATISTICS",
-  GET_LAST_STATISTICS_SUCCESS = "GET_LAST_STATISTICS_SUCCESS",
-  GET_LAST_STATISTICS_ERROR = "GET_LAST_STATISTICS_ERROR",
+  GET_LAST_STATISTICS = 'GET_LAST_STATISTICS',
+  GET_LAST_STATISTICS_SUCCESS = 'GET_LAST_STATISTICS_SUCCESS',
+  GET_LAST_STATISTICS_ERROR = 'GET_LAST_STATISTICS_ERROR',
 }
 
 export const getLastStatistics = (payload: number): ActionWithPayload<StatsAction, number> => ({
@@ -16,7 +16,9 @@ export const getLastStatistics = (payload: number): ActionWithPayload<StatsActio
   payload,
 });
 
-export const getLastStatisticsSuccess = (payload: StatsSearchResult): ActionWithPayload<StatsAction, StatsSearchResult> => ({
+export const getLastStatisticsSuccess = (
+  payload: StatsSearchResult,
+): ActionWithPayload<StatsAction, StatsSearchResult> => ({
   type: StatsAction.GET_LAST_STATISTICS_SUCCESS,
   payload,
 });
