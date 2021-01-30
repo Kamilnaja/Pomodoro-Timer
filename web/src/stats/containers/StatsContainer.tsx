@@ -2,19 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Error } from 'shared/components/error/Error';
 import { Loader } from 'shared/components/loader/Loader';
-import { getYearAndMonth } from '../../shared/scripts/utils';
+import { getCurrentMonth, getYear } from '../../shared/scripts/utils';
 import { StatsComponent } from '../components/StatsComponent';
 import { getStatsInPeriod } from '../store/actions/stats.actions';
 import Stats from '../store/interfaces/stats.interface';
 
 type StatsProps = {
-  handleGetStats: (date: string) => void;
+  handleGetStats: (year: string, month: string) => void;
   stats: Stats;
 };
 
 class StatsContainer extends React.Component<StatsProps> {
   componentDidMount() {
-    this.props.handleGetStats(getYearAndMonth());
+    this.props.handleGetStats(getYear(), getCurrentMonth());
   }
 
   render = () => {

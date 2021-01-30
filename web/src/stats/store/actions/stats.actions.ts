@@ -10,9 +10,8 @@ export enum StatsAction {
   GET_STATISTIC_IN_PERIOD_ERROR = 'GET_STATISTIC_IN_PERIOD_ERROR',
 }
 
-export const getStatisticsInPeriod = (payload: string): ActionWithPayload<StatsAction, string> => ({
+export const getStatisticsInPeriod = (): Action => ({
   type: StatsAction.GET_STATISTIC_IN_PERIOD,
-  payload,
 });
 
 export const getStatisticsInPeriodSuccess = (
@@ -31,18 +30,18 @@ export const getStatisticsInPeriodError = (
 
 // thunk
 
-export const getStatsInPeriod = (date: string) => async (dispatch: (args: Action) => void) => {
-  dispatch(getStatisticsInPeriod(date));
+export const getStatsInPeriod = (year: string, month: string) => async (dispatch: (args: Action) => void) => {
+  dispatch(getStatisticsInPeriod());
 
-  makeGetStatsRequest(date)
+  makeGetStatsRequest(year, month)
     .then((payload: StatsSearchResult) => dispatch(getStatisticsInPeriodSuccess(payload)))
     .catch(err => dispatch(getStatisticsInPeriodError(err)));
 };
 
-export const makeGetStatsRequest = async (date: string) => {
+export const makeGetStatsRequest = async (year: string, month: string) => {
   const token = store.getState().auth.token;
 
-  const response = await fetch(`${config.url.API_URL}/stats/${date}`, {
+  const response = await fetch(`${config.url.API_URL}/stats/${year}/${month}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

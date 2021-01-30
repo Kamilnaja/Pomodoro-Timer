@@ -27,11 +27,8 @@ export const handleCloseModal = (prevFormState: AuthState, currentFormState: Reg
   }
 };
 
-export const getYearAndMonth = (): string => {
-  const date = new Date();
-  let month = date.getMonth();
-  const monthWithOffset = String(month + 1).length === 1 ? `0${month + 1}` : month;
-  const year = date.getFullYear();
-
-  return `${year}-${monthWithOffset}`;
+export const getCurrentMonth = (givenMonth?: string): string => {
+  return givenMonth ? givenMonth : String(new Date().getMonth());
 };
+
+export const getYear = () => new Date().getFullYear().toString();

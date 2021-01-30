@@ -22,8 +22,8 @@ const groupAndOrder = 'GROUP BY date ORDER BY date DESC';
 
 export const getStatsInGivenMonth = async (req: Request, res: Response<StatsSearchResult>, next: NextFunction) => {
   const userId = req.user.id;
-  const { date } = req.params;
-  const [year, month] = req.params.date.split('-').map((item: string) => Number(item));
+
+  let { year, month } = req.params;
 
   if (!isYearCorrect(year)) {
     console.log('error');
@@ -31,7 +31,9 @@ export const getStatsInGivenMonth = async (req: Request, res: Response<StatsSear
   } else if (!isMonthCorrect(month)) {
     setError('month', month, next);
   } else {
-    await searchResultsInDb(userId.toString(), date, res);
+    month = (Number(month) + 1) as any;
+    month.toString().length === 1 ? (month = `${0}${month}`) : month;
+    await searchResultsInDb(userId.toString(), year + '-' + month, res);
   }
 };
 
@@ -46,11 +48,11 @@ const searchResultsInDb = async (userId: string, date: string, res: Response<Sta
   }
 };
 
-const setError = (value: 'year' | 'month', month: number, next: NextFunction) => {
-  const info = `Wrong ${value} ${month}`;
+const setError = (value: 'year' | 'month', field: string, next: NextFunction) => {
+  const info = `Wrong ${value} ${field}`;
   console.log(info);
   next(info); // todo - add error handler
 };
 
-const isYearCorrect = (year: number): boolean => year >= 2020;
-const isMonthCorrect = (month: number): boolean => month > 0 && month < 13;
+const isYearCorrect = (year: string): boolean => Number(year) >= 2020;
+const isMonthCorrect = (month: string): boolean => Number(month) >= 0 && Number(month) < 13;

@@ -3,7 +3,7 @@ import { config } from 'shared/settings/initialConfig';
 import { ActionWithPayload } from 'shared/store/interfaces/actions/action.interface';
 import { store } from 'shared/store/reducers/reducer';
 import { getStatsInPeriod } from 'stats/store/actions/stats.actions';
-import { getYearAndMonth } from '../../../shared/scripts/utils';
+import { getCurrentMonth } from '../../../shared/scripts/utils';
 
 export enum MainAction {
   SAVE_POMODORO = 'SAVE_POMODORO',
@@ -29,7 +29,7 @@ export const savePomodoroError = (error: any): ActionWithPayload<MainAction, any
 export const savePomodoroAndReloadStats = () => async (dispatch: (arg: Action | any) => void) => {
   dispatch(savePomodoro());
   makePostStatsRequest()
-    .then(() => dispatch(getStatsInPeriod(getYearAndMonth())))
+    .then(() => dispatch(getStatsInPeriod(new Date().getFullYear().toString(), getCurrentMonth())))
     .catch(err => dispatch(savePomodoroError(err)));
 };
 
