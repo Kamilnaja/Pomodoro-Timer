@@ -1,4 +1,4 @@
-interface Result {
+export interface Result {
   date: string;
   count: number;
 }

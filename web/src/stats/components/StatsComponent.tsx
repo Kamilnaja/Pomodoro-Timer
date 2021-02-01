@@ -1,16 +1,12 @@
-import StatsSearchResult from '../../../../types/statistics.interfaces';
 import { getCurrentMonth, getCurrentYear } from '../../shared/scripts/utils';
+import { StatsComponentProps } from '../store/interfaces/stats.interfaces';
 import './stats.component.scss';
-
-type StatsProps = {
-  stats: StatsSearchResult;
-};
 
 let pageMonth = getCurrentMonth();
 let pageYear = getCurrentYear();
 
-export const StatsComponent = (props: { stats: StatsProps; handleGetStats: (year: number, month: number) => void }) => {
-  const lastResult = props.stats.stats?.result[0];
+export const StatsComponent = (results: StatsComponentProps) => {
+  const lastResult = results.stats[0];
   const isAnyPomodoroDoneToday = (): boolean => {
     // get last stats days and reverse to allow date comparition
     const reverseLastStatsDate: string = lastResult?.date.split('-').reverse().join('-');
@@ -25,7 +21,7 @@ export const StatsComponent = (props: { stats: StatsProps; handleGetStats: (year
       pageMonth = pageMonth - 1;
     }
 
-    props.handleGetStats(pageYear, pageMonth);
+    results.handleGetStats(pageYear, pageMonth);
   };
 
   const getNextMonth = (): void => {
@@ -36,7 +32,7 @@ export const StatsComponent = (props: { stats: StatsProps; handleGetStats: (year
       pageMonth = pageMonth + 1;
     }
 
-    props.handleGetStats(pageYear, pageMonth);
+    results.handleGetStats(pageYear, pageMonth);
   };
 
   const shouldShowNextMonth = (): boolean => {
@@ -59,7 +55,7 @@ export const StatsComponent = (props: { stats: StatsProps; handleGetStats: (year
           </tr>
         </thead>
         <tbody>
-          {props.stats.stats?.result.map((v, idx) => (
+          {results.stats?.map((v, idx) => (
             <tr key={idx}>
               <td className="table__date">{v.date}</td>
               <td className="table__count">{v.count}</td>

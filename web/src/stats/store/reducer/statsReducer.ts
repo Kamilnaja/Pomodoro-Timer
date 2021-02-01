@@ -1,14 +1,15 @@
 import { ActionWithPayload } from 'shared/store/interfaces/actions/action.interface';
-import TodayStatistics from '../../../../../types/statistics.interfaces';
+import StatsSearchResult from '../../../../../types/statistics.interfaces';
 import { StatsAction } from '../actions/stats.actions';
+import { StatsState } from '../interfaces/stats.interfaces';
 
-export const initialState = {
+export const initialState: StatsState = {
   isLoading: false,
   error: '',
-  stats: null as any,
+  results: [],
 };
 
-export const statsReducer = (state = initialState, action: ActionWithPayload<StatsAction, TodayStatistics>) => {
+export const statsReducer = (state = initialState, action: ActionWithPayload<StatsAction, StatsSearchResult>) => {
   switch (action.type) {
     case StatsAction.GET_STATISTIC_IN_PERIOD:
       return {
@@ -19,7 +20,7 @@ export const statsReducer = (state = initialState, action: ActionWithPayload<Sta
       return {
         ...state,
         isLoading: false,
-        stats: action.payload,
+        results: action.payload.result,
       };
     case StatsAction.GET_STATISTIC_IN_PERIOD_ERROR:
       return {
