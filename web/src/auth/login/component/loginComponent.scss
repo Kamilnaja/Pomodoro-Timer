@@ -1,4 +1,4 @@
-@import "../../../shared/styles/shared.scss";
+@import '../../../shared/styles/shared.scss';
 
 .form {
   align-items: flex-end;
@@ -20,6 +20,11 @@
 }
 
 .login {
+  & &__success {
+    font-size: 30px;
+    text-align: center;
+  }
+
   & &__header {
     margin-bottom: 10px;
   }
