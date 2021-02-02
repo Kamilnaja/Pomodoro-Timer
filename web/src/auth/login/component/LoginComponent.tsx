@@ -49,18 +49,14 @@ export const LoginComponent = (props: LoginProps) => {
                 ref={register({ required: true })}
                 autoFocus
               />
-              <div className="form__error">
-                {errors.login && <ValidationMessage type={'error'} message={'😰Login is required'} />}
-              </div>
+              {errors.login && <ValidationMessage type={'error'} message={'😰Login is required'} />}
             </div>
             <div className="form__row">
               <label className="form__label" htmlFor="password">
                 Password
               </label>
               <input type="password" name="password" id="password" required ref={register({ required: true })} />
-              <div className="form__error">
-                {errors.password && <ValidationMessage type={'error'} message={'😱Password is required'} />}
-              </div>
+              {errors.password && <ValidationMessage type={'error'} message={'😱Password is required'} />}
             </div>
             <button className="form__button" value="Wyślij" type="submit">
               Submit

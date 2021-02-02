@@ -52,10 +52,9 @@ export const RegisterComponent = (props: RegisterProps) => {
                 placeholder="John Doe"
                 ref={register({ required: '😱Login is required' })}
                 required
+                autoFocus
               />
-              <div className="form__error">
-                {errors.login && <ValidationMessage type={'error'} message={errors.login.message as string} />}
-              </div>
+              {errors.login && <ValidationMessage type={'error'} message={errors.login.message as string} />}
             </div>
             <div className="form__row">
               <label className="form__label" htmlFor="email">
@@ -69,14 +68,12 @@ export const RegisterComponent = (props: RegisterProps) => {
                 ref={register({ required: true, pattern: /^\S+@\S+$/i })}
                 required
               />
-              <div className="form__error">
-                {errors.email?.type === 'required' && (
-                  <ValidationMessage type={'error'} message={'😓Email is required'} />
-                )}
-                {errors.email?.type === 'pattern' && (
-                  <ValidationMessage type={'error'} message={'🤥Please provide correct email'} />
-                )}
-              </div>
+              {errors.email?.type === 'required' && (
+                <ValidationMessage type={'error'} message={'😓Email is required'} />
+              )}
+              {errors.email?.type === 'pattern' && (
+                <ValidationMessage type={'error'} message={'🤥Please provide correct email'} />
+              )}
             </div>
             <div className="form__row">
               <label className="form__label" htmlFor="password">
@@ -92,9 +89,7 @@ export const RegisterComponent = (props: RegisterProps) => {
                 })}
                 required
               />
-              <div className="form__error">
-                {errors.password && <ValidationMessage type={'error'} message={errors.password.message as string} />}
-              </div>
+              {errors.password && <ValidationMessage type={'error'} message={errors.password.message as string} />}
             </div>
             <div className="form__row">
               <label className="form__label" htmlFor="repeatedPassword">
@@ -107,11 +102,9 @@ export const RegisterComponent = (props: RegisterProps) => {
                 ref={register({ validate: value => value === password.current || '😨The passwords do not match' })}
                 required
               />
-              <div className="form__error">
-                {errors.repeatedPassword && (
-                  <ValidationMessage type={'error'} message={errors.repeatedPassword.message as string} />
-                )}
-              </div>
+              {errors.repeatedPassword && (
+                <ValidationMessage type={'error'} message={errors.repeatedPassword.message as string} />
+              )}
             </div>
             <button className="form__button" value="Wyślij" type="submit">
               Submit
