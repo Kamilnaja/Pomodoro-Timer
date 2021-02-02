@@ -1,0 +1,34 @@
+@mixin grid-form {
+  .form {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    & &__row {
+      display: grid;
+      grid-gap: 5px;
+      grid-template-areas: 'label input' 'validation validation';
+      grid-template-columns: 1fr 2fr;
+      margin-bottom: 15px;
+      width: 100%;
+    }
+
+    & &__button {
+      @include button($color: $text-secondary, $bgColor: $button-bg);
+    }
+  }
+
+  .label {
+    grid-area: label;
+  }
+
+  .input {
+    grid-area: input;
+    max-height: 33px;
+  }
+
+  .validation {
+    grid-area: validation;
+  }
+}

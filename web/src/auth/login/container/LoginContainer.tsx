@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { handleCloseModal } from 'shared/scripts/utils';
 import { Login } from '../../../../../types/interfaces';
 import { sendLoginForm } from '../../store/actions/auth.actions';
 import { AuthState } from '../../store/interfaces/auth.state';
@@ -19,10 +18,6 @@ class LoginContainer extends React.Component<LoginProps> {
       login,
       password,
     });
-  };
-
-  componentDidUpdate = (prevProps: LoginProps) => {
-    handleCloseModal(prevProps.auth, this.props);
   };
 
   render() {

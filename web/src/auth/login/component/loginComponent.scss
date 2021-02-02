@@ -1,25 +1,13 @@
-@import "../../../shared/styles/shared.scss";
-
-.form {
-  align-items: flex-end;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-
-  & &__row {
-    display: grid;
-    grid-gap: 5px;
-    grid-template-columns: 1fr 1fr;
-    margin-bottom: 15px;
-    width: 100%;
-  }
-
-  & &__button {
-    @include button($color: $text-secondary, $bgColor: $button-bg);
-  }
-}
+@import '../../../shared/styles/shared.scss';
+@import '../../../shared/styles/scss/mixins/form.scss';
+@include grid-form;
 
 .login {
+  & &__success {
+    font-size: 30px;
+    text-align: center;
+  }
+
   & &__header {
     margin-bottom: 10px;
   }

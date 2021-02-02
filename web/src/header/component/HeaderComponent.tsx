@@ -10,26 +10,34 @@ export interface HeaderProps {
 export const HeaderComponent = (props: HeaderProps) => (
   <header className="header">
     <h1 className="header__title">Pomik</h1>
-    <div className="header__buttons-wrapper">
+    <ul className="header__buttons-wrapper">
       {!props.isLoggedIn ? (
         <>
-          <button className="button" onClick={() => props.handleOpenModal(Modal.LOGIN)}>
-            Login
-          </button>
-          <button className="button" onClick={() => props.handleOpenModal(Modal.REGISTER)}>
-            Register
-          </button>
+          <li>
+            <button className="button" onClick={() => props.handleOpenModal(Modal.LOGIN)}>
+              Login
+            </button>
+          </li>
+          <li>
+            <button className="button" onClick={() => props.handleOpenModal(Modal.REGISTER)}>
+              Register
+            </button>
+          </li>
         </>
       ) : (
         <>
-          <button className="button" onClick={() => props.handleOpenModal(Modal.SETTINGS)}>
-            Settings
-          </button>
-          <button className="button" onClick={() => props.handleLogout()}>
-            Logout
-          </button>
+          <li>
+            <button className="button" onClick={() => props.handleOpenModal(Modal.SETTINGS)}>
+              Settings
+            </button>
+          </li>
+          <li>
+            <button className="button" onClick={() => props.handleLogout()}>
+              Logout
+            </button>
+          </li>
         </>
       )}
-    </div>
+    </ul>
   </header>
 );

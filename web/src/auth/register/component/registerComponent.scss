@@ -1,28 +1,10 @@
-@import "../../../shared/styles/shared.scss";
+@import '../../../shared/styles/shared.scss';
+@import '../../../shared/styles/scss/mixins/form.scss';
 
-.form {
-  align-items: flex-end;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+@include grid-form;
 
-  & &__row {
-    display: grid;
-    grid-gap: 5px;
-    grid-template-columns: 1fr 2fr;
-    margin-bottom: 15px;
-    width: 100%;
-  }
-
-  & &__button {
-    @include button($color: $text-secondary, $bgColor: $button-bg);
-  }
-}
-
-@media (max-width: $sm) {
-  .form {
-    & &__row {
-      grid-template-columns: 1fr;
-    }
+.register {
+  & &__header {
+    margin-bottom: 10px;
   }
 }

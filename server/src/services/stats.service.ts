@@ -38,7 +38,7 @@ export const getStatsInGivenMonth = async (req: Request, res: Response<StatsSear
 };
 
 const searchResultsInDb = async (userId: string, date: string, res: Response<StatsSearchResult, number>) => {
-  const sql = `${selectDate} and to_char(date, 'YYYY-MM') = ($2) ${groupAndOrder}`;
+  const sql = `${selectDate} AND TO_CHAR(date, 'YYYY-MM') = ($2) ${groupAndOrder}`;
   try {
     const queryResult = await client.query(sql, [userId.toString(), date]);
     res.json({ result: queryResult.rows });
