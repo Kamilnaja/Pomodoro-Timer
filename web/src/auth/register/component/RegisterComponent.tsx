@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { ValidationMessage } from 'shared/components/validationMessage/ValidationMessage';
 import { Registration } from '../../../../../types/interfaces';
 import { AuthState } from '../../store/interfaces/auth.state';
-import './registerComponent.scss';
 
 export interface RegisterProps {
   handleSubmit: (arg: Registration) => void;
@@ -41,11 +40,11 @@ export const RegisterComponent = (props: RegisterProps) => {
           </div>
           <form className="register__form form" onSubmit={handleSubmit(onSubmit)}>
             <div className="form__row">
-              <label className="form__label" htmlFor="login">
+              <label className="form__label label" htmlFor="login">
                 User login
               </label>
               <input
-                className="form__input"
+                className="form__input input"
                 type="text"
                 name="login"
                 id="login"
@@ -57,10 +56,11 @@ export const RegisterComponent = (props: RegisterProps) => {
               {errors.login && <ValidationMessage type={'error'} message={errors.login.message as string} />}
             </div>
             <div className="form__row">
-              <label className="form__label" htmlFor="email">
+              <label className="form__label label" htmlFor="email">
                 Email
               </label>
               <input
+                className="form__input input"
                 type="text"
                 placeholder="johndoe@gmail.com"
                 name="email"
@@ -76,10 +76,11 @@ export const RegisterComponent = (props: RegisterProps) => {
               )}
             </div>
             <div className="form__row">
-              <label className="form__label" htmlFor="password">
+              <label className="form__label label" htmlFor="password">
                 Password
               </label>
               <input
+                className="form_input input"
                 name="password"
                 id="password"
                 type="password"
@@ -92,10 +93,11 @@ export const RegisterComponent = (props: RegisterProps) => {
               {errors.password && <ValidationMessage type={'error'} message={errors.password.message as string} />}
             </div>
             <div className="form__row">
-              <label className="form__label" htmlFor="repeatedPassword">
+              <label className="form__label label" htmlFor="repeatedPassword">
                 Repeat password
               </label>
               <input
+                className="form__input input"
                 name="repeatedPassword"
                 id="repeatedPassword"
                 type="password"
