@@ -5,14 +5,9 @@ import { Loader } from 'shared/components/loader/Loader';
 import { getCurrentMonth, getCurrentYear } from '../../shared/scripts/utils';
 import { StatsComponent } from '../components/StatsComponent';
 import { getStatsInPeriod } from '../store/actions/stats.actions';
-import Stats from '../store/interfaces/stats.interface';
+import { StatsContainerProps, StatsState } from '../store/interfaces/stats.interfaces';
 
-type StatsProps = {
-  handleGetStats: (year: number, month: number) => void;
-  stats: Stats;
-};
-
-class StatsContainer extends React.Component<StatsProps> {
+class StatsContainer extends React.Component<StatsContainerProps> {
   componentDidMount() {
     this.props.handleGetStats(getCurrentYear(), getCurrentMonth());
   }
@@ -23,12 +18,12 @@ class StatsContainer extends React.Component<StatsProps> {
     } else if (this.props.stats.error) {
       return <Error />;
     } else {
-      return <StatsComponent stats={this.props.stats} handleGetStats={this.props.handleGetStats} />;
+      return <StatsComponent stats={this.props.stats.results} handleGetStats={this.props.handleGetStats} />;
     }
   };
 }
 
-const mapStateToProps = (state: { stats: Stats }) => {
+const mapStateToProps = (state: { stats: StatsState }) => {
   const stats = state.stats;
   return { stats };
 };
