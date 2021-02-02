@@ -1,4 +1,10 @@
-@import "../../../shared/styles/shared.scss";
+@import '../../../shared/styles/shared.scss';
+
+.register {
+  & &__header {
+    margin-bottom: 10px;
+  }
+}
 
 .form {
   align-items: flex-end;

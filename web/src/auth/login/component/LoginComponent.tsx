@@ -36,11 +36,14 @@ export const LoginComponent = (props: LoginProps) => {
           {props.auth.error?.message && <ValidationMessage type={'error'} message={props.auth.error.message} />}
           <form className="login__form form" onSubmit={handleSubmit(onSubmit)}>
             <div className="form__row">
-              <label className="form__label">User login</label>
+              <label className="form__label" htmlFor="login">
+                User login
+              </label>
               <input
                 className="form__input"
                 type="text"
                 name="login"
+                id="login"
                 required
                 placeholder="John Doe"
                 ref={register({ required: true })}
@@ -51,8 +54,10 @@ export const LoginComponent = (props: LoginProps) => {
               </div>
             </div>
             <div className="form__row">
-              <label className="form__label">Password</label>
-              <input type="password" name="password" required ref={register({ required: true })} />
+              <label className="form__label" htmlFor="password">
+                Password
+              </label>
+              <input type="password" name="password" id="password" required ref={register({ required: true })} />
               <div className="form__error">
                 {errors.password && <ValidationMessage type={'error'} message={'😱Password is required'} />}
               </div>
