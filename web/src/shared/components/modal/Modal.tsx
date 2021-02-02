@@ -3,13 +3,9 @@ import ReactModal from 'react-modal';
 import LoginContainer from '../../../auth/login/container/LoginContainer';
 import RegisterContainer from '../../../auth/register/container/RegisterContainer';
 import Settings from '../../../settings/Settings';
-import { Modal as ModalEnum } from '../../store/enums/modal.enum';
+import { Modal as ModalEnum } from '../../store/enums/modalEnum';
+import { ModalProps } from '../../store/interfaces/modalInterface';
 import './modal.scss';
-
-export interface ModalProps {
-  modalType: ModalEnum;
-  closeModal: () => void;
-}
 
 const createModalFactory = (props: ModalProps) => {
   switch (props.modalType) {

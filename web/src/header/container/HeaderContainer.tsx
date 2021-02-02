@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Modal } from 'shared/store/enums/modal.enum';
+import { openModal } from '../../shared/store/interfaces/modalInterface';
 import { HeaderComponent } from '../component/HeaderComponent';
 
 export interface HeaderProps {
-  handleOpenModal: (arg: Modal) => void;
+  handleOpenModal: openModal;
   handleLogout: () => void;
   isLoggedIn: boolean;
 }

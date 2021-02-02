@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { config } from 'shared/settings/initialConfig';
-import { ActionWithPayload } from 'shared/store/interfaces/actions/action.interface';
+import { ActionWithPayload } from 'shared/store/interfaces/actions/actionInterface';
 import { AuthError, Login, LoginResponse, Registration } from '../../../../../types/interfaces';
 
 const localStorageKey = 'token';

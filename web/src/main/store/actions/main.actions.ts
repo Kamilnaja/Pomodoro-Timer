@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { config } from 'shared/settings/initialConfig';
-import { ActionWithPayload } from 'shared/store/interfaces/actions/action.interface';
+import { ActionWithPayload } from 'shared/store/interfaces/actions/actionInterface';
 import { store } from 'shared/store/reducers/reducer';
 import { getStatsInPeriod } from 'stats/store/actions/stats.actions';
 import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';

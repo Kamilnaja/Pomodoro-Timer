@@ -33,11 +33,9 @@ export const RegisterComponent = (props: RegisterProps) => {
       ) : (
         <>
           <h2 className="register__header">Enter registration data</h2>
-          <div className="form_error">
-            {props.formState.error?.message && (
-              <ValidationMessage type={'error'} message={props.formState.error.message} />
-            )}
-          </div>
+          {props.formState.error?.message && (
+            <ValidationMessage type={'error'} message={props.formState.error.message} />
+          )}
           <form className="register__form form" onSubmit={handleSubmit(onSubmit)}>
             <div className="form__row">
               <label className="form__label label" htmlFor="login">

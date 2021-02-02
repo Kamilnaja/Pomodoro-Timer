@@ -1,17 +1,10 @@
 @mixin grid-form {
   .form {
-    align-items: flex-end;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-
     & &__row {
       display: grid;
-      grid-gap: 5px;
       grid-template-areas: 'label input' 'validation validation';
       grid-template-columns: 1fr 2fr;
       margin-bottom: 15px;
-      width: 100%;
     }
 
     & &__button {
@@ -30,5 +23,17 @@
 
   .validation {
     grid-area: validation;
+  }
+
+  @media (max-width: $sm) {
+    .form {
+      & &__row {
+        display: grid;
+        grid-template-areas: 'label' 'input' 'validation';
+        grid-template-columns: 1fr;
+        margin-bottom: 15px;
+        width: 100%;
+      }
+    }
   }
 }

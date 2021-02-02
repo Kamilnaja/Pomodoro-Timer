@@ -3,22 +3,13 @@ import HeaderContainer from 'header/container/HeaderContainer';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'shared/components/modal/Modal';
-import { Modal as ModalEnum } from 'shared/store/enums/modal.enum';
+import { Modal as ModalEnum } from 'shared/store/enums/modalEnum';
 import StatsContainer from 'stats/containers/StatsContainer';
 import Timer from 'timer/containers/Timer';
 import { AuthState } from '../../auth/store/interfaces/auth.state';
+import { closeModal, openModal } from '../../shared/store/interfaces/modalInterface';
+import { MainProps, MainState } from '../store/interfaces/mainProps.interface';
 import './main.scss';
-
-interface MainState {
-  openedModal: ModalEnum;
-}
-
-interface MainProps {
-  resetForm: () => void;
-  setUserIsLoggedIn: () => void;
-  setUserIsLoggedOut: () => void;
-  auth: AuthState;
-}
 
 class Main extends React.Component<MainProps, MainState> {
   constructor(props: MainProps) {
@@ -29,12 +20,12 @@ class Main extends React.Component<MainProps, MainState> {
     this.props.setUserIsLoggedIn();
   }
 
-  handleOpenModal = (modal: ModalEnum) =>
+  handleOpenModal: openModal = (modal: ModalEnum) =>
     this.setState({
       openedModal: modal,
     });
 
-  handleCloseModal = () => {
+  handleCloseModal: closeModal = () => {
     this.setState({
       openedModal: ModalEnum.NULL,
     });

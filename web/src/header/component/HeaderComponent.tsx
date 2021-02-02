@@ -1,8 +1,9 @@
-import { Modal } from 'shared/store/enums/modal.enum';
+import { Modal } from 'shared/store/enums/modalEnum';
+import { openModal } from '../../shared/store/interfaces/modalInterface';
 import './headerComponent.scss';
 
 export interface HeaderProps {
-  handleOpenModal: (arg: Modal) => void;
+  handleOpenModal: openModal;
   handleLogout: () => void;
   isLoggedIn: boolean;
 }
