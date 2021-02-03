@@ -32,17 +32,9 @@ class Main extends React.Component<MainProps, MainState> {
     this.props.resetForm();
   };
 
-  handleLogout: openModal = (modal: ModalEnum) => {
-    this.props.setUserIsLoggedOut();
-  };
-
   render = () => (
     <div className="app">
-      <HeaderContainer
-        handleOpenLogoutModal={this.handleLogout}
-        handleOpenModal={this.handleOpenModal}
-        isLoggedIn={this.props.auth.isLoggedIn}
-      />
+      <HeaderContainer handleOpenModal={this.handleOpenModal} isLoggedIn={this.props.auth.isLoggedIn} />
       <Timer />
       {this.props.auth.isLoggedIn && <StatsContainer />}
       <Modal modalType={this.state.openedModal} closeModal={this.handleCloseModal} />

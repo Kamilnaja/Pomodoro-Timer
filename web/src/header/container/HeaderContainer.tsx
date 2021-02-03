@@ -4,13 +4,7 @@ import { HeaderComponent, HeaderProps } from '../component/HeaderComponent';
 
 class HeaderContainer extends React.Component<HeaderProps> {
   render() {
-    return (
-      <HeaderComponent
-        handleOpenLogoutModal={this.props.handleOpenLogoutModal}
-        handleOpenModal={this.props.handleOpenModal}
-        isLoggedIn={this.props.isLoggedIn}
-      />
-    );
+    return <HeaderComponent handleOpenModal={this.props.handleOpenModal} isLoggedIn={this.props.isLoggedIn} />;
   }
 }
 
