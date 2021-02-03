@@ -6,13 +6,6 @@ let pageMonth = getCurrentMonth();
 let pageYear = getCurrentYear();
 
 export const StatsComponent = (results: StatsComponentProps) => {
-  const lastResult = results.stats[0];
-  const isAnyPomodoroDoneToday = (): boolean => {
-    // get last stats days and reverse to allow date comparition
-    const reverseLastStatsDate: string = lastResult?.date.split('-').reverse().join('-');
-    return new Date(reverseLastStatsDate).toDateString() === new Date().toDateString();
-  };
-
   const getPreviousMonth = () => {
     if (pageMonth === 0) {
       pageMonth = 11;
@@ -41,9 +34,6 @@ export const StatsComponent = (results: StatsComponentProps) => {
 
   return (
     <div className="stats">
-      <h2 className="stats__today-result">
-        Today you have made: {isAnyPomodoroDoneToday() ? lastResult?.count : 0} pomodoros
-      </h2>
       <div className="stats__navigation navigation">
         <button className="navigation__arrow" onClick={() => getPreviousMonth()}>
           &lt; prev
