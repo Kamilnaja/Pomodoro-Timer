@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { handleCloseModal } from 'shared/scripts/utils';
 import { Registration } from '../../../../../types/interfaces';
-import { sendRegisterForm } from '../../store/actions/auth.actions';
-import { AuthState } from '../../store/interfaces/auth.state';
+import { sendRegisterForm } from '../../store/actions/authActions';
+import { AuthState } from '../../store/interfaces/authState';
 import { RegisterComponent } from '../component/RegisterComponent';
 
 export interface RegisterProps {

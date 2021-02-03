@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { ValidationMessage } from 'shared/components/validationMessage/ValidationMessage';
 import { Login } from '../../../../../types/interfaces';
-import { AuthState } from '../../store/interfaces/auth.state';
+import { AuthState } from '../../store/interfaces/authState';
 import './loginComponent.scss';
 
 export interface LoginProps {

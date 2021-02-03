@@ -4,8 +4,8 @@ import { Error } from 'shared/components/error/Error';
 import { Loader } from 'shared/components/loader/Loader';
 import { getCurrentMonth, getCurrentYear } from '../../shared/scripts/utils';
 import { StatsComponent } from '../components/StatsComponent';
-import { getStatsInPeriod } from '../store/actions/stats.actions';
-import { StatsContainerProps, StatsState } from '../store/interfaces/stats.interfaces';
+import { getStatsInPeriod } from '../store/actions/statsActions';
+import { StatsContainerProps, StatsState } from '../store/interfaces/statsInterfaces';
 
 class StatsContainer extends React.Component<StatsContainerProps> {
   componentDidMount() {

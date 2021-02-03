@@ -1,6 +1,6 @@
 import { LoginProps } from '../../auth/login/component/LoginComponent';
 import { RegisterProps } from '../../auth/register/container/RegisterContainer';
-import { AuthState } from '../../auth/store/interfaces/auth.state';
+import { AuthState } from '../../auth/store/interfaces/authState';
 
 export const msToTime = (s: number): string => {
   // Pad to 2 or 3 digits, default is 2

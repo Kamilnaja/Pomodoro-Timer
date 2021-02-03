@@ -1,5 +1,5 @@
 import { getCurrentMonth, getCurrentYear } from '../../shared/scripts/utils';
-import { StatsComponentProps } from '../store/interfaces/stats.interfaces';
+import { StatsComponentProps } from '../store/interfaces/statsInterfaces';
 import './stats.component.scss';
 
 let pageMonth = getCurrentMonth();

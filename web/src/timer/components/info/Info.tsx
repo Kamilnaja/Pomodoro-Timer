@@ -1,4 +1,4 @@
-import { TimerState } from '../../store/enums/timer.enum';
+import { TimerState } from '../../store/enums/timerEnum';
 import './info.scss';
 
 export function Info(props: { currentState: TimerState }) {

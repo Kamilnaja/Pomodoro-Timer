@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { ValidationMessage } from 'shared/components/validationMessage/ValidationMessage';
 import { Registration } from '../../../../../types/interfaces';
-import { AuthState } from '../../store/interfaces/auth.state';
+import { AuthState } from '../../store/interfaces/authState';
 
 export interface RegisterProps {
   handleSubmit: (arg: Registration) => void;

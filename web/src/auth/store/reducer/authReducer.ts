@@ -1,6 +1,6 @@
 import { ActionWithPayload } from '../../../shared/store/interfaces/actions/actionInterface';
-import { AuthAction } from '../actions/auth.actions';
-import { AuthState } from '../interfaces/auth.state';
+import { AuthAction } from '../actions/authActions';
+import { AuthState } from '../interfaces/authState';
 
 export const initialState: AuthState = {
   isLoading: false,

@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { msToTime } from 'shared/scripts/utils';
 import 'shared/settings/initialConfig';
 import { initialConfig } from 'shared/settings/initialConfig';
-import { savePomodoroAndReloadStats } from '../../main/store/actions/main.actions';
+import { savePomodoroAndReloadStats } from '../../main/store/actions/mainActions';
 import { Info } from '../components/info/Info';
 import { Time } from '../components/time/Time';
-import { TimerState } from '../store/enums/timer.enum';
-import { State } from '../store/interfaces/state.interface';
-import { TimerProps } from '../store/interfaces/timerProps.interface';
+import { TimerState } from '../store/enums/timerEnum';
+import { State } from '../store/interfaces/stateInterface';
+import { TimerProps } from '../store/interfaces/timerPropsInterface';
 import { timerState } from '../store/state/timerState';
 import './timer.scss';
 

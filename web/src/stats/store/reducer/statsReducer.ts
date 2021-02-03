@@ -1,7 +1,7 @@
 import { ActionWithPayload } from 'shared/store/interfaces/actions/actionInterface';
 import StatsSearchResult from '../../../../../types/statistics.interfaces';
-import { StatsAction } from '../actions/stats.actions';
-import { StatsState } from '../interfaces/stats.interfaces';
+import { StatsAction } from '../actions/statsActions';
+import { StatsState } from '../interfaces/statsInterfaces';
 
 export const initialState: StatsState = {
   isLoading: false,

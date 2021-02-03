@@ -1,6 +1,6 @@
 import { Action } from 'redux';
-import { MainAction } from '../actions/main.actions';
-import { MainState } from '../interfaces/mainState.interface';
+import { MainAction } from '../actions/mainActions';
+import { MainState } from '../interfaces/mainStateInterface';
 
 const initialState: MainState = {
   isLoading: false,

@@ -1,4 +1,4 @@
-import { AuthState } from '../../../auth/store/interfaces/auth.state';
+import { AuthState } from '../../../auth/store/interfaces/authState';
 import { Modal } from '../../../shared/store/enums/modalEnum';
 
 export interface MainProps {

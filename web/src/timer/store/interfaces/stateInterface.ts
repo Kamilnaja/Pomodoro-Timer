@@ -1,4 +1,4 @@
-import { TimerState } from '../enums/timer.enum';
+import { TimerState } from '../enums/timerEnum';
 
 export interface State {
   timerState: TimerState;
