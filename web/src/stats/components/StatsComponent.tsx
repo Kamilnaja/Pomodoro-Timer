@@ -35,10 +35,10 @@ export const StatsComponent = (results: StatsComponentProps) => {
   return (
     <div className="stats">
       <div className="stats__navigation navigation">
-        <button className="navigation__arrow" onClick={() => getPreviousMonth()}>
+        <button className="navigation__button" onClick={() => getPreviousMonth()}>
           &lt; prev
         </button>
-        <button className="navigation__arrow" onClick={() => getNextMonth()} disabled={shouldShowNextMonth()}>
+        <button className="navigation__button" onClick={() => getNextMonth()} disabled={shouldShowNextMonth()}>
           next &gt;
         </button>
       </div>

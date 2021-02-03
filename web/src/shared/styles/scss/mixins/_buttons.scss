@@ -1,4 +1,4 @@
-@mixin button($color: false, $bgColor: false, $size: false, $border: none) {
+@mixin button($color: false, $bgColor: false, $size: 14px, $border: none) {
   background-color: $bgColor;
   border: $border;
   color: $color;
@@ -8,7 +8,8 @@
   text-transform: uppercase;
   transition: 0.2s ease-in-out;
 
-  &--dimmed {
+  &:disabled {
     background-color: grey;
+    cursor: not-allowed;
   }
 }

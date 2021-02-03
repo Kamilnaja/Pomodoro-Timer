@@ -22,8 +22,9 @@
   margin: 0 auto;
   min-width: 200px;
 
-  & &__arrow {
-    cursor: pointer;
+  & &__button {
+    @include button($bgColor: $button-bg, $color: $text-primary);
+    padding: 5px 5px;
     width: 50%;
   }
 }
