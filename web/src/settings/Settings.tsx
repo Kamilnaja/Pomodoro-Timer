@@ -1,8 +1,6 @@
 import React from 'react';
 
-interface SettingsProps {
-  handleClose: () => void;
-}
+interface SettingsProps {}
 
 export class Settings extends React.Component<SettingsProps> {
   render() {

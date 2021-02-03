@@ -6,5 +6,4 @@ export interface ModalProps {
 }
 
 export type closeModal = () => void;
-
 export type openModal = (arg: Modal) => void;

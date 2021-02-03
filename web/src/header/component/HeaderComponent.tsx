@@ -4,7 +4,7 @@ import './headerComponent.scss';
 
 export interface HeaderProps {
   handleOpenModal: openModal;
-  handleLogout: () => void;
+  handleOpenLogoutModal: openModal;
   isLoggedIn: boolean;
 }
 
@@ -33,7 +33,7 @@ export const HeaderComponent = (props: HeaderProps) => (
             </button>
           </li>
           <li>
-            <button className="button" onClick={() => props.handleLogout()}>
+            <button className="button" onClick={() => props.handleOpenLogoutModal(Modal.LOGOUT)}>
               Logout
             </button>
           </li>

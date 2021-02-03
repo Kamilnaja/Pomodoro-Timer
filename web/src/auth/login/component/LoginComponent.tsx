@@ -6,7 +6,6 @@ import './loginComponent.scss';
 
 export interface LoginProps {
   handleSubmit: (data: Login) => void;
-  handleClose: () => void;
   auth: AuthState;
 }
 

@@ -2,23 +2,10 @@ import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { ValidationMessage } from 'shared/components/validationMessage/ValidationMessage';
 import { Registration } from '../../../../../types/interfaces';
-import { AuthState } from '../../store/interfaces/authState';
+import { RegisterComponentProps, RegisterFormData } from '../../store/interfaces/registerPropsInterface';
 
-export interface RegisterProps {
-  handleSubmit: (arg: Registration) => void;
-  handleClose: () => void;
-  formState: AuthState;
-}
-
-type FormData = {
-  login: string;
-  email: string;
-  password: string;
-  repeatedPassword: string;
-};
-
-export const RegisterComponent = (props: RegisterProps) => {
-  const { register, errors, handleSubmit, watch } = useForm<FormData>();
+export const RegisterComponent = (props: RegisterComponentProps) => {
+  const { register, errors, handleSubmit, watch } = useForm<RegisterFormData>();
   const password = useRef({});
   password.current = watch('password', '');
 

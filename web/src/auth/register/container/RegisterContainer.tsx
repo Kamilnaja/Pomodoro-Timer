@@ -1,18 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { handleCloseModal } from 'shared/scripts/utils';
 import { Registration } from '../../../../../types/interfaces';
 import { sendRegisterForm } from '../../store/actions/authActions';
 import { AuthState } from '../../store/interfaces/authState';
 import { RegisterComponent } from '../component/RegisterComponent';
 
-export interface RegisterProps {
+export interface RegisterContainerProps {
   handleSubmit: (arg: Registration) => void;
-  handleClose: () => void;
   auth: AuthState;
 }
 
-class RegisterContainer extends React.Component<RegisterProps> {
+class RegisterContainer extends React.Component<RegisterContainerProps> {
   handleSubmit = (registrationData: Registration) => {
     const { login, password, email } = registrationData;
     this.props.handleSubmit({
@@ -22,18 +20,8 @@ class RegisterContainer extends React.Component<RegisterProps> {
     });
   };
 
-  componentDidUpdate = (prevProps: RegisterProps) => {
-    handleCloseModal(prevProps.auth, this.props);
-  };
-
   render() {
-    return (
-      <RegisterComponent
-        handleSubmit={this.handleSubmit}
-        formState={this.props.auth}
-        handleClose={this.props.handleClose}
-      />
-    );
+    return <RegisterComponent handleSubmit={this.handleSubmit} formState={this.props.auth} />;
   }
 }
 

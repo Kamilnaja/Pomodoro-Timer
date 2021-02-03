@@ -10,11 +10,11 @@ import './modal.scss';
 const createModalFactory = (props: ModalProps) => {
   switch (props.modalType) {
     case ModalEnum.LOGIN:
-      return <LoginContainer handleClose={props.closeModal} />;
+      return <LoginContainer />;
     case ModalEnum.REGISTER:
-      return <RegisterContainer handleClose={props.closeModal} />;
+      return <RegisterContainer />;
     case ModalEnum.SETTINGS:
-      return <Settings handleClose={props.closeModal} />;
+      return <Settings />;
   }
 };
 

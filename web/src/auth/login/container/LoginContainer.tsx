@@ -7,7 +7,6 @@ import { LoginComponent } from '../component/LoginComponent';
 
 interface LoginProps {
   handleSubmit: (arg: Login) => void;
-  handleClose: () => void;
   auth: AuthState;
 }
 
@@ -21,9 +20,7 @@ class LoginContainer extends React.Component<LoginProps> {
   };
 
   render() {
-    return (
-      <LoginComponent handleSubmit={this.handleSubmit} auth={this.props.auth} handleClose={this.props.handleClose} />
-    );
+    return <LoginComponent handleSubmit={this.handleSubmit} auth={this.props.auth} />;
   }
 }
 

@@ -1,7 +1,3 @@
-import { LoginProps } from '../../auth/login/component/LoginComponent';
-import { RegisterProps } from '../../auth/register/container/RegisterContainer';
-import { AuthState } from '../../auth/store/interfaces/authState';
-
 export const msToTime = (s: number): string => {
   // Pad to 2 or 3 digits, default is 2
   const pad = (n: number, z?: number) => {
@@ -17,14 +13,6 @@ export const msToTime = (s: number): string => {
   const hrs = (s - mins) / 60;
 
   return pad(hrs) + ':' + pad(mins) + ':' + pad(secs);
-};
-
-export const handleCloseModal = (prevFormState: AuthState, currentFormState: RegisterProps | LoginProps) => {
-  if (currentFormState.auth.isSuccess !== prevFormState.isSuccess && currentFormState.auth.isSuccess) {
-    setTimeout(() => {
-      currentFormState.handleClose();
-    }, 3000);
-  }
 };
 
 export const getCurrentMonth = (givenMonth?: number): number => {
