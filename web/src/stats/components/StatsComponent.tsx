@@ -41,13 +41,21 @@ export const StatsComponent = (results: StatsComponentProps) => {
 
   return (
     <div className="stats">
-      <h3 className="stats__today-result">
+      <h2 className="stats__today-result">
         Today you have made: {isAnyPomodoroDoneToday() ? lastResult?.count : 0} pomodoros
-      </h3>
-      <h3 className="stats__today-result">
-        year: {pageYear} month: {pageMonth + 1}
-      </h3>
+      </h2>
+      <div className="stats__navigation navigation">
+        <button className="navigation__arrow" onClick={() => getPreviousMonth()}>
+          &lt; prev
+        </button>
+        <button className="navigation__arrow" onClick={() => getNextMonth()} disabled={shouldShowNextMonth()}>
+          next &gt;
+        </button>
+      </div>
       <table className="stats__table table">
+        <caption>
+          Results from: {pageMonth + 1}.{pageYear}
+        </caption>
         <thead className="table__head">
           <tr>
             <th>Date</th>
@@ -63,14 +71,6 @@ export const StatsComponent = (results: StatsComponentProps) => {
           ))}
         </tbody>
       </table>
-      <div className="stats__navigation navigation">
-        <button className="navigation__arrow" onClick={() => getPreviousMonth()}>
-          &lt; prev
-        </button>
-        <button className="navigation__arrow" onClick={() => getNextMonth()} disabled={shouldShowNextMonth()}>
-          next &gt;
-        </button>
-      </div>
     </div>
   );
 };
