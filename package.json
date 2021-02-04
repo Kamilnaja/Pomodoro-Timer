@@ -1,6 +1,6 @@
 {
-  "name": "pomik",
-  "version": "0.0.2",
+  "name": "tomatodone",
+  "version": "0.5.0",
   "engines": {
     "node": "12.18.4"
   },
@@ -13,7 +13,8 @@
     "md5": "^2.3.0",
     "morgan": "^1.10.0",
     "pg": "^8.5.1",
-    "postgresql": "0.0.1"
+    "postgresql": "0.0.1",
+    "typescript": "^4.1.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^3.0.0",
@@ -39,8 +40,7 @@
     "stylelint": "^13.9.0",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-standard": "^20.0.0",
-    "ts-node": "^9.1.1",
-    "tslint": "^6.1.3"
+    "ts-node": "^9.1.1"
   },
   "main": "./dist/src/index.js",
   "files": [
