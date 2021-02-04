@@ -31,7 +31,6 @@ export const LoginComponent = (props: LoginProps) => {
         </div>
       ) : (
         <div>
-          <h2 className="login__header">Please login</h2>
           {props.auth.error?.message && <ValidationMessage type={'error'} message={props.auth.error.message} />}
           <form className="login__form form" onSubmit={handleSubmit(onSubmit)}>
             <div className="form__row">

@@ -1,4 +1,4 @@
-export enum Modal {
+export enum ModalType {
   LOGIN,
   REGISTER,
   SETTINGS,

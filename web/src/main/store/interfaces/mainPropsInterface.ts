@@ -1,5 +1,5 @@
 import { AuthState } from '../../../auth/store/interfaces/authState';
-import { Modal } from '../../../shared/store/enums/modalEnum';
+import { ModalType } from '../../../shared/store/enums/modalEnum';
 
 export interface MainProps {
   resetForm: () => void;
@@ -9,5 +9,5 @@ export interface MainProps {
 }
 
 export interface MainState {
-  openedModal: Modal;
+  openedModal: ModalType;
 }

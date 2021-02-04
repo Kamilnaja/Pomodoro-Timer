@@ -19,7 +19,6 @@ export const RegisterComponent = (props: RegisterComponentProps) => {
         <div>🤩Registered successfully, now you can log in</div>
       ) : (
         <>
-          <h2 className="register__header">Enter registration data</h2>
           {props.formState.error?.message && (
             <ValidationMessage type={'error'} message={props.formState.error.message} />
           )}

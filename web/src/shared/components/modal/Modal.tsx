@@ -4,42 +4,49 @@ import LoginContainer from '../../../auth/login/container/LoginContainer';
 import LogoutContainer from '../../../auth/logout/container/LogoutContainer';
 import RegisterContainer from '../../../auth/register/container/RegisterContainer';
 import Settings from '../../../settings/Settings';
-import { Modal as ModalEnum } from '../../store/enums/modalEnum';
+import { ModalType as ModalEnum, ModalType } from '../../store/enums/modalEnum';
 import { ModalProps } from '../../store/interfaces/modalInterface';
 import './modal.scss';
+import { CreatedModal } from './modalInterface';
 
-const createModalFactory = (props: ModalProps) => {
-  switch (props.modalType) {
+const createModalBodyFactory = (props: ModalType): CreatedModal => {
+  switch (props) {
     case ModalEnum.LOGIN:
-      return <LoginContainer />;
+      return { component: <LoginContainer />, title: 'Login' };
     case ModalEnum.REGISTER:
-      return <RegisterContainer />;
+      return { component: <RegisterContainer />, title: 'Register' };
     case ModalEnum.SETTINGS:
-      return <Settings />;
+      return { component: <Settings />, title: 'Settings' };
     case ModalEnum.LOGOUT:
-      return <LogoutContainer />;
+      return { component: <LogoutContainer />, title: 'Logout' };
   }
 };
 
 export const Modal = (props: ModalProps) => {
+  const modal: CreatedModal = createModalBodyFactory(props.modalType);
   return (
-    <ReactModal
-      isOpen={props.modalType !== ModalEnum.NULL}
-      ariaHideApp={false}
-      shouldFocusAfterRender={true}
-      shouldCloseOnOverlayClick={true}
-      onRequestClose={props.closeModal}
-      className="modal__content"
-      overlayClassName="modal"
-    >
-      <div className="modal__wrapper">
-        <header className="modal__header">
-          <button className="modal__button--close" onClick={props.closeModal}>
-            ✕
-          </button>
-        </header>
-        {createModalFactory(props)}
-      </div>
-    </ReactModal>
+    <>
+      {props.modalType !== ModalEnum.NULL && (
+        <ReactModal
+          isOpen={true}
+          ariaHideApp={false}
+          shouldFocusAfterRender={true}
+          shouldCloseOnOverlayClick={true}
+          onRequestClose={props.closeModal}
+          className="modal__content"
+          overlayClassName="modal"
+        >
+          <div className="modal__wrapper">
+            <header className="modal__header">
+              <h2 className="modal__title">{modal.title}</h2>
+              <button className="modal__button--close" onClick={props.closeModal}>
+                ✕
+              </button>
+            </header>
+            {modal.component}
+          </div>
+        </ReactModal>
+      )}
+    </>
   );
 };

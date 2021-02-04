@@ -1,4 +1,4 @@
-import { Modal } from 'shared/store/enums/modalEnum';
+import { ModalType } from 'shared/store/enums/modalEnum';
 import { openModal } from '../../shared/store/interfaces/modalInterface';
 import './headerComponent.scss';
 
@@ -14,12 +14,12 @@ export const HeaderComponent = (props: HeaderProps) => (
       {!props.isLoggedIn ? (
         <>
           <li>
-            <button className="button" onClick={() => props.handleOpenModal(Modal.LOGIN)}>
+            <button className="button" onClick={() => props.handleOpenModal(ModalType.LOGIN)}>
               Login
             </button>
           </li>
           <li>
-            <button className="button" onClick={() => props.handleOpenModal(Modal.REGISTER)}>
+            <button className="button" onClick={() => props.handleOpenModal(ModalType.REGISTER)}>
               Register
             </button>
           </li>
@@ -27,12 +27,12 @@ export const HeaderComponent = (props: HeaderProps) => (
       ) : (
         <>
           <li>
-            <button className="button" onClick={() => props.handleOpenModal(Modal.SETTINGS)}>
+            <button className="button" onClick={() => props.handleOpenModal(ModalType.SETTINGS)}>
               Settings
             </button>
           </li>
           <li>
-            <button className="button" onClick={() => props.handleOpenModal(Modal.LOGOUT)}>
+            <button className="button" onClick={() => props.handleOpenModal(ModalType.LOGOUT)}>
               Logout
             </button>
           </li>

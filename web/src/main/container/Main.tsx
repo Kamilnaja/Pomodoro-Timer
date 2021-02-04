@@ -3,7 +3,7 @@ import HeaderContainer from 'header/container/HeaderContainer';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'shared/components/modal/Modal';
-import { Modal as ModalEnum } from 'shared/store/enums/modalEnum';
+import { ModalType as ModalEnum } from 'shared/store/enums/modalEnum';
 import StatsContainer from 'stats/containers/StatsContainer';
 import Timer from 'timer/containers/Timer';
 import { AuthState } from '../../auth/store/interfaces/authState';
