@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { ValidationMessage } from 'shared/components/validationMessage/ValidationMessage';
 import { Registration } from '../../../../../types/interfaces';
 import { RegisterComponentProps, RegisterFormData } from '../../store/interfaces/registerPropsInterface';
+import './registerComponent.scss';
 
 export const RegisterComponent = (props: RegisterComponentProps) => {
   const { register, errors, handleSubmit, watch } = useForm<RegisterFormData>();

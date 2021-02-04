@@ -1,0 +1,19 @@
+@import 'src/shared/styles/shared';
+
+.logout {
+  & &__question {
+    text-align: center;
+  }
+
+  & &__buttons-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  & &__button {
+    @include button($color: $text-secondary, $bgColor: $button-bg);
+    margin-left: 10px;
+    min-width: 100px;
+  }
+}
