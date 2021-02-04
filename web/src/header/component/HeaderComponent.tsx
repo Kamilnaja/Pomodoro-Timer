@@ -9,7 +9,7 @@ export interface HeaderProps {
 
 export const HeaderComponent = (props: HeaderProps) => (
   <header className="header">
-    <h1 className="header__title">Pomik</h1>
+    <h1 className="header__title">Tomatodone</h1>
     <ul className="header__buttons-wrapper">
       {!props.isLoggedIn ? (
         <>
