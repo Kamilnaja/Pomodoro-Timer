@@ -9,20 +9,20 @@ import { ModalProps } from '../../store/interfaces/modalInterface';
 import './modal.scss';
 import { CreatedModal } from './modalInterface';
 
-const createModalBodyFactory = (props: ModalType): CreatedModal => {
-  switch (props) {
-    case ModalEnum.LOGIN:
-      return { component: <LoginContainer />, title: 'Login' };
-    case ModalEnum.REGISTER:
-      return { component: <RegisterContainer />, title: 'Register' };
-    case ModalEnum.SETTINGS:
-      return { component: <Settings />, title: 'Settings' };
-    case ModalEnum.LOGOUT:
-      return { component: <LogoutContainer />, title: 'Logout' };
-  }
-};
-
 export const Modal = (props: ModalProps) => {
+  const createModalBodyFactory = (modalType: ModalType): CreatedModal => {
+    switch (modalType) {
+      case ModalEnum.LOGIN:
+        return { component: <LoginContainer />, title: 'Login' };
+      case ModalEnum.REGISTER:
+        return { component: <RegisterContainer />, title: 'Register' };
+      case ModalEnum.SETTINGS:
+        return { component: <Settings />, title: 'Settings' };
+      case ModalEnum.LOGOUT:
+        return { component: <LogoutContainer closeModal={props.closeModal} />, title: 'Logout' };
+    }
+  };
+
   const modal: CreatedModal = createModalBodyFactory(props.modalType);
   return (
     <>

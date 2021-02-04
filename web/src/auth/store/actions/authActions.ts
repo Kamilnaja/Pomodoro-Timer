@@ -20,31 +20,31 @@ export enum AuthAction {
   SET_LOGGED_OUT = 'SET_LOGGED_OUT',
 }
 
-export const register = (payload: Registration): ActionWithPayload<AuthAction, Registration> => ({
+const register = (payload: Registration): ActionWithPayload<AuthAction, Registration> => ({
   type: AuthAction.REGISTER,
   payload,
 });
 
-export const registerSuccess = (): Action => ({
+const registerSuccess = (): Action => ({
   type: AuthAction.REGISTER_SUCCESS,
 });
 
-export const registerError = (error: any): ActionWithPayload<AuthAction, AuthError> => ({
+const registerError = (error: any): ActionWithPayload<AuthAction, AuthError> => ({
   type: AuthAction.REGISTER_ERROR,
   payload: error,
 });
 
-export const login = (payload: Login): ActionWithPayload<AuthAction, Login> => ({
+const login = (payload: Login): ActionWithPayload<AuthAction, Login> => ({
   type: AuthAction.LOGIN,
   payload,
 });
 
-export const loginSuccess = (payload: string): ActionWithPayload<AuthAction, string> => ({
+const loginSuccess = (payload: string): ActionWithPayload<AuthAction, string> => ({
   type: AuthAction.LOGIN_SUCCESS,
   payload,
 });
 
-export const loginError = (error: AuthError): ActionWithPayload<AuthAction, AuthError> => ({
+const loginError = (error: AuthError): ActionWithPayload<AuthAction, AuthError> => ({
   type: AuthAction.LOGIN_ERROR,
   payload: error,
 });
@@ -53,11 +53,7 @@ export const resetForm = (): Action => ({
   type: AuthAction.RESET_FORM,
 });
 
-export const setLoggedIn = (): Action => ({
-  type: AuthAction.SET_LOGGED_IN,
-});
-
-export const setLoggedOut = (): Action => ({
+const setLoggedOut = (): Action => ({
   type: AuthAction.SET_LOGGED_OUT,
 });
 
@@ -124,8 +120,6 @@ export const setUserIsLoggedIn = () => (dispatch: (action: Action<any>) => void)
 };
 
 export const setUserIsLoggedOut = () => (dispatch: (action: Action<any>) => void) => {
-  console.log('click');
-
   localStorage.removeItem(localStorageKey);
 
   dispatch(setLoggedOut());

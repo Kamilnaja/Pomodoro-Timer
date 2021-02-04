@@ -2,16 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setUserIsLoggedOut } from '../../store/actions/authActions';
 import { AuthState } from '../../store/interfaces/authState';
+import { LogoutContainerProps } from '../../store/interfaces/LogoutContainerProps';
 import { LogoutComponent } from '../component/LogoutComponent';
 
-export interface LogoutContainerProps {
-  handleLogout: () => void;
-  auth: AuthState;
-}
-
 class LogoutContainer extends React.Component<LogoutContainerProps> {
+  logout = () => {
+    this.props.handleLogout();
+    this.props.closeModal();
+  };
+
+  cancel = () => {
+    this.props.closeModal();
+  };
+
   render() {
-    return <LogoutComponent handleLogout={this.props.handleLogout}></LogoutComponent>;
+    return <LogoutComponent handleLogout={this.logout} handleCancel={this.cancel}></LogoutComponent>;
   }
 }
 

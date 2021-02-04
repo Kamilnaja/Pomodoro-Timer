@@ -10,27 +10,25 @@ export enum StatsAction {
   GET_STATISTIC_IN_PERIOD_ERROR = 'GET_STATISTIC_IN_PERIOD_ERROR',
 }
 
-export const getStatisticsInPeriod = (): Action => ({
+const getStatisticsInPeriod = (): Action => ({
   type: StatsAction.GET_STATISTIC_IN_PERIOD,
 });
 
-export const getStatisticsInPeriodSuccess = (
+const getStatisticsInPeriodSuccess = (
   payload: StatsSearchResult,
 ): ActionWithPayload<StatsAction, StatsSearchResult> => ({
   type: StatsAction.GET_STATISTIC_IN_PERIOD_SUCCESS,
   payload,
 });
 
-export const getStatisticsInPeriodError = (
-  payload: StatsSearchResult,
-): ActionWithPayload<StatsAction, StatsSearchResult> => ({
+const getStatisticsInPeriodError = (payload: StatsSearchResult): ActionWithPayload<StatsAction, StatsSearchResult> => ({
   type: StatsAction.GET_STATISTIC_IN_PERIOD_ERROR,
   payload,
 });
 
 // thunk
 
-export const getStatsInPeriod = (year: number, month: number) => async (dispatch: (args: Action) => void) => {
+export const handleGetStatsInPeriod = (year: number, month: number) => async (dispatch: (args: Action) => void) => {
   dispatch(getStatisticsInPeriod());
 
   makeGetStatsRequest(year, month)
@@ -38,7 +36,7 @@ export const getStatsInPeriod = (year: number, month: number) => async (dispatch
     .catch(err => dispatch(getStatisticsInPeriodError(err)));
 };
 
-export const makeGetStatsRequest = async (year: number, month: number) => {
+const makeGetStatsRequest = async (year: number, month: number) => {
   const token = store.getState().auth.token;
 
   const response = await fetch(`${config.url.API_URL}/stats/${year}/${month}`, {
