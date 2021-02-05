@@ -10,6 +10,7 @@ import { AuthState } from '../../auth/store/interfaces/authState';
 import { closeModal, openModal } from '../../shared/store/interfaces/modalInterface';
 import { MainProps, MainState } from '../store/interfaces/mainPropsInterface';
 import './main.scss';
+import 'shared/styles/reset.scss';
 
 class Main extends React.Component<MainProps, MainState> {
   constructor(props: MainProps) {
