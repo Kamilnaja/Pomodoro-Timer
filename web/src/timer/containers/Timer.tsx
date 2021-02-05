@@ -11,6 +11,7 @@ import { State } from '../store/interfaces/stateInterface';
 import { TimerProps } from '../store/interfaces/timerPropsInterface';
 import { timerState } from '../store/state/timerState';
 import './timer.scss';
+import Button from 'react-bootstrap/Button';
 
 class Timer extends React.Component<TimerProps, State> {
   interval = 0;
@@ -151,23 +152,24 @@ class Timer extends React.Component<TimerProps, State> {
     <main>
       <div className={`timer ${this.isAnyTimerRunning() ? 'timer--dimmed' : ''}`}>
         <div className="timer__button-wrapper">
-          <button className={'timer__button'} onClick={this.startNewPomodoro}>
+          <Button variant="outline-dark" onClick={this.startNewPomodoro}>
             Pomodoro
-          </button>
-          <button className="timer__button" onClick={() => this.startNewBreak(initialConfig.shortBreakTime)}>
+          </Button>
+          <Button variant="outline-dark" onClick={() => this.startNewBreak(initialConfig.shortBreakTime)}>
             Short Break
-          </button>
-          <button className="timer__button" onClick={() => this.startNewBreak(initialConfig.longBreakTime)}>
+          </Button>
+          <Button variant="outline-dark" onClick={() => this.startNewBreak(initialConfig.longBreakTime)}>
             Long Break
-          </button>
+          </Button>
         </div>
         <Time time={msToTime(this.state.timerTime)} />
-        <button
-          className="timer__button timer__button--stop"
+        <Button
+          variant="outline-dark"
+          className="timer__button"
           onClick={this.isAnyTimerRunning() ? this.pauseCounter : this.startCounter}
         >
           {this.isAnyTimerRunning() ? 'stop' : 'start'}
-        </button>
+        </Button>
         <Info currentState={this.state.timerState} />
       </div>
     </main>

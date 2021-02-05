@@ -1,7 +1,7 @@
-@import "../../../shared/styles/shared.scss";
+@import '../../../shared/styles/shared.scss';
 
 .time {
-  @include font-fira-sans($size: 80px);
+  @include font-fira-sans($size: 40px);
   align-items: center;
   display: flex;
   justify-content: center;

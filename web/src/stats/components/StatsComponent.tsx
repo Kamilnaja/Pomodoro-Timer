@@ -1,6 +1,7 @@
 import { getCurrentMonth, getCurrentYear } from '../../shared/scripts/utils';
 import { StatsComponentProps } from '../store/interfaces/statsInterfaces';
 import './stats.component.scss';
+import Table from 'react-bootstrap/Table';
 
 let pageMonth = getCurrentMonth();
 let pageYear = getCurrentYear();
@@ -42,7 +43,7 @@ export const StatsComponent = (results: StatsComponentProps) => {
           next &gt;
         </button>
       </div>
-      <table className="stats__table table">
+      <Table className="stats__table table">
         <caption>
           Results from: {pageMonth + 1}.{pageYear}
         </caption>
@@ -60,7 +61,7 @@ export const StatsComponent = (results: StatsComponentProps) => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </div>
   );
 };

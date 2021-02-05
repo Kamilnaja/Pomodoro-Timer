@@ -1,4 +1,4 @@
-import { openModal } from '../../../shared/store/interfaces/modalInterface';
+import { openModal } from '../../shared/store/interfaces/modalInterface';
 
 export interface HeaderProps {
   handleOpenModal: openModal;

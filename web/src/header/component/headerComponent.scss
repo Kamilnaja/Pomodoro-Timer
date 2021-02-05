@@ -2,25 +2,26 @@
 
 .header {
   display: flex;
-  height: 50px;
+  height: 40px;
   justify-content: space-between;
   margin: 0 auto;
   max-width: 900px;
 
   & &__title {
-    @include font-fira-sans($colour: $button-bg, $size: 20px);
+    @include font-fira-sans($size: 20px);
     align-items: center;
     display: flex;
+    margin-bottom: 0;
   }
 
   & &__buttons-wrapper {
     align-items: center;
     display: flex;
-  }
-}
 
-.button {
-  @include button($color: white, $bgColor: transparent);
+    li {
+      list-style-type: none;
+    }
+  }
 }
 
 @media (max-width: $sm) {

@@ -1,8 +1,10 @@
-@import "../../shared/styles/shared.scss";
+@import '../../shared/styles/shared.scss';
 
 .timer {
+  align-items: center;
   background-color: $bg-accent;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   max-width: $page-width;
   padding-top: 30px;
@@ -12,15 +14,7 @@
     display: flex;
     justify-content: space-evenly;
     text-align: center;
-  }
-
-  & &__button {
-    @include button($color: $text-primary, $bgColor: $button-bg);
-
-    &--stop {
-      margin: 0 auto;
-      padding: 15px 30px;
-    }
+    width: 100%;
   }
 
   &--dimmed {
