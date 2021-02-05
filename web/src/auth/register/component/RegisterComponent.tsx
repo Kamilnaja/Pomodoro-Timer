@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { ValidationMessage } from 'shared/components/validationMessage/ValidationMessage';
-import { Registration } from '../../../../../types/interfaces';
+import { Registration } from '../../../../../types/authInterfaces';
 import { RegisterComponentProps, RegisterFormData } from '../../store/interfaces/registerPropsInterface';
 import './registerComponent.scss';
 

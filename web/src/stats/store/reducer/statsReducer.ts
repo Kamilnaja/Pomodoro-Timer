@@ -1,5 +1,5 @@
 import { ActionWithPayload } from 'shared/store/interfaces/actions/actionInterface';
-import StatsSearchResult from '../../../../../types/statistics.interfaces';
+import StatsSearchResult from '../../../../../types/statisticsInterfaces';
 import { StatsAction } from '../actions/statsActions';
 import { StatsState } from '../interfaces/statsInterfaces';
 

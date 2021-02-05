@@ -1,7 +1,7 @@
 import express, { NextFunction } from 'express';
 import bcrypt from 'bcrypt';
 import { loginUser, registerUser } from '../services/auth.service';
-import { Login as LoginEnum } from '../../../types/interfaces';
+import { Login as LoginEnum } from '../../../types/authInterfaces';
 import { Request } from '../models/auth/request.interface';
 
 const router = express.Router();

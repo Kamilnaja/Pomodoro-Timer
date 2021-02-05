@@ -1,11 +1,11 @@
-import { ModalType } from 'shared/store/enums/modalEnum';
-import { openModal } from '../../shared/store/interfaces/modalInterface';
-import './headerComponent.scss';
 import Button from 'react-bootstrap/Button';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import { TodosContainer } from '../../todos/containers/TodosContainer';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { ModalType } from 'shared/store/enums/modalEnum';
 import Timer from 'timer/containers/Timer';
+import { openModal } from '../../shared/store/interfaces/modalInterface';
 import StatsContainer from '../../stats/containers/StatsContainer';
+import { TodosContainer } from '../../tasksAndNotes/calendar/container/TodosContainer';
+import './headerComponent.scss';
 
 export interface HeaderProps {
   handleOpenModal: openModal;
@@ -41,7 +41,14 @@ export const HeaderComponent = (props: HeaderProps) => (
                 </Button>
               </li>
               <li>
-                <Link to="/todos">Todos</Link>
+                <Button variant="link" href="/todos">
+                  Todos
+                </Button>
+              </li>
+              <li>
+                <Button variant="link" href="/stats">
+                  Stats
+                </Button>
               </li>
               <li>
                 <Button variant="link" onClick={() => props.handleOpenModal(ModalType.LOGOUT)}>

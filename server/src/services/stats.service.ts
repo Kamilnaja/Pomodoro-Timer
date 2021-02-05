@@ -1,6 +1,6 @@
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
-import StatsSearchResult from '../../../types/statistics.interfaces';
+import StatsSearchResult from '../../../types/statisticsInterfaces';
 import client from '../db/db';
 import { Request } from '../models/auth/request.interface';
 

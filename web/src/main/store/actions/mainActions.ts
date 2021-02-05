@@ -3,7 +3,7 @@ import { config } from 'shared/settings/initialConfig';
 import { ActionWithPayload } from 'shared/store/interfaces/actions/actionInterface';
 import { store } from 'shared/store/reducers/reducer';
 import { handleGetStatsInPeriod } from 'stats/store/actions/statsActions';
-import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
+import { getCurrentMonth, getCurrentYear } from 'shared/scripts/utils';
 
 export enum MainAction {
   SAVE_POMODORO = 'SAVE_POMODORO',

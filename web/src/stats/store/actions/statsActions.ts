@@ -2,7 +2,7 @@ import { Action } from 'redux';
 import { config } from 'shared/settings/initialConfig';
 import { ActionWithPayload } from 'shared/store/interfaces/actions/actionInterface';
 import { store } from 'shared/store/reducers/reducer';
-import StatsSearchResult from '../../../../../types/statistics.interfaces';
+import StatsSearchResult from '../../../../../types/statisticsInterfaces';
 
 export enum StatsAction {
   GET_STATISTIC_IN_PERIOD = 'GET_STATISTIC_IN_PERIOD',

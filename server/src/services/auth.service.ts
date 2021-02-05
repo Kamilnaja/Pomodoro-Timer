@@ -3,7 +3,7 @@ import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import jwt, { JsonWebTokenError, NotBeforeError, TokenExpiredError } from 'jsonwebtoken';
 import { QueryResult } from 'pg';
-import { AuthError, ErrorCodes, Login, LoginResponse, Registration } from '../../../types/interfaces';
+import { AuthError, ErrorCodes, Login, LoginResponse, Registration } from '../../../types/authInterfaces';
 import pool from '../db/db';
 import { Request } from '../models/auth/request.interface';
 

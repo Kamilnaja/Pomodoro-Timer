@@ -1,4 +1,4 @@
-import { Result } from '../../../../../types/statistics.interfaces';
+import { Result } from '../../../../../types/statisticsInterfaces';
 
 export type HandleGetStats = (year: number, month: number) => void;
 

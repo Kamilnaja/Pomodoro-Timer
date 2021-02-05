@@ -1,4 +1,4 @@
-import { AuthError } from '../../../../../types/interfaces';
+import { AuthError } from '../../../../../types/authInterfaces';
 
 export interface AuthState {
   isLoading: boolean;

@@ -1,4 +1,4 @@
-import { Registration } from '../../../../../types/interfaces';
+import { Registration } from '../../../../../types/authInterfaces';
 import { AuthState } from './authState';
 
 export interface RegisterComponentProps {
