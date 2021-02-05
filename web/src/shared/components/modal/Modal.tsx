@@ -7,7 +7,7 @@ import Settings from '../../../settings/Settings';
 import { ModalType as ModalEnum, ModalType } from '../../store/enums/modalEnum';
 import { ModalProps } from '../../store/interfaces/modalInterface';
 import './modal.scss';
-import { CreatedModal } from './modalInterface';
+import { CreatedModal } from './ModalInterface';
 
 export const Modal = (props: ModalProps) => {
   const createModalBodyFactory = (modalType: ModalType): CreatedModal => {

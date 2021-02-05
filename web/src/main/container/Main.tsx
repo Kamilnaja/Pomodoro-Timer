@@ -4,8 +4,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'shared/components/modal/Modal';
 import { ModalType as ModalEnum } from 'shared/store/enums/modalEnum';
-import StatsContainer from 'stats/containers/StatsContainer';
-import Timer from 'timer/containers/Timer';
 import { AuthState } from '../../auth/store/interfaces/authState';
 import { closeModal, openModal } from '../../shared/store/interfaces/modalInterface';
 import { MainProps, MainState } from '../store/interfaces/mainPropsInterface';
@@ -35,8 +33,6 @@ class Main extends React.Component<MainProps, MainState> {
   render = () => (
     <div className="app">
       <HeaderContainer handleOpenModal={this.handleOpenModal} isLoggedIn={this.props.auth.isLoggedIn} />
-      <Timer />
-      {this.props.auth.isLoggedIn && <StatsContainer />}
       <Modal modalType={this.state.openedModal} closeModal={this.handleCloseModal} />
     </div>
   );
