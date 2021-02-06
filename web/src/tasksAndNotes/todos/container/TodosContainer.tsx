@@ -18,7 +18,12 @@ class TodosContainer extends Component<TodosContainerProps> {
     } else if (this.props.todosState.isLoading) {
       return <Loader />;
     } else {
-      return <TodosComponent todos={this.props.todosState.todos} isAddingTaskActive={false} />;
+      return (
+        <TodosComponent
+          todos={this.props.todosState.todos}
+          isAddingTaskActive={this.props.todosState.isAddingTaskActive}
+        />
+      );
     }
   }
 }
