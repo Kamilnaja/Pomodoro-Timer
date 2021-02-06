@@ -1,10 +1,10 @@
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
-import { TodoRequestBody, TodosSearchResults } from '../../../types/tasksAndNotesInterfaces';
+import { TaskSearchResults, TaskRequestBody } from '../../../types/tasksAndNotesInterfaces';
 import client from '../db/db';
 import { Request as RequestWithBody } from '../models/auth/request.interface';
 
-export const getTodos = async (req: RequestWithBody<never>, res: Response<TodosSearchResults>, next: NextFunction) => {
+export const getTodos = async (req: RequestWithBody<never>, res: Response<TaskSearchResults>, next: NextFunction) => {
   const sql = `SELECT id, title, note, datecreated "dateCreated", isDone "isDone" 
               FROM todos 
               WHERE userID = ($1)
@@ -20,7 +20,7 @@ export const getTodos = async (req: RequestWithBody<never>, res: Response<TodosS
   }
 };
 
-export const handleAddTodo = async (req: RequestWithBody<TodoRequestBody>, res: Response, next: NextFunction) => {
+export const handleAddTodo = async (req: RequestWithBody<TaskRequestBody>, res: Response, next: NextFunction) => {
   const { title, note, isDone } = req.body;
   const userId = req.user.id;
 

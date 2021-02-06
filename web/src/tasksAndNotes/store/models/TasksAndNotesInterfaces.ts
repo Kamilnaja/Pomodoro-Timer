@@ -1,9 +1,9 @@
-import { CalendarEntry, Note, Todo } from '../../../../../types/tasksAndNotesInterfaces';
+import { Task } from '../../../../../types/tasksAndNotesInterfaces';
 
 export interface TasksAndNotesState {
-  todos: Todo[];
-  notes: Note[];
-  calendarEntries: CalendarEntry[];
+  todos: Task[];
+  notes: Task[];
+  calendarEntries: Task[];
   isLoading: boolean;
   error: any;
   isAddingTaskActive: boolean;

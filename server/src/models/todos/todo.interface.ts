@@ -1,5 +1,5 @@
-import { Todo } from '../../../../types/tasksAndNotesInterfaces';
+import { Task } from '../../../../types/tasksAndNotesInterfaces';
 
 export interface TodoRequest {
-  body: Todo;
+  body: Task;
 }

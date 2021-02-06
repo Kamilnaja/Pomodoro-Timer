@@ -1,32 +1,31 @@
 import { SearchResult } from './commonInterfaces';
 
-interface BaseTask {
+export enum TaskType {
+  CALENDAR,
+  TODO,
+  NOTE,
+}
+
+export interface Task {
   id: string;
+  isDone: boolean;
   title: string;
   note: string;
   dateCreated: Date;
-}
-
-export interface Todo extends BaseTask {
-  subtasks: Todo[];
-  isDone: boolean;
-}
-
-export interface Note extends BaseTask {}
-
-export interface CalendarEntry extends BaseTask {
+  subtasks: Task[];
+  type: TaskType;
   dueDate: Date;
-  isDone: boolean;
 }
 
-export interface NotesSearchResults extends SearchResult<Note> {}
+export interface TaskSearchResults extends SearchResult<Task> {}
 
-export interface TodosSearchResults extends SearchResult<Todo> {}
-
-export interface TodoRequestBody {
+export interface TaskRequestBody {
   id?: string;
+  isDone: boolean;
   title: string;
-  note?: string;
-  dateCreated?: Date;
-  isDone?: boolean;
+  note: string;
+  dateCreated: Date;
+  subtasks: Task[];
+  type: TaskType;
+  dueDate: Date;
 }

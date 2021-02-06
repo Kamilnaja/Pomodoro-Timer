@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-export const SidebarComponent = () => (
+export const SidebarComponent = (props: { handleOpenNewTask: () => void }) => (
   <ul className="list-unstyled">
     <li>
-      <Button>Add new task</Button>
+      <Button onClick={() => props.handleOpenNewTask()}>Add new task</Button>
       <hr />
     </li>
     <li tabIndex={0}>Todos</li>

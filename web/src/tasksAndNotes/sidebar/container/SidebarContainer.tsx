@@ -1,11 +1,15 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {TasksAndNotesState} from '../../store/models/TasksAndNotesInterfaces';
-import {SidebarComponent} from '../component/SidebarComponent';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { TasksAndNotesState } from '../../store/models/TasksAndNotesInterfaces';
+import { SidebarComponent } from '../component/SidebarComponent';
 
 export class SidebarContainer extends Component {
+  handleOpenNewTask = () => {
+    console.log('adding');
+  };
+
   render() {
-    return <SidebarComponent />;
+    return <SidebarComponent handleOpenNewTask={this.handleOpenNewTask} />;
   }
 }
 

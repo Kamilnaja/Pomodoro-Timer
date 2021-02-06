@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { Note } from '../../../../../types/tasksAndNotesInterfaces';
+import { Task } from '../../../../../types/tasksAndNotesInterfaces';
 import { ActionWithPayload } from '../../../shared/store/interfaces/actions/actionInterface';
 
 export enum NotesActions {
@@ -12,7 +12,7 @@ const getNotes = (): Action<NotesActions> => ({
   type: NotesActions.GET_NOTES,
 });
 
-const getNotesucces = (payload: Note[]): ActionWithPayload<NotesActions, Note[]> => ({
+const getNotesucces = (payload: Task[]): ActionWithPayload<NotesActions, Task[]> => ({
   type: NotesActions.GET_NOTES_SUCCES,
   payload,
 });

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
-import { Todo } from '../../../../../../types/tasksAndNotesInterfaces';
+import { Task } from '../../../../../../types/tasksAndNotesInterfaces';
 
-export const CardComponent = (props: { todo?: Todo }) => (
+export const CardComponent = (props: { todo?: Task }) => (
   <Card>
     <Form>
       <Card.Header>

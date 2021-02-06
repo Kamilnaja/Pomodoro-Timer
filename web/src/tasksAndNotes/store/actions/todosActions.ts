@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { Todo, TodosSearchResults } from '../../../../../types/tasksAndNotesInterfaces';
+import { Task, TaskSearchResults } from '../../../../../types/tasksAndNotesInterfaces';
 import { config } from '../../../shared/settings/initialConfig';
 import { ActionWithPayload } from '../../../shared/store/interfaces/actions/actionInterface';
 import { store } from '../../../shared/store/reducers/reducer';
@@ -18,7 +18,7 @@ const addTodo = (): Action<TodosActions> => ({
   type: TodosActions.ADD_TODO,
 });
 
-const addTodoSuccess = (payload: Todo[]): ActionWithPayload<TodosActions, Todo[]> => ({
+const addTodoSuccess = (payload: Task[]): ActionWithPayload<TodosActions, Task[]> => ({
   type: TodosActions.ADD_TODO_SUCCESS,
   payload,
 });
@@ -32,7 +32,7 @@ const getTodos = (): Action<TodosActions> => ({
   type: TodosActions.GET_TODOS,
 });
 
-const getTodosSuccess = (payload: TodosSearchResults): ActionWithPayload<TodosActions, TodosSearchResults> => ({
+const getTodosSuccess = (payload: TaskSearchResults): ActionWithPayload<TodosActions, TaskSearchResults> => ({
   type: TodosActions.GET_TODOS_SUCCESS,
   payload,
 });
@@ -47,11 +47,11 @@ const getTodosError = (payload: any): ActionWithPayload<TodosActions, any> => ({
 export const handleGetTodos = () => (dispatch: (args: Action) => void) => {
   dispatch(getTodos());
   makeGetTodosRequest()
-    .then((payload: TodosSearchResults) => dispatch(getTodosSuccess(payload)))
+    .then((payload: TaskSearchResults) => dispatch(getTodosSuccess(payload)))
     .catch(err => getTodosError(err));
 };
 
-const makeGetTodosRequest = async (): Promise<TodosSearchResults> => {
+const makeGetTodosRequest = async (): Promise<TaskSearchResults> => {
   const token = store.getState().auth.token;
 
   const response = await fetch(`${config.url.API_URL}/todos`, {
