@@ -3,9 +3,22 @@ import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import jwt, { JsonWebTokenError, NotBeforeError, TokenExpiredError } from 'jsonwebtoken';
 import { QueryResult } from 'pg';
-import { AuthError, ErrorCodes, Login, LoginResponse, Registration } from '../../../types/authInterfaces';
+import {
+  AuthError,
+  ErrorCodes,
+  Login as LoginInterface,
+  LoginResponse,
+  Registration,
+} from '../../../types/authInterfaces';
 import pool from '../db/db';
+import { Login } from '../models/auth/login.interface';
 import { Request } from '../models/auth/request.interface';
+
+export const handleRegister = (req: Request, res: Response, next: NextFunction) => {
+  const rounds = 10;
+  const hash = bcrypt.hashSync(req.body.password, rounds);
+  registerUser(hash, req, res, next);
+};
 
 export const registerUser = async (
   userHash: string,
@@ -47,7 +60,17 @@ const handleRegisterError = (err: { stack: any; constraint: string }, res: Respo
   }
 };
 
-export const loginUser = async (req: Login, res: Response<LoginResponse | AuthError>): Promise<void> => {
+export const handlePostLogin = (req: Login, res: Response, next: NextFunction) => {
+  const { login, password } = req.body;
+
+  if (login && password) {
+    loginUser(req.body, res);
+  } else {
+    res.status(500).send('error while login, no password or login');
+  }
+};
+
+export const loginUser = async (req: LoginInterface, res: Response<LoginResponse | AuthError>): Promise<void> => {
   const query = 'SELECT * FROM users where login = $1 LIMIT 1';
 
   try {
