@@ -1,11 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Error } from 'shared/components/error/Error';
-import { Loader } from 'shared/components/loader/Loader';
-import { getCurrentMonth, getCurrentYear } from '../../shared/scripts/utils';
-import { StatsComponent } from '../components/StatsComponent';
-import { handleGetStatsInPeriod } from '../store/actions/statsActions';
-import { StatsContainerProps, StatsState } from '../store/interfaces/statsInterfaces';
+import {connect} from 'react-redux';
+import {Error} from 'shared/components/error/Error';
+import {Loader} from 'shared/components/loader/Loader';
+import {getCurrentMonth, getCurrentYear} from '../../shared/scripts/utils';
+import {StatsComponent} from '../components/StatsComponent';
+import {handleGetStatsInPeriod} from '../store/actions/statsActions';
+import {StatsContainerProps, StatsState} from './statsContainerInterfaces';
 
 class StatsContainer extends React.Component<StatsContainerProps> {
   componentDidMount() {

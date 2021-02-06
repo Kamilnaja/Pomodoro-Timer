@@ -1,7 +1,7 @@
-import { getCurrentMonth, getCurrentYear } from '../../shared/scripts/utils';
-import { StatsComponentProps } from '../store/interfaces/statsInterfaces';
-import './stats.component.scss';
 import Table from 'react-bootstrap/Table';
+import {getCurrentMonth, getCurrentYear} from '../../shared/scripts/utils';
+import './stats.component.scss';
+import {StatsComponentProps} from './statsComponentInterface';
 
 let pageMonth = getCurrentMonth();
 let pageYear = getCurrentYear();
