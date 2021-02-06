@@ -22,7 +22,7 @@ export const TodosComponent = (props: { todos: Todo[] }) => (
               <div>{item.note}</div>
               <div>{item.dateCreated}</div>
               <div>{item.isDone}</div>
-              <Button variant="success">Add subtask</Button>
+              <Button variant="success">+</Button>
             </Card.Body>
           </Card>
         </li>

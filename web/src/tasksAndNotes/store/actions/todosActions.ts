@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import TodosSearchResults, { Todo } from '../../../../../types/tasksAndNotesInterfaces';
+import { Todo, TodosSearchResults } from '../../../../../types/tasksAndNotesInterfaces';
 import { config } from '../../../shared/settings/initialConfig';
 import { ActionWithPayload } from '../../../shared/store/interfaces/actions/actionInterface';
 import { store } from '../../../shared/store/reducers/reducer';

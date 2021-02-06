@@ -17,6 +17,14 @@ export interface CalendarEntry extends BaseTask {
   isDone: boolean;
 }
 
-export default interface TodosSearchResults {
+export interface TodosSearchResults {
   todos: Todo[];
+}
+
+export interface TodoRequestBody {
+  id?: string;
+  title: string;
+  note?: string;
+  dateCreated?: Date;
+  isDone?: boolean;
 }

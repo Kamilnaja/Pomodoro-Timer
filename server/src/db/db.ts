@@ -42,7 +42,7 @@ queries.forEach((tableQuery: TableQuery) => {
     if (err) {
       console.log(`error while creating db: ${err.message}`);
     } else {
-      console.log(`table created: ${tableQuery.tableName}`);
+      console.log(`table created: ${tableQuery.tableName} !`);
     }
   });
 });
