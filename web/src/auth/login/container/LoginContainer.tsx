@@ -5,12 +5,12 @@ import { sendLoginForm } from '../../store/actions/authActions';
 import { AuthState } from '../../store/interfaces/authState';
 import { LoginComponent } from '../component/LoginComponent';
 
-interface LoginProps {
+interface LoginContainerProps {
   handleSubmit: (arg: Login) => void;
   auth: AuthState;
 }
 
-class LoginContainer extends React.Component<LoginProps> {
+class LoginContainer extends React.Component<LoginContainerProps> {
   handleSubmit = (data: Login) => {
     const { login, password } = data;
     this.props.handleSubmit({

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { CalendarContainer } from '../../calendar/container/CalendarContainer';
+import CalendarContainer from '../../calendar/container/CalendarContainer';
 import NotesContainer from '../../notes/container/NotesContainer';
-import { SidebarContainer } from '../../sidebar/container/SidebarContainer';
+import SidebarContainer from '../../sidebar/container/SidebarContainer';
 import TodosContainer from '../../todos/container/TodosContainer';
 
 export const TaskAndNotesComponent = () => {

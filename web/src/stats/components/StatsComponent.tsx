@@ -1,7 +1,7 @@
 import Table from 'react-bootstrap/Table';
-import {getCurrentMonth, getCurrentYear} from '../../shared/scripts/utils';
+import { getCurrentMonth, getCurrentYear } from '../../shared/scripts/utils';
 import './stats.component.scss';
-import {StatsComponentProps} from './statsComponentInterface';
+import { StatsComponentProps } from './statsComponentProps';
 
 let pageMonth = getCurrentMonth();
 let pageYear = getCurrentYear();

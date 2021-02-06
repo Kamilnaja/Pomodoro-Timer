@@ -5,10 +5,14 @@ export enum TaskActions {
   HIDE_ADD_NEW_TASK = 'Hide add new task',
 }
 
-export const showAddNewTask = (): Action<TaskActions> => ({
+const showAddNewTask = (): Action<TaskActions> => ({
   type: TaskActions.SHOW_ADD_NEW_TASK,
 });
 
-export const hideAddNewTask = (): Action<TaskActions> => ({
+const hideAddNewTask = (): Action<TaskActions> => ({
   type: TaskActions.HIDE_ADD_NEW_TASK,
 });
+
+export const handleShowAddNewTask = () => (dispatch: (action: Action<any>) => void) => {
+  dispatch(showAddNewTask());
+};

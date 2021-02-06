@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import { handleShowAddNewTask } from '../../store/actions/taskActions';
 import { TasksAndNotesState } from '../../store/models/TasksAndNotesInterfaces';
 import { SidebarComponent } from '../component/SidebarComponent';
+import { SidebarContainerProps } from './sidebarContainerInterface';
 
-export class SidebarContainer extends Component {
+class SidebarContainer extends React.Component<SidebarContainerProps> {
   handleOpenNewTask = () => {
-    console.log('adding');
+    this.props.handleOpenNewTask();
   };
 
   render() {
@@ -13,8 +15,13 @@ export class SidebarContainer extends Component {
   }
 }
 
-const mapStateToProps = (state: TasksAndNotesState) => ({});
+const mapStateToProps = (state: TasksAndNotesState) => {
+  const isAddingTaskActive = state.isAddingTaskActive;
+  return { isAddingTaskActive };
+};
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  handleOpenNewTask: handleShowAddNewTask,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidebarContainer);
