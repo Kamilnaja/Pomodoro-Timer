@@ -10,8 +10,9 @@ const createTableSql = 'CREATE TABLE IF NOT EXISTS';
 const queries: TableQuery[] = [
   {
     query: `${createTableSql} pomodoros (
-    userID text,
-    date   date)`,
+      userID text,
+      date   date
+    )`,
     tableName: 'pomodoros',
   },
   {
@@ -27,7 +28,7 @@ const queries: TableQuery[] = [
   {
     query: `${createTableSql} todos (
       id           SERIAL PRIMARY KEY,
-      dateCreated  date,
+      dateCreated  timestamp,
       userID       text,
       title        text,
       note         text,

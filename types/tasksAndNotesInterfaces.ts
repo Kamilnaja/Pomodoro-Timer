@@ -18,7 +18,7 @@ export interface CalendarEntry extends BaseTask {
 }
 
 export interface TodosSearchResults {
-  todos: Todo[];
+  result: Todo[];
 }
 
 export interface TodoRequestBody {

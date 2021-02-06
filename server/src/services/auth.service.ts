@@ -14,7 +14,7 @@ import pool from '../db/db';
 import { Login } from '../models/auth/login.interface';
 import { Request } from '../models/auth/request.interface';
 
-export const handleRegister = (req: Request, res: Response, next: NextFunction) => {
+export const handleRegister = (req: Request<any>, res: Response, next: NextFunction) => {
   const rounds = 10;
   const hash = bcrypt.hashSync(req.body.password, rounds);
   registerUser(hash, req, res, next);
@@ -22,7 +22,7 @@ export const handleRegister = (req: Request, res: Response, next: NextFunction) 
 
 export const registerUser = async (
   userHash: string,
-  req: Request,
+  req: Request<any>,
   res: Response<{ message: string } | AuthError>,
   next: NextFunction,
 ): Promise<void> => {
@@ -120,7 +120,7 @@ const checkPassword = async (
   }
 };
 
-export const authenticateJWT = (req: Request, res: any, next: () => void) => {
+export const authenticateJWT = (req: Request<any>, res: any, next: () => void) => {
   const authHeader = req.headers.authorization;
 
   if (authHeader) {

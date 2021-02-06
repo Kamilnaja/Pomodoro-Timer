@@ -1,5 +1,5 @@
 import { Todo } from '../../../../../types/tasksAndNotesInterfaces';
-import { Button, Card } from 'react-bootstrap';
+import { CardComponent } from './card/CardComponent';
 
 const toggleIsChecked = () => {
   console.log('checking');
@@ -8,25 +8,24 @@ const toggleIsChecked = () => {
 export const TodosComponent = (props: { todos: Todo[] }) => (
   <div>
     <h2>Your things to do</h2>
-
+    {!props.todos.length && <div>You have 0 todos, please add something</div>}
     <ul className="list-unstyled">
       {props.todos?.map((item: Todo, idx: number) => (
         <li key={idx} className="mb-4" tabIndex={0}>
-          <Card>
-            <Card.Header>
-              <input type="checkbox" checked={item.isDone} onChange={() => toggleIsChecked()} />
-              <span>{item.id}</span>
-              <span>{item.title}</span>
-            </Card.Header>
-            <Card.Body>
-              <div>{item.note}</div>
-              <div>{item.dateCreated}</div>
-              <div>{item.isDone}</div>
-              <Button variant="success">+</Button>
-            </Card.Body>
-          </Card>
+          <CardComponent todo={item}></CardComponent>
         </li>
       ))}
+    </ul>
+    <h2>Done tasks</h2>
+    <ul className="list-unstyled">
+      {props.todos
+        ?.filter(v => v.isDone)
+        .map((item: Todo, idx: number) => (
+          <li key={idx} className="mb-4">
+            <CardComponent todo={item}></CardComponent>
+          </li>
+        ))}
+      <li></li>
     </ul>
   </div>
 );

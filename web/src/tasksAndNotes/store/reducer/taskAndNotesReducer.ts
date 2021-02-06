@@ -6,9 +6,9 @@ import { TasksAndNotesState } from '../models/TasksAndNotesInterfaces';
 export const initialState: TasksAndNotesState = {
   isLoading: false,
   error: '',
-  todos: null,
-  notes: null,
-  calendarEntries: null,
+  todos: [],
+  notes: [],
+  calendarEntries: [],
 };
 
 export const taskAndNotesReducer = (
@@ -25,7 +25,7 @@ export const taskAndNotesReducer = (
       return {
         ...state,
         isLoading: false,
-        todos: action.payload.todos,
+        todos: action.payload.result,
       };
     case TodosActions.GET_TODOS_ERROR:
       return {

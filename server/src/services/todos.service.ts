@@ -1,31 +1,23 @@
 import { NextFunction } from 'express';
-import { Request, Response } from 'express-serve-static-core';
-import { Todo, TodoRequestBody, TodosSearchResults } from '../../../types/tasksAndNotesInterfaces';
+import { Response } from 'express-serve-static-core';
+import { TodoRequestBody, TodosSearchResults } from '../../../types/tasksAndNotesInterfaces';
 import client from '../db/db';
 import { Request as RequestWithBody } from '../models/auth/request.interface';
 
-export const getTodos = (req: Request, res: Response<TodosSearchResults>, next: NextFunction) => {
-  const todosList: Todo[] = [];
-  todosList.push({
-    dateCreated: new Date(),
-    id: '1',
-    isDone: false,
-    note: 'Lorem ipsum dolor sit amet',
-    subtasks: [],
-    title: 'Hello world',
-  });
+export const getTodos = async (req: RequestWithBody<never>, res: Response<TodosSearchResults>, next: NextFunction) => {
+  const sql = `SELECT id, title, note, dateCreated 
+              FROM todos 
+              WHERE userID = ($1)
+              ORDER BY dateCreated DESC`;
+  const userId = req.user.id;
 
-  todosList.push({
-    dateCreated: new Date(),
-    id: '2',
-    isDone: true,
-    note: 'Niedaleko Damaszku siedział diabeł na daszku',
-    subtasks: [],
-    title: 'Lorem ipsum dolor',
-  });
-  res.json({
-    todos: todosList,
-  });
+  try {
+    const queryResult = await client.query(sql, [userId]);
+    res.json({ result: queryResult.rows });
+  } catch (err) {
+    console.log(`error when getting todos ${err}`);
+    next(err);
+  }
 };
 
 export const handleAddTodo = async (req: RequestWithBody<TodoRequestBody>, res: Response, next: NextFunction) => {

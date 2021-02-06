@@ -4,7 +4,7 @@ import StatsSearchResult from '../../../types/statisticsInterfaces';
 import client from '../db/db';
 import { Request } from '../models/auth/request.interface';
 
-export const handleAddPomodoro = async (req: Request<never>, res: Response<Error | void, number>) => {
+export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | void, number>) => {
   const sql = 'INSERT INTO pomodoros (userID, date) VALUES ($1, $2)';
 
   const values = [req.user.id, new Date()];
@@ -17,7 +17,10 @@ export const handleAddPomodoro = async (req: Request<never>, res: Response<Error
   }
 };
 
-const selectDate = "SELECT TO_CHAR(date, 'DD-MM-YYYY') as date, COUNT (date) FROM pomodoros WHERE userID = ($1)";
+const selectDate = `SELECT TO_CHAR(date, 'DD-MM-YYYY') as date, 
+                    COUNT (date) 
+                    FROM pomodoros 
+                    WHERE userID = ($1)`;
 const groupAndOrder = 'GROUP BY date ORDER BY date DESC';
 
 export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<StatsSearchResult>, next: NextFunction) => {
@@ -39,6 +42,7 @@ export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<Stats
 
 const searchResultsInDb = async (userId: string, date: string, res: Response<StatsSearchResult>) => {
   const sql = `${selectDate} AND TO_CHAR(date, 'YYYY-MM') = ($2) ${groupAndOrder}`;
+
   try {
     const queryResult = await client.query(sql, [userId.toString(), date]);
     res.json({ result: queryResult.rows });
