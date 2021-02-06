@@ -1,6 +1,7 @@
 import { NextFunction } from 'express';
 import { Request, Response } from 'express-serve-static-core';
 import TodosSearchResults, { Todo } from '../../../types/tasksAndNotesInterfaces';
+import { TodoRequest } from '../models/todos/todo.interface';
 
 export const getTodos = (req: Request, res: Response<TodosSearchResults>, next: NextFunction) => {
   const todosList: Todo[] = [];
@@ -24,4 +25,10 @@ export const getTodos = (req: Request, res: Response<TodosSearchResults>, next: 
   res.json({
     todos: todosList,
   });
+};
+
+export const handleAddTodo = async (req: TodoRequest, res: Response) => {
+  const { title, note, subtasks } = req.body;
+
+  res.send('handling post');
 };

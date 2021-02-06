@@ -1,33 +1,50 @@
 import client from './client';
 
-client.query(
-  `CREATE TABLE IF NOT EXISTS pomodoros (
-  userID text,
-  date   date)`,
-  (err: Error) => {
-    if (err) {
-      console.log(`error with db: ${err.message}`);
-    } else {
-      console.log('table created');
-    }
-  },
-);
+type TableQuery = {
+  query: string;
+  tableName: string;
+};
 
-client.query(
-  `CREATE TABLE IF NOT EXISTS users (
-          id           SERIAL PRIMARY KEY,
-          dateCreated  date,
-          login        text UNIQUE,
-          email        text UNIQUE,
-          password     text NOT NULL
-        )`,
-  (err: Error) => {
-    if (err) {
-      console.log(`error with db: ${err.message}`);
-    } else {
-      console.log('users table created or updated');
-    }
+const createTableSql = 'CREATE TABLE IF NOT EXISTS';
+
+const queries: TableQuery[] = [
+  {
+    query: `${createTableSql} pomodoros (
+    userID text,
+    date   date)`,
+    tableName: 'pomodoros',
   },
-);
+  {
+    query: `${createTableSql} users (
+        id           SERIAL PRIMARY KEY,
+        dateCreated  date,
+        login        text UNIQUE,
+        email        text UNIQUE,
+        password     text NOT NULL
+      )`,
+    tableName: 'users',
+  },
+  {
+    query: `${createTableSql} todos (
+      id           SERIAL PRIMARY KEY,
+      dateCreated  date,
+      userID       text,
+      title        text,
+      note         text,
+      isDone       boolean
+    )`,
+    tableName: 'todos',
+  },
+];
+
+queries.forEach((tableQuery: TableQuery) => {
+  client.query(tableQuery.query, (err: Error) => {
+    if (err) {
+      console.log(`error while creating db: ${err.message}`);
+    } else {
+      console.log(`table created: ${tableQuery.tableName}`);
+    }
+  });
+});
 
 export default client;

@@ -1,5 +1,5 @@
-import { Login as LoginEnum } from '../../../../types/authInterfaces';
+import { Login as iLogin } from '../../../../types/authInterfaces';
 
 export interface Login {
-  body: LoginEnum;
+  body: iLogin;
 }
