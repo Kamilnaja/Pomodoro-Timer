@@ -5,6 +5,8 @@ import { CardComponent } from '../../shared/component/card/CardComponent';
 export const TodosComponent = (props: { todos: Todo[]; isAddingTaskActive: boolean }) => (
   <div>
     <h2>Your things to do</h2>
+    {props.isAddingTaskActive && <CardComponent></CardComponent>}
+
     {!props.todos.length && <div>You have 0 todos, please add something</div>}
     <ul className="list-unstyled">
       {props.todos?.map((item: Todo, idx: number) => (

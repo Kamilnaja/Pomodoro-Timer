@@ -1,5 +1,7 @@
+import { Action } from 'redux';
 import { ActionWithPayload } from 'shared/store/interfaces/actions/actionInterface';
 import { NotesActions } from '../actions/notesActions';
+import { TaskActions } from '../actions/taskActions';
 import { TodosActions } from '../actions/todosActions';
 import { TasksAndNotesState } from '../models/TasksAndNotesInterfaces';
 
@@ -14,7 +16,7 @@ export const initialState: TasksAndNotesState = {
 
 export const taskAndNotesReducer = (
   state = initialState,
-  action: ActionWithPayload<TodosActions | NotesActions, TodosActions | NotesActions | any>,
+  action: ActionWithPayload<TodosActions | NotesActions, any> | Action<TaskActions>,
 ): TasksAndNotesState => {
   switch (action.type) {
     case TodosActions.GET_TODOS:
@@ -42,12 +44,23 @@ export const taskAndNotesReducer = (
       return {
         ...state,
         isLoading: false,
-        todos: action.payload,
+        notes: action.payload,
       };
     case NotesActions.GET_NOTES_ERROR:
       return {
         ...state,
         isLoading: true,
+      };
+    case TaskActions.SHOW_ADD_NEW_TASK:
+      return {
+        ...state,
+        isAddingTaskActive: true,
+      };
+
+    case TaskActions.HIDE_ADD_NEW_TASK:
+      return {
+        ...state,
+        isAddingTaskActive: false,
       };
     default:
       return state;

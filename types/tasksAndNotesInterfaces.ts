@@ -1,3 +1,5 @@
+import { SearchResult } from './commonInterfaces';
+
 interface BaseTask {
   id: string;
   title: string;
@@ -17,9 +19,9 @@ export interface CalendarEntry extends BaseTask {
   isDone: boolean;
 }
 
-export interface TodosSearchResults {
-  result: Todo[];
-}
+export interface NotesSearchResults extends SearchResult<Note> {}
+
+export interface TodosSearchResults extends SearchResult<Todo> {}
 
 export interface TodoRequestBody {
   id?: string;
