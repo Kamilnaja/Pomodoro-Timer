@@ -1,7 +1,12 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
 export const SidebarComponent = () => (
-  <ul>
+  <ul className="list-unstyled">
+    <li>
+      <Button>Add new task</Button>
+      <hr />
+    </li>
     <li tabIndex={0}>Todos</li>
     <li tabIndex={0}>Notes</li>
     <li tabIndex={0}>Calendar</li>

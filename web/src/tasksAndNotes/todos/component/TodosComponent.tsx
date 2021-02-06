@@ -1,11 +1,8 @@
+import React from 'react';
 import { Todo } from '../../../../../types/tasksAndNotesInterfaces';
-import { CardComponent } from './card/CardComponent';
+import { CardComponent } from '../../shared/component/card/CardComponent';
 
-const toggleIsChecked = () => {
-  console.log('checking');
-};
-
-export const TodosComponent = (props: { todos: Todo[] }) => (
+export const TodosComponent = (props: { todos: Todo[]; isAddingTaskActive: boolean }) => (
   <div>
     <h2>Your things to do</h2>
     {!props.todos.length && <div>You have 0 todos, please add something</div>}
@@ -16,10 +13,12 @@ export const TodosComponent = (props: { todos: Todo[] }) => (
         </li>
       ))}
     </ul>
+
+    <hr />
     <h2>Done tasks</h2>
     <ul className="list-unstyled">
       {props.todos
-        ?.filter(v => v.isDone)
+        .filter(item => item.isDone === true)
         .map((item: Todo, idx: number) => (
           <li key={idx} className="mb-4">
             <CardComponent todo={item}></CardComponent>

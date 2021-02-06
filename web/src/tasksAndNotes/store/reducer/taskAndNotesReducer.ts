@@ -9,6 +9,7 @@ export const initialState: TasksAndNotesState = {
   todos: [],
   notes: [],
   calendarEntries: [],
+  isAddingTaskActive: false,
 };
 
 export const taskAndNotesReducer = (

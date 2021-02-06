@@ -9,17 +9,14 @@ export const TaskAndNotesComponent = () => {
   return (
     <Container>
       <Row>
-        <Col lg={3}>
+        <Col lg={2}>
           <SidebarContainer />
         </Col>
-        <Col lg={8}>
+        <Col lg={10}>
           <TodosContainer />
           <NotesContainer />
           <CalendarContainer />
         </Col>
-      </Row>
-      <Row>
-        <Col lg={12}>Task Preview</Col>
       </Row>
     </Container>
   );
