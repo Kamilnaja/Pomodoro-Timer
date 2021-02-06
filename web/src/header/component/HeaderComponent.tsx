@@ -1,10 +1,10 @@
 import Button from 'react-bootstrap/Button';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { ModalType } from 'shared/store/enums/modalEnum';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {ModalType} from 'shared/store/enums/modalEnum';
 import Timer from 'timer/containers/Timer';
-import { openModal } from '../../shared/store/interfaces/modalInterface';
+import {openModal} from '../../shared/store/interfaces/modalInterface';
 import StatsContainer from '../../stats/containers/StatsContainer';
-import { TodosContainer } from '../../tasksAndNotes/calendar/container/TodosContainer';
+import TaskAndNotesContainer from '../../tasksAndNotes/taskAndNotesWrapper/taskAndNotesContainer/TaskAndNotesContainer';
 import './headerComponent.scss';
 
 export interface HeaderProps {
@@ -41,8 +41,8 @@ export const HeaderComponent = (props: HeaderProps) => (
                 </Button>
               </li>
               <li>
-                <Button variant="link" href="/todos">
-                  Todos
+                <Button variant="link" href="/taskAndNotes">
+                  Tasks and notes
                 </Button>
               </li>
               <li>
@@ -61,14 +61,14 @@ export const HeaderComponent = (props: HeaderProps) => (
       </nav>
     </header>
     <Switch>
-      <Route path="/todos">
-        <TodosContainer></TodosContainer>
+      <Route path="/taskAndNotes">
+        <TaskAndNotesContainer />
       </Route>
       <Route path="/stats">
-        <StatsContainer></StatsContainer>
+        <StatsContainer />
       </Route>
       <Route path="/">
-        <Timer></Timer>
+        <Timer />
       </Route>
     </Switch>
   </Router>

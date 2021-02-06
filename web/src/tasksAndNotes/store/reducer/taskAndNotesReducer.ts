@@ -16,18 +16,18 @@ export const taskAndNotesReducer = (
   action: ActionWithPayload<TodosActions | NotesActions, TodosActions | NotesActions | any>,
 ): TasksAndNotesState => {
   switch (action.type) {
-    case TodosActions.GET_TODO:
+    case TodosActions.GET_TODOS:
       return {
         ...state,
         isLoading: true,
       };
-    case TodosActions.GET_TODO_SUCCESS:
+    case TodosActions.GET_TODOS_SUCCESS:
       return {
         ...state,
         isLoading: false,
         todos: action.payload,
       };
-    case TodosActions.GET_TODO_ERROR:
+    case TodosActions.GET_TODOS_ERROR:
       return {
         ...state,
         isLoading: true,
