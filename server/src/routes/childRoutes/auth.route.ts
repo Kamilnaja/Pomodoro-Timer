@@ -1,8 +1,8 @@
-import express, { NextFunction } from 'express';
 import bcrypt from 'bcrypt';
-import { loginUser, registerUser } from '../services/auth.service';
-import { Login as LoginEnum } from '../../../types/authInterfaces';
-import { Request } from '../models/auth/request.interface';
+import express, { NextFunction } from 'express';
+import { Login as LoginEnum } from '../../../../types/authInterfaces';
+import { Request } from '../../models/auth/request.interface';
+import { loginUser, registerUser } from '../../services/auth.service';
 
 const router = express.Router();
 
@@ -27,4 +27,4 @@ router.post('/login', (req: Login, res, next) => {
   }
 });
 
-export { router };
+export default router;
