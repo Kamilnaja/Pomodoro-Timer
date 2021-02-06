@@ -1,8 +1,8 @@
-import { Todo } from '../../../../../types/tasksAndNotesInterfaces';
+import { TasksAndNotesState } from '../../store/models/TasksAndNotesInterfaces';
 
 export type HandleGetTodos = () => void;
 
 export interface TodosContainerProps {
   handleGetTodos: HandleGetTodos;
-  todos: Todo[];
+  todosState: TasksAndNotesState;
 }

@@ -25,7 +25,7 @@ export const taskAndNotesReducer = (
       return {
         ...state,
         isLoading: false,
-        todos: action.payload,
+        todos: action.payload.todos,
       };
     case TodosActions.GET_TODOS_ERROR:
       return {
