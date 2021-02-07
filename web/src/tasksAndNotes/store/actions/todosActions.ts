@@ -1,9 +1,7 @@
 import { Action } from 'redux';
 import { Task, TaskSearchResults } from '../../../../../types/tasksAndNotesInterfaces';
-import { fetchData, postData } from '../../../shared/scripts/requests';
-import { config } from '../../../shared/settings/initialConfig';
+import { fetchData, updateData } from '../../../shared/scripts/requests';
 import { ActionWithPayload } from '../../../shared/store/interfaces/actions/actionInterface';
-import { store } from '../../../shared/store/reducers/reducer';
 
 export enum TodosActions {
   SAVE_TODO = 'Save todo',
@@ -49,7 +47,14 @@ export const handleGetTodos = () => (dispatch: (args: Action) => void) => {
 
 export const handleSave = (payload: Task) => (dispatch: (arg0: any) => void) => {
   dispatch(saveTodo());
-  postData('todos', payload)
-    .then(() => dispatch(handleGetTodos()))
-    .catch((err: any) => dispatch(saveTodoError(err)));
+  const { id } = payload;
+  if (id) {
+    updateData(`todos/${id}`, payload, 'PUT')
+      .then(() => dispatch(handleGetTodos()))
+      .catch((err: any) => dispatch(saveTodoError(err)));
+  } else {
+    updateData('todos', payload, 'POST')
+      .then(() => dispatch(handleGetTodos()))
+      .catch((err: any) => dispatch(saveTodoError(err)));
+  }
 };

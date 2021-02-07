@@ -14,11 +14,11 @@ export const fetchData = async (url: string): Promise<any> => {
   return response.ok ? Promise.resolve(responseBody) : Promise.reject(responseBody);
 };
 
-export const postData = async (url: string, payload: any): Promise<any> => {
+export const updateData = async (url: string, payload: any, method: 'PUT' | 'POST'): Promise<any> => {
   const token = store.getState().auth.token;
 
   const response = await fetch(`${config.url.API_URL}/${url}/`, {
-    method: 'POST',
+    method,
     headers: {
       Authorization: 'Bearer ' + token,
       'Content-Type': 'application/json',
