@@ -1,7 +1,7 @@
 import { TimerState } from '../../store/enums/timerEnum';
 import './info.scss';
 
-export function Info(props: { currentState: TimerState }) {
+export const InfoComponent = (props: { currentState: TimerState }) => {
   let info = '';
   switch (props.currentState) {
     case TimerState.BREAK_END:
@@ -17,11 +17,16 @@ export function Info(props: { currentState: TimerState }) {
       info = 'Do not work';
       break;
     case TimerState.POMODORO_PAUSE:
-      info = 'Pomodoro pause';
+      info = 'Pomodoro paused';
       break;
     case TimerState.BREAK_PAUSE:
       info = 'Break pause';
       break;
   }
-  return <div className="info">{info}</div>;
-}
+  return (
+    <div className="info">
+      <hr className="text-white" />
+      <span className="text-white text-center">{info}</span>
+    </div>
+  );
+};

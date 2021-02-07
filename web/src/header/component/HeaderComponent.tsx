@@ -1,9 +1,8 @@
 import React from 'react';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ModalType } from 'shared/store/enums/modalEnum';
-import Timer from 'timer/containers/Timer';
+import TimerContainer from 'timer/containers/TimerContainer';
 import Settings from '../../settings/Settings';
 import { openModal } from '../../shared/store/interfaces/modalInterface';
 import StatsContainer from '../../stats/containers/StatsContainer';
@@ -46,12 +45,11 @@ export const HeaderComponent = (props: HeaderProps) => (
         <Route path="/settings">
           <Settings />
         </Route>
-
         <Route path="/stats">
           <StatsContainer />
         </Route>
         <Route path="/">
-          <Timer />
+          <TimerContainer />
         </Route>
       </Switch>
     </Container>

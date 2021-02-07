@@ -1,11 +1,6 @@
-@import "./../../../shared/styles/shared.scss";
+@import './../../../shared/styles/shared.scss';
 
 .info {
-  @include font-fira-sans($colour: $text-primary, $size: 18px);
-  align-items: center;
-  border-top: 1px solid $bg-primary;
-  display: flex;
-  justify-content: center;
   margin-top: 30px;
   padding: 20px 0;
 }

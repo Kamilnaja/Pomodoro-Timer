@@ -1,5 +1,5 @@
 import React, { FormEvent, useEffect } from 'react';
-import { Accordion, Button, Card, Form, Col, Row, Container } from 'react-bootstrap';
+import { Accordion, Button, Card, Form, Col, Row, Container, Badge } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { CardComponentProps } from './cardComponentProps';
 import './cardComponent.scss';
@@ -34,7 +34,7 @@ export const CardComponent = (props: CardComponentProps) => {
                 <Col md={1}>
                   <Form.Check name="isDone" inline type="checkbox" ref={register()}></Form.Check>
                 </Col>
-                <Col md={5}>
+                <Col md={7}>
                   <span
                     className="card__editable"
                     suppressContentEditableWarning={true}
@@ -46,9 +46,10 @@ export const CardComponent = (props: CardComponentProps) => {
                     {props.task?.title}
                   </span>
                 </Col>
-                <Col md={3}>
-                  <span className="mr-1">{props.task?.id}</span>
-                  <span>{props.task?.dateCreated.toString().substr(0, 10) || new Date().toDateString()}</span>
+                <Col md={2}>
+                  <Badge pill variant="primary">
+                    {props.task?.dateCreated.toString().substr(0, 10) || new Date().toDateString()}
+                  </Badge>
                 </Col>
                 <Col md={1}>
                   <Accordion.Toggle as={Button} variant="link" eventKey="0">

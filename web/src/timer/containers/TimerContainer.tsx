@@ -4,20 +4,21 @@ import { msToTime } from 'shared/scripts/utils';
 import 'shared/settings/initialConfig';
 import { initialConfig } from 'shared/settings/initialConfig';
 import { savePomodoroAndReloadStats } from '../../main/store/actions/mainActions';
-import { Info } from '../components/info/Info';
-import { Time } from '../components/time/Time';
 import { TimerState } from '../store/enums/timerEnum';
 import { State } from '../store/interfaces/stateInterface';
-import { TimerProps } from '../store/interfaces/timerPropsInterface';
 import { timerState } from '../store/state/timerState';
 import './timer.scss';
 import Button from 'react-bootstrap/Button';
+import { Jumbotron } from 'react-bootstrap';
+import { TimeComponent } from '../components/time/TimeComponent';
+import { TimerContainerProps } from './timerContainerProps';
+import { InfoComponent } from '../components/info/InfoComponent';
 
-class Timer extends React.Component<TimerProps, State> {
+class TimerContainer extends React.Component<TimerContainerProps, State> {
   interval = 0;
   blinkingInterval = 0;
 
-  constructor(props: TimerProps) {
+  constructor(props: TimerContainerProps) {
     super(props);
     this.state = timerState;
   }
@@ -149,30 +150,28 @@ class Timer extends React.Component<TimerProps, State> {
   }
 
   render = () => (
-    <main>
-      <div className={`timer ${this.isAnyTimerRunning() ? 'timer--dimmed' : ''}`}>
-        <div className="timer__button-wrapper">
-          <Button variant="outline-dark" onClick={this.startNewPomodoro}>
-            Pomodoro
-          </Button>
-          <Button variant="outline-dark" onClick={() => this.startNewBreak(initialConfig.shortBreakTime)}>
-            Short Break
-          </Button>
-          <Button variant="outline-dark" onClick={() => this.startNewBreak(initialConfig.longBreakTime)}>
-            Long Break
-          </Button>
-        </div>
-        <Time time={msToTime(this.state.timerTime)} />
-        <Button
-          variant="outline-dark"
-          className="timer__button"
-          onClick={this.isAnyTimerRunning() ? this.pauseCounter : this.startCounter}
-        >
-          {this.isAnyTimerRunning() ? 'stop' : 'start'}
+    <Jumbotron className="align-items-center d-flex flex-column bg-dark">
+      <div className="button-wrapper">
+        <Button variant="primary" onClick={this.startNewPomodoro}>
+          Pomodoro
         </Button>
-        <Info currentState={this.state.timerState} />
+        <Button variant="primary" onClick={() => this.startNewBreak(initialConfig.shortBreakTime)}>
+          Short Break
+        </Button>
+        <Button variant="primary" onClick={() => this.startNewBreak(initialConfig.longBreakTime)}>
+          Long Break
+        </Button>
       </div>
-    </main>
+      <TimeComponent time={msToTime(this.state.timerTime)} />
+      <Button
+        variant="primary"
+        className="timer__button"
+        onClick={this.isAnyTimerRunning() ? this.pauseCounter : this.startCounter}
+      >
+        {this.isAnyTimerRunning() ? 'Stop timer' : 'Start timer'}
+      </Button>
+      <InfoComponent currentState={this.state.timerState} />
+    </Jumbotron>
   );
 }
 
@@ -180,4 +179,4 @@ const mapDispatchToProps = {
   handleSavePomodoro: savePomodoroAndReloadStats,
 };
 
-export default connect(null, mapDispatchToProps)(Timer);
+export default connect(null, mapDispatchToProps)(TimerContainer);

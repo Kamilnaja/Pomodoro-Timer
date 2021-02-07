@@ -1,19 +1,4 @@
-@import '../../../shared/styles/shared.scss';
-
 .time {
-  @include font-fira-sans($size: 40px);
-  align-items: center;
-  display: flex;
-  justify-content: center;
+  font-size: 40px;
   padding: 40px 0;
-}
-
-.timer--dimmed .time {
-  color: $bg-accent;
-}
-
-@media (max-width: $xs) {
-  .time {
-    font-size: 40px;
-  }
 }
