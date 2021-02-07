@@ -34,7 +34,6 @@ const makePostStatsRequest = async () => {
 
   const response = await fetch(`${config.url.API_URL}/stats/`, {
     method: 'POST',
-
     headers: {
       Authorization: 'Bearer ' + token,
     },

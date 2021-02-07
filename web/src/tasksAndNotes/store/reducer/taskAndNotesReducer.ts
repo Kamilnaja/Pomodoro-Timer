@@ -35,6 +35,22 @@ export const taskAndNotesReducer = (
         ...state,
         isLoading: true,
       };
+    case TodosActions.SAVE_TODO:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case TodosActions.SAVE_TODO_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case TodosActions.SAVE_TODO_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      };
     case NotesActions.GET_NOTES:
       return {
         ...state,

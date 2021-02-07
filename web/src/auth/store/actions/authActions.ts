@@ -58,7 +58,7 @@ const setLoggedOut = (): Action => ({
 });
 
 // thunk
-export const sendRegisterForm = (formData: Registration) => (dispatch: (action: Action<any>) => void) => {
+export const sendRegisterForm = (formData: Registration) => (dispatch: (action: Action<AuthAction>) => void) => {
   dispatch(register(formData));
 
   makeRegisterRequest(formData)

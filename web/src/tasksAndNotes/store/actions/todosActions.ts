@@ -5,26 +5,26 @@ import { ActionWithPayload } from '../../../shared/store/interfaces/actions/acti
 import { store } from '../../../shared/store/reducers/reducer';
 
 export enum TodosActions {
-  ADD_TODO = 'add todo',
-  ADD_TODO_SUCCESS = 'add todo success',
-  ADD_TODO_ERROR = 'add todo error',
+  SAVE_TODO = 'Save todo',
+  SAVE_TODO_SUCCESS = 'Save todo success',
+  SAVE_TODO_ERROR = 'Save todo error',
 
   GET_TODOS = 'get todos',
   GET_TODOS_SUCCESS = 'get todos success',
   GET_TODOS_ERROR = 'get todos error',
 }
 
-const addTodo = (): Action<TodosActions> => ({
-  type: TodosActions.ADD_TODO,
-});
-
-const addTodoSuccess = (payload: Task[]): ActionWithPayload<TodosActions, Task[]> => ({
-  type: TodosActions.ADD_TODO_SUCCESS,
+const saveTodo = (payload: Task): ActionWithPayload<TodosActions, Task> => ({
+  type: TodosActions.SAVE_TODO,
   payload,
 });
 
-const addTodoError = (payload: any): ActionWithPayload<TodosActions, any> => ({
-  type: TodosActions.ADD_TODO_ERROR,
+const saveTodoSuccess = (payload: Task[]): Action<TodosActions> => ({
+  type: TodosActions.SAVE_TODO_SUCCESS,
+});
+
+const saveTodoError = (payload: any): ActionWithPayload<TodosActions, any> => ({
+  type: TodosActions.SAVE_TODO_ERROR,
   payload,
 });
 
@@ -58,6 +58,31 @@ const makeGetTodosRequest = async (): Promise<TaskSearchResults> => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
+  });
+
+  const responseBody = await response.json();
+
+  return response.ok ? Promise.resolve(responseBody) : Promise.reject(responseBody);
+};
+
+export const handleSave = (payload: Task) => (dispatch: (arg0: any) => void) => {
+  dispatch(saveTodo(payload));
+  makeSaveTodoRequest()
+    .then(() => {
+      dispatch(handleGetTodos());
+    })
+    .catch((err: any) => dispatch(saveTodoError(err)));
+};
+
+const makeSaveTodoRequest = async () => {
+  const token = store.getState().auth.token;
+
+  const response = await fetch(`${config.url.API_URL}/todos`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: '',
   });
 
   const responseBody = await response.json();

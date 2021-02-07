@@ -1,22 +1,33 @@
 import React, { Component } from 'react';
-import { Task } from '../../../../../../types/tasksAndNotesInterfaces';
+import { connect } from 'react-redux';
+import { TasksAndNotesState } from '../../../store/models/TasksAndNotesInterfaces';
 import { CardComponent } from '../component/CardComponent';
+import { CardCointainerProps } from './cardContainerProps';
+import { handleSave } from '../../../store/actions/todosActions';
 
-export class CardContainer extends Component<{ task?: Task }, { isExpanded: boolean }> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      isExpanded: false,
-    };
-  }
-
+class CardContainer extends Component<CardCointainerProps> {
   addSubtask = () => {
     console.log('adding subtask');
   };
 
   render() {
-    return <CardComponent addSubtask={this.addSubtask} task={this.props.task}></CardComponent>;
+    return (
+      <CardComponent
+        addSubtask={this.addSubtask}
+        task={this.props.task}
+        handleSave={this.props.handleSave}
+      ></CardComponent>
+    );
   }
 }
 
-export default CardContainer;
+const mapDispatchToProps = {
+  handleSave,
+};
+
+const mapStateToProps = (state: { tasksAndNotes: TasksAndNotesState }) => {
+  const todosState = state.tasksAndNotes;
+  return { todosState };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardContainer);

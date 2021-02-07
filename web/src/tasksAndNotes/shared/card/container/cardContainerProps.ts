@@ -1,7 +1,6 @@
 import { Task } from '../../../../../../types/tasksAndNotesInterfaces';
 
-export interface CardComponentProps {
+export interface CardCointainerProps {
   task?: Task;
-  addSubtask: () => void;
   handleSave: (payload: Task) => void;
 }
