@@ -6,14 +6,15 @@ import './cardComponent.scss';
 import { Task } from '../../../../../../types/tasksAndNotesInterfaces';
 
 export const CardComponent = (props: CardComponentProps) => {
+  const { task } = props;
+
   const defaultValues = {
-    id: props.task?.id,
-    note: props.task?.note,
-    title: props.task?.title,
-    isDone: props.task?.isDone,
+    id: task?.id,
+    note: task?.note,
+    title: task?.title,
+    isDone: task?.isDone,
   };
   const { register, handleSubmit, setValue } = useForm({ defaultValues });
-
   const onSubmit = (data: Task) => {
     props.handleSave(data);
   };
@@ -36,19 +37,19 @@ export const CardComponent = (props: CardComponentProps) => {
                 </Col>
                 <Col md={7}>
                   <span
-                    className="card__editable"
+                    className={`card__editable ${task?.isDone ? 'text-muted' : ''}`}
                     suppressContentEditableWarning={true}
                     contentEditable
                     onInput={(e: FormEvent<HTMLDivElement>) => {
                       setValue('title', e.currentTarget.textContent);
                     }}
                   >
-                    {props.task?.title}
+                    {task?.title}
                   </span>
                 </Col>
                 <Col md={2}>
                   <Badge pill variant="primary">
-                    {props.task?.dateCreated.toString().substr(0, 10) || new Date().toDateString()}
+                    {task?.dateCreated.toString().substr(0, 10) || new Date().toDateString()}
                   </Badge>
                 </Col>
                 <Col md={1}>
@@ -74,15 +75,15 @@ export const CardComponent = (props: CardComponentProps) => {
                 suppressContentEditableWarning={true}
                 className="content__editable"
               >
-                {props.task?.note}
+                {task?.note}
               </div>
-              <div>{props.task?.isDone}</div>
+              <div>{task?.isDone}</div>
               <hr />
               <h4>Subtasks</h4>
               <Button variant="success" onClick={() => props.addSubtask()}>
                 +
               </Button>
-              {props.task?.subtasks?.map(item => (
+              {task?.subtasks?.map(item => (
                 <div>item</div>
               ))}
               <hr />

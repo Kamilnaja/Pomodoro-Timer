@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 export const SidebarComponent = (props: { handleOpenNewTask: () => void }) => (
   <ul className="list-unstyled">
     <li>
-      <Button onClick={() => props.handleOpenNewTask()}>Add new task</Button>
+      <Button onClick={() => props.handleOpenNewTask()}>Show add new task</Button>
       <hr />
     </li>
     <li tabIndex={0}>Todos</li>
