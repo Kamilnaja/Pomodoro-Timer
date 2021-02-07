@@ -33,7 +33,7 @@ export const taskAndNotesReducer = (
     case TodosActions.GET_TODOS_ERROR:
       return {
         ...state,
-        isLoading: true,
+        isLoading: false,
       };
     case TodosActions.SAVE_TODO:
       return {
