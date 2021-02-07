@@ -10,9 +10,8 @@ export const msToTime = (s: number): string => {
   const secs = s % 60;
   s = (s - secs) / 60;
   const mins = s % 60;
-  const hrs = (s - mins) / 60;
 
-  return pad(hrs) + ':' + pad(mins) + ':' + pad(secs);
+  return pad(mins) + ':' + pad(secs);
 };
 
 export const getCurrentMonth = (givenMonth?: number): number => {

@@ -113,7 +113,7 @@ class TimerContainer extends React.Component<TimerContainerProps, State> {
       if (isTimeVisible) {
         document.title = `${msToTime(this.state.timerTime)}`;
       } else {
-        document.title = `00.00.00`;
+        document.title = `00.00`;
       }
       isTimeVisible = !isTimeVisible;
     }, 500);
