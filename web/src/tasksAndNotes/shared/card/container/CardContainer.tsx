@@ -10,19 +10,12 @@ export class CardContainer extends Component<{ task?: Task }, { isExpanded: bool
     };
   }
 
-  toggleExpand = () =>
-    this.setState({
-      isExpanded: !this.state.isExpanded,
-    });
+  addSubtask = () => {
+    console.log('adding subtask');
+  };
 
   render() {
-    return (
-      <CardComponent
-        toggleExpand={this.toggleExpand}
-        isExpanded={this.state.isExpanded}
-        task={this.props.task}
-      ></CardComponent>
-    );
+    return <CardComponent addSubtask={this.addSubtask} task={this.props.task}></CardComponent>;
   }
 }
 

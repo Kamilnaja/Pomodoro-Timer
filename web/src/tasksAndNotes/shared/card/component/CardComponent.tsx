@@ -1,73 +1,78 @@
-import React from 'react';
-import { Button, Card, Form, Col, Row } from 'react-bootstrap';
-import { Task } from '../../../../../../types/tasksAndNotesInterfaces';
+import React, { FormEvent, useEffect } from 'react';
+import { Accordion, Button, Card, Form, Col, Row, Container } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
+import { CardComponentProps } from './cardComponentProps';
 
-export const CardComponent = (props: { task?: Task; toggleExpand: () => void; isExpanded?: boolean }) => (
-  <>
-    <Card className="mb-1">
-      {props.task ? (
-        <Form>
-          <Card.Header onClick={() => props.toggleExpand()}>
-            <Form.Check inline type="checkbox"></Form.Check>
-            <span>{props.task.title}</span>
-            <span>{props.task?.id}</span>
-            <div>{props.task.dateCreated}</div>
-          </Card.Header>
-          {props.isExpanded && (
-            <>
-              <Card.Body>
-                <div>{props.task.note}</div>
-                <div>{props.task.isDone}</div>
-                <Button variant="success">+</Button>
-              </Card.Body>
-              <Card.Footer>
-                <Button variant="danger" className="mr-2" onClick={() => props.toggleExpand()}>
-                  Cancel
-                </Button>
-                <Button variant="success">Save</Button>
-              </Card.Footer>
-            </>
-          )}
-        </Form>
-      ) : (
-        <Form>
+export const CardComponent = (props: CardComponentProps) => {
+  const { register, handleSubmit, setValue } = useForm();
+  const onSubmit = (data: any) => alert(JSON.stringify(data));
+  useEffect(() => {
+    register({ name: 'note' });
+    register({ name: 'title' });
+    register({ name: 'isDone' });
+  }, []);
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Accordion>
+        <Card className="mb-1">
           <Card.Header>
-            <Form.Group as={Row}>
-              <Col lg={1}>
-                <Form.Check inline type="checkbox"></Form.Check>
-              </Col>
-              <Col lg={11}>
-                <Form.Control></Form.Control>
-              </Col>
-            </Form.Group>
+            <Container>
+              <Row className="align-items-center">
+                <Col lg={7}>
+                  <Form.Check name="isDone" inline type="checkbox" ref={register()}></Form.Check>
+                  <span
+                    suppressContentEditableWarning={true}
+                    contentEditable
+                    onInput={(e: FormEvent<HTMLDivElement>) => {
+                      setValue('title', e.currentTarget.textContent);
+                    }}
+                  >
+                    {props.task.title}
+                  </span>
+                </Col>
+                <Col lg={3}>
+                  <span className="mr-1">{props.task.id}</span>
+                  <span>{props.task.dateCreated.toString().substr(0, 10)}</span>
+                </Col>
+                <Col lg={1}>
+                  <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                    toggle
+                  </Accordion.Toggle>
+                </Col>
+              </Row>
+            </Container>
           </Card.Header>
-          <Card.Body>
-            <Form.Group controlId="exampleForm.ControlSelect1">
-              <Form.Label>Task type</Form.Label>
-              <Form.Control as="select">
-                <option>Todo</option>
-                <option>Note</option>
-                <option>Calendar</option>
-              </Form.Control>
-            </Form.Group>
-            <Form.Group>
-              <Form.Control size="lg"></Form.Control>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Add subtasks</Form.Label>
-              <Button variant="success">+</Button>
-            </Form.Group>
-          </Card.Body>
-          <Card.Footer>
-            <Form.Group>
-              <Button variant="danger" className="mr-2" onClick={() => props.toggleExpand()}>
+          <Accordion.Collapse eventKey="0">
+            <Card.Body>
+              <div
+                contentEditable
+                onInput={(e: FormEvent<HTMLDivElement>) => {
+                  setValue('note', e.currentTarget.textContent);
+                }}
+                suppressContentEditableWarning={true}
+              >
+                {props.task.note}
+              </div>
+              <div>{props.task.isDone}</div>
+              <hr />
+              <Button variant="success" onClick={() => props.addSubtask()}>
+                +
+              </Button>
+              {props.task.subtasks?.map(item => (
+                <div>item</div>
+              ))}
+              <hr />
+              <Button variant="danger" className="mr-2">
                 Cancel
               </Button>
-              <Button variant="success">Save</Button>
-            </Form.Group>
-          </Card.Footer>
-        </Form>
-      )}
-    </Card>
-  </>
-);
+              <Button variant="success" type="submit">
+                Save
+              </Button>
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
+    </form>
+  );
+};
