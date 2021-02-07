@@ -6,11 +6,15 @@ import './cardComponent.scss';
 import { Task } from '../../../../../../types/tasksAndNotesInterfaces';
 
 export const CardComponent = (props: CardComponentProps) => {
-  const { register, handleSubmit, setValue } = useForm();
+  const defaultValues = {
+    id: props.task?.id,
+    note: props.task?.note,
+    title: props.task?.title,
+    isDone: props.task?.isDone,
+  };
+  const { register, handleSubmit, setValue } = useForm({ defaultValues });
+
   const onSubmit = (data: Task) => {
-    if (props.task?.id) {
-      setValue('id', props.task.id);
-    }
     props.handleSave(data);
   };
   useEffect(() => {
@@ -30,7 +34,7 @@ export const CardComponent = (props: CardComponentProps) => {
                 <Col md={1}>
                   <Form.Check name="isDone" inline type="checkbox" ref={register()}></Form.Check>
                 </Col>
-                <Col md={6}>
+                <Col md={5}>
                   <span
                     className="card__editable"
                     suppressContentEditableWarning={true}
@@ -48,8 +52,13 @@ export const CardComponent = (props: CardComponentProps) => {
                 </Col>
                 <Col md={1}>
                   <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                    toggle
+                    exp
                   </Accordion.Toggle>
+                </Col>
+                <Col md={1}>
+                  <Button variant="success" type="submit">
+                    Save
+                  </Button>
                 </Col>
               </Row>
             </Container>
@@ -62,6 +71,7 @@ export const CardComponent = (props: CardComponentProps) => {
                   setValue('note', e.currentTarget.textContent);
                 }}
                 suppressContentEditableWarning={true}
+                className="content__editable"
               >
                 {props.task?.note}
               </div>

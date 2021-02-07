@@ -6,6 +6,7 @@ import { TodosComponentProps } from './todosComponentProps';
 export const TodosComponent = (props: TodosComponentProps) => (
   <div>
     <h2>Your things to do</h2>
+
     {props.isAddingTaskActive && <CardContainer></CardContainer>}
 
     {!props.todos.length && <div>You have 0 todos, please add something</div>}

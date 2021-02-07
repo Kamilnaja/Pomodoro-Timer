@@ -14,13 +14,8 @@ export enum TodosActions {
   GET_TODOS_ERROR = 'get todos error',
 }
 
-const saveTodo = (payload: Task): ActionWithPayload<TodosActions, Task> => ({
+const saveTodo = (): Action<TodosActions> => ({
   type: TodosActions.SAVE_TODO,
-  payload,
-});
-
-const saveTodoSuccess = (payload: Task[]): Action<TodosActions> => ({
-  type: TodosActions.SAVE_TODO_SUCCESS,
 });
 
 const saveTodoError = (payload: any): ActionWithPayload<TodosActions, any> => ({
@@ -66,23 +61,22 @@ const makeGetTodosRequest = async (): Promise<TaskSearchResults> => {
 };
 
 export const handleSave = (payload: Task) => (dispatch: (arg0: any) => void) => {
-  dispatch(saveTodo(payload));
-  makeSaveTodoRequest()
-    .then(() => {
-      dispatch(handleGetTodos());
-    })
+  dispatch(saveTodo());
+  makeSaveTodoRequest(payload)
+    .then(() => dispatch(handleGetTodos()))
     .catch((err: any) => dispatch(saveTodoError(err)));
 };
 
-const makeSaveTodoRequest = async () => {
+const makeSaveTodoRequest = async (todo: Task) => {
   const token = store.getState().auth.token;
 
   const response = await fetch(`${config.url.API_URL}/todos`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     },
-    body: '',
+    body: JSON.stringify(todo),
   });
 
   const responseBody = await response.json();
