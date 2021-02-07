@@ -27,7 +27,7 @@ export const CardComponent = (props: CardComponentProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Accordion>
-        <Card className="mb-1">
+        <Card>
           <Card.Header>
             <Container>
               <Row className="align-items-center">

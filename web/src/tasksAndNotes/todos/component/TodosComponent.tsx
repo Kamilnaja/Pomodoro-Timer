@@ -25,7 +25,7 @@ export const TodosComponent = (props: TodosComponentProps) => (
       {props.todos
         .filter((item: Task) => item.isDone)
         .map((item: Task, idx: number) => (
-          <li key={idx} className="mb-4">
+          <li key={idx} className="mb-1">
             <CardContainer task={item}></CardContainer>
           </li>
         ))}

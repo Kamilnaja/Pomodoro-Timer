@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleGetTodos, handleSave } from '../../store/actions/todosActions';
+import { handleGetTodos } from '../../store/actions/todosActions';
 import { TasksAndNotesState } from '../../store/models/TasksAndNotesInterfaces';
 import { TodosComponent } from '../component/TodosComponent';
 import { TodosContainerProps } from './todosContainerInterface';
