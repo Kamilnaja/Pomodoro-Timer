@@ -2,14 +2,21 @@ import React, { FormEvent, useEffect } from 'react';
 import { Accordion, Button, Card, Form, Col, Row, Container } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { CardComponentProps } from './cardComponentProps';
+import './cardComponent.scss';
 
 export const CardComponent = (props: CardComponentProps) => {
   const { register, handleSubmit, setValue } = useForm();
-  const onSubmit = (data: any) => alert(JSON.stringify(data));
+  const onSubmit = (data: any) => {
+    if (props.task?.id) {
+      setValue('id', props.task.id);
+    }
+    alert(JSON.stringify(data));
+  };
   useEffect(() => {
     register({ name: 'note' });
     register({ name: 'title' });
     register({ name: 'isDone' });
+    register({ name: 'id' });
   }, []);
 
   return (
@@ -19,21 +26,24 @@ export const CardComponent = (props: CardComponentProps) => {
           <Card.Header>
             <Container>
               <Row className="align-items-center">
-                <Col lg={7}>
+                <Col lg={1}>
                   <Form.Check name="isDone" inline type="checkbox" ref={register()}></Form.Check>
+                </Col>
+                <Col lg={6}>
                   <span
+                    className="card__editable"
                     suppressContentEditableWarning={true}
                     contentEditable
                     onInput={(e: FormEvent<HTMLDivElement>) => {
                       setValue('title', e.currentTarget.textContent);
                     }}
                   >
-                    {props.task.title}
+                    {props.task?.title}
                   </span>
                 </Col>
                 <Col lg={3}>
-                  <span className="mr-1">{props.task.id}</span>
-                  <span>{props.task.dateCreated.toString().substr(0, 10)}</span>
+                  <span className="mr-1">{props.task?.id}</span>
+                  <span>{props.task?.dateCreated.toString().substr(0, 10) || new Date().toDateString()}</span>
                 </Col>
                 <Col lg={1}>
                   <Accordion.Toggle as={Button} variant="link" eventKey="0">
@@ -52,14 +62,14 @@ export const CardComponent = (props: CardComponentProps) => {
                 }}
                 suppressContentEditableWarning={true}
               >
-                {props.task.note}
+                {props.task?.note}
               </div>
-              <div>{props.task.isDone}</div>
+              <div>{props.task?.isDone}</div>
               <hr />
               <Button variant="success" onClick={() => props.addSubtask()}>
                 +
               </Button>
-              {props.task.subtasks?.map(item => (
+              {props.task?.subtasks?.map(item => (
                 <div>item</div>
               ))}
               <hr />

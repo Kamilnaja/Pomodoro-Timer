@@ -1,0 +1,6 @@
+.card {
+  & &__editable {
+    border-bottom: 1px solid #000;
+    display: block;
+  }
+}
