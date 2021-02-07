@@ -3,7 +3,6 @@ import ReactModal from 'react-modal';
 import LoginContainer from '../../../auth/login/container/LoginContainer';
 import LogoutContainer from '../../../auth/logout/container/LogoutContainer';
 import RegisterContainer from '../../../auth/register/container/RegisterContainer';
-import Settings from '../../../settings/Settings';
 import { ModalType as ModalEnum, ModalType } from '../../store/enums/modalEnum';
 import { ModalProps } from '../../store/interfaces/modalInterface';
 import './modal.scss';
@@ -16,8 +15,6 @@ export const Modal = (props: ModalProps) => {
         return { component: <LoginContainer />, title: 'Login' };
       case ModalEnum.REGISTER:
         return { component: <RegisterContainer />, title: 'Register' };
-      case ModalEnum.SETTINGS:
-        return { component: <Settings />, title: 'Settings' };
       case ModalEnum.LOGOUT:
         return { component: <LogoutContainer closeModal={props.closeModal} />, title: 'Logout' };
     }

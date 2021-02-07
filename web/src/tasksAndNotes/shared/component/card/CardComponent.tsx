@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Card, Form, Col, Row } from 'react-bootstrap';
 import { Task } from '../../../../../../types/tasksAndNotesInterfaces';
 
-export const CardComponent = (props: { todo?: Task }) => (
+export const CardComponent = (props: { todo?: Task }, state: { isExpanded: boolean }) => (
   <>
     <Card className="mb-4">
       {props.todo ? (

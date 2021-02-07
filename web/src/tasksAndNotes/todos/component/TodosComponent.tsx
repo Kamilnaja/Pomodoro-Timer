@@ -20,7 +20,7 @@ export const TodosComponent = (props: { todos: Task[]; isAddingTaskActive: boole
     <h2>Done tasks</h2>
     <ul className="list-unstyled">
       {props.todos
-        .filter(item => item.isDone === true)
+        .filter(item => item.isDone)
         .map((item: Task, idx: number) => (
           <li key={idx} className="mb-4">
             <CardComponent todo={item}></CardComponent>

@@ -16,3 +16,7 @@ const hideAddNewTask = (): Action<TaskActions> => ({
 export const handleShowAddNewTask = () => (dispatch: (action: Action<any>) => void) => {
   dispatch(showAddNewTask());
 };
+
+export const handleHideAddNewTask = () => (dispatch: (action: Action<any>) => void) => {
+  dispatch(hideAddNewTask());
+};
