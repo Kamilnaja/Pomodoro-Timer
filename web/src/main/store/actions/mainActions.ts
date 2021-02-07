@@ -4,6 +4,7 @@ import { ActionWithPayload } from 'shared/store/interfaces/actions/actionInterfa
 import { store } from 'shared/store/reducers/reducer';
 import { handleGetStatsInPeriod } from 'stats/store/actions/statsActions';
 import { getCurrentMonth, getCurrentYear } from 'shared/scripts/utils';
+import { postData } from '../../../shared/scripts/requests';
 
 export enum MainAction {
   SAVE_POMODORO = 'SAVE_POMODORO',
@@ -24,20 +25,7 @@ const savePomodoroError = (error: any): ActionWithPayload<MainAction, any> => ({
 
 export const savePomodoroAndReloadStats = () => async (dispatch: (arg: Action | any) => void) => {
   dispatch(savePomodoro());
-  makePostStatsRequest()
+  postData('stats', {})
     .then(() => dispatch(handleGetStatsInPeriod(getCurrentYear(), getCurrentMonth())))
     .catch(err => dispatch(savePomodoroError(err)));
-};
-
-const makePostStatsRequest = async () => {
-  const token = store.getState().auth.token;
-
-  const response = await fetch(`${config.url.API_URL}/stats/`, {
-    method: 'POST',
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-  });
-
-  return response.ok ? Promise.resolve() : Promise.reject();
 };

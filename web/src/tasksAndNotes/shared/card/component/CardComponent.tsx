@@ -78,6 +78,7 @@ export const CardComponent = (props: CardComponentProps) => {
               </div>
               <div>{props.task?.isDone}</div>
               <hr />
+              <h4>Subtasks</h4>
               <Button variant="success" onClick={() => props.addSubtask()}>
                 +
               </Button>

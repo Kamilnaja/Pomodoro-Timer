@@ -1,8 +1,7 @@
 import { Action } from 'redux';
-import { config } from 'shared/settings/initialConfig';
 import { ActionWithPayload } from 'shared/store/interfaces/actions/actionInterface';
-import { store } from 'shared/store/reducers/reducer';
 import StatsSearchResult from '../../../../../types/statisticsInterfaces';
+import { fetchData } from '../../../shared/scripts/requests';
 
 export enum StatsAction {
   GET_STATISTIC_IN_PERIOD = 'GET_STATISTIC_IN_PERIOD',
@@ -31,21 +30,7 @@ const getStatisticsInPeriodError = (payload: StatsSearchResult): ActionWithPaylo
 export const handleGetStatsInPeriod = (year: number, month: number) => async (dispatch: (args: Action) => void) => {
   dispatch(getStatisticsInPeriod());
 
-  makeGetStatsRequest(year, month)
+  fetchData(`/stats/${year}/${month}`)
     .then((payload: StatsSearchResult) => dispatch(getStatisticsInPeriodSuccess(payload)))
     .catch(err => dispatch(getStatisticsInPeriodError(err)));
-};
-
-const makeGetStatsRequest = async (year: number, month: number) => {
-  const token = store.getState().auth.token;
-
-  const response = await fetch(`${config.url.API_URL}/stats/${year}/${month}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  const responseBody = await response.json();
-
-  return response.ok ? Promise.resolve(responseBody) : Promise.reject(responseBody);
 };

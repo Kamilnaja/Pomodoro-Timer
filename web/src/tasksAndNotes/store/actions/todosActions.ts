@@ -1,5 +1,6 @@
 import { Action } from 'redux';
 import { Task, TaskSearchResults } from '../../../../../types/tasksAndNotesInterfaces';
+import { fetchData, postData } from '../../../shared/scripts/requests';
 import { config } from '../../../shared/settings/initialConfig';
 import { ActionWithPayload } from '../../../shared/store/interfaces/actions/actionInterface';
 import { store } from '../../../shared/store/reducers/reducer';
@@ -41,45 +42,14 @@ const getTodosError = (payload: any): ActionWithPayload<TodosActions, any> => ({
 
 export const handleGetTodos = () => (dispatch: (args: Action) => void) => {
   dispatch(getTodos());
-  makeGetTodosRequest()
+  fetchData('todos')
     .then((payload: TaskSearchResults) => dispatch(getTodosSuccess(payload)))
     .catch(err => getTodosError(err));
 };
 
-const makeGetTodosRequest = async (): Promise<TaskSearchResults> => {
-  const token = store.getState().auth.token;
-
-  const response = await fetch(`${config.url.API_URL}/todos`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  const responseBody = await response.json();
-
-  return response.ok ? Promise.resolve(responseBody) : Promise.reject(responseBody);
-};
-
 export const handleSave = (payload: Task) => (dispatch: (arg0: any) => void) => {
   dispatch(saveTodo());
-  makeSaveTodoRequest(payload)
+  postData('todos', payload)
     .then(() => dispatch(handleGetTodos()))
     .catch((err: any) => dispatch(saveTodoError(err)));
-};
-
-const makeSaveTodoRequest = async (todo: Task) => {
-  const token = store.getState().auth.token;
-
-  const response = await fetch(`${config.url.API_URL}/todos`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(todo),
-  });
-
-  const responseBody = await response.json();
-
-  return response.ok ? Promise.resolve(responseBody) : Promise.reject(responseBody);
 };
