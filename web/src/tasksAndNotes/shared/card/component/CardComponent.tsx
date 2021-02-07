@@ -2,25 +2,32 @@ import React from 'react';
 import { Button, Card, Form, Col, Row } from 'react-bootstrap';
 import { Task } from '../../../../../../types/tasksAndNotesInterfaces';
 
-export const CardComponent = (props: { todo?: Task }, state: { isExpanded: boolean }) => (
+export const CardComponent = (props: { task?: Task; toggleExpand: () => void; isExpanded?: boolean }) => (
   <>
-    <Card className="mb-4">
-      {props.todo ? (
+    <Card className="mb-1">
+      {props.task ? (
         <Form>
-          <Card.Header>
+          <Card.Header onClick={() => props.toggleExpand()}>
             <Form.Check inline type="checkbox"></Form.Check>
-            <span>{props.todo.title}</span>
-            <span>{props.todo?.id}</span>
-            <div>{props.todo.dateCreated}</div>
+            <span>{props.task.title}</span>
+            <span>{props.task?.id}</span>
+            <div>{props.task.dateCreated}</div>
           </Card.Header>
-          <Card.Body>
-            <div>{props.todo.note}</div>
-            <div>{props.todo.isDone}</div>
-            <Button variant="success">+</Button>
-          </Card.Body>
-          <Card.Footer>
-            <Button variant="success">Save</Button>
-          </Card.Footer>
+          {props.isExpanded && (
+            <>
+              <Card.Body>
+                <div>{props.task.note}</div>
+                <div>{props.task.isDone}</div>
+                <Button variant="success">+</Button>
+              </Card.Body>
+              <Card.Footer>
+                <Button variant="danger" className="mr-2" onClick={() => props.toggleExpand()}>
+                  Cancel
+                </Button>
+                <Button variant="success">Save</Button>
+              </Card.Footer>
+            </>
+          )}
         </Form>
       ) : (
         <Form>
@@ -53,6 +60,9 @@ export const CardComponent = (props: { todo?: Task }, state: { isExpanded: boole
           </Card.Body>
           <Card.Footer>
             <Form.Group>
+              <Button variant="danger" className="mr-2" onClick={() => props.toggleExpand()}>
+                Cancel
+              </Button>
               <Button variant="success">Save</Button>
             </Form.Group>
           </Card.Footer>

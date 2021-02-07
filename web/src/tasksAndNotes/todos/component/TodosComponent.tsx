@@ -1,21 +1,20 @@
 import React from 'react';
 import { Task } from '../../../../../types/tasksAndNotesInterfaces';
-import { CardComponent } from '../../shared/component/card/CardComponent';
+import { CardContainer } from '../../shared/card/container/CardContainer';
 
 export const TodosComponent = (props: { todos: Task[]; isAddingTaskActive: boolean }) => (
   <div>
     <h2>Your things to do</h2>
-    {props.isAddingTaskActive && <CardComponent></CardComponent>}
+    {props.isAddingTaskActive && <CardContainer></CardContainer>}
 
     {!props.todos.length && <div>You have 0 todos, please add something</div>}
     <ul className="list-unstyled">
       {props.todos?.map((item: Task, idx: number) => (
-        <li key={idx} className="mb-4" tabIndex={0}>
-          <CardComponent todo={item}></CardComponent>
+        <li key={idx} className="mb-1" tabIndex={0}>
+          <CardContainer task={item}></CardContainer>
         </li>
       ))}
     </ul>
-
     <hr />
     <h2>Done tasks</h2>
     <ul className="list-unstyled">
@@ -23,7 +22,7 @@ export const TodosComponent = (props: { todos: Task[]; isAddingTaskActive: boole
         .filter(item => item.isDone)
         .map((item: Task, idx: number) => (
           <li key={idx} className="mb-4">
-            <CardComponent todo={item}></CardComponent>
+            <CardContainer task={item}></CardContainer>
           </li>
         ))}
       <li></li>
