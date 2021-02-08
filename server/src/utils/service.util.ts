@@ -1,7 +1,8 @@
 import { NextFunction } from 'express';
 import client from '../db/db';
+import Request from '../models/auth/request.interface';
 
-export const handleGet = async (sql: string, req: any, res: any, next: NextFunction) => {
+export const handleSelect = async (sql: string, req: Request<{}>, res: any, next: NextFunction) => {
   const userId = req.user.id;
 
   try {

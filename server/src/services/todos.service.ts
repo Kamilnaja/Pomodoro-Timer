@@ -8,7 +8,7 @@ import {
 } from '../../../types/tasksAndNotesInterfaces';
 import client from '../db/db';
 import { Request as RequestWithBody } from '../models/auth/request.interface';
-import { handleGet } from '../utils/service.util';
+import { handleSelect } from '../utils/service.util';
 
 export const getTodos = async (req: RequestWithBody<{}>, res: Response<TaskSearchResults>, next: NextFunction) => {
   const sql = `SELECT id, title, note, datecreated "dateCreated", isDone "isDone" 
@@ -16,7 +16,7 @@ export const getTodos = async (req: RequestWithBody<{}>, res: Response<TaskSearc
                WHERE userID = ($1) and isDone = false
                ORDER BY dateCreated DESC`;
 
-  handleGet(sql, req, res, next);
+  handleSelect(sql, req, res, next);
 };
 
 export const handleAddTodo = async (req: RequestWithBody<TaskRequestBody>, res: Response, next: NextFunction) => {
@@ -43,15 +43,8 @@ export const handleGetSubtasks = async (
                FROM subtasks 
                WHERE userID = ($1) and parentId = ($2)
                ORDER BY dateCreated DESC`;
-  const userId = req.user.id;
 
-  try {
-    const queryResult = await client.query(sql, [userId]);
-    res.json({ result: queryResult.rows });
-  } catch (err) {
-    console.log(`error when getting todos ${err}`);
-    next(err);
-  }
+  handleSelect(sql, req, res, next);
 };
 
 export const handleAddSubtask = async (req: RequestWithBody<Subtask>, res: Response, next: NextFunction) => {
