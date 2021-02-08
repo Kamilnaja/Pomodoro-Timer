@@ -37,10 +37,10 @@ const queries: TableQuery[] = [
     tableName: 'todos',
   },
   {
-    query: `${createTableSql} subtask (
+    query: `${createTableSql} subtasks (
       id           SERIAL PRIMARY KEY,
       dateCreated  timestamp,
-      parentTaskId text,
+      parentTaskId integer,
       title        text,
       note         text,
       isDone       boolean

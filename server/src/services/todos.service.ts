@@ -1,65 +1,55 @@
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
-import {
-  Subtask,
-  SubtaskSearchResult,
-  TaskRequestBody,
-  TaskSearchResults,
-} from '../../../types/tasksAndNotesInterfaces';
+import { TaskRequestBody, TaskSearchResults } from '../../../types/tasksAndNotesInterfaces';
 import client from '../db/db';
 import { Request as RequestWithBody } from '../models/auth/request.interface';
-import { handleSelect } from '../utils/service.util';
 
 export const getTodos = async (req: RequestWithBody<{}>, res: Response<TaskSearchResults>, next: NextFunction) => {
-  const sql = `SELECT id, title, note, datecreated "dateCreated", isDone "isDone" 
+  const sql = `SELECT todos.id, todos.title, todos.note, todos.datecreated "dateCreated", todos.isDone "isDone", subtasks.parentTaskId
                FROM todos 
-               WHERE userID = ($1) and isDone = false
-               ORDER BY dateCreated DESC`;
+               LEFT JOIN subtasks
+                ON todos.id = subtasks.parentTaskId
+               WHERE userID = ($1) and todos.isDone = false
+               ORDER BY todos.dateCreated DESC`;
 
-  handleSelect(sql, req, res, next);
+  handleSelectTodos(sql, req, res, next);
+};
+
+export const handleSelectTodos = async (sql: string, req: any, res: any, next: NextFunction) => {
+  const userId = req.user.id;
+
+  try {
+    const queryResult = await client.query(sql, [userId]);
+    res.json({ result: queryResult.rows });
+  } catch (err) {
+    console.log(`error while get request:  ${err}`);
+    next(err);
+  }
 };
 
 export const handleAddTodo = async (req: RequestWithBody<TaskRequestBody>, res: Response, next: NextFunction) => {
-  const { title, note, isDone } = req.body;
+  const { title, note, isDone, subtasks } = req.body;
   const userId = req.user.id;
 
   const sql = `INSERT INTO todos (title, note, dateCreated, isDone, userId) VALUES ($1, $2, $3, $4, $5)`;
+  const sqlSubtasks = `INSERT INTO subtasks (title, note, parentTaskId) VALUES ($1, $2, $3)`;
 
   try {
-    await client.query(sql, [title, note, new Date(), isDone, userId]);
+    await client.query(sql, [title, note, isDone, userId]);
     res.json({});
   } catch (err) {
     console.log(`Error when inserting todo: ${err}`);
     next(err);
   }
-};
 
-export const handleGetSubtasks = async (
-  req: RequestWithBody<{}>,
-  res: Response<SubtaskSearchResult>,
-  next: NextFunction,
-) => {
-  const sql = `SELECT id, title, note, datecreated "dateCreated", isDone "isDone" 
-               FROM subtasks 
-               WHERE userID = ($1) and parentId = ($2)
-               ORDER BY dateCreated DESC`;
-
-  handleSelect(sql, req, res, next);
-};
-
-export const handleAddSubtask = async (req: RequestWithBody<Subtask>, res: Response, next: NextFunction) => {
-  const { title, note, isDone, parentId } = req.body;
-
-  const sql = `
-    INSERT INTO subtasks (title, note, dateCreated, isDone, parentId) 
-    VALUES ($1, $2, $3, $4, $5)`;
-
-  try {
-    await client.query(sql, [title, note, new Date(), isDone, parentId]);
-    res.json({});
-  } catch (err) {
-    console.log(`Error when inserting subtask: ${err}`);
-    next(err);
+  for (const item of subtasks) {
+    try {
+      await client.query(sqlSubtasks, [item.title, item.note, new Date(), item.isDone, item.parentId]);
+      res.json({});
+    } catch (err) {
+      console.log(`Error when inserting todo: ${err}`);
+      next(err);
+    }
   }
 };
 

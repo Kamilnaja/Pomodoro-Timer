@@ -34,7 +34,7 @@ export interface TaskRequestBody {
   title: string;
   note: string;
   dateCreated: Date;
-  subtasks: Task[];
+  subtasks: Subtask[];
   type: TaskType;
   dueDate: Date;
 }
