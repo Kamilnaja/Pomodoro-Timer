@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { Task } from '../../../../../types/tasksAndNotesInterfaces';
+import { Subtask } from '../../../../../types/tasksAndNotesInterfaces';
 import { ActionWithPayload } from '../../../shared/store/interfaces/actions/actionInterface';
 
 export enum TaskActions {
@@ -18,8 +18,17 @@ const hideAddNewTask = (): Action<TaskActions> => ({
   type: TaskActions.HIDE_ADD_NEW_TASK,
 });
 
-const addSubtask = (payload: Task): ActionWithPayload<TaskActions, Task> => ({
+const addSubtask = (payload: Subtask): ActionWithPayload<TaskActions, Subtask> => ({
   type: TaskActions.ADD_SUBTASK,
+  payload,
+});
+
+const addSubtaskSuccess = (): Action<TaskActions> => ({
+  type: TaskActions.ADD_SUBTASK_SUCCESS,
+});
+
+const addSubtaskError = (payload: any): ActionWithPayload<TaskActions, any> => ({
+  type: TaskActions.ADD_SUBTASK_ERROR,
   payload,
 });
 
@@ -31,4 +40,10 @@ export const handleHideAddNewTask = () => (dispatch: (action: Action<any>) => vo
   dispatch(hideAddNewTask());
 };
 
-export const handleAddSubtask = () => (dispatch: (action: ActionWithPayload<TaskActions, Task>) => void) => {};
+export const handleAddSubtask = (payload: Subtask) => (
+  dispatch: (action: ActionWithPayload<TaskActions, Subtask>) => void,
+) => {
+  dispatch(addSubtask(payload));
+
+  console.log('dispatching add new task');
+};

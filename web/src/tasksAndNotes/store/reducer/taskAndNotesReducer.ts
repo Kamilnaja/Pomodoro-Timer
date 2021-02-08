@@ -44,6 +44,7 @@ export const taskAndNotesReducer = (
       return {
         ...state,
         isLoading: false,
+        isAddingTaskActive: false,
       };
     case TodosActions.SAVE_TODO_ERROR:
       return {
@@ -72,11 +73,14 @@ export const taskAndNotesReducer = (
         ...state,
         isAddingTaskActive: true,
       };
-
     case TaskActions.HIDE_ADD_NEW_TASK:
       return {
         ...state,
         isAddingTaskActive: false,
+      };
+    case TaskActions.ADD_SUBTASK:
+      return {
+        ...state,
       };
     default:
       return state;

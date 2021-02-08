@@ -1,13 +1,13 @@
 import React, { FormEvent, useEffect } from 'react';
-import { Accordion, Button, Card, Form, Col, Row, Container, Badge } from 'react-bootstrap';
+import { Accordion, Badge, Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { CardComponentProps } from './cardComponentProps';
-import './cardComponent.scss';
 import { Task } from '../../../../../../types/tasksAndNotesInterfaces';
+import SubtaskContainer from '../../subtask/subtasksWrapper/container/SubtaskWrapperContainer';
+import './cardComponent.scss';
+import { CardComponentProps } from './cardComponentProps';
 
 export const CardComponent = (props: CardComponentProps) => {
   const { task } = props;
-
   const defaultValues = {
     id: task?.id,
     note: task?.note,
@@ -79,13 +79,7 @@ export const CardComponent = (props: CardComponentProps) => {
               </div>
               <div>{task?.isDone}</div>
               <hr />
-              <h4>Subtasks</h4>
-              <Button variant="success" onClick={() => props.addSubtask()}>
-                +
-              </Button>
-              {task?.subtasks?.map(item => (
-                <div>item</div>
-              ))}
+              <SubtaskContainer subtasks={props.task?.subtasks} />
               <hr />
               <Button variant="danger" className="mr-2">
                 Cancel

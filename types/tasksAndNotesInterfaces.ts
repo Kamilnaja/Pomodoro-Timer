@@ -6,13 +6,20 @@ export enum TaskType {
   NOTE,
 }
 
-export interface Task {
+export interface BaseTask {
   id: string;
   isDone: boolean;
   title: string;
   note: string;
+}
+
+export interface Subtask extends BaseTask {
+  parentId: string;
+}
+
+export interface Task extends BaseTask {
   dateCreated: Date;
-  subtasks: Task[];
+  subtasks: Subtask[];
   type: TaskType;
   dueDate: Date;
 }
