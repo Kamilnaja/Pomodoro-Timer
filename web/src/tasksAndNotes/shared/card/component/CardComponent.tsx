@@ -2,27 +2,33 @@ import React, { FormEvent, useEffect } from 'react';
 import { Accordion, Badge, Button, Card, Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { Task } from '../../../../../../types/tasksAndNotesInterfaces';
-import SubtaskContainer from '../../subtask/subtasksWrapper/container/SubtaskWrapperContainer';
+import SubtasksWrapperContainer from '../../subtask/subtasksWrapper/container/SubtasksWrapperContainer';
 import './cardComponent.scss';
-import { CardComponentProps } from './cardComponentProps';
+import { CardComponentProps, FormData } from './cardComponentProps';
 
 export const CardComponent = (props: CardComponentProps) => {
   const { task } = props;
-  const defaultValues = {
+
+  const defaultValues: FormData = {
     id: task?.id,
     note: task?.note,
     title: task?.title,
     isDone: task?.isDone,
+    subtasks: task?.subtasks,
   };
-  const { register, handleSubmit, setValue } = useForm({ defaultValues });
+  const { register, handleSubmit, setValue } = useForm<FormData>({ defaultValues });
   const onSubmit = (data: Task) => {
+    if (!data.title) {
+      return;
+    }
     props.handleSave(data);
   };
   useEffect(() => {
     register({ name: 'note' });
-    register({ name: 'title' });
+    register({ name: 'title', required: true, minLength: 2 });
     register({ name: 'isDone' });
     register({ name: 'id' });
+    register({ name: 'subtasks' });
   }, []);
 
   return (
@@ -79,7 +85,7 @@ export const CardComponent = (props: CardComponentProps) => {
               </div>
               <div>{task?.isDone}</div>
               <hr />
-              <SubtaskContainer subtasks={props.task?.subtasks} />
+              <SubtasksWrapperContainer subtasks={props.task?.subtasks} />
               <hr />
               <Button variant="danger" className="mr-2">
                 Cancel
