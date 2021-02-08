@@ -26,6 +26,8 @@ export interface Task extends BaseTask {
 
 export interface TaskSearchResults extends SearchResult<Task> {}
 
+export interface SubtaskSearchResult extends SearchResult<Subtask> {}
+
 export interface TaskRequestBody {
   id?: string;
   isDone: boolean;

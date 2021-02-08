@@ -36,6 +36,17 @@ const queries: TableQuery[] = [
     )`,
     tableName: 'todos',
   },
+  {
+    query: `${createTableSql} subtask (
+      id           SERIAL PRIMARY KEY,
+      dateCreated  timestamp,
+      parentTaskId text,
+      title        text,
+      note         text,
+      isDone       boolean
+    )`,
+    tableName: 'subtasks',
+  },
 ];
 
 queries.forEach((tableQuery: TableQuery) => {
