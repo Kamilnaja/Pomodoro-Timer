@@ -12,6 +12,22 @@ export const initialState: StatsState = {
 
 export const statsReducer = (state = initialState, action: ActionWithPayload<StatsAction, StatsSearchResult>) => {
   switch (action.type) {
+    case StatsAction.SAVE_POMODORO:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case StatsAction.SAVE_POMODORO_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+      };
+    case StatsAction.SAVE_POMODORO_ERROR:
+      return {
+        ...state,
+        error: 'todo handle error',
+        isLoading: false,
+      };
     case StatsAction.GET_STATISTIC_IN_PERIOD:
       return {
         ...state,

@@ -1,18 +1,18 @@
 import React from 'react';
+import { Jumbotron } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
 import { msToTime } from 'shared/scripts/utils';
 import 'shared/settings/initialConfig';
 import { initialConfig } from 'shared/settings/initialConfig';
-import { savePomodoroAndReloadStats } from '../../main/store/actions/mainActions';
+import { savePomodoroAndReloadStats } from '../../stats/store/actions/statsActions';
+import { InfoComponent } from '../components/info/InfoComponent';
+import { TimeComponent } from '../components/time/TimeComponent';
 import { TimerState } from '../store/enums/timerEnum';
 import { State } from '../store/interfaces/stateInterface';
 import { timerState } from '../store/state/timerState';
 import './timer.scss';
-import Button from 'react-bootstrap/Button';
-import { Jumbotron } from 'react-bootstrap';
-import { TimeComponent } from '../components/time/TimeComponent';
 import { TimerContainerProps } from './timerContainerProps';
-import { InfoComponent } from '../components/info/InfoComponent';
 
 class TimerContainer extends React.Component<TimerContainerProps, State> {
   interval = 0;

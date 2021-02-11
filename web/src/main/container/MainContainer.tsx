@@ -6,11 +6,12 @@ import { Modal } from 'shared/components/modal/Modal';
 import { ModalType as ModalEnum } from 'shared/store/enums/modalEnum';
 import { AuthState } from '../../auth/store/interfaces/authState';
 import { closeModal, openModal } from '../../shared/store/interfaces/modalInterface';
-import { MainProps, MainState } from '../store/interfaces/mainPropsInterface';
 import './main.scss';
+import { MainContainerProps } from './mainContainerPropsInterface';
+import { MainContainerState } from './mainContainerStateInterface';
 
-class Main extends React.Component<MainProps, MainState> {
-  constructor(props: MainProps) {
+class MainContainer extends React.Component<MainContainerProps, MainContainerState> {
+  constructor(props: MainContainerProps) {
     super(props);
     this.state = {
       openedModal: ModalEnum.NULL,
@@ -49,4 +50,4 @@ const mapStateToProps = (state: { auth: AuthState }) => {
   return { auth: authState };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
