@@ -4,7 +4,7 @@ import StatsSearchResult from '../../../types/statisticsInterfaces';
 import client from '../db/db';
 import { Request } from '../models/auth/request.interface';
 
-export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | void, number>) => {
+export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | void, number>, next: NextFunction) => {
   const sql = 'INSERT INTO pomodoros (userID, date) VALUES ($1, $2)';
 
   const values = [req.user.id, new Date()];
@@ -13,7 +13,7 @@ export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | 
     res.json();
   } catch (err) {
     console.log(err.stack);
-    res.sendStatus(500).json(err.stack);
+    next(err);
   }
 };
 
@@ -24,38 +24,66 @@ export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<Stats
 
   let { year, month } = req.params;
 
-  if (!isYearCorrect(year)) {
+  if (isDateError(year, month)) {
     console.log('error');
-    setError('year', year, next);
-  } else if (!isMonthCorrect(month)) {
-    setError('month', month, next);
+    setError('error', next);
   } else {
     month = (Number(month) + 1) as any;
     month.toString().length === 1 ? (month = `${0}${month}`) : month;
-    await searchResultsInDb(userId.toString(), year + '-' + month, res);
+    await searchResultsInDb(userId.toString(), `${year}-${month}`, 'YYYY-MM', res, next);
   }
 };
 
-const searchResultsInDb = async (userId: string, date: string, res: Response<StatsSearchResult>) => {
+export const getStatsInGivenDay = async (req: Request<{}>, res: Response<StatsSearchResult>, next: NextFunction) => {
+  const userId = req.user.id;
+
+  let { year, month, day } = req.params;
+
+  if (isDateError(year, month, day)) {
+    console.log('error');
+    setError('error', next);
+  } else {
+    month = (Number(month) + 1) as any;
+    month.toString().length === 1 ? (month = `${0}${month}`) : month;
+    await searchResultsInDb(userId.toString(), `${year}-${month}-${day}`, 'YYYY-MM-DD', res, next);
+  }
+};
+
+const searchResultsInDb = async (
+  userId: string,
+  date: string,
+  dateFormat: string,
+  res: Response<StatsSearchResult>,
+  next: NextFunction,
+) => {
   const sql = `SELECT TO_CHAR(date, 'DD-MM-YYYY') as date, 
      COUNT (date) 
      FROM pomodoros 
-     WHERE userID = ($1) AND TO_CHAR(date, 'YYYY-MM') = ($2) ${groupAndOrder}`;
+     WHERE userID = ($1) AND TO_CHAR(date, ($2)) = ($3) ${groupAndOrder}`;
 
   try {
-    const queryResult = await client.query(sql, [userId.toString(), date]);
+    const queryResult = await client.query(sql, [userId.toString(), dateFormat, date]);
     res.json({ result: queryResult.rows });
   } catch (err) {
     console.log(`err fetching getStatsInGivenMonth ${err}`);
-    res.sendStatus(500).json(err.stack);
+    next(err);
   }
 };
 
-const setError = (value: 'year' | 'month', field: string, next: NextFunction) => {
-  const info = `Wrong ${value} ${field}`;
+const setError = (field: string, next: NextFunction) => {
+  const info = `Wrong ${field}`;
   console.log(info);
-  next(info); // todo - add error handler
+  next(info);
+};
+
+const isDateError = (year: string, month: string, day?: string): boolean => {
+  if (day) {
+    return !isYearCorrect(year) || !isMonthCorrect(month) || !isDayCorrect(day);
+  } else {
+    return !isYearCorrect(year) || !isMonthCorrect(month);
+  }
 };
 
 const isYearCorrect = (year: string): boolean => Number(year) >= 2020;
-const isMonthCorrect = (month: string): boolean => Number(month) >= 0 && Number(month) < 13;
+const isMonthCorrect = (month: string): boolean => Number(month) >= 0 && Number(month) <= 12;
+const isDayCorrect = (day: string): boolean => Number(day) >= 0 && Number(day) < 31;

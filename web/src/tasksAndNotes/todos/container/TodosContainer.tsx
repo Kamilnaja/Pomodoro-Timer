@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { ErrorComponent } from 'shared/components/error/ErrorComponent';
+import { Loader } from 'shared/components/loader/Loader';
 import { handleGetTodos } from '../../store/actions/todosActions';
 import { TasksAndNotesState } from '../../store/models/TasksAndNotesInterfaces';
 import { TodosComponent } from '../component/TodosComponent';
 import { TodosContainerProps } from './todosContainerInterface';
-import { Error } from 'shared/components/error/Error';
-import { Loader } from 'shared/components/loader/Loader';
 
 class TodosContainer extends Component<TodosContainerProps> {
   componentDidMount() {
@@ -14,7 +14,7 @@ class TodosContainer extends Component<TodosContainerProps> {
 
   render() {
     if (this.props.todosState.error) {
-      return <Error />;
+      return <ErrorComponent />;
     } else if (this.props.todosState.isLoading) {
       return <Loader />;
     } else {

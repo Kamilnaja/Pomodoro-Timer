@@ -19,3 +19,5 @@ export const getCurrentMonth = (givenMonth?: number): number => {
 };
 
 export const getCurrentYear = (): number => new Date().getFullYear();
+
+export const getCurrentDay = (): number => new Date().getDate();

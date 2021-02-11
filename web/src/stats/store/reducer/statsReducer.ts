@@ -37,13 +37,14 @@ export const statsReducer = (state = initialState, action: ActionWithPayload<Sta
     case StatsAction.GET_TODAY_STATS_ERROR:
       return {
         ...state,
+        isLoading: false,
         error: 'something wrong',
       };
     case StatsAction.GET_TODAY_STATS_SUCCESS:
       return {
         ...state,
-        isLoading: true,
-        todayResults: action.payload.result,
+        isLoading: false,
+        todayResults: action.payload,
       };
     default:
       return state;

@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { ActionWithPayload } from 'shared/store/interfaces/actions/actionInterface';
-import StatsSearchResult, { SearchDate, TodayStatsResult } from '../../../../../types/statisticsInterfaces';
+import StatsSearchResult, { SearchDate } from '../../../../../types/statisticsInterfaces';
 import { fetchData } from '../../../shared/scripts/requests';
 
 export enum StatsAction {
@@ -33,7 +33,7 @@ const getTodayStats = (): Action => ({
   type: StatsAction.GET_TODAY_STATS,
 });
 
-const getTodayStatsSuccess = (payload: TodayStatsResult): ActionWithPayload<StatsAction, TodayStatsResult> => ({
+const getTodayStatsSuccess = (payload: number): ActionWithPayload<StatsAction, number> => ({
   type: StatsAction.GET_TODAY_STATS_SUCCESS,
   payload,
 });
@@ -48,7 +48,7 @@ const getTodayStatsError = (payload: any): ActionWithPayload<StatsAction, any> =
 export const handleGetStatsInPeriod = (year: number, month: number) => async (dispatch: (args: Action) => void) => {
   dispatch(getStatisticsInPeriod());
 
-  fetchData(`/stats/${year}/${month}`)
+  fetchData(`stats/${year}/${month}`)
     .then((payload: StatsSearchResult) => dispatch(getStatisticsInPeriodSuccess(payload)))
     .catch(err => dispatch(getStatisticsInPeriodError(err)));
 };
@@ -58,7 +58,7 @@ export const handleGetTodayStats = (searchDate: SearchDate) => async (dispatch: 
 
   const { year, month, day } = searchDate;
 
-  fetchData(`/stats/${year}/${month}/${day}`)
-    .then((payload: TodayStatsResult) => dispatch(getTodayStatsSuccess(payload)))
+  fetchData(`stats/${year}/${month}/${day}`)
+    .then((payload: StatsSearchResult) => dispatch(getTodayStatsSuccess(payload.result[0].count)))
     .catch(err => dispatch(getTodayStatsError(err)));
 };

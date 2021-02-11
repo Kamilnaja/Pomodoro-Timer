@@ -1,6 +1,6 @@
 import './error.scss';
 
-export const Error = () => (
+export const ErrorComponent = () => (
   <div className="error">
     <span>Error while trying to synchronize</span>
   </div>
