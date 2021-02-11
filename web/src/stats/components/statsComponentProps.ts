@@ -1,4 +1,4 @@
-import { PomodoroEntry } from '../../../../types/statisticsInterfaces';
+import { PomodorosDoneInDay } from '../../../../types/statisticsInterfaces';
 import { HandleGetStats } from '../containers/statsContainerInterfaces';
 
-export type StatsComponentProps = { stats: PomodoroEntry[]; handleGetStats: HandleGetStats };
+export type StatsComponentProps = { stats: PomodorosDoneInDay[]; handleGetStats: HandleGetStats };

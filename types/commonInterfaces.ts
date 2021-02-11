@@ -1,3 +1,3 @@
 export interface SearchResult<T> {
-  result: T[];
+  result: T;
 }

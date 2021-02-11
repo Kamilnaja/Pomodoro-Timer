@@ -29,7 +29,7 @@ export const HeaderComponent = (props: HeaderProps) => (
               </>
             ) : (
               <>
-                <Nav.Link href="/taskAndNotes">Tasks and notes</Nav.Link>
+                {/* <Nav.Link href="/taskAndNotes">Tasks and notes</Nav.Link> */}
                 <Nav.Link href="/stats">Stats</Nav.Link>
                 <Nav.Link href="/settings">Settings</Nav.Link>
                 <Nav.Link onClick={() => props.handleOpenModal(ModalType.LOGOUT)}>Logout</Nav.Link>

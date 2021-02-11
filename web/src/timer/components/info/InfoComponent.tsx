@@ -1,3 +1,4 @@
+import TodayStatsContainer from '../../../stats/todayStats/containers/TodayStatsContainer';
 import { TimerState } from '../../store/enums/timerEnum';
 import './info.scss';
 
@@ -27,6 +28,7 @@ export const InfoComponent = (props: { currentState: TimerState }) => {
     <div className="info">
       <hr className="text-white" />
       <span className="text-white text-center">{info}</span>
+      <TodayStatsContainer />
     </div>
   );
 };

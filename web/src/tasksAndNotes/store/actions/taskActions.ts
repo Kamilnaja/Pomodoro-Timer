@@ -23,14 +23,14 @@ const addSubtask = (payload: Subtask): ActionWithPayload<TaskActions, Subtask> =
   payload,
 });
 
-const addSubtaskSuccess = (): Action<TaskActions> => ({
-  type: TaskActions.ADD_SUBTASK_SUCCESS,
-});
+// const addSubtaskSuccess = (): Action<TaskActions> => ({
+//   type: TaskActions.ADD_SUBTASK_SUCCESS,
+// });
 
-const addSubtaskError = (payload: any): ActionWithPayload<TaskActions, any> => ({
-  type: TaskActions.ADD_SUBTASK_ERROR,
-  payload,
-});
+// const addSubtaskError = (payload: any): ActionWithPayload<TaskActions, any> => ({
+//   type: TaskActions.ADD_SUBTASK_ERROR,
+//   payload,
+// });
 
 export const handleShowAddNewTask = () => (dispatch: (action: Action<any>) => void) => {
   dispatch(showAddNewTask());

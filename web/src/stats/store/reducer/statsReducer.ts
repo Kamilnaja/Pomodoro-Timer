@@ -7,6 +7,7 @@ export const initialState: StatsState = {
   isLoading: false,
   error: '',
   results: [],
+  todayResults: 0,
 };
 
 export const statsReducer = (state = initialState, action: ActionWithPayload<StatsAction, StatsSearchResult>) => {
@@ -27,6 +28,22 @@ export const statsReducer = (state = initialState, action: ActionWithPayload<Sta
         ...state,
         error: 'something went wrong',
         isLoading: false,
+      };
+    case StatsAction.GET_TODAY_STATS:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case StatsAction.GET_TODAY_STATS_ERROR:
+      return {
+        ...state,
+        error: 'something wrong',
+      };
+    case StatsAction.GET_TODAY_STATS_SUCCESS:
+      return {
+        ...state,
+        isLoading: true,
+        todayResults: action.payload.result,
       };
     default:
       return state;
