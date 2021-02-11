@@ -1,7 +1,6 @@
-import { SearchDate } from '../../../../../types/statisticsInterfaces';
 import { StatsState } from '../../containers/statsContainerInterfaces';
 
-export type HandleGetStats = (date: SearchDate) => void;
+export type HandleGetStats = () => void;
 
 export interface TodayStatsContainerProps {
   stats: StatsState;

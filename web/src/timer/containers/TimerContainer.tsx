@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { msToTime } from 'shared/scripts/utils';
 import 'shared/settings/initialConfig';
 import { initialConfig } from 'shared/settings/initialConfig';
-import { savePomodoroAndReloadStats } from '../../stats/store/actions/statsActions';
+import { handleSavePomodoro } from '../../stats/store/actions/statsActions';
 import { InfoComponent } from '../components/info/InfoComponent';
 import { TimeComponent } from '../components/time/TimeComponent';
 import { TimerState } from '../store/enums/timerEnum';
@@ -176,7 +176,7 @@ class TimerContainer extends React.Component<TimerContainerProps, State> {
 }
 
 const mapDispatchToProps = {
-  savePomodoroAndReloadStats,
+  savePomodoroAndReloadStats: handleSavePomodoro,
 };
 
 export default connect(null, mapDispatchToProps)(TimerContainer);

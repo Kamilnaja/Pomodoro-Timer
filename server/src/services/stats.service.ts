@@ -4,13 +4,13 @@ import StatsSearchResult from '../../../types/statisticsInterfaces';
 import client from '../db/db';
 import { Request } from '../models/auth/request.interface';
 
-export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | void, number>, next: NextFunction) => {
+export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | {}, number>, next: NextFunction) => {
   const sql = 'INSERT INTO pomodoros (userID, date) VALUES ($1, $2)';
 
   const values = [req.user.id, new Date()];
   try {
     await client.query(sql, values);
-    res.json();
+    res.json({});
   } catch (err) {
     console.log(err.stack);
     next(err);

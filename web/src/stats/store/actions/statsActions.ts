@@ -1,8 +1,8 @@
 import { Action } from 'redux';
 import { ActionWithPayload } from 'shared/store/interfaces/actions/actionInterface';
-import StatsSearchResult, { SearchDate } from '../../../../../types/statisticsInterfaces';
+import StatsSearchResult from '../../../../../types/statisticsInterfaces';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
-import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
+import { getCurrentDay, getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
 
 export enum StatsAction {
   GET_STATISTIC_IN_PERIOD = 'GET_STATISTIC_IN_PERIOD',
@@ -22,18 +22,12 @@ const savePomodoro = (): Action<StatsAction> => ({
   type: StatsAction.SAVE_POMODORO,
 });
 
-const savePomodoroError = (error: any): ActionWithPayload<StatsAction, any> => ({
-  type: StatsAction.SAVE_POMODORO_ERROR,
-  payload: error,
-});
-
-// thunk
-
-export const savePomodoroAndReloadStats = () => async (dispatch: (arg: Action | any) => void) => {
-  dispatch(savePomodoro());
-  updateData('stats', {}, 'POST')
-    .then(() => dispatch(handleGetStatsInPeriod(getCurrentYear(), getCurrentMonth())))
-    .catch(err => dispatch(savePomodoroError(err)));
+const savePomodoroError = (error: any): ActionWithPayload<StatsAction, any> => {
+  console.log(error);
+  return {
+    type: StatsAction.SAVE_POMODORO_ERROR,
+    payload: error,
+  };
 };
 
 const getStatisticsInPeriod = (): Action => ({
@@ -76,12 +70,17 @@ export const handleGetStatsInPeriod = (year: number, month: number) => async (di
     .catch(err => dispatch(getStatisticsInPeriodError(err)));
 };
 
-export const handleGetTodayStats = (searchDate: SearchDate) => async (dispatch: (args: Action) => void) => {
+export const handleGetTodayStats = () => async (dispatch: (args: Action) => void) => {
   dispatch(getTodayStats());
 
-  const { year, month, day } = searchDate;
-
-  fetchData(`stats/${year}/${month}/${day}`)
+  fetchData(`stats/${getCurrentYear()}/${getCurrentMonth()}/${getCurrentDay()}`)
     .then((payload: StatsSearchResult) => dispatch(getTodayStatsSuccess(payload.result[0].count)))
     .catch(err => dispatch(getTodayStatsError(err)));
+};
+
+export const handleSavePomodoro = () => async (dispatch: (arg: Action | any) => void) => {
+  dispatch(savePomodoro());
+  updateData('stats', {}, 'POST')
+    .then(() => dispatch(handleGetTodayStats()))
+    .catch(err => dispatch(savePomodoroError(err)));
 };
