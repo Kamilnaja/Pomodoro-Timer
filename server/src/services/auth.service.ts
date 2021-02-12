@@ -103,7 +103,7 @@ const checkPassword = async (
     if (isPasswordCorrect) {
       console.log('password correct!!!');
       res.json({
-        token: jwt.sign({ login, email, id }, process.env.ACCESS_TOKEN_SECRET || 'loremipsumdolorsitamet'),
+        token: jwt.sign({ login, email, id }, process.env.ACCESS_TOKEN_SECRET),
       });
     } else {
       res.status(401).send({
