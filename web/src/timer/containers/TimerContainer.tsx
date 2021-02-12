@@ -140,7 +140,7 @@ class TimerContainer extends React.Component<TimerContainerProps, State> {
         timerState: TimerState.POMODORO_END,
         timerTime: initialConfig.shortBreakTime,
       });
-      this.props.savePomodoroAndReloadStats();
+      this.props.handleSavePomodoro();
     } else if (this.state.timerState === TimerState.BREAK_RUNNING) {
       this.setState({
         timerState: TimerState.BREAK_END,
@@ -175,9 +175,8 @@ class TimerContainer extends React.Component<TimerContainerProps, State> {
     </Jumbotron>
   );
 }
-// todo - handleSavePomodoro
 const mapDispatchToProps = {
-  savePomodoroAndReloadStats: handleSavePomodoro,
+  handleSavePomodoro,
 };
 
 const mapStateToProps = (state: { auth: AuthState }) => {
