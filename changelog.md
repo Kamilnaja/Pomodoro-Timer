@@ -1,3 +1,8 @@
+## 0.6.0 - 2021-02-12
+
+- showing today stats (back) on main page
+- new layout based on Bootstrap
+
 ## 0.5.0 - 2021-01-30
 
 - api for stats for fetching months and years
