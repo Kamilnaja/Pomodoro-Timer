@@ -26,7 +26,7 @@ export const registerUser = async (
   res: Response<{ message: string } | AuthError>,
   next: NextFunction,
 ): Promise<void> => {
-  const insert = 'INSERT INTO users (dateCreated, login, email, password) VALUES($1, $2, $3, $4)';
+  const insert = 'INSERT INTO users (date_created, login, email, password) VALUES($1, $2, $3, $4)';
 
   try {
     const now = new Date();

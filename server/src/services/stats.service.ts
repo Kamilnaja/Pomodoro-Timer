@@ -5,7 +5,7 @@ import client from '../db/db';
 import { Request } from '../models/auth/request.interface';
 
 export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | {}, number>, next: NextFunction) => {
-  const sql = 'INSERT INTO pomodoros (userID, date) VALUES ($1, $2)';
+  const sql = 'INSERT INTO pomodoros (user_id, date) VALUES ($1, $2)';
 
   const values = [req.user.id, new Date()];
   try {
@@ -59,7 +59,7 @@ const searchResultsInDb = async (
   const sql = `SELECT TO_CHAR(date, 'DD-MM-YYYY') as date, 
      COUNT (date) 
      FROM pomodoros 
-     WHERE userID = ($1) AND TO_CHAR(date, ($2)) = ($3) ${groupAndOrder}`;
+     WHERE user_id = ($1) AND TO_CHAR(date, ($2)) = ($3) ${groupAndOrder}`;
 
   try {
     const queryResult = await client.query(sql, [userId.toString(), dateFormat, date]);

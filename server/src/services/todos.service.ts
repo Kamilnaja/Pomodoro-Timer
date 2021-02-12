@@ -31,8 +31,8 @@ export const handleAddTodo = async (req: RequestWithBody<TaskRequestBody>, res: 
   const { title, note, isDone, subtasks } = req.body;
   const userId = req.user.id;
 
-  const sql = `INSERT INTO todos (title, note, dateCreated, isDone, userId) VALUES ($1, $2, $3, $4, $5)`;
-  const sqlSubtasks = `INSERT INTO subtasks (title, note, parentTaskId) VALUES ($1, $2, $3)`;
+  const sql = `INSERT INTO todos (title, note, date_created, is_done, user_id) VALUES ($1, $2, $3, $4, $5)`;
+  const sqlSubtasks = `INSERT INTO subtasks (title, note, parent_task_id) VALUES ($1, $2, $3)`;
 
   try {
     await client.query(sql, [title, note, isDone, userId]);
