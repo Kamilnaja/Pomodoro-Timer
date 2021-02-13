@@ -1,5 +1,5 @@
-import { LogoutComponentProps } from '../../store/interfaces/logoutComponentProps';
 import './logoutComponent.scss';
+import { LogoutComponentProps } from './LogoutComponentProps';
 
 export const LogoutComponent = (props: LogoutComponentProps) => (
   <div className="logout">

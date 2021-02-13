@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import { ValidationMessage } from 'shared/components/validationMessage/ValidationMessage';
+import { ValidationMessage } from 'shared/validationMessage/ValidationMessage';
 import { Registration } from '../../../../../types/authInterfaces';
-import { RegisterComponentProps, RegisterFormData } from '../../store/interfaces/registerPropsInterface';
 import './registerComponent.scss';
+import { RegisterComponentProps, RegisterFormData } from './RegisterComponentProps';
 
 export const RegisterComponent = (props: RegisterComponentProps) => {
   const { register, errors, handleSubmit, watch } = useForm<RegisterFormData>();

@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setUserIsLoggedOut } from '../../store/actions/authActions';
 import { AuthState } from '../../store/interfaces/authState';
-import { LogoutContainerProps } from '../../store/interfaces/LogoutContainerProps';
 import { LogoutComponent } from '../component/LogoutComponent';
+import { LogoutContainerProps } from './LogoutContainerProps';
 
 class LogoutContainer extends React.Component<LogoutContainerProps> {
   logout = () => {

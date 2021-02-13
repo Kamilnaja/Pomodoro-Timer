@@ -10,10 +10,10 @@ import { handleSavePomodoro } from '../../stats/store/actions/statsActions';
 import { InfoComponent } from '../components/info/InfoComponent';
 import { TimeComponent } from '../components/time/TimeComponent';
 import { TimerState } from '../store/enums/timerEnum';
-import { State } from '../store/interfaces/stateInterface';
+import { State } from '../store/interfaces/StateInterface';
 import { timerState } from '../store/state/timerState';
 import './timer.scss';
-import { TimerContainerProps } from './timerContainerProps';
+import { TimerContainerProps } from './TimerContainerProps';
 
 class TimerContainer extends React.Component<TimerContainerProps, State> {
   interval = 0;

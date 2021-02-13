@@ -1,9 +1,6 @@
 import { openModal } from '../../shared/modal/ModalProps';
 
-export interface HeaderProps {
+export interface HeaderContainerProps {
   handleOpenModal: openModal;
-  handleLogout: logout;
   isLoggedIn: boolean;
 }
-
-export type logout = () => void;

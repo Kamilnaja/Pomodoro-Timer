@@ -1,5 +1,5 @@
 import { Registration } from '../../../../../types/authInterfaces';
-import { AuthState } from './authState';
+import { AuthState } from '../../store/interfaces/authState';
 
 export interface RegisterComponentProps {
   handleSubmit: (arg: Registration) => void;

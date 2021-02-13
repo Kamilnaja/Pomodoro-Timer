@@ -1,4 +1,4 @@
-import { AuthState } from './authState';
+import { AuthState } from '../../store/interfaces/authState';
 
 export interface LogoutContainerProps {
   handleLogout: () => void;

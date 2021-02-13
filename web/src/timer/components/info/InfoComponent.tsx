@@ -1,7 +1,7 @@
 import TodayStatsContainer from '../../../stats/todayStats/containers/TodayStatsContainer';
 import { TimerState } from '../../store/enums/timerEnum';
 import './info.scss';
-import { InfoComponentProps } from './infoComponentProps';
+import { InfoComponentProps } from './InfoComponentProps';
 
 export const InfoComponent = (props: InfoComponentProps) => {
   let info = '';

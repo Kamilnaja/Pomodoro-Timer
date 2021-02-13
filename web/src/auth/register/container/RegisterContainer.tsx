@@ -4,7 +4,7 @@ import { Registration } from '../../../../../types/authInterfaces';
 import { sendRegisterForm } from '../../store/actions/authActions';
 import { AuthState } from '../../store/interfaces/authState';
 import { RegisterComponent } from '../component/RegisterComponent';
-import { RegisterContainerProps } from './registerContainerProps';
+import { RegisterContainerProps } from './RegisterContainerProps';
 
 class RegisterContainer extends React.Component<RegisterContainerProps> {
   handleSubmit = (registrationData: Registration) => {

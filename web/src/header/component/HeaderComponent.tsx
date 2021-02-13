@@ -3,18 +3,13 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ModalType } from 'shared/store/enums/modalEnum';
 import TimerContainer from 'timer/containers/TimerContainer';
-import Settings from '../../settings/Settings';
-import { openModal } from '../../shared/store/interfaces/modalInterface';
+import SettingsContainer from '../../settings/container/SettingsContainer';
 import StatsContainer from '../../stats/containers/StatsContainer';
 import TaskAndNotesContainer from '../../tasksAndNotes/taskAndNotesWrapper/taskAndNotesContainer/TaskAndNotesContainer';
+import { HeaderContainerProps } from '../container/HeaderContainerProps';
 import './headerComponent.scss';
 
-export interface HeaderProps {
-  handleOpenModal: openModal;
-  isLoggedIn: boolean;
-}
-
-export const HeaderComponent = (props: HeaderProps) => (
+export const HeaderComponent = (props: HeaderContainerProps) => (
   <Router>
     <Container>
       <Navbar>
@@ -43,7 +38,7 @@ export const HeaderComponent = (props: HeaderProps) => (
           <TaskAndNotesContainer />
         </Route>
         <Route path="/settings">
-          <Settings />
+          <SettingsContainer />
         </Route>
         <Route path="/stats">
           <StatsContainer />

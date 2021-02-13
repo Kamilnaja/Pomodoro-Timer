@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ErrorComponent } from '../../../shared/components/error/ErrorComponent';
-import { Loader } from '../../../shared/components/loader/Loader';
-import { StatsState } from '../../containers/statsContainerInterfaces';
+import { ErrorComponent } from '../../../shared/error/errorComponent/ErrorComponent';
+import { Loader } from '../../../shared/loader/Loader';
+import { StatsState } from '../../store/models/StatsInterfaces';
 import { TodayStatsComponent } from '../components/TodayStatsComponent';
 import { handleGetTodayStats } from './../../store/actions/statsActions';
-import { TodayStatsContainerProps } from './todayStatsContainerProps';
+import { TodayStatsContainerProps } from './TodayStatsContainerProps';
 
 class TodayStatsContainer extends Component<TodayStatsContainerProps> {
   componentDidMount() {

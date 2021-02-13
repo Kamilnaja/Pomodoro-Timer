@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import LoginContainer from '../../../auth/login/container/LoginContainer';
-import LogoutContainer from '../../../auth/logout/container/LogoutContainer';
-import RegisterContainer from '../../../auth/register/container/RegisterContainer';
-import { ModalType as ModalEnum, ModalType } from '../../store/enums/modalEnum';
-import { ModalProps } from '../../store/interfaces/modalInterface';
+import LoginContainer from '../../auth/login/container/LoginContainer';
+import LogoutContainer from '../../auth/logout/container/LogoutContainer';
+import RegisterContainer from '../../auth/register/container/RegisterContainer';
+import { ModalType as ModalEnum, ModalType } from '../store/enums/modalEnum';
 import './modal.scss';
-import { CreatedModal } from './modalInterface';
+import { CreatedModal } from './ModalInterface';
+import { ModalProps } from './ModalProps';
 
 export const Modal = (props: ModalProps) => {
   const createModalBodyFactory = (modalType: ModalType): CreatedModal => {

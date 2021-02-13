@@ -2,13 +2,13 @@ import { resetForm, setUserIsLoggedIn, setUserIsLoggedOut } from 'auth/store/act
 import HeaderContainer from 'header/container/HeaderContainer';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Modal } from 'shared/components/modal/Modal';
+import { Modal } from 'shared/modal/Modal';
 import { ModalType as ModalEnum } from 'shared/store/enums/modalEnum';
 import { AuthState } from '../../auth/store/interfaces/authState';
-import { closeModal, openModal } from '../../shared/store/interfaces/modalInterface';
+import { closeModal, openModal } from '../../shared/modal/ModalProps';
 import './main.scss';
-import { MainContainerProps } from './mainContainerPropsInterface';
-import { MainContainerState } from './mainContainerStateInterface';
+import { MainContainerProps } from './MainContainerProps';
+import { MainContainerState } from './MainContainerState';
 
 class MainContainer extends React.Component<MainContainerProps, MainContainerState> {
   constructor(props: MainContainerProps) {

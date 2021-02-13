@@ -1,4 +1,4 @@
-import './error.scss';
+import './errorComponent.scss';
 
 export const ErrorComponent = () => (
   <div className="error">

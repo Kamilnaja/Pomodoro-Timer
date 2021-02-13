@@ -1,4 +1,4 @@
-import { InitialConfig } from '../store/interfaces/initialConfigInterface';
+import { InitialConfig } from './InitialConfigInterface';
 
 const prod = {
   url: {

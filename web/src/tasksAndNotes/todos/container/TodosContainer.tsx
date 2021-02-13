@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ErrorComponent } from 'shared/components/error/ErrorComponent';
-import { Loader } from 'shared/components/loader/Loader';
+import { ErrorComponent } from 'shared/error/errorComponent/ErrorComponent';
+import { Loader } from 'shared/loader/Loader';
 import { handleGetTodos } from '../../store/actions/todosActions';
 import { TasksAndNotesState } from '../../store/models/TasksAndNotesInterfaces';
 import { TodosComponent } from '../component/TodosComponent';

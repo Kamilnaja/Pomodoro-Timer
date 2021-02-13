@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { HeaderComponent, HeaderProps } from '../component/HeaderComponent';
+import { HeaderComponent } from '../component/HeaderComponent';
+import { HeaderContainerProps } from './HeaderContainerProps';
 
-class HeaderContainer extends React.Component<HeaderProps> {
+class HeaderContainer extends React.Component<HeaderContainerProps> {
   render() {
     return <HeaderComponent handleOpenModal={this.props.handleOpenModal} isLoggedIn={this.props.isLoggedIn} />;
   }

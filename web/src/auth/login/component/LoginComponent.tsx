@@ -1,20 +1,10 @@
 import { useForm } from 'react-hook-form';
-import { ValidationMessage } from 'shared/components/validationMessage/ValidationMessage';
+import { ValidationMessage } from 'shared/validationMessage/ValidationMessage';
 import { Login } from '../../../../../types/authInterfaces';
-import { AuthState } from '../../store/interfaces/authState';
 import './loginComponent.scss';
+import { FormData, LoginComponentProps } from './LoginComponentProps';
 
-export interface LoginProps {
-  handleSubmit: (data: Login) => void;
-  auth: AuthState;
-}
-
-type FormData = {
-  login: string;
-  password: string;
-};
-
-export const LoginComponent = (props: LoginProps) => {
+export const LoginComponent = (props: LoginComponentProps) => {
   const { register, errors, handleSubmit } = useForm<FormData>();
   const onSubmit = (loginData: Login) => {
     props.handleSubmit(loginData);
