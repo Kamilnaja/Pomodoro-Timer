@@ -1,6 +1,5 @@
 import React from 'react';
 import { Jumbotron } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
 import { connect } from 'react-redux';
 import { msToTime } from 'shared/scripts/utils';
 import 'shared/settings/initialConfig';
@@ -8,10 +7,10 @@ import { initialConfig } from 'shared/settings/initialConfig';
 import { AuthState } from '../../../auth/store/interfaces/authState';
 import { handleSavePomodoro } from '../../../stats/store/actions/statsActions';
 import { InfoComponent } from '../../info/InfoComponent';
-import { TimeComponent } from '../../time/TimeComponent';
 import { TimerState } from '../../state/enums/timerEnum';
 import { State } from '../../state/interfaces/StateInterface';
 import { timerState } from '../../state/state/timerState';
+import { TimerButtonsComponent } from '../buttons/TimerButtonsComponent';
 import { TimerContainerProps } from './TimerContainerProps';
 
 class TimerContainer extends React.Component<TimerContainerProps, State> {
@@ -151,25 +150,14 @@ class TimerContainer extends React.Component<TimerContainerProps, State> {
 
   render = () => (
     <Jumbotron className="align-items-center d-flex flex-column bg-dark">
-      <div className="button-wrapper d-flex justify-content-around w-100">
-        <Button variant="primary" onClick={this.startNewPomodoro}>
-          Pomodoro
-        </Button>
-        <Button variant="primary" onClick={() => this.startNewBreak(initialConfig.shortBreakTime)}>
-          Short Break
-        </Button>
-        <Button variant="primary" onClick={() => this.startNewBreak(initialConfig.longBreakTime)}>
-          Long Break
-        </Button>
-      </div>
-      <TimeComponent time={msToTime(this.state.timerTime)} />
-      <Button
-        variant="primary"
-        className="timer__button"
-        onClick={this.isAnyTimerRunning() ? this.pauseCounter : this.startCounter}
-      >
-        {this.isAnyTimerRunning() ? 'Stop timer' : 'Start timer'}
-      </Button>
+      <TimerButtonsComponent
+        startNewPomodoro={this.startNewPomodoro}
+        startNewBreak={this.startNewBreak}
+        isAnyTimerRunning={this.isAnyTimerRunning}
+        pauseCounter={this.pauseCounter}
+        startCounter={this.startCounter}
+        time={msToTime(this.state.timerTime)}
+      ></TimerButtonsComponent>
       <InfoComponent currentState={this.state.timerState} authState={this.props.authState} />
     </Jumbotron>
   );
