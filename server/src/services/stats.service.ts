@@ -4,7 +4,7 @@ import StatsSearchResult from '../../../types/statisticsInterfaces';
 import client from '../db/db';
 import { Request } from '../models/auth/request.interface';
 
-export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | {}, number>, next: NextFunction) => {
+export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | {}>, next: NextFunction) => {
   const sql = 'INSERT INTO pomodoros (user_id, date) VALUES ($1, $2)';
 
   const values = [req.user.id, new Date()];
