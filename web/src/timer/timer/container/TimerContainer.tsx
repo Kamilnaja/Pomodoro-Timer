@@ -5,14 +5,13 @@ import { connect } from 'react-redux';
 import { msToTime } from 'shared/scripts/utils';
 import 'shared/settings/initialConfig';
 import { initialConfig } from 'shared/settings/initialConfig';
-import { AuthState } from '../../auth/store/interfaces/authState';
-import { handleSavePomodoro } from '../../stats/store/actions/statsActions';
-import { InfoComponent } from '../components/info/InfoComponent';
-import { TimeComponent } from '../components/time/TimeComponent';
-import { TimerState } from '../state/enums/timerEnum';
-import { State } from '../state/interfaces/StateInterface';
-import { timerState } from '../state/state/timerState';
-import './timer.scss';
+import { AuthState } from '../../../auth/store/interfaces/authState';
+import { handleSavePomodoro } from '../../../stats/store/actions/statsActions';
+import { InfoComponent } from '../../info/InfoComponent';
+import { TimeComponent } from '../../time/TimeComponent';
+import { TimerState } from '../../state/enums/timerEnum';
+import { State } from '../../state/interfaces/StateInterface';
+import { timerState } from '../../state/state/timerState';
 import { TimerContainerProps } from './TimerContainerProps';
 
 class TimerContainer extends React.Component<TimerContainerProps, State> {
@@ -152,7 +151,7 @@ class TimerContainer extends React.Component<TimerContainerProps, State> {
 
   render = () => (
     <Jumbotron className="align-items-center d-flex flex-column bg-dark">
-      <div className="button-wrapper">
+      <div className="button-wrapper d-flex justify-content-around w-100">
         <Button variant="primary" onClick={this.startNewPomodoro}>
           Pomodoro
         </Button>

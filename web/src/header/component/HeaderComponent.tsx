@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ModalType } from 'shared/store/enums/modalEnum';
-import TimerContainer from 'timer/containers/TimerContainer';
+import TimerContainer from 'timer/timer/container/TimerContainer';
 import SettingsContainer from '../../settings/container/SettingsContainer';
 import StatsContainer from '../../stats/allStats/containers/StatsContainer';
 import TaskAndNotesContainer from '../../tasksAndNotes/taskAndNotesWrapper/taskAndNotesContainer/TaskAndNotesContainer';
