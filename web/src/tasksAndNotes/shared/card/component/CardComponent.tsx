@@ -50,10 +50,6 @@ export const CardComponent = (props: CardComponentProps) => {
     setCounter(prevCounter => prevCounter - 1);
   };
 
-  // const clearSubtasks = () => {
-  //   setIndexes([]);
-  // };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Accordion>

@@ -10,40 +10,40 @@ const createTableSql = 'CREATE TABLE IF NOT EXISTS';
 const queries: TableQuery[] = [
   {
     query: `${createTableSql} pomodoros (
-      userID text,
-      date   date
+      user_id text,
+      date    date
     )`,
     tableName: 'pomodoros',
   },
   {
     query: `${createTableSql} users (
-        id           SERIAL PRIMARY KEY,
-        dateCreated  date,
-        login        text UNIQUE,
-        email        text UNIQUE,
-        password     text NOT NULL
+        id            SERIAL PRIMARY KEY,
+        date_created  date,
+        login         text UNIQUE,
+        email         text UNIQUE,
+        password      text NOT NULL
       )`,
     tableName: 'users',
   },
   {
     query: `${createTableSql} todos (
-      id           SERIAL PRIMARY KEY,
-      dateCreated  timestamp,
-      userID       text,
-      title        text,
-      note         text,
-      isDone       boolean
+      id            SERIAL PRIMARY KEY,
+      date_created  timestamp,
+      user_id       text,
+      title         text,
+      note          text,
+      is_done       boolean
     )`,
     tableName: 'todos',
   },
   {
     query: `${createTableSql} subtasks (
-      id           SERIAL PRIMARY KEY,
-      dateCreated  timestamp,
-      parentTaskId integer,
-      title        text,
-      note         text,
-      isDone       boolean
+      id             SERIAL PRIMARY KEY,
+      date_created   timestamp,
+      parent_task_id integer,
+      title          text,
+      note           text,
+      is_done        boolean
     )`,
     tableName: 'subtasks',
   },

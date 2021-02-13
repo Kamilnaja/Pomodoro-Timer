@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { msToTime } from 'shared/scripts/utils';
 import 'shared/settings/initialConfig';
 import { initialConfig } from 'shared/settings/initialConfig';
+import { AuthState } from '../../auth/store/interfaces/authState';
 import { handleSavePomodoro } from '../../stats/store/actions/statsActions';
 import { InfoComponent } from '../components/info/InfoComponent';
 import { TimeComponent } from '../components/time/TimeComponent';
@@ -139,7 +140,7 @@ class TimerContainer extends React.Component<TimerContainerProps, State> {
         timerState: TimerState.POMODORO_END,
         timerTime: initialConfig.shortBreakTime,
       });
-      this.props.savePomodoroAndReloadStats();
+      this.props.handleSavePomodoro();
     } else if (this.state.timerState === TimerState.BREAK_RUNNING) {
       this.setState({
         timerState: TimerState.BREAK_END,
@@ -170,13 +171,17 @@ class TimerContainer extends React.Component<TimerContainerProps, State> {
       >
         {this.isAnyTimerRunning() ? 'Stop timer' : 'Start timer'}
       </Button>
-      <InfoComponent currentState={this.state.timerState} />
+      <InfoComponent currentState={this.state.timerState} authState={this.props.authState} />
     </Jumbotron>
   );
 }
-
 const mapDispatchToProps = {
-  savePomodoroAndReloadStats: handleSavePomodoro,
+  handleSavePomodoro,
 };
 
-export default connect(null, mapDispatchToProps)(TimerContainer);
+const mapStateToProps = (state: { auth: AuthState }) => {
+  const authState = state.auth;
+  return { authState };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimerContainer);

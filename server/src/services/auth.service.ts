@@ -26,7 +26,7 @@ export const registerUser = async (
   res: Response<{ message: string } | AuthError>,
   next: NextFunction,
 ): Promise<void> => {
-  const insert = 'INSERT INTO users (dateCreated, login, email, password) VALUES($1, $2, $3, $4)';
+  const insert = 'INSERT INTO users (date_created, login, email, password) VALUES($1, $2, $3, $4)';
 
   try {
     const now = new Date();
@@ -103,7 +103,7 @@ const checkPassword = async (
     if (isPasswordCorrect) {
       console.log('password correct!!!');
       res.json({
-        token: jwt.sign({ login, email, id }, process.env.ACCESS_TOKEN_SECRET || 'loremipsumdolorsitamet'),
+        token: jwt.sign({ login, email, id }, process.env.ACCESS_TOKEN_SECRET),
       });
     } else {
       res.status(401).send({

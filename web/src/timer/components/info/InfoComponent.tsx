@@ -1,8 +1,9 @@
 import TodayStatsContainer from '../../../stats/todayStats/containers/TodayStatsContainer';
 import { TimerState } from '../../store/enums/timerEnum';
 import './info.scss';
+import { InfoComponentProps } from './infoComponentProps';
 
-export const InfoComponent = (props: { currentState: TimerState }) => {
+export const InfoComponent = (props: InfoComponentProps) => {
   let info = '';
   switch (props.currentState) {
     case TimerState.BREAK_END:
@@ -26,9 +27,16 @@ export const InfoComponent = (props: { currentState: TimerState }) => {
   }
   return (
     <div className="info">
-      <hr className="text-white" />
-      <span className="text-white text-center">{info}</span>
-      <TodayStatsContainer />
+      {props.authState.isLoggedIn ? (
+        <div className="text-white text-center">
+          <span>{info}</span>
+          <TodayStatsContainer />
+        </div>
+      ) : (
+        <div className="text-danger text-center">
+          <span>Please login to save pomodoros</span>
+        </div>
+      )}
     </div>
   );
 };
