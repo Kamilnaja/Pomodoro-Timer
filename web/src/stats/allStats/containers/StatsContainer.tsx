@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ErrorComponent } from 'shared/error/errorComponent/ErrorComponent';
 import { Loader } from 'shared/loader/Loader';
-import { getCurrentMonth, getCurrentYear } from '../../shared/scripts/utils';
+import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
+import { handleGetStatsInPeriod } from '../../store/actions/statsActions';
+import { StatsState } from '../../store/models/StatsInterfaces';
 import { StatsComponent } from '../components/StatsComponent';
-import { handleGetStatsInPeriod } from '../store/actions/statsActions';
-import { StatsState } from '../store/models/StatsInterfaces';
 import { StatsContainerProps } from './StatsContainerProps';
 
 class StatsContainer extends React.Component<StatsContainerProps> {

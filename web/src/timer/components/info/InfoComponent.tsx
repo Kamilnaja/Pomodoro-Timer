@@ -1,5 +1,5 @@
 import TodayStatsContainer from '../../../stats/todayStats/containers/TodayStatsContainer';
-import { TimerState } from '../../store/enums/timerEnum';
+import { TimerState } from '../../state/enums/timerEnum';
 import './info.scss';
 import { InfoComponentProps } from './InfoComponentProps';
 

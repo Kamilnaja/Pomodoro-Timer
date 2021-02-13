@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ModalType } from 'shared/store/enums/modalEnum';
 import TimerContainer from 'timer/containers/TimerContainer';
 import SettingsContainer from '../../settings/container/SettingsContainer';
-import StatsContainer from '../../stats/containers/StatsContainer';
+import StatsContainer from '../../stats/allStats/containers/StatsContainer';
 import TaskAndNotesContainer from '../../tasksAndNotes/taskAndNotesWrapper/taskAndNotesContainer/TaskAndNotesContainer';
 import { HeaderContainerProps } from '../container/HeaderContainerProps';
 import './headerComponent.scss';

@@ -9,9 +9,9 @@ import { AuthState } from '../../auth/store/interfaces/authState';
 import { handleSavePomodoro } from '../../stats/store/actions/statsActions';
 import { InfoComponent } from '../components/info/InfoComponent';
 import { TimeComponent } from '../components/time/TimeComponent';
-import { TimerState } from '../store/enums/timerEnum';
-import { State } from '../store/interfaces/StateInterface';
-import { timerState } from '../store/state/timerState';
+import { TimerState } from '../state/enums/timerEnum';
+import { State } from '../state/interfaces/StateInterface';
+import { timerState } from '../state/state/timerState';
 import './timer.scss';
 import { TimerContainerProps } from './TimerContainerProps';
 
