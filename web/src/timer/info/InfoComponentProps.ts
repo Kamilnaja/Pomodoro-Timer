@@ -1,7 +1,7 @@
 import { AuthState } from '../../auth/store/interfaces/authState';
-import { TimerState } from '../state/enums/timerEnum';
+import { CounterState } from '../state/enums/timerEnum';
 
 export interface InfoComponentProps {
-  currentState: TimerState;
+  currentState: CounterState;
   authState: AuthState;
 }

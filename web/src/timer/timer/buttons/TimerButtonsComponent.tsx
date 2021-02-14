@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import { initialConfig } from '../../../shared/settings/initialConfig';
 import { TimerButtonsComponentProps } from './TimerButtonsComponentProps';
 import { TimeComponent } from '../../time/TimeComponent';
+import { isAnyTimerRunning } from '../container/TimerContainerHelpers';
 
 export const TimerButtonsComponent = (props: TimerButtonsComponentProps) => {
   return (
@@ -19,8 +20,8 @@ export const TimerButtonsComponent = (props: TimerButtonsComponentProps) => {
         </Button>
       </div>
       <TimeComponent time={props.time} />
-      <Button variant="success" onClick={props.isAnyTimerRunning() ? props.pauseCounter : props.startCounter}>
-        {props.isAnyTimerRunning() ? 'Stop timer' : 'Start timer'}
+      <Button variant="success" onClick={isAnyTimerRunning(props.state) ? props.pauseCounter : props.startCounter}>
+        {isAnyTimerRunning(props.state) ? 'Stop timer' : 'Start timer'}
       </Button>
     </>
   );

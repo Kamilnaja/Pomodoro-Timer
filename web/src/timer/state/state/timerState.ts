@@ -1,8 +1,8 @@
 import { initialConfig } from 'shared/settings/initialConfig';
-import { TimerState } from '../enums/timerEnum';
-import { State } from '../interfaces/StateInterface';
+import { CounterState } from '../enums/timerEnum';
+import { TimerState } from '../interfaces/StateInterface';
 
-export const timerState: State = {
-  timerState: TimerState.BREAK_END,
+export const timerState: TimerState = {
+  counterState: CounterState.BREAK_END,
   timerTime: initialConfig.pomodoroTime,
 };

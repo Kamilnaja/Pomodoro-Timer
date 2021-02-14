@@ -1,6 +1,6 @@
-import { TimerState } from '../enums/timerEnum';
+import { CounterState } from '../enums/timerEnum';
 
-export interface State {
-  timerState: TimerState;
+export interface TimerState {
+  counterState: CounterState;
   timerTime: number;
 }

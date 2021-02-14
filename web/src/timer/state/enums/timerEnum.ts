@@ -1,4 +1,4 @@
-export enum TimerState {
+export enum CounterState {
   POMODORO_RUNNING = 'POMODORO_RUNNING',
   BREAK_RUNNING = 'BREAK_RUNNING',
   POMODORO_END = 'POMODORO_END',

@@ -7,43 +7,39 @@ import { initialConfig } from 'shared/settings/initialConfig';
 import { AuthState } from '../../../auth/store/interfaces/authState';
 import { handleSavePomodoro } from '../../../stats/store/actions/statsActions';
 import { InfoComponent } from '../../info/InfoComponent';
-import { TimerState } from '../../state/enums/timerEnum';
-import { State } from '../../state/interfaces/StateInterface';
+import { CounterState } from '../../state/enums/timerEnum';
+import { TimerState } from '../../state/interfaces/StateInterface';
 import { timerState } from '../../state/state/timerState';
 import { TimerButtonsComponent } from '../buttons/TimerButtonsComponent';
+import { TabTitle } from '../Title/TabTitle';
+import { isAnyTimerRunning, playClickSound, playEndSound } from './TimerContainerHelpers';
 import { TimerContainerProps } from './TimerContainerProps';
 
-class TimerContainer extends React.Component<TimerContainerProps, State> {
+class TimerContainer extends React.Component<TimerContainerProps, TimerState> {
   interval = 0;
-  blinkingInterval = 0;
+  private tabTitle = new TabTitle();
 
   constructor(props: TimerContainerProps) {
     super(props);
     this.state = timerState;
   }
 
-  startCounter = () => {
-    if (!this.isAnyTimerRunning()) {
-      clearInterval(this.blinkingInterval);
-      this.clickSound();
+  handleStartCounter = () => {
+    if (!isAnyTimerRunning(this.state)) {
+      this.tabTitle.stopBlinking();
+      playClickSound();
 
-      switch (this.state.timerState) {
-        case TimerState.BREAK_END:
-          this.setState({ timerState: TimerState.POMODORO_RUNNING });
-          break;
-        case TimerState.POMODORO_END:
+      switch (this.state.counterState) {
+        case CounterState.BREAK_END:
+        case CounterState.POMODORO_PAUSE:
           this.setState({
-            timerState: TimerState.BREAK_RUNNING,
+            counterState: CounterState.POMODORO_RUNNING,
           });
           break;
-        case TimerState.POMODORO_PAUSE:
+        case CounterState.POMODORO_END:
+        case CounterState.BREAK_PAUSE:
           this.setState({
-            timerState: TimerState.POMODORO_RUNNING,
-          });
-          break;
-        case TimerState.BREAK_PAUSE:
-          this.setState({
-            timerState: TimerState.BREAK_RUNNING,
+            counterState: CounterState.BREAK_RUNNING,
           });
           break;
       }
@@ -51,38 +47,34 @@ class TimerContainer extends React.Component<TimerContainerProps, State> {
     }
   };
 
-  pauseCounter = () => {
-    switch (this.state.timerState) {
-      case TimerState.POMODORO_RUNNING:
+  handlePauseCounter = () => {
+    switch (this.state.counterState) {
+      case CounterState.POMODORO_RUNNING:
         this.setState({
-          timerState: TimerState.POMODORO_PAUSE,
+          counterState: CounterState.POMODORO_PAUSE,
         });
         break;
-      case TimerState.BREAK_RUNNING:
+      case CounterState.BREAK_RUNNING:
         this.setState({
-          timerState: TimerState.BREAK_PAUSE,
+          counterState: CounterState.BREAK_PAUSE,
         });
         break;
     }
     this.clearIntervalAndSetTime();
   };
 
-  startNewPomodoro = () => {
+  handleStartNewPomodoro = () => {
     this.clearIntervalAndSetTime(initialConfig.pomodoroTime);
     this.setState({
-      timerState: TimerState.BREAK_END,
+      counterState: CounterState.BREAK_END,
     });
   };
 
-  startNewBreak = (time: number) => {
+  handleStartNewBreak = (time: number) => {
     this.clearIntervalAndSetTime(time);
     this.setState({
-      timerState: TimerState.POMODORO_END,
+      counterState: CounterState.POMODORO_END,
     });
-  };
-
-  isAnyTimerRunning = () => {
-    return this.state.timerState === TimerState.BREAK_RUNNING || this.state.timerState === TimerState.POMODORO_RUNNING;
   };
 
   private clearIntervalAndSetTime = (time?: number) => {
@@ -98,7 +90,7 @@ class TimerContainer extends React.Component<TimerContainerProps, State> {
         this.setState({
           timerTime: this.state.timerTime - initialConfig.refreshRate,
         });
-        document.title = `${msToTime(this.state.timerTime)}`;
+        this.tabTitle.setTitle = `${msToTime(this.state.timerTime)}`;
       } else {
         this.stopCounting();
         this.informUser();
@@ -106,42 +98,21 @@ class TimerContainer extends React.Component<TimerContainerProps, State> {
     }, initialConfig.refreshRate);
   };
 
-  private makeTitleBlinking() {
-    let isTimeVisible = true;
-    this.blinkingInterval = window.setInterval(() => {
-      if (isTimeVisible) {
-        document.title = `${msToTime(this.state.timerTime)}`;
-      } else {
-        document.title = `00.00`;
-      }
-      isTimeVisible = !isTimeVisible;
-    }, 500);
-  }
-
   private informUser() {
-    const audio = new Audio(
-      'sounds/zapsplat_multimedia_game_sound_positive_award_bonus_bright_warm_synth_001_60698.mp3',
-    );
-    audio.play();
-
-    this.makeTitleBlinking();
-  }
-
-  private clickSound() {
-    const audio = new Audio('sounds/zapsplat_multimedia_game_sound_childrens_ping_high_pitched_soft_007_60676.mp3');
-    audio.play();
+    playEndSound();
+    this.tabTitle.startBlinking();
   }
 
   private stopCounting() {
-    if (this.state.timerState === TimerState.POMODORO_RUNNING) {
+    if (this.state.counterState === CounterState.POMODORO_RUNNING) {
       this.setState({
-        timerState: TimerState.POMODORO_END,
+        counterState: CounterState.POMODORO_END,
         timerTime: initialConfig.shortBreakTime,
       });
       this.props.handleSavePomodoro();
-    } else if (this.state.timerState === TimerState.BREAK_RUNNING) {
+    } else if (this.state.counterState === CounterState.BREAK_RUNNING) {
       this.setState({
-        timerState: TimerState.BREAK_END,
+        counterState: CounterState.BREAK_END,
         timerTime: initialConfig.pomodoroTime,
       });
     }
@@ -151,14 +122,14 @@ class TimerContainer extends React.Component<TimerContainerProps, State> {
   render = () => (
     <Jumbotron className="align-items-center d-flex flex-column bg-dark">
       <TimerButtonsComponent
-        startNewPomodoro={this.startNewPomodoro}
-        startNewBreak={this.startNewBreak}
-        isAnyTimerRunning={this.isAnyTimerRunning}
-        pauseCounter={this.pauseCounter}
-        startCounter={this.startCounter}
+        startNewPomodoro={this.handleStartNewPomodoro}
+        startNewBreak={this.handleStartNewBreak}
+        pauseCounter={this.handlePauseCounter}
+        startCounter={this.handleStartCounter}
         time={msToTime(this.state.timerTime)}
+        state={this.state}
       ></TimerButtonsComponent>
-      <InfoComponent currentState={this.state.timerState} authState={this.props.authState} />
+      <InfoComponent currentState={this.state.counterState} authState={this.props.authState} />
     </Jumbotron>
   );
 }
