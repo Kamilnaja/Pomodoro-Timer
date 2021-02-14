@@ -5,6 +5,7 @@ import { msToTime } from 'shared/scripts/utils';
 import 'shared/settings/initialConfig';
 import { initialConfig } from 'shared/settings/initialConfig';
 import { AuthState } from '../../../auth/store/interfaces/authState';
+import { CurrentFocusContainer } from '../../../currentFocus/container/CurrentFocusContainer';
 import { handleSavePomodoro } from '../../../stats/store/actions/statsActions';
 import { InfoComponent } from '../../info/InfoComponent';
 import { TimerState } from '../../state/enums/timerEnum';
@@ -12,6 +13,7 @@ import { State } from '../../state/interfaces/StateInterface';
 import { timerState } from '../../state/state/timerState';
 import { TimerButtonsComponent } from '../buttons/TimerButtonsComponent';
 import { TimerContainerProps } from './TimerContainerProps';
+import './timerContainer.scss';
 
 class TimerContainer extends React.Component<TimerContainerProps, State> {
   interval = 0;
@@ -149,17 +151,20 @@ class TimerContainer extends React.Component<TimerContainerProps, State> {
   }
 
   render = () => (
-    <Jumbotron className="align-items-center d-flex flex-column bg-dark">
-      <TimerButtonsComponent
-        startNewPomodoro={this.startNewPomodoro}
-        startNewBreak={this.startNewBreak}
-        isAnyTimerRunning={this.isAnyTimerRunning}
-        pauseCounter={this.pauseCounter}
-        startCounter={this.startCounter}
-        time={msToTime(this.state.timerTime)}
-      ></TimerButtonsComponent>
-      <InfoComponent currentState={this.state.timerState} authState={this.props.authState} />
-    </Jumbotron>
+    <>
+      <Jumbotron className="align-items-center d-flex flex-column bg-dark">
+        <TimerButtonsComponent
+          startNewPomodoro={this.startNewPomodoro}
+          startNewBreak={this.startNewBreak}
+          isAnyTimerRunning={this.isAnyTimerRunning}
+          pauseCounter={this.pauseCounter}
+          startCounter={this.startCounter}
+          time={msToTime(this.state.timerTime)}
+        ></TimerButtonsComponent>
+        <InfoComponent currentState={this.state.timerState} authState={this.props.authState} />
+      </Jumbotron>
+      <CurrentFocusContainer />
+    </>
   );
 }
 const mapDispatchToProps = {
