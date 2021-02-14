@@ -1,1 +1,3 @@
-export const CalendarComponent = () => <div>Todos</div>;
+import { CalendarComponentProps } from './CalendarComponentProps';
+
+export const CalendarComponent = (props: CalendarComponentProps) => <div>Todos</div>;
