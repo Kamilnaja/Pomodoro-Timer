@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Registration } from '../../../../../types/authInterfaces';
+import { Loader } from '../../../shared/loader/Loader';
 import { sendRegisterForm } from '../../store/actions/authActions';
 import { AuthState } from '../../store/interfaces/authState';
 import { RegisterComponent } from '../component/RegisterComponent';
@@ -17,7 +18,11 @@ class RegisterContainer extends React.Component<RegisterContainerProps> {
   };
 
   render() {
-    return <RegisterComponent handleSubmit={this.handleSubmit} formState={this.props.auth} />;
+    return this.props.auth.isLoading ? (
+      <Loader />
+    ) : (
+      <RegisterComponent handleSubmit={this.handleSubmit} formState={this.props.auth} />
+    );
   }
 }
 
