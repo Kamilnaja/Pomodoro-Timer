@@ -10,7 +10,7 @@ import { InfoComponent } from '../info/InfoComponent';
 import { CounterState } from '../state/enums/timerEnum';
 import { TimerState } from '../state/interfaces/StateInterface';
 import { timerState } from '../state/state/timerState';
-import { TimerButtonsComponent } from '../timer/buttons/TimerButtonsComponent';
+import { CounterComponent } from '../counter/CounterComponent';
 import { TabTitle } from '../../shared/title/TabTitle';
 import { isAnyTimerRunning, playClickSound, playEndSound } from './PomodoroCounterContainerHelpers';
 import { PomodoroCounterContainerProps } from './PomodoroCounterContainerProps';
@@ -123,12 +123,12 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
   render = () => (
     <Jumbotron className="align-items-center d-flex flex-column bg-dark">
       <ModeButtonsComponent startNewPomodoro={this.handleStartNewPomodoro} startNewBreak={this.handleStartNewBreak} />
-      <TimerButtonsComponent
+      <CounterComponent
         pauseCounter={this.handlePauseCounter}
         startCounter={this.handleStartCounter}
         time={msToTime(this.state.timerTime)}
         state={this.state}
-      ></TimerButtonsComponent>
+      ></CounterComponent>
       <InfoComponent currentState={this.state.counterState} authState={this.props.authState} />
     </Jumbotron>
   );
