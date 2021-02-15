@@ -1,8 +1,8 @@
-import { TimerState } from '../state/interfaces/StateInterface';
+import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 
 export interface CounterComponentProps {
   pauseCounter: () => void;
   startCounter: () => void;
-  state: TimerState;
+  state: PomodoroCounterState;
   time: string;
 }

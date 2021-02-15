@@ -1,6 +1,6 @@
 import { CounterState } from '../enums/timerEnum';
 
-export interface TimerState {
+export interface PomodoroCounterState {
   counterState: CounterState;
   timerTime: number;
 }

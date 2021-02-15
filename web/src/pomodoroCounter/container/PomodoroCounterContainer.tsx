@@ -7,16 +7,16 @@ import { initialConfig } from 'shared/settings/initialConfig';
 import { AuthState } from '../../auth/store/interfaces/authState';
 import { handleSavePomodoro } from '../../stats/store/actions/statsActions';
 import { InfoComponent } from '../info/InfoComponent';
-import { CounterState } from '../state/enums/timerEnum';
-import { TimerState } from '../state/interfaces/StateInterface';
-import { timerState } from '../state/state/timerState';
+import { CounterState } from '../store/enums/timerEnum';
+import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
+import { timerState } from '../store/state/timerState';
 import { CounterComponent } from '../counter/CounterComponent';
 import { TabTitle } from '../../shared/title/TabTitle';
 import { isAnyTimerRunning, playClickSound, playEndSound } from './PomodoroCounterContainerHelpers';
 import { PomodoroCounterContainerProps } from './PomodoroCounterContainerProps';
 import { ModeButtonsComponent } from '../modeButtons/ModeButtonsComponent';
 
-class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerProps, TimerState> {
+class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerProps, PomodoroCounterState> {
   interval = 0;
   private tabTitle = new TabTitle();
 
