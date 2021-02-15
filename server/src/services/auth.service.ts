@@ -128,7 +128,7 @@ export const authenticateJWT = (req: Request<any>, res: any, next: () => void) =
 
     jwt.verify(
       token,
-      process.env.ACCESS_TOKEN_SECRET || 'loremipsumdolorsitamet', // todo - remove
+      process.env.ACCESS_TOKEN_SECRET,
       (err: JsonWebTokenError | NotBeforeError | TokenExpiredError | null, user: Registration) => {
         if (err) {
           return res.sendStatus(403);

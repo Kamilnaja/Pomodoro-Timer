@@ -3,3 +3,4 @@ web/.eslintcache
 package-lock.json
 dist/
 .idea/*
+.env

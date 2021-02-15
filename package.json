@@ -8,6 +8,7 @@
     "@types/enzyme": "^3.10.8",
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "enzyme": "^3.11.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
@@ -52,10 +53,10 @@
   "types": "../types.d.ts",
   "scripts": {
     "start": "node dist/server/src/index.js",
+    "start-dev": "node -r dotenv/config dist/server/src/index.js",
     "postinstall": "cd server && tsc",
     "heroku-postbuild": "tsc & cd web/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "watch-ts": "cd server && tsc -w",
-    "start_local": "SET DATABASE_HOST='localhost'; SET DATABASE_PASSWORD='asdf'; SET DATABASE_USER='standarduser'; SET DATABASE_DATABASE='pomodoros'; SET PORT='8080'; SET ACCESS_TOKEN_SECRET='loremipsumdolorsitamet'; node dist/server/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "git add . && git commit -m Heroku && git push heroku master",
     "lint-all": "**/*.ts"
