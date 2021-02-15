@@ -4,22 +4,22 @@ import { connect } from 'react-redux';
 import { msToTime } from 'shared/scripts/utils';
 import 'shared/settings/initialConfig';
 import { initialConfig } from 'shared/settings/initialConfig';
-import { AuthState } from '../../../auth/store/interfaces/authState';
-import { handleSavePomodoro } from '../../../stats/store/actions/statsActions';
-import { InfoComponent } from '../../info/InfoComponent';
-import { CounterState } from '../../state/enums/timerEnum';
-import { TimerState } from '../../state/interfaces/StateInterface';
-import { timerState } from '../../state/state/timerState';
-import { TimerButtonsComponent } from '../buttons/TimerButtonsComponent';
-import { TabTitle } from '../Title/TabTitle';
-import { isAnyTimerRunning, playClickSound, playEndSound } from './TimerContainerHelpers';
-import { TimerContainerProps } from './TimerContainerProps';
+import { AuthState } from '../../auth/store/interfaces/authState';
+import { handleSavePomodoro } from '../../stats/store/actions/statsActions';
+import { InfoComponent } from '../info/InfoComponent';
+import { CounterState } from '../state/enums/timerEnum';
+import { TimerState } from '../state/interfaces/StateInterface';
+import { timerState } from '../state/state/timerState';
+import { TimerButtonsComponent } from '../timer/buttons/TimerButtonsComponent';
+import { TabTitle } from '../../shared/title/TabTitle';
+import { isAnyTimerRunning, playClickSound, playEndSound } from './PomodoroCounterContainerHelpers';
+import { PomodoroCounterContainerProps } from './PomodoroCounterContainerProps';
 
-class TimerContainer extends React.Component<TimerContainerProps, TimerState> {
+class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerProps, TimerState> {
   interval = 0;
   private tabTitle = new TabTitle();
 
-  constructor(props: TimerContainerProps) {
+  constructor(props: PomodoroCounterContainerProps) {
     super(props);
     this.state = timerState;
   }
@@ -142,4 +142,4 @@ const mapStateToProps = (state: { auth: AuthState }) => {
   return { authState };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TimerContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PomodoroCounterContainer);

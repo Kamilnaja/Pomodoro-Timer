@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { initialConfig } from '../../../shared/settings/initialConfig';
 import { TimerButtonsComponentProps } from './TimerButtonsComponentProps';
 import { TimeComponent } from '../../time/TimeComponent';
-import { isAnyTimerRunning } from '../container/TimerContainerHelpers';
+import { isAnyTimerRunning } from '../../container/PomodoroCounterContainerHelpers';
 
 export const TimerButtonsComponent = (props: TimerButtonsComponentProps) => {
   return (
