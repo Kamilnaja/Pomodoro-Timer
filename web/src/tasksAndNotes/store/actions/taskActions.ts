@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { Subtask } from '../../../../../types/tasksAndNotesInterfaces';
-import { ActionWithPayload } from '../../../shared/store/interfaces/actions/actionInterface';
+import { ActionWithPayload } from '../../../store/interfaces/actions/actionInterface';
 
 export enum TaskActions {
   SHOW_ADD_NEW_TASK = 'Show add new task',

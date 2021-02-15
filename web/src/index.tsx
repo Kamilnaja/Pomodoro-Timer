@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { store } from 'shared/store/reducers/reducer';
+import { store } from 'store/reducers/reducer';
 import MainContainer from './main/container/MainContainer';
 import reportWebVitals from './reportWebVitals';
 

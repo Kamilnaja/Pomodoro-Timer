@@ -1,4 +1,4 @@
-import { ModalType } from '../store/enums/modalEnum';
+import { ModalType } from './modalEnum';
 
 export interface ModalProps {
   modalType: ModalType;

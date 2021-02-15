@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 import { Task, TaskSearchResults } from '../../../../../types/tasksAndNotesInterfaces';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
-import { ActionWithPayload } from '../../../shared/store/interfaces/actions/actionInterface';
+import { ActionWithPayload } from '../../../store/interfaces/actions/actionInterface';
 
 export enum TodosActions {
   SAVE_TODO = 'Save todo',

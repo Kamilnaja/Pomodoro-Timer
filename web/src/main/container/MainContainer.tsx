@@ -3,7 +3,7 @@ import HeaderContainer from 'header/container/HeaderContainer';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Modal } from 'shared/modal/Modal';
-import { ModalType as ModalEnum } from 'shared/store/enums/modalEnum';
+import { ModalType as ModalEnum } from 'shared/modal/modalEnum';
 import { AuthState } from '../../auth/store/interfaces/authState';
 import { closeModal, openModal } from '../../shared/modal/ModalProps';
 import './main.scss';

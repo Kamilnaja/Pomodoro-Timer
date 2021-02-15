@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 import LoginContainer from '../../auth/login/container/LoginContainer';
 import LogoutContainer from '../../auth/logout/container/LogoutContainer';
 import RegisterContainer from '../../auth/register/container/RegisterContainer';
-import { ModalType as ModalEnum, ModalType } from '../store/enums/modalEnum';
+import { ModalType as ModalEnum, ModalType } from './modalEnum';
 import './modal.scss';
 import { CreatedModal } from './ModalInterface';
 import { ModalProps } from './ModalProps';

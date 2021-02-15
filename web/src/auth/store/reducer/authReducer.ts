@@ -1,4 +1,4 @@
-import { ActionWithPayload } from '../../../shared/store/interfaces/actions/actionInterface';
+import { ActionWithPayload } from '../../../store/interfaces/actions/actionInterface';
 import { AuthAction } from '../actions/authActions';
 import { AuthState } from '../interfaces/authState';
 import { authInitialState } from './initialState';

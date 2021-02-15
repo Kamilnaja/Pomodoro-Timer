@@ -1,5 +1,5 @@
 import { config } from '../settings/initialConfig';
-import { store } from '../store/reducers/reducer';
+import { store } from '../../store/reducers/reducer';
 
 export const fetchData = async (url: string): Promise<any> => {
   const token = store.getState().auth.token;

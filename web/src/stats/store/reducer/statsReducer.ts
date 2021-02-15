@@ -1,4 +1,4 @@
-import { ActionWithPayload } from 'shared/store/interfaces/actions/actionInterface';
+import { ActionWithPayload } from 'store/interfaces/actions/actionInterface';
 import StatsSearchResult from '../../../../../types/statisticsInterfaces';
 import { StatsAction } from '../actions/statsActions';
 import { StatsState } from '../models/StatsInterfaces';

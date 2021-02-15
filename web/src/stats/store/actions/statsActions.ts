@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { ActionWithPayload } from 'shared/store/interfaces/actions/actionInterface';
+import { ActionWithPayload } from 'store/interfaces/actions/actionInterface';
 import StatsSearchResult from '../../../../../types/statisticsInterfaces';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
 import { getCurrentDay, getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { ModalType } from 'shared/store/enums/modalEnum';
+import { ModalType } from 'shared/modal/modalEnum';
 import TimerContainer from 'pomodoroCounter/container/PomodoroCounterContainer';
 import SettingsContainer from '../../settings/container/SettingsContainer';
 import StatsContainer from '../../stats/allStats/containers/StatsContainer';

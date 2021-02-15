@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { ActionWithPayload } from 'shared/store/interfaces/actions/actionInterface';
+import { ActionWithPayload } from 'store/interfaces/actions/actionInterface';
 import { NotesActions } from '../actions/notesActions';
 import { TaskActions } from '../actions/taskActions';
 import { TodosActions } from '../actions/todosActions';
