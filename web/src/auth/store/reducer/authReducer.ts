@@ -1,16 +1,9 @@
 import { ActionWithPayload } from '../../../shared/store/interfaces/actions/actionInterface';
 import { AuthAction } from '../actions/authActions';
 import { AuthState } from '../interfaces/authState';
+import { authInitialState } from './initialState';
 
-export const initialState: AuthState = {
-  isLoading: false,
-  isSuccess: false,
-  isLoggedIn: false,
-  error: null as any,
-  token: '',
-};
-
-export const authReducer = (state = initialState, action: ActionWithPayload<AuthAction, any>): AuthState => {
+export const authReducer = (state = authInitialState, action: ActionWithPayload<AuthAction, any>): AuthState => {
   switch (action.type) {
     case AuthAction.REGISTER:
       return {
@@ -53,8 +46,8 @@ export const authReducer = (state = initialState, action: ActionWithPayload<Auth
     case AuthAction.RESET_FORM:
       return {
         ...state,
-        isLoading: initialState.isLoading,
-        isSuccess: initialState.isSuccess,
+        isLoading: authInitialState.isLoading,
+        isSuccess: authInitialState.isSuccess,
         error: null as any,
       };
     case AuthAction.SET_LOGGED_OUT:
