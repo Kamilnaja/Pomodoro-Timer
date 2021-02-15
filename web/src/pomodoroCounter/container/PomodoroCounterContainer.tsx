@@ -14,6 +14,7 @@ import { TimerButtonsComponent } from '../timer/buttons/TimerButtonsComponent';
 import { TabTitle } from '../../shared/title/TabTitle';
 import { isAnyTimerRunning, playClickSound, playEndSound } from './PomodoroCounterContainerHelpers';
 import { PomodoroCounterContainerProps } from './PomodoroCounterContainerProps';
+import { ModeButtonsComponent } from '../modeButtons/ModeButtonsComponent';
 
 class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerProps, TimerState> {
   interval = 0;
@@ -121,9 +122,8 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
 
   render = () => (
     <Jumbotron className="align-items-center d-flex flex-column bg-dark">
+      <ModeButtonsComponent startNewPomodoro={this.handleStartNewPomodoro} startNewBreak={this.handleStartNewBreak} />
       <TimerButtonsComponent
-        startNewPomodoro={this.handleStartNewPomodoro}
-        startNewBreak={this.handleStartNewBreak}
         pauseCounter={this.handlePauseCounter}
         startCounter={this.handleStartCounter}
         time={msToTime(this.state.timerTime)}
