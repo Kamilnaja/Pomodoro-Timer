@@ -27,7 +27,7 @@ export const InfoComponent = (props: InfoComponentProps) => {
   }
   return (
     <div className="info mt-4">
-      {props.authState.isLoggedIn ? (
+      {props.auth.isLoggedIn ? (
         <div className="text-white text-center">
           <span>{info}</span>
           <TodayStatsContainer />

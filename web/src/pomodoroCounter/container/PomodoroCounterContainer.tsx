@@ -129,7 +129,7 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
         time={msToTime(this.state.timerTime)}
         state={this.state}
       ></CounterComponent>
-      <InfoComponent currentState={this.state.counterState} authState={this.props.authState} />
+      <InfoComponent currentState={this.state.counterState} auth={this.props.auth} />
     </Jumbotron>
   );
 }
@@ -137,9 +137,9 @@ const mapDispatchToProps = {
   handleSavePomodoro,
 };
 
-const mapStateToProps = (state: { auth: AuthState }) => {
-  const authState = state.auth;
-  return { authState };
+const mapStateToProps = (state: { auth: AuthState; pomodoroCounter: PomodoroCounterState }) => {
+  const { auth, pomodoroCounter } = state;
+  return { auth, pomodoroCounter };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PomodoroCounterContainer);
