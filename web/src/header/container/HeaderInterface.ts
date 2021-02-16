@@ -1,7 +1,7 @@
-import { openModal } from '../../shared/modal/ModalProps';
+import { OpenModal } from '../../shared/modal/ModalProps';
 
 export interface HeaderProps {
-  handleOpenModal: openModal;
+  handleOpenModal: OpenModal;
   handleLogout: logout;
   isLoggedIn: boolean;
 }

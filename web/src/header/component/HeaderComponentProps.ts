@@ -1,6 +1,6 @@
-import { openModal } from '../../shared/modal/ModalProps';
+import { OpenModal } from '../../shared/modal/ModalProps';
 
 export interface HeaderComponentProps {
-  handleOpenModal: openModal;
+  handleOpenModal: OpenModal;
   isLoggedIn: boolean;
 }

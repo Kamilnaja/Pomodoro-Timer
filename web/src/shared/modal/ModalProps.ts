@@ -2,8 +2,8 @@ import { ModalType } from './modalEnum';
 
 export interface ModalProps {
   modalType: ModalType;
-  closeModal: closeModal;
+  closeModal: CloseModal;
 }
 
-export type closeModal = () => void;
-export type openModal = (arg: ModalType) => void;
+export type CloseModal = () => void;
+export type OpenModal = (arg: ModalType) => void;
