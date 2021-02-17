@@ -1,5 +1,5 @@
-import { Action } from 'redux';
 import { initialConfig } from '../../../shared/settings/initialConfig';
+import { ActionWithPayload } from '../../../store/interfaces/actions/actionInterface';
 import { PomodoroCounterActions } from '../actions/pomodoroCounterAction';
 import { CounterState } from '../enums/timerEnum';
 import { PomodoroCounterState } from '../interfaces/PomodoroCounterState';
@@ -11,7 +11,7 @@ export const timerState: PomodoroCounterState = {
 
 export const pomodoroCounterReducer = (
   state: PomodoroCounterState = timerState,
-  action: Action<PomodoroCounterActions>,
+  action: ActionWithPayload<PomodoroCounterActions, number | null>,
 ): PomodoroCounterState => {
   switch (action.type) {
     case PomodoroCounterActions.POMODORO_RUN:
@@ -43,6 +43,11 @@ export const pomodoroCounterReducer = (
       return {
         ...state,
         counterState: CounterState.POMODORO_END,
+      };
+    case PomodoroCounterActions.UPDATE_TIME:
+      return {
+        ...state,
+        timerTime: action.payload,
       };
     default:
       return state;
