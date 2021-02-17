@@ -4,6 +4,5 @@ export interface CounterComponentProps {
   pauseCounter: () => void;
   startCounter: () => void;
   updateCounter: (time: number) => void;
-  state: PomodoroCounterState;
-  time: string;
+  counterState: PomodoroCounterState;
 }

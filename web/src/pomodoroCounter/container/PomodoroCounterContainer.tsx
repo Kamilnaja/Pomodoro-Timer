@@ -10,7 +10,6 @@ import { InfoComponent } from '../info/InfoComponent';
 import { CounterState } from '../store/enums/timerEnum';
 import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 import { timerState } from '../store/state/timerState';
-import { CounterComponent } from '../counter/CounterComponent';
 import { TabTitle } from '../../shared/title/TabTitle';
 import { isAnyTimerRunning, playClickSound, playEndSound } from './PomodoroCounterContainerHelpers';
 import { PomodoroCounterContainerProps } from './PomodoroCounterContainerProps';
@@ -23,6 +22,7 @@ import {
   breakEnd,
   pomodoroEnd,
 } from '../store/actions/pomodoroCounterAction';
+import CounterContainer from '../counter/CounterContainer';
 
 class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerProps, { timerTime: number }> {
   interval = 0;
@@ -119,12 +119,10 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
   render = () => (
     <Jumbotron className="align-items-center d-flex flex-column bg-dark">
       <ModeButtonsComponent startNewPomodoro={this.handleStartNewPomodoro} startNewBreak={this.handleStartNewBreak} />
-      <CounterComponent
+      <CounterContainer
         pauseCounter={this.handlePauseCounter}
         startCounter={this.handleStartCounter}
-        time={msToTime(this.state.timerTime)}
-        state={this.props.pomodoroCounter}
-      ></CounterComponent>
+      ></CounterContainer>
       <InfoComponent currentState={this.props.pomodoroCounter.counterState} auth={this.props.auth} />
     </Jumbotron>
   );

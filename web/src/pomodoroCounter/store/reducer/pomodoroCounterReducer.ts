@@ -6,7 +6,7 @@ import { PomodoroCounterState } from '../interfaces/PomodoroCounterState';
 
 export const timerState: PomodoroCounterState = {
   counterState: CounterState.BREAK_END,
-  timerTime: initialConfig.pomodoroTime,
+  counterTime: initialConfig.pomodoroTime,
 };
 
 export const pomodoroCounterReducer = (
@@ -47,7 +47,7 @@ export const pomodoroCounterReducer = (
     case PomodoroCounterActions.UPDATE_TIME:
       return {
         ...state,
-        timerTime: action.payload,
+        counterTime: action.payload,
       };
     default:
       return state;
