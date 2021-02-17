@@ -24,15 +24,10 @@ export const pomodoroCounterReducer = (
         ...state,
         counterState: CounterState.BREAK_RUNNING,
       };
-    case PomodoroCounterActions.BREAK_PAUSE:
+    case PomodoroCounterActions.PAUSE:
       return {
         ...state,
-        counterState: CounterState.BREAK_PAUSE,
-      };
-    case PomodoroCounterActions.POMODORO_PAUSE:
-      return {
-        ...state,
-        counterState: CounterState.POMODORO_PAUSE,
+        counterState: CounterState.PAUSE,
       };
     case PomodoroCounterActions.BREAK_END:
       return {

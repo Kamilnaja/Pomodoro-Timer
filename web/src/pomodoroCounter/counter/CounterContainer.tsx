@@ -7,14 +7,7 @@ import { updateCounter } from '../store/actions/pomodoroCounterAction';
 import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 import { TimeComponent } from '../time/TimeComponent';
 import { CounterComponentProps } from './CounterContainerProps';
-import {
-  pomodoroRun,
-  breakRun,
-  pomodoroPause,
-  breakPause,
-  breakEnd,
-  pomodoroEnd,
-} from '../store/actions/pomodoroCounterAction';
+import { pomodoroRun, breakRun, pause, breakEnd, pomodoroEnd } from '../store/actions/pomodoroCounterAction';
 import { CounterState } from '../store/enums/timerEnum';
 import { isAnyTimerRunning, playClickSound, playEndSound } from '../container/PomodoroCounterContainerHelpers';
 import { initialConfig } from '../../shared/settings/initialConfig';
@@ -23,14 +16,7 @@ class CounterContainer extends React.Component<CounterComponentProps> {
   private tabTitle = new TabTitle();
 
   handlePauseCounter = () => {
-    switch (this.props.counter.counterState) {
-      case CounterState.POMODORO_RUNNING:
-        this.props.pomodoroPause();
-        break;
-      case CounterState.BREAK_RUNNING:
-        this.props.breakPause();
-        break;
-    }
+    this.props.pause();
     this.clearIntervalAndSetTime();
   };
 
@@ -41,11 +27,10 @@ class CounterContainer extends React.Component<CounterComponentProps> {
 
       switch (this.props.counter.counterState) {
         case CounterState.BREAK_END:
-        case CounterState.POMODORO_PAUSE:
+        case CounterState.PAUSE:
           this.props.pomodoroRun();
           break;
         case CounterState.POMODORO_END:
-        case CounterState.BREAK_PAUSE:
           this.props.breakRun();
           break;
       }
@@ -141,8 +126,7 @@ const mapDispatchToProps = {
   updateCounter,
   pomodoroRun,
   breakRun,
-  pomodoroPause,
-  breakPause,
+  pause,
   breakEnd,
   pomodoroEnd,
 };

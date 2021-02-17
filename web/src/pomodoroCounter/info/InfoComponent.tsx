@@ -18,11 +18,8 @@ export const InfoComponent = (props: InfoComponentProps) => {
     case CounterState.BREAK_RUNNING:
       info = 'Do not work';
       break;
-    case CounterState.POMODORO_PAUSE:
-      info = 'Pomodoro paused';
-      break;
-    case CounterState.BREAK_PAUSE:
-      info = 'Break pause';
+    case CounterState.PAUSE:
+      info = 'Timer paused';
       break;
   }
   return (

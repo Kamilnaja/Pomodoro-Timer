@@ -2,8 +2,7 @@ import { Action } from 'redux';
 import { ActionWithPayload } from '../../../store/interfaces/actions/actionInterface';
 
 export enum PomodoroCounterActions {
-  POMODORO_PAUSE = 'POMODORO_PAUSE',
-  BREAK_PAUSE = 'BREAK_PAUSE',
+  PAUSE = 'PAUSE',
   POMODORO_RUN = 'POMODORO_RUN',
   BREAK_RUN = 'BREAK_RUN',
   BREAK_END = 'BREAK_END',
@@ -11,12 +10,8 @@ export enum PomodoroCounterActions {
   UPDATE_TIME = 'UPDATE_TIME',
 }
 
-export const pomodoroPause = (): Action<PomodoroCounterActions> => ({
-  type: PomodoroCounterActions.POMODORO_PAUSE,
-});
-
-export const breakPause = (): Action<PomodoroCounterActions> => ({
-  type: PomodoroCounterActions.BREAK_PAUSE,
+export const pause = (): Action<PomodoroCounterActions> => ({
+  type: PomodoroCounterActions.PAUSE,
 });
 
 export const pomodoroRun = (): Action<PomodoroCounterActions> => ({
