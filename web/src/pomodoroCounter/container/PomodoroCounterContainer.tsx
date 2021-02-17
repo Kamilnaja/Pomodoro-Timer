@@ -15,8 +15,16 @@ import { TabTitle } from '../../shared/title/TabTitle';
 import { isAnyTimerRunning, playClickSound, playEndSound } from './PomodoroCounterContainerHelpers';
 import { PomodoroCounterContainerProps } from './PomodoroCounterContainerProps';
 import { ModeButtonsComponent } from '../modeButtons/ModeButtonsComponent';
+import {
+  pomodoroRun,
+  breakRun,
+  pomodoroPause,
+  breakPause,
+  breakEnd,
+  pomodoroEnd,
+} from '../store/actions/pomodoroCounterAction';
 
-class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerProps, PomodoroCounterState> {
+class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerProps, { timerTime: number }> {
   interval = 0;
   private tabTitle = new TabTitle();
 
@@ -26,22 +34,18 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
   }
 
   handleStartCounter = () => {
-    if (!isAnyTimerRunning(this.state)) {
+    if (!isAnyTimerRunning(this.props.pomodoroCounter)) {
       this.tabTitle.stopBlinking();
       playClickSound();
 
-      switch (this.state.counterState) {
+      switch (this.props.pomodoroCounter.counterState) {
         case CounterState.BREAK_END:
         case CounterState.POMODORO_PAUSE:
-          this.setState({
-            counterState: CounterState.POMODORO_RUNNING,
-          });
+          this.props.pomodoroRun();
           break;
         case CounterState.POMODORO_END:
         case CounterState.BREAK_PAUSE:
-          this.setState({
-            counterState: CounterState.BREAK_RUNNING,
-          });
+          this.props.breakRun();
           break;
       }
       this.count();
@@ -49,16 +53,12 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
   };
 
   handlePauseCounter = () => {
-    switch (this.state.counterState) {
+    switch (this.props.pomodoroCounter.counterState) {
       case CounterState.POMODORO_RUNNING:
-        this.setState({
-          counterState: CounterState.POMODORO_PAUSE,
-        });
+        this.props.pomodoroPause();
         break;
       case CounterState.BREAK_RUNNING:
-        this.setState({
-          counterState: CounterState.BREAK_PAUSE,
-        });
+        this.props.breakPause();
         break;
     }
     this.clearIntervalAndSetTime();
@@ -66,16 +66,12 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
 
   handleStartNewPomodoro = () => {
     this.clearIntervalAndSetTime(initialConfig.pomodoroTime);
-    this.setState({
-      counterState: CounterState.BREAK_END,
-    });
+    this.props.breakEnd();
   };
 
   handleStartNewBreak = (time: number) => {
     this.clearIntervalAndSetTime(time);
-    this.setState({
-      counterState: CounterState.POMODORO_END,
-    });
+    this.props.pomodoroEnd();
   };
 
   private clearIntervalAndSetTime = (time?: number) => {
@@ -105,15 +101,15 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
   }
 
   private stopCounting() {
-    if (this.state.counterState === CounterState.POMODORO_RUNNING) {
+    if (this.props.pomodoroCounter.counterState === CounterState.POMODORO_RUNNING) {
+      this.props.pomodoroEnd();
       this.setState({
-        counterState: CounterState.POMODORO_END,
         timerTime: initialConfig.shortBreakTime,
       });
       this.props.handleSavePomodoro();
-    } else if (this.state.counterState === CounterState.BREAK_RUNNING) {
+    } else if (this.props.pomodoroCounter.counterState === CounterState.BREAK_RUNNING) {
+      this.props.breakEnd();
       this.setState({
-        counterState: CounterState.BREAK_END,
         timerTime: initialConfig.pomodoroTime,
       });
     }
@@ -127,19 +123,25 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
         pauseCounter={this.handlePauseCounter}
         startCounter={this.handleStartCounter}
         time={msToTime(this.state.timerTime)}
-        state={this.state}
+        state={this.props.pomodoroCounter}
       ></CounterComponent>
-      <InfoComponent currentState={this.state.counterState} authState={this.props.authState} />
+      <InfoComponent currentState={this.props.pomodoroCounter.counterState} auth={this.props.auth} />
     </Jumbotron>
   );
 }
 const mapDispatchToProps = {
   handleSavePomodoro,
+  pomodoroRun,
+  breakRun,
+  pomodoroPause,
+  breakPause,
+  breakEnd,
+  pomodoroEnd,
 };
 
-const mapStateToProps = (state: { auth: AuthState }) => {
-  const authState = state.auth;
-  return { authState };
+const mapStateToProps = (state: { auth: AuthState; pomodoroCounter: PomodoroCounterState }) => {
+  const { auth, pomodoroCounter } = state;
+  return { auth, pomodoroCounter };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PomodoroCounterContainer);
