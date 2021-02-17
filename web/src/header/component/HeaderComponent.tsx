@@ -2,12 +2,12 @@ import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ModalType } from 'shared/modal/modalEnum';
-import TimerContainer from 'pomodoroCounter/container/PomodoroCounterContainer';
 import SettingsContainer from '../../settings/container/SettingsContainer';
 import StatsContainer from '../../stats/allStats/containers/StatsContainer';
 import TaskAndNotesContainer from '../../tasksAndNotes/taskAndNotesWrapper/taskAndNotesContainer/TaskAndNotesContainer';
 import { HeaderContainerProps } from '../container/HeaderContainerProps';
 import './headerComponent.scss';
+import PomodoroCounterContainer from '../../pomodoroCounter/container/PomodoroCounterContainer';
 
 export const HeaderComponent = (props: HeaderContainerProps) => (
   <Router>
@@ -44,7 +44,7 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
           <StatsContainer />
         </Route>
         <Route path="/">
-          <TimerContainer />
+          <PomodoroCounterContainer />
         </Route>
       </Switch>
     </Container>

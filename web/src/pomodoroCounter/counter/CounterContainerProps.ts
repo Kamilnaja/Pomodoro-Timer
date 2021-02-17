@@ -1,8 +1,13 @@
 import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 
 export interface CounterComponentProps {
-  pauseCounter: () => void;
-  startCounter: () => void;
   updateCounter: (time: number) => void;
-  counterState: PomodoroCounterState;
+  counter: PomodoroCounterState;
+  pomodoroPause: () => void;
+  breakPause: () => void;
+  pomodoroRun: () => void;
+  breakRun: () => void;
+  breakEnd: () => void;
+  pomodoroEnd: () => void;
+  handleSavePomodoro: () => void;
 }
