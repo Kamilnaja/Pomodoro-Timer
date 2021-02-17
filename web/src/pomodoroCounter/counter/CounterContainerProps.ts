@@ -4,9 +4,7 @@ export interface CounterComponentProps {
   updateCounter: (time: number) => void;
   counter: PomodoroCounterState;
   pause: () => void;
-  pomodoroRun: () => void;
-  breakRun: () => void;
-  breakEnd: () => void;
-  pomodoroEnd: () => void;
+  run: () => void;
+  end: () => void;
   handleSavePomodoro: () => void;
 }

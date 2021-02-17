@@ -5,6 +5,4 @@ export interface PomodoroCounterContainerProps {
   handleSavePomodoro: () => void;
   auth: AuthState;
   pomodoroCounter: PomodoroCounterState;
-  breakEnd: () => void;
-  pomodoroEnd: () => void;
 }

@@ -10,9 +10,9 @@ import { ModeButtonsComponent } from '../modeButtons/ModeButtonsComponent';
 import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 import { timerState } from '../store/state/timerState';
 import { PomodoroCounterContainerProps } from './PomodoroCounterContainerProps';
-import { breakEnd, pomodoroEnd } from '../store/actions/pomodoroCounterAction';
+import {} from '../store/actions/pomodoroCounterAction';
 
-class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerProps, { timerTime: number }> {
+class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerProps> {
   constructor(props: PomodoroCounterContainerProps) {
     super(props);
     this.state = timerState;
@@ -21,12 +21,12 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
   handleStartNewPomodoro = () => {
     // set timer in timer
     // this.clearIntervalAndSetTime(initialConfig.pomodoroTime);
-    this.props.breakEnd();
+    // this.props.breakEnd();
   };
 
   handleStartNewBreak = (time: number) => {
     // this.clearIntervalAndSetTime(time);
-    this.props.pomodoroEnd();
+    // this.props.pomodoroEnd();
   };
 
   render = () => (
@@ -40,8 +40,6 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
 }
 const mapDispatchToProps = {
   handleSavePomodoro,
-  breakEnd,
-  pomodoroEnd,
 };
 
 const mapStateToProps = (state: { auth: AuthState; pomodoroCounter: PomodoroCounterState }) => {

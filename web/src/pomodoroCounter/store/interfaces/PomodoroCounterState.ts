@@ -1,4 +1,4 @@
-import { CounterState } from '../enums/timerEnum';
+import { CounterState } from '../enums/CounterState';
 
 export interface PomodoroCounterState {
   counterState: CounterState;

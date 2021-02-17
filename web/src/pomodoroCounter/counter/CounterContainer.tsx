@@ -7,10 +7,10 @@ import { updateCounter } from '../store/actions/pomodoroCounterAction';
 import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 import { TimeComponent } from '../time/TimeComponent';
 import { CounterComponentProps } from './CounterContainerProps';
-import { pomodoroRun, breakRun, pause, breakEnd, pomodoroEnd } from '../store/actions/pomodoroCounterAction';
-import { CounterState } from '../store/enums/timerEnum';
+import { CounterState } from '../store/enums/CounterState';
 import { isAnyTimerRunning, playClickSound, playEndSound } from '../container/PomodoroCounterContainerHelpers';
 import { initialConfig } from '../../shared/settings/initialConfig';
+import { pause, run, end } from '../store/actions/pomodoroCounterAction';
 
 class CounterContainer extends React.Component<CounterComponentProps> {
   private tabTitle = new TabTitle();
@@ -25,15 +25,8 @@ class CounterContainer extends React.Component<CounterComponentProps> {
       this.tabTitle.stopBlinking();
       playClickSound();
 
-      switch (this.props.counter.counterState) {
-        case CounterState.BREAK_END:
-        case CounterState.PAUSE:
-          this.props.pomodoroRun();
-          break;
-        case CounterState.POMODORO_END:
-          this.props.breakRun();
-          break;
-      }
+      this.props.run();
+
       this.worker.postMessage({
         type: 'START',
         payload: this.props.counter.counterTime,
@@ -43,12 +36,12 @@ class CounterContainer extends React.Component<CounterComponentProps> {
 
   handleStartNewPomodoro = () => {
     this.clearIntervalAndSetTime(initialConfig.pomodoroTime);
-    this.props.breakEnd();
+    this.props.end();
   };
 
   handleStartNewBreak = (time: number) => {
     this.clearIntervalAndSetTime(time);
-    this.props.pomodoroEnd();
+    this.props.end();
   };
 
   private clearIntervalAndSetTime = (time: number = 0) => {
@@ -63,23 +56,23 @@ class CounterContainer extends React.Component<CounterComponentProps> {
     this.tabTitle.startBlinking();
   }
 
-  private stopCounting() {
-    if (this.props.counter.counterState === CounterState.POMODORO_RUNNING) {
-      this.props.pomodoroEnd();
-      this.worker.postMessage({
-        type: 'SET_TIME',
-        payload: initialConfig.shortBreakTime,
-      });
-      this.props.handleSavePomodoro();
-    } else if (this.props.counter.counterState === CounterState.BREAK_RUNNING) {
-      this.props.breakEnd();
-      this.worker.postMessage({
-        type: 'SET_TIME',
-        payload: initialConfig.pomodoroTime,
-      });
-    }
-    this.clearIntervalAndSetTime(0);
-  }
+  // private stopCounting() {
+  //   if (this.props.counter.counterState === CounterState.POMODORO_RUNNING) {
+  //     this.props.pomodoroEnd();
+  //     this.worker.postMessage({
+  //       type: 'SET_TIME',
+  //       payload: initialConfig.shortBreakTime,
+  //     });
+  //     this.props.handleSavePomodoro();
+  //   } else if (this.props.counter.counterState === CounterState.BREAK_RUNNING) {
+  //     this.props.breakEnd();
+  //     this.worker.postMessage({
+  //       type: 'SET_TIME',
+  //       payload: initialConfig.pomodoroTime,
+  //     });
+  //   }
+  //   this.clearIntervalAndSetTime(0);
+  // }
 
   worker: Worker;
   componentDidMount() {
@@ -103,7 +96,7 @@ class CounterContainer extends React.Component<CounterComponentProps> {
     return (
       <>
         <TimeComponent time={msToTime(this.props.counter.counterTime)} />
-        {isAnyTimerRunning(this.props.counter.counterState) ? (
+        {this.props.counter.counterState === CounterState.RUNNING ? (
           <Button variant="secondary" onClick={this.handlePauseCounter}>
             Stop timer
           </Button>
@@ -124,11 +117,9 @@ const mapStateToProps = (state: { pomodoroCounter: PomodoroCounterState }) => {
 
 const mapDispatchToProps = {
   updateCounter,
-  pomodoroRun,
-  breakRun,
   pause,
-  breakEnd,
-  pomodoroEnd,
+  run,
+  end,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CounterContainer);

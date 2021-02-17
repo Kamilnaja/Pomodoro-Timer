@@ -1,22 +1,16 @@
 import TodayStatsContainer from '../../stats/todayStats/containers/TodayStatsContainer';
-import { CounterState } from '../store/enums/timerEnum';
+import { CounterState } from '../store/enums/CounterState';
 import './info.scss';
 import { InfoComponentProps } from './InfoComponentProps';
 
 export const InfoComponent = (props: InfoComponentProps) => {
   let info = '';
   switch (props.currentState) {
-    case CounterState.BREAK_END:
-      info = 'Start new pomodoro';
+    case CounterState.END:
+      info = 'Start new timer';
       break;
-    case CounterState.POMODORO_END:
-      info = 'Start break';
-      break;
-    case CounterState.POMODORO_RUNNING:
-      info = 'Hard work';
-      break;
-    case CounterState.BREAK_RUNNING:
-      info = 'Do not work';
+    case CounterState.RUNNING:
+      info = 'Timer in progress';
       break;
     case CounterState.PAUSE:
       info = 'Timer paused';

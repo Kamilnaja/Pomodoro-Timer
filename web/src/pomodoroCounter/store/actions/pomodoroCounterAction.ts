@@ -3,10 +3,8 @@ import { ActionWithPayload } from '../../../store/interfaces/actions/actionInter
 
 export enum PomodoroCounterActions {
   PAUSE = 'PAUSE',
-  POMODORO_RUN = 'POMODORO_RUN',
-  BREAK_RUN = 'BREAK_RUN',
-  BREAK_END = 'BREAK_END',
-  POMODORO_END = 'POMODORO_END',
+  RUN = 'RUN',
+  END = 'END',
   UPDATE_TIME = 'UPDATE_TIME',
 }
 
@@ -14,20 +12,12 @@ export const pause = (): Action<PomodoroCounterActions> => ({
   type: PomodoroCounterActions.PAUSE,
 });
 
-export const pomodoroRun = (): Action<PomodoroCounterActions> => ({
-  type: PomodoroCounterActions.POMODORO_RUN,
+export const run = (): Action<PomodoroCounterActions> => ({
+  type: PomodoroCounterActions.RUN,
 });
 
-export const pomodoroEnd = (): Action<PomodoroCounterActions> => ({
-  type: PomodoroCounterActions.POMODORO_END,
-});
-
-export const breakRun = (): Action<PomodoroCounterActions> => ({
-  type: PomodoroCounterActions.BREAK_RUN,
-});
-
-export const breakEnd = (): Action<PomodoroCounterActions> => ({
-  type: PomodoroCounterActions.BREAK_END,
+export const end = (): Action<PomodoroCounterActions> => ({
+  type: PomodoroCounterActions.END,
 });
 
 export const updateCounter = (payload: number): ActionWithPayload<PomodoroCounterActions, number> => ({
