@@ -6,7 +6,6 @@ import { initialConfig } from '../../shared/settings/initialConfig';
 import { TabTitle } from '../../shared/title/TabTitle';
 import { isAnyTimerRunning, playClickSound, isPomodoroMode } from '../container/PomodoroCounterContainerHelpers';
 import { end, pause, run, updateCounter } from '../store/actions/pomodoroCounterAction';
-import { CounterState } from '../store/enums/CounterState';
 import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 import './counterContainer.scss';
 import { CounterComponentProps } from './CounterContainerProps';

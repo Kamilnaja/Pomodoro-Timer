@@ -16,10 +16,11 @@ export class TabTitle {
 
   startBlinking() {
     let isTimeVisible = true;
+
     this.blinkingInterval = window.setInterval(() => {
-      isTimeVisible ? (document.title = 'XX.XXX') : (document.title = `00.00`);
+      isTimeVisible ? (document.title = 'time up') : (document.title = `back to work`);
       isTimeVisible = !isTimeVisible;
-    }, 500);
+    }, 1000);
   }
 
   stopBlinking() {
