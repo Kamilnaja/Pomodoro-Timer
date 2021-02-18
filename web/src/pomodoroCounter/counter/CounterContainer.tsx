@@ -17,6 +17,10 @@ class CounterContainer extends React.Component<CounterComponentProps> {
   private tabTitle = new TabTitle();
   private worker: Worker = worker;
 
+  componentDidMount() {
+    this.initializeWorker();
+  }
+
   handlePauseCounter = () => {
     this.props.pause();
     this.setWorkerTime();
@@ -46,39 +50,16 @@ class CounterContainer extends React.Component<CounterComponentProps> {
     this.props.end();
   };
 
+  handlePomodoroEnd = () => {
+    this.props.handleSavePomodoro();
+  };
+
   private setWorkerTime = (time: number = 0) => {
     this.worker.postMessage({
       type: 'SET_TIME',
       payload: time,
     });
   };
-
-  private informUser() {
-    playEndSound();
-    this.tabTitle.startBlinking();
-  }
-
-  // private stopCounting() {
-  //   if (this.props.counter.counterState === CounterState.POMODORO_RUNNING) {
-  //     this.props.pomodoroEnd();
-  //     this.worker.postMessage({
-  //       type: 'SET_TIME',
-  //       payload: initialConfig.shortBreakTime,
-  //     });
-  //     this.props.handleSavePomodoro();
-  //   } else if (this.props.counter.counterState === CounterState.BREAK_RUNNING) {
-  //     this.props.breakEnd();
-  //     this.worker.postMessage({
-  //       type: 'SET_TIME',
-  //       payload: initialConfig.pomodoroTime,
-  //     });
-  //   }
-  //   this.clearIntervalAndSetTime(0);
-  // }
-
-  componentDidMount() {
-    this.initializeWorker();
-  }
 
   private initializeWorker() {
     this.worker.onmessage = e => {
@@ -89,6 +70,7 @@ class CounterContainer extends React.Component<CounterComponentProps> {
         this.props.updateCounter(time);
       } else {
         this.tabTitle.startBlinking();
+        this.props.handleSavePomodoro();
       }
     };
   }

@@ -13,9 +13,11 @@ import { PomodoroCounterContainerProps } from './PomodoroCounterContainerProps';
 import { handleSetModeBreak, handleSetModePomodoro } from '../store/actions/pomodoroCounterAction';
 import { initialConfig } from 'shared/settings/initialConfig';
 import { worker } from '../counter/Worker';
+import { TabTitle } from '../../shared/title/TabTitle';
 
 class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerProps> {
   private worker: Worker = worker;
+  private tabTitle: TabTitle = new TabTitle();
 
   constructor(props: PomodoroCounterContainerProps) {
     super(props);
@@ -46,8 +48,6 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
     });
   };
 
-  handlePostTimer = () => {};
-
   render = () => (
     <Jumbotron className="align-items-center d-flex flex-column bg-dark">
       <ModeButtonsComponent
@@ -55,10 +55,7 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
         setModeLongBreak={this.handleSetModeLongBreak}
         setModeShortBreak={this.handleSetModeShortBreak}
       />
-      <CounterContainer
-        handlePostTimer={this.handlePostTimer}
-        handleSavePomodoro={this.props.handleSavePomodoro}
-      ></CounterContainer>
+      <CounterContainer handleSavePomodoro={this.props.handleSavePomodoro}></CounterContainer>
       <InfoComponent currentState={this.props.pomodoroCounter.counterState} auth={this.props.auth} />
     </Jumbotron>
   );

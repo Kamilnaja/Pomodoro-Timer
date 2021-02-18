@@ -7,5 +7,4 @@ export interface CounterComponentProps {
   run: () => void;
   end: () => void;
   handleSavePomodoro: () => void;
-  handlePostTimer: () => void;
 }
