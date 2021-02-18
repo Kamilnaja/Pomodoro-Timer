@@ -38,11 +38,9 @@ export const setModeBreak = (payload: number): ActionWithPayload<PomodoroCounter
 
 // thunk
 export const handleSetModePomodoro = () => (dispatch: (action: Action<PomodoroCounterActions>) => void) => {
-  dispatch(end());
   dispatch(setModePomodoro());
 };
 
 export const handleSetModeBreak = (time: number) => (dispatch: (action: Action<PomodoroCounterActions>) => void) => {
-  dispatch(end());
   dispatch(setModeBreak(time));
 };

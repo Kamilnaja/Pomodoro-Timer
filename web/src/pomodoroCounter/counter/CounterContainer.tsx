@@ -11,10 +11,11 @@ import { isAnyTimerRunning, playClickSound, playEndSound } from '../container/Po
 import { initialConfig } from '../../shared/settings/initialConfig';
 import { pause, run, end } from '../store/actions/pomodoroCounterAction';
 import './counterContainer.scss';
+import { worker } from './Worker';
 
 class CounterContainer extends React.Component<CounterComponentProps> {
   private tabTitle = new TabTitle();
-  private worker: Worker;
+  private worker: Worker = worker;
 
   handlePauseCounter = () => {
     this.props.pause();
@@ -78,22 +79,18 @@ class CounterContainer extends React.Component<CounterComponentProps> {
   componentDidMount() {
     this.initializeWorker();
   }
+
   private initializeWorker() {
-    if (typeof Worker !== 'undefined') {
-      this.worker = new Worker('scripts/counter.js');
-      this.worker.onmessage = e => {
-        const { data } = e;
-        if (data.isRunning) {
-          const { time } = data;
-          this.tabTitle.setTitle = `${msToTime(time)}`;
-          this.props.updateCounter(time);
-        } else {
-          this.tabTitle.startBlinking();
-        }
-      };
-    } else {
-      console.log('Your browser do not allow to use web workers. Please use other browser');
-    }
+    this.worker.onmessage = e => {
+      const { data } = e;
+      if (data.isRunning) {
+        const { time } = data;
+        this.tabTitle.setTitle = `${msToTime(time)}`;
+        this.props.updateCounter(time);
+      } else {
+        this.tabTitle.startBlinking();
+      }
+    };
   }
 
   render() {

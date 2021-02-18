@@ -10,11 +10,11 @@ onmessage = function (name, listener) {
 };
 
 function handleTimerActions(name) {
+  clearInterval(interval);
   if (name.data.payload === 0) {
-    clearInterval(interval);
+    console.log('empty spaces ...');
   } else {
-    // todo - implement
-    console.log('not implemented yet');
+    this.interval = name.data.payload.time;
   }
 }
 
@@ -29,7 +29,7 @@ function setupCounter(time) {
       });
     } else {
       postMessage({
-        isRunning: true,
+        isRunning: false,
         time: 0,
       });
       clearInterval(interval);

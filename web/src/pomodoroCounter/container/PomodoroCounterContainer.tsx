@@ -12,8 +12,11 @@ import { timerState } from '../store/state/timerState';
 import { PomodoroCounterContainerProps } from './PomodoroCounterContainerProps';
 import { handleSetModeBreak, handleSetModePomodoro } from '../store/actions/pomodoroCounterAction';
 import { initialConfig } from 'shared/settings/initialConfig';
+import { worker } from '../counter/Worker';
 
 class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerProps> {
+  private worker: Worker = worker;
+
   constructor(props: PomodoroCounterContainerProps) {
     super(props);
     this.state = timerState;
@@ -21,6 +24,10 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
 
   handleSetModePomodoro = () => {
     this.props.handleSetModePomodoro();
+    worker.postMessage({
+      type: 'SET_TIME',
+      payload: initialConfig.pomodoroTime,
+    });
     // set timer in timer
     // this.clearIntervalAndSetTime(initialConfig.pomodoroTime);
     // this.props.breakEnd();
@@ -28,12 +35,20 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
 
   handleSetModeLongBreak = () => {
     this.props.handleSetModeBreak(initialConfig.longBreakTime);
+    worker.postMessage({
+      type: 'SET_TIME',
+      payload: initialConfig.longBreakTime,
+    });
     // this.clearIntervalAndSetTime(time);
     // this.props.pomodoroEnd();
   };
 
   handleSetModeShortBreak = () => {
     this.props.handleSetModeBreak(initialConfig.shortBreakTime);
+    worker.postMessage({
+      type: 'SET_TIME',
+      payload: initialConfig.shortBreakTime,
+    });
     // this.clearIntervalAndSetTime(time);
     // this.props.pomodoroEnd();
   };
