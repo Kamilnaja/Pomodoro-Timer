@@ -98,7 +98,7 @@ class CounterContainer extends React.Component<CounterComponentProps> {
       <>
         <p className="time text-light d-flex align-items-center">{msToTime(this.props.counter.counterTime)}</p>
         {this.props.counter.counterState === CounterState.RUNNING ? (
-          <Button variant="secondary" onClick={this.handlePauseCounter}>
+          <Button variant="outline-primary" onClick={this.handlePauseCounter}>
             Pause timer
           </Button>
         ) : (
