@@ -46,7 +46,7 @@ export const RegisterComponent = (props: RegisterComponentProps) => {
               </label>
               <input
                 className="form__input input"
-                type="text"
+                type="email"
                 placeholder="johndoe@gmail.com"
                 name="email"
                 id="email"
