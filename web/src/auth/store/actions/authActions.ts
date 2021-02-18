@@ -119,7 +119,7 @@ export const setUserIsLoggedIn = () => (dispatch: (action: Action<any>) => void)
   }
 };
 
-export const setUserIsLoggedOut = () => (dispatch: (action: Action<any>) => void) => {
+export const setUserIsLoggedOut = () => (dispatch: (action: Action<AuthAction>) => void) => {
   localStorage.removeItem(localStorageKey);
 
   dispatch(setLoggedOut());

@@ -10,7 +10,7 @@ import { ModeButtonsComponent } from '../modeButtons/ModeButtonsComponent';
 import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 import { timerState } from '../store/state/timerState';
 import { PomodoroCounterContainerProps } from './PomodoroCounterContainerProps';
-import {} from '../store/actions/pomodoroCounterAction';
+import { handleSetModeBreak, handleSetModePomodoro } from '../store/actions/pomodoroCounterAction';
 
 class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerProps> {
   constructor(props: PomodoroCounterContainerProps) {
@@ -18,28 +18,37 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
     this.state = timerState;
   }
 
-  handleStartNewPomodoro = () => {
+  handleSetModePomodoro = () => {
+    this.props.handleSetModePomodoro();
     // set timer in timer
     // this.clearIntervalAndSetTime(initialConfig.pomodoroTime);
     // this.props.breakEnd();
   };
 
-  handleStartNewBreak = (time: number) => {
+  handleSetModeBreak = (time: number) => {
+    this.props.handleSetModeBreak();
     // this.clearIntervalAndSetTime(time);
     // this.props.pomodoroEnd();
   };
 
+  handlePostTimer = () => {};
+
   render = () => (
     <Jumbotron className="align-items-center d-flex flex-column bg-dark">
       {/* // todo - set mode pomodoro, set mode break */}
-      <ModeButtonsComponent startNewPomodoro={this.handleStartNewPomodoro} startNewBreak={this.handleStartNewBreak} />
-      <CounterContainer handleSavePomodoro={this.props.handleSavePomodoro}></CounterContainer>
+      <ModeButtonsComponent setModePomodoro={this.handleSetModePomodoro} setModeBreak={this.handleSetModeBreak} />
+      <CounterContainer
+        handlePostTimer={this.handlePostTimer}
+        handleSavePomodoro={this.props.handleSavePomodoro}
+      ></CounterContainer>
       <InfoComponent currentState={this.props.pomodoroCounter.counterState} auth={this.props.auth} />
     </Jumbotron>
   );
 }
 const mapDispatchToProps = {
   handleSavePomodoro,
+  handleSetModePomodoro,
+  handleSetModeBreak,
 };
 
 const mapStateToProps = (state: { auth: AuthState; pomodoroCounter: PomodoroCounterState }) => {

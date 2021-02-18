@@ -6,6 +6,8 @@ export enum PomodoroCounterActions {
   RUN = 'RUN',
   END = 'END',
   UPDATE_TIME = 'UPDATE_TIME',
+  SET_MODE_POMODORO = 'SET_MODE_POMODORO',
+  SET_MODE_BREAK = 'SET_MODE_BREAK',
 }
 
 export const pause = (): Action<PomodoroCounterActions> => ({
@@ -25,4 +27,21 @@ export const updateCounter = (payload: number): ActionWithPayload<PomodoroCounte
   payload,
 });
 
-export type PomodorActions = Action<PomodoroCounterActions> | ActionWithPayload<PomodoroCounterActions, number>;
+export const setModePomodoro = (): Action<PomodoroCounterActions> => ({
+  type: PomodoroCounterActions.SET_MODE_POMODORO,
+});
+
+export const setModeBreak = (): Action<PomodoroCounterActions> => ({
+  type: PomodoroCounterActions.SET_MODE_BREAK,
+});
+
+// thunk
+export const handleSetModePomodoro = () => (dispatch: (action: Action<PomodoroCounterActions>) => void) => {
+  dispatch(end());
+  dispatch(setModePomodoro());
+};
+
+export const handleSetModeBreak = () => (dispatch: (action: Action<PomodoroCounterActions>) => void) => {
+  dispatch(end());
+  dispatch(setModeBreak());
+};

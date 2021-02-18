@@ -6,13 +6,13 @@ import { ModeButtonsComponentProps } from './ModeButtonsComponentProps';
 export const ModeButtonsComponent = (props: ModeButtonsComponentProps) => {
   return (
     <div className="d-flex justify-content-around w-100">
-      <Button variant="primary" onClick={() => props.startNewPomodoro()}>
+      <Button variant="primary" onClick={() => props.setModePomodoro()}>
         Pomodoro
       </Button>
-      <Button variant="primary" onClick={() => props.startNewBreak(initialConfig.shortBreakTime)}>
+      <Button variant="primary" onClick={() => props.setModeBreak(initialConfig.shortBreakTime)}>
         Short Break
       </Button>
-      <Button variant="primary" onClick={() => props.startNewBreak(initialConfig.longBreakTime)}>
+      <Button variant="primary" onClick={() => props.setModeBreak(initialConfig.longBreakTime)}>
         Long Break
       </Button>
     </div>

@@ -5,12 +5,12 @@ import { msToTime } from '../../shared/scripts/utils';
 import { TabTitle } from '../../shared/title/TabTitle';
 import { updateCounter } from '../store/actions/pomodoroCounterAction';
 import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
-import { TimeComponent } from '../time/TimeComponent';
 import { CounterComponentProps } from './CounterContainerProps';
 import { CounterState } from '../store/enums/CounterState';
 import { isAnyTimerRunning, playClickSound, playEndSound } from '../container/PomodoroCounterContainerHelpers';
 import { initialConfig } from '../../shared/settings/initialConfig';
 import { pause, run, end } from '../store/actions/pomodoroCounterAction';
+import './counterContainer.scss';
 
 class CounterContainer extends React.Component<CounterComponentProps> {
   private tabTitle = new TabTitle();
@@ -95,7 +95,7 @@ class CounterContainer extends React.Component<CounterComponentProps> {
   render() {
     return (
       <>
-        <TimeComponent time={msToTime(this.props.counter.counterTime)} />
+        <p className="time text-light d-flex align-items-center">{msToTime(this.props.counter.counterTime)}</p>
         {this.props.counter.counterState === CounterState.RUNNING ? (
           <Button variant="secondary" onClick={this.handlePauseCounter}>
             Stop timer

@@ -29,11 +29,24 @@ export const pomodoroCounterReducer = (
       return {
         ...state,
         counterState: CounterState.END,
+        counterTime: 0,
       };
     case PomodoroCounterActions.UPDATE_TIME:
       return {
         ...state,
         counterTime: action.payload,
+      };
+    case PomodoroCounterActions.SET_MODE_POMODORO:
+      return {
+        ...state,
+        currentTimer: CurrentTimer.POMODORO,
+        counterTime: initialConfig.pomodoroTime,
+      };
+    case PomodoroCounterActions.SET_MODE_BREAK:
+      return {
+        ...state,
+        currentTimer: CurrentTimer.SHORT_BREAK,
+        counterTime: initialConfig.shortBreakTime,
       };
     default:
       return state;
