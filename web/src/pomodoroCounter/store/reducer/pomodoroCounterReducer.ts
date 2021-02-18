@@ -29,7 +29,6 @@ export const pomodoroCounterReducer = (
       return {
         ...state,
         counterState: CounterState.END,
-        counterTime: 0,
       };
     case PomodoroCounterActions.UPDATE_TIME:
       return {

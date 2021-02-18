@@ -10,12 +10,8 @@ onmessage = function (name, listener) {
 };
 
 function handleTimerActions(name) {
+  this.interval = name.data.payload.time;
   clearInterval(interval);
-  if (name.data.payload === 0) {
-    console.log('empty spaces ...');
-  } else {
-    this.interval = name.data.payload.time;
-  }
 }
 
 function setupCounter(time) {

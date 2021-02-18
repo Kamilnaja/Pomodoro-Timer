@@ -28,9 +28,6 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
       type: 'SET_TIME',
       payload: initialConfig.pomodoroTime,
     });
-    // set timer in timer
-    // this.clearIntervalAndSetTime(initialConfig.pomodoroTime);
-    // this.props.breakEnd();
   };
 
   handleSetModeLongBreak = () => {
