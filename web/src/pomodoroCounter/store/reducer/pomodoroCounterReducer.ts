@@ -2,11 +2,12 @@ import { initialConfig } from '../../../shared/settings/initialConfig';
 import { ActionWithPayload } from '../../../store/interfaces/actions/actionInterface';
 import { PomodoroCounterActions } from '../actions/pomodoroCounterAction';
 import { CounterState } from '../enums/CounterState';
-import { PomodoroCounterState } from '../interfaces/PomodoroCounterState';
+import { CurrentTimer, PomodoroCounterState } from '../interfaces/PomodoroCounterState';
 
 export const timerState: PomodoroCounterState = {
   counterState: CounterState.END,
   counterTime: initialConfig.pomodoroTime,
+  currentTimer: CurrentTimer.POMODORO,
 };
 
 export const pomodoroCounterReducer = (
