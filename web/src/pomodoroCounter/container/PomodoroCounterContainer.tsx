@@ -36,8 +36,6 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
       type: 'SET_TIME',
       payload: initialConfig.longBreakTime,
     });
-    // this.clearIntervalAndSetTime(time);
-    // this.props.pomodoroEnd();
   };
 
   handleSetModeShortBreak = () => {
@@ -46,15 +44,12 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
       type: 'SET_TIME',
       payload: initialConfig.shortBreakTime,
     });
-    // this.clearIntervalAndSetTime(time);
-    // this.props.pomodoroEnd();
   };
 
   handlePostTimer = () => {};
 
   render = () => (
     <Jumbotron className="align-items-center d-flex flex-column bg-dark">
-      {/* // todo - set mode pomodoro, set mode break */}
       <ModeButtonsComponent
         setModePomodoro={this.handleSetModePomodoro}
         setModeLongBreak={this.handleSetModeLongBreak}

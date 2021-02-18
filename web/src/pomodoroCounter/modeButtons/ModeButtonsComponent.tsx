@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { initialConfig } from '../../shared/settings/initialConfig';
 import { ModeButtonsComponentProps } from './ModeButtonsComponentProps';
 
 export const ModeButtonsComponent = (props: ModeButtonsComponentProps) => {
@@ -9,10 +8,10 @@ export const ModeButtonsComponent = (props: ModeButtonsComponentProps) => {
       <Button variant="primary" onClick={() => props.setModePomodoro()}>
         Pomodoro
       </Button>
-      <Button variant="primary" onClick={() => props.setModeLongBreak(initialConfig.shortBreakTime)}>
+      <Button variant="primary" onClick={() => props.setModeShortBreak()}>
         Short Break
       </Button>
-      <Button variant="primary" onClick={() => props.setModeShortBreak(initialConfig.longBreakTime)}>
+      <Button variant="primary" onClick={() => props.setModeLongBreak()}>
         Long Break
       </Button>
     </div>
