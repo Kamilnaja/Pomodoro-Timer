@@ -14,10 +14,11 @@ import './counterContainer.scss';
 
 class CounterContainer extends React.Component<CounterComponentProps> {
   private tabTitle = new TabTitle();
+  private worker: Worker;
 
   handlePauseCounter = () => {
     this.props.pause();
-    this.clearIntervalAndSetTime();
+    this.setWorkerTime();
   };
 
   handleStartCounter = () => {
@@ -35,16 +36,16 @@ class CounterContainer extends React.Component<CounterComponentProps> {
   };
 
   handleStartNewPomodoro = () => {
-    this.clearIntervalAndSetTime(initialConfig.pomodoroTime);
+    this.setWorkerTime(initialConfig.pomodoroTime);
     this.props.end();
   };
 
   handleStartNewBreak = (time: number) => {
-    this.clearIntervalAndSetTime(time);
+    this.setWorkerTime(time);
     this.props.end();
   };
 
-  private clearIntervalAndSetTime = (time: number = 0) => {
+  private setWorkerTime = (time: number = 0) => {
     this.worker.postMessage({
       type: 'SET_TIME',
       payload: time,
@@ -74,8 +75,10 @@ class CounterContainer extends React.Component<CounterComponentProps> {
   //   this.clearIntervalAndSetTime(0);
   // }
 
-  worker: Worker;
   componentDidMount() {
+    this.initializeWorker();
+  }
+  private initializeWorker() {
     if (typeof Worker !== 'undefined') {
       this.worker = new Worker('scripts/counter.js');
       this.worker.onmessage = e => {
@@ -92,13 +95,14 @@ class CounterContainer extends React.Component<CounterComponentProps> {
       console.log('Your browser do not allow to use web workers. Please use other browser');
     }
   }
+
   render() {
     return (
       <>
         <p className="time text-light d-flex align-items-center">{msToTime(this.props.counter.counterTime)}</p>
         {this.props.counter.counterState === CounterState.RUNNING ? (
           <Button variant="secondary" onClick={this.handlePauseCounter}>
-            Stop timer
+            Pause timer
           </Button>
         ) : (
           <Button variant="success" onClick={this.handleStartCounter}>
