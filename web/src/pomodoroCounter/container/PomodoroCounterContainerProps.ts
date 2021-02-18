@@ -6,5 +6,5 @@ export interface PomodoroCounterContainerProps {
   pomodoroCounter: PomodoroCounterState;
   handleSavePomodoro: () => void;
   handleSetModePomodoro: () => void;
-  handleSetModeBreak: () => void;
+  handleSetModeBreak: (time: number) => void;
 }

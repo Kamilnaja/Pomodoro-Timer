@@ -1,4 +1,5 @@
 export interface ModeButtonsComponentProps {
   setModePomodoro: () => void;
-  setModeBreak: (time: number) => void;
+  setModeShortBreak: (time: number) => void;
+  setModeLongBreak: (time: number) => void;
 }

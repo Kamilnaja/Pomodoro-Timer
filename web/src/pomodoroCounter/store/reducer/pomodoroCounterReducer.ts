@@ -46,7 +46,7 @@ export const pomodoroCounterReducer = (
       return {
         ...state,
         currentTimer: CurrentTimer.SHORT_BREAK,
-        counterTime: initialConfig.shortBreakTime,
+        counterTime: action.payload,
       };
     default:
       return state;

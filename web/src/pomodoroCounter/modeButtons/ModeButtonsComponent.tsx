@@ -9,10 +9,10 @@ export const ModeButtonsComponent = (props: ModeButtonsComponentProps) => {
       <Button variant="primary" onClick={() => props.setModePomodoro()}>
         Pomodoro
       </Button>
-      <Button variant="primary" onClick={() => props.setModeBreak(initialConfig.shortBreakTime)}>
+      <Button variant="primary" onClick={() => props.setModeLongBreak(initialConfig.shortBreakTime)}>
         Short Break
       </Button>
-      <Button variant="primary" onClick={() => props.setModeBreak(initialConfig.longBreakTime)}>
+      <Button variant="primary" onClick={() => props.setModeShortBreak(initialConfig.longBreakTime)}>
         Long Break
       </Button>
     </div>

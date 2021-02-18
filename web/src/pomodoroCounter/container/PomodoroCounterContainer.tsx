@@ -11,6 +11,7 @@ import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 import { timerState } from '../store/state/timerState';
 import { PomodoroCounterContainerProps } from './PomodoroCounterContainerProps';
 import { handleSetModeBreak, handleSetModePomodoro } from '../store/actions/pomodoroCounterAction';
+import { initialConfig } from 'shared/settings/initialConfig';
 
 class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerProps> {
   constructor(props: PomodoroCounterContainerProps) {
@@ -25,8 +26,14 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
     // this.props.breakEnd();
   };
 
-  handleSetModeBreak = (time: number) => {
-    this.props.handleSetModeBreak();
+  handleSetModeLongBreak = () => {
+    this.props.handleSetModeBreak(initialConfig.longBreakTime);
+    // this.clearIntervalAndSetTime(time);
+    // this.props.pomodoroEnd();
+  };
+
+  handleSetModeShortBreak = () => {
+    this.props.handleSetModeBreak(initialConfig.shortBreakTime);
     // this.clearIntervalAndSetTime(time);
     // this.props.pomodoroEnd();
   };
@@ -36,7 +43,11 @@ class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerP
   render = () => (
     <Jumbotron className="align-items-center d-flex flex-column bg-dark">
       {/* // todo - set mode pomodoro, set mode break */}
-      <ModeButtonsComponent setModePomodoro={this.handleSetModePomodoro} setModeBreak={this.handleSetModeBreak} />
+      <ModeButtonsComponent
+        setModePomodoro={this.handleSetModePomodoro}
+        setModeLongBreak={this.handleSetModeLongBreak}
+        setModeShortBreak={this.handleSetModeShortBreak}
+      />
       <CounterContainer
         handlePostTimer={this.handlePostTimer}
         handleSavePomodoro={this.props.handleSavePomodoro}
