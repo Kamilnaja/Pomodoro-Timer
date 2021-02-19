@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import jwt, { JsonWebTokenError, NotBeforeError, TokenExpiredError } from 'jsonwebtoken';
 import { QueryResult } from 'pg';
@@ -14,17 +13,16 @@ import pool from '../db/db';
 import { Login } from '../models/auth/login.interface';
 import { Request } from '../models/auth/request.interface';
 
-export const handleRegister = (req: Request<any>, res: Response, next: NextFunction) => {
+export const handleRegister = (req: Request<Registration>, res: Response) => {
   const rounds = 10;
   const hash = bcrypt.hashSync(req.body.password, rounds);
-  registerUser(hash, req, res, next);
+  registerUser(hash, req, res);
 };
 
 export const registerUser = async (
   userHash: string,
-  req: Request<any>,
+  req: Request<Registration>,
   res: Response<{ message: string } | AuthError>,
-  next: NextFunction,
 ): Promise<void> => {
   const insert = 'INSERT INTO users (date_created, login, email, password) VALUES($1, $2, $3, $4)';
 
@@ -60,7 +58,7 @@ const handleRegisterError = (err: { stack: any; constraint: string }, res: Respo
   }
 };
 
-export const handlePostLogin = (req: Login, res: Response, next: NextFunction) => {
+export const handlePostLogin = (req: Login, res: Response) => {
   const { login, password } = req.body;
 
   if (login && password) {
@@ -120,7 +118,7 @@ const checkPassword = async (
   }
 };
 
-export const authenticateJWT = (req: Request<any>, res: any, next: () => void) => {
+export const authenticateJWT = (req: Request<Registration>, res: Response<LoginResponse>, next: () => void) => {
   const authHeader = req.headers.authorization;
 
   if (authHeader) {

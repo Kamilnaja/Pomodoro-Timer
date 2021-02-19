@@ -4,7 +4,6 @@ import { getStatsInGivenDay, getStatsInGivenMonth, handleAddPomodoro } from '../
 
 const router: Router = express.Router();
 
-// get number of all pomodoros
 router.route('/').post(authenticateJWT, handleAddPomodoro);
 
 router.route('/:year/:month').get(authenticateJWT, getStatsInGivenMonth);

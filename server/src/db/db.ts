@@ -1,22 +1,17 @@
 import client from './client';
-
-type TableQuery = {
-  query: string;
-  tableName: string;
-};
-
+import { TableQuery } from '../models/db/TableQuery';
 const createTableSql = 'CREATE TABLE IF NOT EXISTS';
 
 const queries: TableQuery[] = [
   {
-    query: `${createTableSql} pomodoros (
+    query: `pomodoros (
       user_id text,
       date    date
     )`,
     tableName: 'pomodoros',
   },
   {
-    query: `${createTableSql} users (
+    query: `users (
         id            SERIAL PRIMARY KEY,
         date_created  date,
         login         text UNIQUE,
@@ -26,7 +21,7 @@ const queries: TableQuery[] = [
     tableName: 'users',
   },
   {
-    query: `${createTableSql} todos (
+    query: `todos (
       id            SERIAL PRIMARY KEY,
       date_created  timestamp,
       user_id       text,
@@ -37,7 +32,7 @@ const queries: TableQuery[] = [
     tableName: 'todos',
   },
   {
-    query: `${createTableSql} subtasks (
+    query: `subtasks (
       id             SERIAL PRIMARY KEY,
       date_created   timestamp,
       parent_task_id integer,
@@ -50,7 +45,7 @@ const queries: TableQuery[] = [
 ];
 
 queries.forEach((tableQuery: TableQuery) => {
-  client.query(tableQuery.query, (err: Error) => {
+  client.query(`${createTableSql} ${tableQuery.query}`, (err: Error) => {
     if (err) {
       console.log(`error while creating db: ${err.message}`);
     } else {

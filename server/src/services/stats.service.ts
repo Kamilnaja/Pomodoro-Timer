@@ -3,6 +3,7 @@ import { Response } from 'express-serve-static-core';
 import StatsSearchResult from '../../../types/statisticsInterfaces';
 import client from '../db/db';
 import { Request } from '../models/auth/request.interface';
+import { isDateError, normalizeMonth } from '../utils/service.util';
 
 export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | {}>, next: NextFunction) => {
   const sql = 'INSERT INTO pomodoros (user_id, date) VALUES ($1, $2)';
@@ -28,8 +29,7 @@ export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<Stats
     console.log('error');
     setError('error', next);
   } else {
-    month = (Number(month) + 1) as any;
-    month.toString().length === 1 ? (month = `${0}${month}`) : month;
+    month = normalizeMonth(month);
     await searchResultsInDb(userId.toString(), `${year}-${month}`, 'YYYY-MM', res, next);
   }
 };
@@ -43,8 +43,7 @@ export const getStatsInGivenDay = async (req: Request<{}>, res: Response<StatsSe
     console.log('error');
     setError('error', next);
   } else {
-    month = (Number(month) + 1) as any;
-    month.toString().length === 1 ? (month = `${0}${month}`) : month;
+    month = normalizeMonth(month);
     await searchResultsInDb(userId.toString(), `${year}-${month}-${day}`, 'YYYY-MM-DD', res, next);
   }
 };
@@ -75,15 +74,3 @@ const setError = (field: string, next: NextFunction) => {
   console.log(info);
   next(info);
 };
-
-const isDateError = (year: string, month: string, day?: string): boolean => {
-  if (day) {
-    return !isYearCorrect(year) || !isMonthCorrect(month) || !isDayCorrect(day);
-  } else {
-    return !isYearCorrect(year) || !isMonthCorrect(month);
-  }
-};
-
-const isYearCorrect = (year: string): boolean => Number(year) >= 2020;
-const isMonthCorrect = (month: string): boolean => Number(month) >= 0 && Number(month) <= 12;
-const isDayCorrect = (day: string): boolean => Number(day) >= 0 && Number(day) < 31;
