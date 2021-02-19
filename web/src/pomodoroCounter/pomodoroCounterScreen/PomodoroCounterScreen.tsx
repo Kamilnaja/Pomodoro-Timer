@@ -9,17 +9,17 @@ import { InfoComponent } from '../info/InfoComponent';
 import { ModeButtonsComponent } from '../modeButtons/ModeButtonsComponent';
 import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 import { timerState } from '../store/state/timerState';
-import { PomodoroCounterContainerProps } from './PomodoroCounterContainerProps';
+import { PomodoroCounterScreenProps } from './PomodoroCounterScreenProps';
 import { handleSetModeBreak, handleSetModePomodoro } from '../store/actions/pomodoroCounterAction';
 import { initialConfig } from 'shared/settings/initialConfig';
 import { worker } from '../counter/Worker';
 import { TabTitle } from '../../shared/title/TabTitle';
 
-class PomodoroCounterContainer extends React.Component<PomodoroCounterContainerProps> {
+class PomodoroCounterScreen extends React.Component<PomodoroCounterScreenProps> {
   private worker: Worker = worker;
   private tabTitle: TabTitle = new TabTitle();
 
-  constructor(props: PomodoroCounterContainerProps) {
+  constructor(props: PomodoroCounterScreenProps) {
     super(props);
     this.state = timerState;
   }
@@ -71,4 +71,4 @@ const mapStateToProps = (state: { auth: AuthState; pomodoroCounter: PomodoroCoun
   return { auth, pomodoroCounter };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PomodoroCounterContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PomodoroCounterScreen);

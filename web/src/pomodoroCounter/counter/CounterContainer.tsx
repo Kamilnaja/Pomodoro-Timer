@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 import { msToTime } from '../../shared/scripts/utils';
 import { initialConfig } from '../../shared/settings/initialConfig';
 import { TabTitle } from '../../shared/title/TabTitle';
-import { isAnyTimerRunning, playClickSound, isPomodoroMode } from '../container/PomodoroCounterContainerHelpers';
+import {
+  isAnyTimerRunning,
+  playClickSound,
+  isPomodoroMode,
+} from '../pomodoroCounterScreen/PomodoroCounterScreenHelpers';
 import { end, pause, run, updateCounter } from '../store/actions/pomodoroCounterAction';
 import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 import './counterContainer.scss';

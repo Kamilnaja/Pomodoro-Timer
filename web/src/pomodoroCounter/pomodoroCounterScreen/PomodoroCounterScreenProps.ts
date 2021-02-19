@@ -1,7 +1,7 @@
 import { AuthState } from '../../auth/store/interfaces/authState';
 import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 
-export interface PomodoroCounterContainerProps {
+export interface PomodoroCounterScreenProps {
   auth: AuthState;
   pomodoroCounter: PomodoroCounterState;
   handleSavePomodoro: () => void;

@@ -7,7 +7,7 @@ import StatsContainer from '../../stats/allStats/containers/StatsContainer';
 import TaskAndNotesContainer from '../../tasksAndNotes/taskAndNotesWrapper/taskAndNotesContainer/TaskAndNotesContainer';
 import { HeaderContainerProps } from '../container/HeaderContainerProps';
 import './headerComponent.scss';
-import PomodoroCounterContainer from '../../pomodoroCounter/container/PomodoroCounterContainer';
+import PomodoroCounterScreen from '../../pomodoroCounter/pomodoroCounterScreen/PomodoroCounterScreen';
 
 export const HeaderComponent = (props: HeaderContainerProps) => (
   <Router>
@@ -44,7 +44,7 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
           <StatsContainer />
         </Route>
         <Route path="/">
-          <PomodoroCounterContainer />
+          <PomodoroCounterScreen />
         </Route>
       </Switch>
     </Container>
