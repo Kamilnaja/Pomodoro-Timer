@@ -1,5 +1,3 @@
-import { ActionWithPayload } from 'store/interfaces/actions/actionInterface';
-import StatsSearchResult from '../../../../../types/statisticsInterfaces';
 import {
   GET_STATISTIC_IN_PERIOD,
   GET_STATISTIC_IN_PERIOD_ERROR,
@@ -10,6 +8,7 @@ import {
   SAVE_POMODORO,
   SAVE_POMODORO_ERROR,
   SAVE_POMODORO_SUCCESS,
+  StatsActionsTypes,
 } from '../actions/statsActionsTypes';
 import { StatsState } from '../models/StatsInterfaces';
 
@@ -20,7 +19,7 @@ export const initialState: StatsState = {
   todayResults: 0,
 };
 
-export const statsReducer = (state = initialState, action: ActionWithPayload<string, StatsSearchResult>) => {
+export const statsReducer = (state = initialState, action: StatsActionsTypes) => {
   switch (action.type) {
     case SAVE_POMODORO:
       return {
