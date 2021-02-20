@@ -2,6 +2,9 @@ import {
   GET_SETTINGS,
   GET_SETTINGS_ERROR,
   GET_SETTINGS_SUCCESS,
+  SAVE_SETTINGS,
+  SAVE_SETTINGS_ERROR,
+  SAVE_SETTINGS_SUCCESS,
   SettingsActionsType,
 } from '../actions/settingsActionsTypes';
 import { SettingsState } from '../interfaces/settingsInterfaces';
@@ -35,7 +38,23 @@ export const settingsReducer = (state = initialState, action: SettingsActionsTyp
         error: action.payload,
         isLoading: false,
       };
-
+    case SAVE_SETTINGS:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case SAVE_SETTINGS_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        isLoading: false,
+      };
+    case SAVE_SETTINGS_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false,
+      };
     default:
       return state;
   }
