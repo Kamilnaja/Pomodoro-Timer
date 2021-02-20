@@ -1,64 +1,59 @@
 import { Action } from 'redux';
 import { config } from 'shared/settings/initialConfig';
-import { ActionWithPayload } from 'store/interfaces/actions/actionInterface';
 import { AuthError, Login, LoginResponse, Registration } from '../../../../../types/authInterfaces';
+import {
+  AuthActionsTypes,
+  LOGIN,
+  LOGIN_ERROR,
+  LOGIN_SUCCESS,
+  REGISTER,
+  REGISTER_ERROR,
+  REGISTER_SUCCESS,
+  RESET_FORM,
+  SET_LOGGED_OUT,
+} from './authActionsTypes';
 
 const localStorageKey = 'token';
 
-export enum AuthAction {
-  REGISTER = 'REGISTER',
-  REGISTER_SUCCESS = 'REGISTER_SUCCESS',
-  REGISTER_ERROR = 'REGISTER_ERROR',
-
-  LOGIN = 'LOGIN',
-  LOGIN_SUCCESS = 'LOGIN_SUCCESS',
-  LOGIN_ERROR = 'LOGIN_ERROR',
-
-  RESET_FORM = 'RESET_FORM',
-
-  SET_LOGGED_IN = 'SET_LOGGED_IN',
-  SET_LOGGED_OUT = 'SET_LOGGED_OUT',
-}
-
-const register = (payload: Registration): ActionWithPayload<AuthAction, Registration> => ({
-  type: AuthAction.REGISTER,
+const register = (payload: Registration): AuthActionsTypes => ({
+  type: REGISTER,
   payload,
 });
 
-const registerSuccess = (): Action => ({
-  type: AuthAction.REGISTER_SUCCESS,
+const registerSuccess = (): AuthActionsTypes => ({
+  type: REGISTER_SUCCESS,
 });
 
-const registerError = (error: any): ActionWithPayload<AuthAction, AuthError> => ({
-  type: AuthAction.REGISTER_ERROR,
+const registerError = (error: any): AuthActionsTypes => ({
+  type: REGISTER_ERROR,
   payload: error,
 });
 
-const login = (payload: Login): ActionWithPayload<AuthAction, Login> => ({
-  type: AuthAction.LOGIN,
+const login = (payload: Login): AuthActionsTypes => ({
+  type: LOGIN,
   payload,
 });
 
-const loginSuccess = (payload: string): ActionWithPayload<AuthAction, string> => ({
-  type: AuthAction.LOGIN_SUCCESS,
+const loginSuccess = (payload: string): AuthActionsTypes => ({
+  type: LOGIN_SUCCESS,
   payload,
 });
 
-const loginError = (error: AuthError): ActionWithPayload<AuthAction, AuthError> => ({
-  type: AuthAction.LOGIN_ERROR,
+const loginError = (error: AuthError): AuthActionsTypes => ({
+  type: LOGIN_ERROR,
   payload: error,
 });
 
 export const resetForm = (): Action => ({
-  type: AuthAction.RESET_FORM,
+  type: RESET_FORM,
 });
 
 const setLoggedOut = (): Action => ({
-  type: AuthAction.SET_LOGGED_OUT,
+  type: SET_LOGGED_OUT,
 });
 
 // thunk
-export const sendRegisterForm = (formData: Registration) => (dispatch: (action: Action<AuthAction>) => void) => {
+export const sendRegisterForm = (formData: Registration) => (dispatch: (action: AuthActionsTypes) => void) => {
   dispatch(register(formData));
 
   makeRegisterRequest(formData)
@@ -119,7 +114,7 @@ export const setUserIsLoggedIn = () => (dispatch: (action: Action<any>) => void)
   }
 };
 
-export const setUserIsLoggedOut = () => (dispatch: (action: Action<AuthAction>) => void) => {
+export const setUserIsLoggedOut = () => (dispatch: (action: AuthActionsTypes) => void) => {
   localStorage.removeItem(localStorageKey);
 
   dispatch(setLoggedOut());

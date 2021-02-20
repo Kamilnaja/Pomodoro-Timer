@@ -1,40 +1,49 @@
-import { ActionWithPayload } from '../../../store/interfaces/actions/actionInterface';
-import { AuthAction } from '../actions/authActions';
+import {
+  AuthActionsTypes,
+  LOGIN,
+  LOGIN_ERROR,
+  LOGIN_SUCCESS,
+  REGISTER,
+  REGISTER_ERROR,
+  REGISTER_SUCCESS,
+  RESET_FORM,
+  SET_LOGGED_OUT,
+} from '../actions/authActionsTypes';
 import { AuthState } from '../interfaces/authState';
 import { authInitialState } from './initialState';
 
-export const authReducer = (state = authInitialState, action: ActionWithPayload<AuthAction, any>): AuthState => {
+export const authReducer = (state = authInitialState, action: AuthActionsTypes): AuthState => {
   switch (action.type) {
-    case AuthAction.REGISTER:
+    case REGISTER:
       return {
         ...state,
         isLoading: true,
       };
-    case AuthAction.REGISTER_ERROR:
+    case REGISTER_ERROR:
       return {
         ...state,
         isLoading: false,
         error: action.payload,
       };
-    case AuthAction.REGISTER_SUCCESS:
+    case REGISTER_SUCCESS:
       return {
         ...state,
         isLoading: false,
         isSuccess: true,
         error: null as any,
       };
-    case AuthAction.LOGIN:
+    case LOGIN:
       return {
         ...state,
         isLoading: true,
       };
-    case AuthAction.LOGIN_ERROR:
+    case LOGIN_ERROR:
       return {
         ...state,
         isLoading: false,
         error: action.payload,
       };
-    case AuthAction.LOGIN_SUCCESS:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         isLoading: false,
@@ -43,14 +52,14 @@ export const authReducer = (state = authInitialState, action: ActionWithPayload<
         token: action.payload,
         error: null as any,
       };
-    case AuthAction.RESET_FORM:
+    case RESET_FORM:
       return {
         ...state,
         isLoading: authInitialState.isLoading,
         isSuccess: authInitialState.isSuccess,
         error: null as any,
       };
-    case AuthAction.SET_LOGGED_OUT:
+    case SET_LOGGED_OUT:
       return {
         ...state,
         isLoggedIn: false,
