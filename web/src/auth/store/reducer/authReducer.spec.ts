@@ -3,6 +3,6 @@ import { authInitialState } from './initialState';
 
 describe('AuthReducer', () => {
   it('should render the initial state', () => {
-    expect(authReducer(undefined, null)).toEqual(authInitialState);
+    expect(authReducer(undefined, { type: null })).toEqual(authInitialState);
   });
 });
