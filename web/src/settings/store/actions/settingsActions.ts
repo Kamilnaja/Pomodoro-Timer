@@ -1,5 +1,5 @@
 import { Settings } from '../../../../../types/settingsInterface';
-import { updateData } from '../../../shared/scripts/requests';
+import { fetchData, updateData } from '../../../shared/scripts/requests';
 import { config } from '../../../shared/settings/initialConfig';
 import {
   GET_SETTINGS,
@@ -38,8 +38,20 @@ const saveSettingsError = (payload: Error): SettingsActionsType => ({
   payload,
 });
 
+export const handleGetSettings = () => (dispatch: (action: SettingsActionsType) => void) => {
+  dispatch(getSettings());
+
+  fetchData(`${config.url.API_URL}/settings`)
+    .then((payload: Settings) => {
+      dispatch(getSettingsSuccess(payload));
+    })
+    .catch(error => {
+      dispatch(getSettingsError(error));
+    });
+};
+
 // thunk
-export const handleSaveCookieConsent = (settings: Settings) => (dispatch: (action: SettingsActionsType) => void) => {
+export const handleSaveSettings = (settings: Settings) => (dispatch: (action: SettingsActionsType) => void) => {
   dispatch(saveSettings());
 
   updateData(`${config.url.API_URL}/settings`, settings, 'PUT')
