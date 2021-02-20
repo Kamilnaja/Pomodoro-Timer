@@ -3,12 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ModalType as ModalEnum } from 'shared/modal/modalEnum';
 import { AuthState } from '../../auth/store/interfaces/authState';
-import { SettingsState } from '../../settings/store/interfaces/settingsInterfaces';
 import { CloseModal, OpenModal } from '../../shared/modal/ModalProps';
 import { MainComponent } from '../component/MainComponent';
 import { MainContainerProps } from './MainContainerProps';
 import { MainContainerState } from './MainContainerState';
-import { handleSaveCookieConsent } from 'settings/store/actions/settingsActions';
 
 class MainContainer extends React.Component<MainContainerProps, MainContainerState> {
   constructor(props: MainContainerProps) {
@@ -31,18 +29,12 @@ class MainContainer extends React.Component<MainContainerProps, MainContainerSta
     this.props.resetForm();
   };
 
-  handleAcceptCookieConsent = () => {
-    this.props.handleSaveCookieConsent({ ...this.props.settingsState.settings, isCookieConsentAccepted: true });
-  };
-
   render = () => (
     <MainComponent
       handleOpenModal={this.handleOpenModal}
       handleCloseModal={() => this.handleCloseModal()}
       openedModal={this.state.openedModal}
       isLoggedIn={this.props.authState.isLoggedIn}
-      isCookieInfoVisible={this.props.settingsState.settings.isCookieConsentAccepted}
-      handleSaveCookieConsent={this.handleAcceptCookieConsent}
     />
   );
 }
@@ -51,13 +43,11 @@ const mapDispatchToProps = {
   resetForm,
   setUserIsLoggedIn,
   setUserIsLoggedOut,
-  handleSaveCookieConsent,
 };
 
-const mapStateToProps = (state: { auth: AuthState; settings: SettingsState }) => {
+const mapStateToProps = (state: { auth: AuthState }) => {
   const authState = state.auth;
-  const settingsState = state.settings;
-  return { authState, settingsState };
+  return { authState };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
