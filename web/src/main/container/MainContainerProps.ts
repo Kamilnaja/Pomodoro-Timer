@@ -1,3 +1,4 @@
+import { Settings } from '../../../../types/settingsInterface';
 import { AuthState } from '../../auth/store/interfaces/authState';
 import { SettingsState } from '../../settings/store/interfaces/settingsInterfaces';
 
@@ -7,4 +8,5 @@ export interface MainContainerProps {
   setUserIsLoggedOut: () => void;
   authState: AuthState;
   settingsState: SettingsState;
+  handleSaveCookieConsent: (settings: Settings) => void;
 }

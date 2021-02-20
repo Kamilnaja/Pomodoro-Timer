@@ -48,7 +48,7 @@ describe('settingsActions', () => {
       type: 'SAVE_SETTINGS_SUCCESS',
     };
 
-    expect(actions.setSettingsSuccess()).toEqual(expectedAction);
+    expect(actions.saveSettingsSuccess()).toEqual(expectedAction);
   });
 
   it('should return saveSettingsError', () => {
@@ -59,6 +59,6 @@ describe('settingsActions', () => {
       payload,
     };
 
-    expect(actions.setSettingsError(payload)).toEqual(expectedAction);
+    expect(actions.saveSettingsError(payload)).toEqual(expectedAction);
   });
 });

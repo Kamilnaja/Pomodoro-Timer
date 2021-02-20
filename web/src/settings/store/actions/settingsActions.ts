@@ -1,4 +1,5 @@
 import { Settings } from '../../../../../types/settingsInterface';
+import { config } from '../../../shared/settings/initialConfig';
 import {
   GET_SETTINGS,
   GET_SETTINGS_ERROR,
@@ -23,16 +24,42 @@ export const getSettingsError = (payload: Error): SettingsActionsType => ({
   payload: payload,
 });
 
-export const saveSettings = (payload: Settings): SettingsActionsType => ({
+export const saveSettings = (): SettingsActionsType => ({
   type: SAVE_SETTINGS,
-  payload,
 });
 
-export const setSettingsSuccess = (): SettingsActionsType => ({
+export const saveSettingsSuccess = (): SettingsActionsType => ({
   type: SAVE_SETTINGS_SUCCESS,
 });
 
-export const setSettingsError = (payload: Error): SettingsActionsType => ({
+export const saveSettingsError = (payload: Error): SettingsActionsType => ({
   type: SAVE_SETTINGS_ERROR,
   payload,
 });
+
+// thunk
+export const handleSaveCookieConsent = (settings: Settings) => (dispatch: (action: SettingsActionsType) => void) => {
+  dispatch(saveSettings());
+
+  makePostRequest(settings)
+    .then(() => {
+      dispatch(saveSettingsSuccess());
+    })
+    .catch((error: any) => {
+      dispatch(saveSettingsError(error));
+    });
+};
+
+const makePostRequest = async (formData: Settings) => {
+  const response: Response = await fetch(`${config.url.API_URL}/settings`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  });
+
+  const requestBody = await response.json();
+
+  return response.ok ? Promise.resolve(requestBody) : Promise.reject(requestBody);
+};

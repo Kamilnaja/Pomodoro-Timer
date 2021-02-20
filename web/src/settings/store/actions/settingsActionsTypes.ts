@@ -23,7 +23,6 @@ interface GetSettingsErrorAction {
 
 interface SaveSettingsAction {
   type: typeof SAVE_SETTINGS;
-  payload: Settings;
 }
 
 interface SaveSettingsSuccessAction {
