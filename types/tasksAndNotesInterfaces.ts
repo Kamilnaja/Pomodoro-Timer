@@ -24,7 +24,7 @@ export interface Task extends BaseTask {
   dueDate: Date;
 }
 
-export interface TaskSearchResults extends SearchResult<Task> {}
+export interface TaskSearchResults extends SearchResult<Task[]> {}
 
 export interface SubtaskSearchResult extends SearchResult<Subtask> {}
 

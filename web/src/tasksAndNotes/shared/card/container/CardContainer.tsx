@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { TasksAndNotesState } from '../../../store/models/TasksAndNotesInterfaces';
 import { CardComponent } from '../component/CardComponent';
 import { CardCointainerProps } from './cardContainerProps';
-import { handleSave } from '../../../store/actions/todosActions';
+import { handleSave } from '../../../store/actions/todosActions/todosActions';
 
 class CardContainer extends Component<CardCointainerProps> {
   addSubtask = () => {

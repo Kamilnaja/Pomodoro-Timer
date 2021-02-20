@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { handleShowAddNewTask } from '../../store/actions/taskActions';
+import { handleShowAddNewTask } from '../../store/actions/tasksActions/taskActions';
 import { TasksAndNotesState } from '../../store/models/TasksAndNotesInterfaces';
 import { SidebarComponent } from '../component/SidebarComponent';
 import { SidebarContainerProps } from './sidebarContainerInterface';

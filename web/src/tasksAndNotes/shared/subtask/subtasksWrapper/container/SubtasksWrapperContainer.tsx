@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { handleAddSubtask } from '../../../../store/actions/taskActions';
+import { handleAddSubtask } from '../../../../store/actions/tasksActions/taskActions';
 import { SubtaskWrapperComponent } from '../components/subtaskWrapperComponent/SubtaskWrapperComponent';
 import { SubtaskWrapperContainerProps } from './subtasksWrapperContainerProps';
 
