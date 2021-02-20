@@ -1,12 +1,12 @@
 import { shallow } from 'enzyme';
+import { shallowToJson } from 'enzyme-to-json';
 import { createAuth, createCurrentState } from '../testing/pomodoroCounter.test.data';
 import { InfoComponent } from './InfoComponent';
 
 describe('InfoComponent', () => {
-  it('Should render', () => {
-    // const infoComponent = shallow(<InfoComponent currentState={createCurrentState()} auth={createAuth()} />);
+  const infoComponent = shallow(<InfoComponent currentState={createCurrentState()} auth={createAuth()} />);
 
-    // expect(infoComponent).not.toBeNull();
-    expect(true).toBeTruthy();
+  it('Should match snapshot', () => {
+    expect(shallowToJson(infoComponent)).toMatchSnapshot();
   });
 });

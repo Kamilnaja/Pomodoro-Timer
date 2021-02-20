@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginComponent Should match snapshot 1`] = `
+<div
+  className="login"
+>
+  <div
+    className="login__success"
+  >
+    <ValidationMessage
+      message="😀Login successfull, now close the modal and do some work!"
+      type="success"
+    />
+  </div>
+</div>
+`;

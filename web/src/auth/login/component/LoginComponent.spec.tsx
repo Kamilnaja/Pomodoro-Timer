@@ -10,5 +10,7 @@ describe('LoginComponent', () => {
   const handleSubmit = (data: Login) => {};
   const wrapper = shallow(<LoginComponent handleSubmit={handleSubmit} auth={createAuthState()} />);
 
-  expect(shallowToJson(wrapper)).not.toBeNull();
+  it('Should match snapshot', () => {
+    expect(shallowToJson(wrapper)).toMatchSnapshot();
+  });
 });

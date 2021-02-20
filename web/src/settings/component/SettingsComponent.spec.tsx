@@ -1,8 +1,11 @@
 import { shallow } from 'enzyme';
+import { shallowToJson } from 'enzyme-to-json';
 import { SettingsComponent } from './SettingsComponent';
 
-test('Should render', () => {
+describe('SettingsComponent', () => {
   const component = shallow(<SettingsComponent />);
 
-  expect(component).not.toBeNull();
+  it('Should match snapshot', () => {
+    expect(shallowToJson(component)).toMatchSnapshot();
+  });
 });

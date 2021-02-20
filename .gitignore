@@ -4,3 +4,5 @@ package-lock.json
 dist/
 .idea/*
 .env
+web/junit.xml
+web/junit.xml

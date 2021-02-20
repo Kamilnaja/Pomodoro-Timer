@@ -1,4 +1,5 @@
 import { shallow } from 'enzyme';
+import { shallowToJson } from 'enzyme-to-json';
 import { handleCancel, handleLogout } from '../../testing/auth.testing.data';
 import { LogoutComponent } from './LogoutComponent';
 
@@ -7,6 +8,10 @@ let logoutComponent: any;
 describe('LogoutComponent', () => {
   beforeEach(() => {
     logoutComponent = shallow(<LogoutComponent handleLogout={handleLogout} handleCancel={handleCancel} />);
+  });
+
+  it('Should match snapshot', () => {
+    expect(shallowToJson(logoutComponent)).toMatchSnapshot();
   });
 
   it('Should have logout wrapper', () => {

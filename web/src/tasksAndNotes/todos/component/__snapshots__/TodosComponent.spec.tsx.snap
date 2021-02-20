@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodosComponent Should match snapshot 1`] = `
+<div>
+  <h2>
+    Your things to do
+  </h2>
+  <Connect(CardContainer) />
+  <ul
+    className="list-unstyled"
+  >
+    <li
+      className="mb-1"
+      key="0"
+      tabIndex={0}
+    >
+      <Connect(CardContainer)
+        task={
+          Object {
+            "dateCreated": 2021-01-11T23:00:00.000Z,
+            "dueDate": 2020-01-11T23:00:00.000Z,
+            "id": "1",
+            "isDone": false,
+            "note": "lorem ipsum dolor",
+            "subtasks": Array [],
+            "title": "hello world",
+            "type": 1,
+          }
+        }
+      />
+    </li>
+  </ul>
+  <hr />
+  <Accordion>
+    <h2>
+      Done tasks
+      <ForwardRef
+        as={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "defaultProps": Object {
+              "active": false,
+              "disabled": false,
+              "variant": "primary",
+            },
+            "render": [Function],
+          }
+        }
+        eventKey="0"
+        variant="link"
+      >
+        exp
+      </ForwardRef>
+    </h2>
+    <AccordionCollapse
+      eventKey="0"
+    >
+      <ul
+        className="list-unstyled"
+      >
+        <li />
+      </ul>
+    </AccordionCollapse>
+  </Accordion>
+</div>
+`;

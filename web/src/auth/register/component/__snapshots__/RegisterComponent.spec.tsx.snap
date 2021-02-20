@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RegisterComponent Should match snapshot 1`] = `
+<div
+  className="register"
+>
+  <div>
+    🤩Registered successfully, now you can log in
+  </div>
+</div>
+`;
