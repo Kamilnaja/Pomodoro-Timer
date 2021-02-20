@@ -1,3 +1,10 @@
+## 0.7.0 - 2021-02-20
+
+- mode - ?time=3000 to setup shorter time
+- better setup for actions
+- playing end time
+- new, awesome not hanging up timer
+
 ## 0.6.0 - 2021-02-12
 
 - showing today stats (back) on main page

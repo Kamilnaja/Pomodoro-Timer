@@ -8,6 +8,7 @@ import {
   isAnyTimerRunning,
   playClickSound,
   isPomodoroMode,
+  playEndSound,
 } from '../pomodoroCounterScreen/PomodoroCounterScreenHelpers';
 import { end, pause, run, updateCounter } from '../store/actions/pomodoroCounterAction';
 import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
@@ -73,7 +74,7 @@ class CounterContainer extends React.Component<CounterComponentProps> {
           this.props.updateCounter(time);
         } else {
           this.tabTitle.startBlinking();
-
+          playEndSound();
           if (isPomodoroMode(this.props.counter.currentTimer)) {
             this.props.handleSavePomodoro();
             this.setWorkerTime(initialConfig.shortBreakTime);

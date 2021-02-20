@@ -14,9 +14,12 @@ const dev = {
 
 export const config = process.env.NODE_ENV === 'development' ? dev : prod;
 
+const url = new URL(window.location.href);
+const time = Number(url.searchParams.get('time'));
+
 export const initialConfig: InitialConfig = {
   shortBreakTime: 5 * 60 * 1000,
   longBreakTime: 15 * 60 * 1000,
-  pomodoroTime: 25 * 60 * 1000,
+  pomodoroTime: time ? time : 25 * 60 * 1000,
   refreshRate: 1000,
 };
