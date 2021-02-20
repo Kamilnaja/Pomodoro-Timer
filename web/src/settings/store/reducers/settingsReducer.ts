@@ -1,11 +1,15 @@
-import { ActionWithPayload } from 'store/interfaces/actions/actionInterface';
 import { Settings } from '../../../../../types/settingsInterface';
-import { SettingsActions } from '../actions/settingsActions';
+import {
+  GET_SETTINGS,
+  GET_SETTINGS_ERROR,
+  GET_SETTINGS_SUCCESS,
+  SettingsActionsType,
+} from '../actions/settingsActionsTypes';
 
 interface State {
   settings: Settings;
   isLoading: boolean;
-  error: string;
+  error: any;
 }
 
 const initialState: State = {
@@ -17,25 +21,25 @@ const initialState: State = {
   },
 };
 
-export const settingsReducer = (state = initialState, action: ActionWithPayload<SettingsActions, any>): State => {
+export const settingsReducer = (state = initialState, action: SettingsActionsType): State => {
   switch (action.type) {
-    case SettingsActions.GET_SETTINGS:
+    case GET_SETTINGS:
       return {
         ...state,
         isLoading: true,
         error: null,
       };
-    case SettingsActions.GET_SETTINGS_SUCCESS:
+    case GET_SETTINGS_SUCCESS:
       return {
         ...state,
         settings: action.payload,
         isLoading: false,
-        error: null,
       };
-    case SettingsActions.GET_SETTINGS_ERROR:
+    case GET_SETTINGS_ERROR:
       return {
         ...state,
-        settings: action.payload,
+        error: action.payload,
+        isLoading: false,
       };
 
     default:
