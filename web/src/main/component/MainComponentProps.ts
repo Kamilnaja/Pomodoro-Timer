@@ -6,4 +6,5 @@ export interface MainComponentProps {
   handleCloseModal: CloseModal;
   openedModal: ModalType;
   isLoggedIn: boolean;
+  isCookieInfoVisible: boolean;
 }

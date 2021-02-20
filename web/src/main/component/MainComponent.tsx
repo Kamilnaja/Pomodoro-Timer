@@ -8,6 +8,7 @@ export const MainComponent = (props: MainComponentProps) => {
   return (
     <div className="app">
       <HeaderContainer handleOpenModal={props.handleOpenModal} isLoggedIn={props.isLoggedIn} />
+      <div> I 'm cookie consent</div>
       <Modal modalType={props.openedModal} closeModal={props.handleCloseModal} />
     </div>
   );

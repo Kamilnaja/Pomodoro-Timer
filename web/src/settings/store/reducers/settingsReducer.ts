@@ -1,18 +1,12 @@
-import { Settings } from '../../../../../types/settingsInterface';
 import {
   GET_SETTINGS,
   GET_SETTINGS_ERROR,
   GET_SETTINGS_SUCCESS,
   SettingsActionsType,
 } from '../actions/settingsActionsTypes';
+import { SettingsState } from '../interfaces/settingsInterfaces';
 
-interface State {
-  settings: Settings;
-  isLoading: boolean;
-  error: any;
-}
-
-const initialState: State = {
+const initialState: SettingsState = {
   isLoading: false,
   error: null,
   settings: {
@@ -21,7 +15,7 @@ const initialState: State = {
   },
 };
 
-export const settingsReducer = (state = initialState, action: SettingsActionsType): State => {
+export const settingsReducer = (state = initialState, action: SettingsActionsType): SettingsState => {
   switch (action.type) {
     case GET_SETTINGS:
       return {
