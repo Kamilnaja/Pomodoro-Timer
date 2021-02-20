@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="8" failures="0" errors="0" time="5.948">
+  <testsuite name="InfoComponent" errors="0" failures="0" skipped="0" timestamp="2021-02-20T11:00:05" time="1.547" tests="1">
+    <testcase classname="InfoComponent Should render" name="InfoComponent Should render" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2021-02-20T11:00:05" time="1.549" tests="1">
+    <testcase classname=" Should render" name=" Should render" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="actions" errors="0" failures="0" skipped="0" timestamp="2021-02-20T11:00:05" time="1.549" tests="1">
+    <testcase classname="actions should create an auth action" name="actions should create an auth action" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="StatsComponent" errors="0" failures="0" skipped="0" timestamp="2021-02-20T11:00:05" time="1.594" tests="1">
+    <testcase classname="StatsComponent Should match snapshot" name="StatsComponent Should match snapshot" time="0.005">
+    </testcase>
+  </testsuite>
+  <testsuite name="LogoutComponent" errors="0" failures="0" skipped="0" timestamp="2021-02-20T11:00:05" time="1.573" tests="2">
+    <testcase classname="LogoutComponent Should have logout wrapper" name="LogoutComponent Should have logout wrapper" time="0.008">
+    </testcase>
+    <testcase classname="LogoutComponent Should start handleCancel method after clicking in handleCancel button" name="LogoutComponent Should start handleCancel method after clicking in handleCancel button" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="RegisterComponent" errors="0" failures="0" skipped="0" timestamp="2021-02-20T11:00:05" time="1.597" tests="1">
+    <testcase classname="RegisterComponent Should create" name="RegisterComponent Should create" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="MainContainer" errors="0" failures="0" skipped="0" timestamp="2021-02-20T11:00:05" time="2.061" tests="1">
+    <testcase classname="MainContainer Should match the snapshot" name="MainContainer Should match the snapshot" time="0.027">
+    </testcase>
+  </testsuite>
+</testsuites>

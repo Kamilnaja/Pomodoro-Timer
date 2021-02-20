@@ -6,7 +6,7 @@ import { StatsComponentProps } from './StatsComponentProps';
 let pageMonth = getCurrentMonth();
 let pageYear = getCurrentYear();
 
-export const StatsComponent = (results: StatsComponentProps) => {
+export const StatsComponent = (props: StatsComponentProps) => {
   const getPreviousMonth = () => {
     if (pageMonth === 0) {
       pageMonth = 11;
@@ -15,7 +15,7 @@ export const StatsComponent = (results: StatsComponentProps) => {
       pageMonth = pageMonth - 1;
     }
 
-    results.handleGetStats(pageYear, pageMonth);
+    props.handleGetStats(pageYear, pageMonth);
   };
 
   const getNextMonth = (): void => {
@@ -26,7 +26,7 @@ export const StatsComponent = (results: StatsComponentProps) => {
       pageMonth = pageMonth + 1;
     }
 
-    results.handleGetStats(pageYear, pageMonth);
+    props.handleGetStats(pageYear, pageMonth);
   };
 
   const shouldShowNextMonth = (): boolean => {
@@ -54,7 +54,7 @@ export const StatsComponent = (results: StatsComponentProps) => {
           </tr>
         </thead>
         <tbody>
-          {results.stats?.map((v, idx) => (
+          {props.stats?.map((v, idx) => (
             <tr key={idx}>
               <td className="table__date">{v.date}</td>
               <td className="table__count">{v.count}</td>

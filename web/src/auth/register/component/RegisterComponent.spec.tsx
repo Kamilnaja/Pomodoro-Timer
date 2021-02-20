@@ -5,7 +5,7 @@ import { RegisterComponent } from './RegisterComponent';
 describe('RegisterComponent', () => {
   let registerComponent = shallow(<RegisterComponent handleSubmit={() => {}} formState={createAuthState()} />);
 
-  it('Should match snapshot', () => {
+  it('Should create', () => {
     expect(registerComponent).not.toBeNull();
   });
 });

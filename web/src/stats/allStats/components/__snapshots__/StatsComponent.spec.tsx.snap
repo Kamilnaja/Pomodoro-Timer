@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StatsComponent Should match snapshot 1`] = `
+<div
+  className="stats"
+>
+  <div
+    className="stats__navigation navigation"
+  >
+    <button
+      className="navigation__button"
+      onClick={[Function]}
+    >
+      &lt; prev
+    </button>
+    <button
+      className="navigation__button"
+      disabled={true}
+      onClick={[Function]}
+    >
+      next &gt;
+    </button>
+  </div>
+  <ForwardRef
+    className="stats__table table"
+  >
+    <caption>
+      Results from: 
+      2
+      .
+      2021
+    </caption>
+    <thead
+      className="table__head"
+    >
+      <tr>
+        <th>
+          Date
+        </th>
+        <th>
+          Number of pomodoros
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        key="0"
+      >
+        <td
+          className="table__date"
+        >
+          Sat Feb 20 2021
+        </td>
+        <td
+          className="table__count"
+        >
+          10
+        </td>
+      </tr>
+    </tbody>
+  </ForwardRef>
+</div>
+`;

@@ -14,6 +14,11 @@ export const createAuthState = (): AuthState => ({
   token: '***** ***',
 });
 
+export const createLoginData = (): Login => ({
+  login: '',
+  password: '',
+});
+
 export const handleSubmit = (data: Login) => {};
 
 export const handleLogout = () => {};
