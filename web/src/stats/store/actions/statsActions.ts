@@ -3,60 +3,51 @@ import { ActionWithPayload } from 'store/interfaces/actions/actionInterface';
 import StatsSearchResult from '../../../../../types/statisticsInterfaces';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
 import { getCurrentDay, getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
+import {
+  SAVE_POMODORO,
+  SAVE_POMODORO_ERROR,
+  GET_STATISTIC_IN_PERIOD,
+  GET_STATISTIC_IN_PERIOD_SUCCESS,
+  GET_STATISTIC_IN_PERIOD_ERROR,
+  GET_TODAY_STATS,
+  GET_TODAY_STATS_SUCCESS,
+  GET_TODAY_STATS_ERROR,
+} from './statsActionsTypes';
 
-export enum StatsAction {
-  GET_STATISTIC_IN_PERIOD = 'GET_STATISTIC_IN_PERIOD',
-  GET_STATISTIC_IN_PERIOD_SUCCESS = 'GET_STATISTIC_IN_PERIOD_SUCCESS',
-  GET_STATISTIC_IN_PERIOD_ERROR = 'GET_STATISTIC_IN_PERIOD_ERROR',
-
-  GET_TODAY_STATS = 'Get today stats',
-  GET_TODAY_STATS_SUCCESS = 'Get today stats success',
-  GET_TODAY_STATS_ERROR = 'Get today stats error',
-
-  SAVE_POMODORO = 'SAVE_POMODORO',
-  SAVE_POMODORO_SUCCESS = 'SAVE_POMODORO_SUCCESS',
-  SAVE_POMODORO_ERROR = 'SAVE_POMODORO_ERROR',
-}
-
-const savePomodoro = (): Action<StatsAction> => ({
-  type: StatsAction.SAVE_POMODORO,
+const savePomodoro = (): Action<string> => ({
+  type: SAVE_POMODORO,
 });
 
-const savePomodoroError = (error: any): ActionWithPayload<StatsAction, any> => {
-  console.log(error);
-  return {
-    type: StatsAction.SAVE_POMODORO_ERROR,
-    payload: error,
-  };
-};
+const savePomodoroError = (error: any): ActionWithPayload<string, any> => ({
+  type: SAVE_POMODORO_ERROR,
+  payload: error,
+});
 
 const getStatisticsInPeriod = (): Action => ({
-  type: StatsAction.GET_STATISTIC_IN_PERIOD,
+  type: GET_STATISTIC_IN_PERIOD,
 });
 
-const getStatisticsInPeriodSuccess = (
-  payload: StatsSearchResult,
-): ActionWithPayload<StatsAction, StatsSearchResult> => ({
-  type: StatsAction.GET_STATISTIC_IN_PERIOD_SUCCESS,
+const getStatisticsInPeriodSuccess = (payload: StatsSearchResult): ActionWithPayload<string, StatsSearchResult> => ({
+  type: GET_STATISTIC_IN_PERIOD_SUCCESS,
   payload,
 });
 
-const getStatisticsInPeriodError = (payload: StatsSearchResult): ActionWithPayload<StatsAction, StatsSearchResult> => ({
-  type: StatsAction.GET_STATISTIC_IN_PERIOD_ERROR,
+const getStatisticsInPeriodError = (payload: StatsSearchResult): ActionWithPayload<string, StatsSearchResult> => ({
+  type: GET_STATISTIC_IN_PERIOD_ERROR,
   payload,
 });
 
 const getTodayStats = (): Action => ({
-  type: StatsAction.GET_TODAY_STATS,
+  type: GET_TODAY_STATS,
 });
 
-const getTodayStatsSuccess = (payload: number): ActionWithPayload<StatsAction, number> => ({
-  type: StatsAction.GET_TODAY_STATS_SUCCESS,
+const getTodayStatsSuccess = (payload: number): ActionWithPayload<string, number> => ({
+  type: GET_TODAY_STATS_SUCCESS,
   payload,
 });
 
-const getTodayStatsError = (payload: any): ActionWithPayload<StatsAction, any> => ({
-  type: StatsAction.GET_TODAY_STATS_ERROR,
+const getTodayStatsError = (payload: any): ActionWithPayload<string, any> => ({
+  type: GET_TODAY_STATS_ERROR,
   payload,
 });
 

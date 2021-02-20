@@ -1,6 +1,16 @@
 import { ActionWithPayload } from 'store/interfaces/actions/actionInterface';
 import StatsSearchResult from '../../../../../types/statisticsInterfaces';
-import { StatsAction } from '../actions/statsActions';
+import {
+  GET_STATISTIC_IN_PERIOD,
+  GET_STATISTIC_IN_PERIOD_ERROR,
+  GET_STATISTIC_IN_PERIOD_SUCCESS,
+  GET_TODAY_STATS,
+  GET_TODAY_STATS_ERROR,
+  GET_TODAY_STATS_SUCCESS,
+  SAVE_POMODORO,
+  SAVE_POMODORO_ERROR,
+  SAVE_POMODORO_SUCCESS,
+} from '../actions/statsActionsTypes';
 import { StatsState } from '../models/StatsInterfaces';
 
 export const initialState: StatsState = {
@@ -10,53 +20,53 @@ export const initialState: StatsState = {
   todayResults: 0,
 };
 
-export const statsReducer = (state = initialState, action: ActionWithPayload<StatsAction, StatsSearchResult>) => {
+export const statsReducer = (state = initialState, action: ActionWithPayload<string, StatsSearchResult>) => {
   switch (action.type) {
-    case StatsAction.SAVE_POMODORO:
+    case SAVE_POMODORO:
       return {
         ...state,
         isLoading: true,
       };
-    case StatsAction.SAVE_POMODORO_SUCCESS:
+    case SAVE_POMODORO_SUCCESS:
       return {
         ...state,
         isLoading: false,
       };
-    case StatsAction.SAVE_POMODORO_ERROR:
+    case SAVE_POMODORO_ERROR:
       return {
         ...state,
         error: 'todo handle error',
         isLoading: false,
       };
-    case StatsAction.GET_STATISTIC_IN_PERIOD:
+    case GET_STATISTIC_IN_PERIOD:
       return {
         ...state,
         isLoading: true,
       };
-    case StatsAction.GET_STATISTIC_IN_PERIOD_SUCCESS:
+    case GET_STATISTIC_IN_PERIOD_SUCCESS:
       return {
         ...state,
         isLoading: false,
         results: action.payload.result,
       };
-    case StatsAction.GET_STATISTIC_IN_PERIOD_ERROR:
+    case GET_STATISTIC_IN_PERIOD_ERROR:
       return {
         ...state,
         error: 'something went wrong',
         isLoading: false,
       };
-    case StatsAction.GET_TODAY_STATS:
+    case GET_TODAY_STATS:
       return {
         ...state,
         isLoading: true,
       };
-    case StatsAction.GET_TODAY_STATS_ERROR:
+    case GET_TODAY_STATS_ERROR:
       return {
         ...state,
         isLoading: false,
         error: 'something wrong',
       };
-    case StatsAction.GET_TODAY_STATS_SUCCESS:
+    case GET_TODAY_STATS_SUCCESS:
       return {
         ...state,
         isLoading: false,

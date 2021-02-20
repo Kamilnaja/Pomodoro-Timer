@@ -1,5 +1,6 @@
 import { ActionWithPayload } from 'store/interfaces/actions/actionInterface';
 import { Settings } from '../../../../../types/settingsInterface';
+import { SettingsActions } from '../actions/settingsActions';
 
 interface State {
   settings: Settings;
@@ -16,22 +17,22 @@ const initialState: State = {
   },
 };
 
-export const settingsReducer = (state = initialState, action: ActionWithPayload<SettingsAction, any>): State => {
+export const settingsReducer = (state = initialState, action: ActionWithPayload<SettingsActions, any>): State => {
   switch (action.type) {
-    case SettingsAction.GET_SETTINGS:
+    case SettingsActions.GET_SETTINGS:
       return {
         ...state,
         isLoading: true,
         error: null,
       };
-    case SettingsAction.GET_SETTINGS_SUCCESS:
+    case SettingsActions.GET_SETTINGS_SUCCESS:
       return {
         ...state,
         settings: action.payload,
         isLoading: false,
         error: null,
       };
-    case SettingsAction.GET_SETTINGS_ERROR:
+    case SettingsActions.GET_SETTINGS_ERROR:
       return {
         ...state,
         settings: action.payload,

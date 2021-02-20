@@ -1,0 +1,11 @@
+export const GET_STATISTIC_IN_PERIOD = 'GET_STATISTIC_IN_PERIOD';
+export const GET_STATISTIC_IN_PERIOD_SUCCESS = 'GET_STATISTIC_IN_PERIOD_SUCCESS';
+export const GET_STATISTIC_IN_PERIOD_ERROR = 'GET_STATISTIC_IN_PERIOD_ERROR';
+
+export const GET_TODAY_STATS = 'Get today stats';
+export const GET_TODAY_STATS_SUCCESS = 'Get today stats success';
+export const GET_TODAY_STATS_ERROR = 'Get today stats error';
+
+export const SAVE_POMODORO = 'SAVE_POMODORO';
+export const SAVE_POMODORO_SUCCESS = 'SAVE_POMODORO_SUCCESS';
+export const SAVE_POMODORO_ERROR = 'SAVE_POMODORO_ERROR';

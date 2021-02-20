@@ -1,12 +1,37 @@
-import { shallow } from 'enzyme';
 import React from 'react';
-import './main.scss';
+import { Provider } from 'react-redux';
+import renderer from 'react-test-renderer';
+import configureStore from 'redux-mock-store';
 import MainContainer from './MainContainer';
+import thunk from 'redux-thunk';
+import { CounterState } from '../../pomodoroCounter/store/enums/CounterState';
+const mockStore = configureStore([thunk]);
 
 describe('MainContainer', () => {
-  it('Should be defined', () => {
-    const main = shallow(<MainContainer />);
+  let store;
+  let component: renderer.ReactTestRenderer;
 
-    expect(main).not.toBeNull();
+  beforeEach(() => {
+    store = mockStore({
+      auth: {
+        isLoggedIn: true,
+      },
+      pomodoroCounter: {
+        counterState: CounterState.RUNNING,
+      },
+      stats: {
+        isLoading: false,
+      },
+    });
+
+    component = renderer.create(
+      <Provider store={store}>
+        <MainContainer />
+      </Provider>,
+    );
+  });
+
+  it('Should be defined', () => {
+    expect(component.toJSON()).toMatchSnapshot();
   });
 });
