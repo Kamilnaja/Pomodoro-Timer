@@ -1,0 +1,137 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainContainer Should match the snapshot 1`] = `
+<div
+  className="app"
+>
+  <div
+    className="container"
+  >
+    <nav
+      className="navbar navbar-expand navbar-light"
+    >
+      <a
+        className="navbar-brand"
+        href="/"
+      >
+        Tomatodone
+      </a>
+      <button
+        aria-controls="basic-navbar-nav"
+        aria-label="Toggle navigation"
+        className="navbar-toggler collapsed"
+        onClick={[Function]}
+        type="button"
+      >
+        <span
+          className="navbar-toggler-icon"
+        />
+      </button>
+      <div
+        aria-expanded={null}
+        className="navbar-collapse collapse"
+        id="basic-navbar-nav"
+      >
+        <div
+          className="mr-auto navbar-nav"
+          onKeyDown={[Function]}
+        >
+          <a
+            className="nav-link"
+            data-rb-event-key="/stats"
+            href="/stats"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+          >
+            Stats
+          </a>
+          <a
+            className="nav-link"
+            data-rb-event-key="/settings"
+            href="/settings"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+          >
+            Settings
+          </a>
+          <a
+            className="nav-link"
+            data-rb-event-key={null}
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            Logout
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div
+      className="align-items-center d-flex flex-column bg-dark jumbotron"
+    >
+      <div
+        className="d-flex justify-content-around w-100"
+      >
+        <button
+          className="btn btn-primary"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Pomodoro
+        </button>
+        <button
+          className="btn btn-primary"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Short Break
+        </button>
+        <button
+          className="btn btn-primary"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          Long Break
+        </button>
+      </div>
+      <p
+        className="time text-light d-flex align-items-center"
+      >
+        aN:aN
+      </p>
+      <button
+        className="btn btn-outline-primary"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Pause timer
+      </button>
+      <div
+        className="info mt-4"
+      >
+        <div
+          className="text-white text-center"
+        >
+          <span>
+            Timer in progress
+          </span>
+          <p
+            className="text-white text-center mt-2"
+          >
+            Today you have made: 
+            <span
+              className="badge badge-primary"
+            />
+             pomodoros
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

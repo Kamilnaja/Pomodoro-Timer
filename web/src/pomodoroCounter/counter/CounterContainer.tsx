@@ -64,23 +64,24 @@ class CounterContainer extends React.Component<CounterComponentProps> {
   };
 
   private initializeWorker() {
-    this.worker.onmessage = e => {
-      const { data } = e;
-      if (data.isRunning) {
-        const { time } = data;
-        this.tabTitle.setTitle = `${msToTime(time)}`;
-        this.props.updateCounter(time);
-      } else {
-        this.tabTitle.startBlinking();
-
-        if (isPomodoroMode(this.props.counter.currentTimer)) {
-          this.props.handleSavePomodoro();
-          this.setWorkerTime(initialConfig.shortBreakTime);
+    if (typeof Worker !== 'undefined')
+      this.worker.onmessage = e => {
+        const { data } = e;
+        if (data.isRunning) {
+          const { time } = data;
+          this.tabTitle.setTitle = `${msToTime(time)}`;
+          this.props.updateCounter(time);
         } else {
-          console.log('break end!');
+          this.tabTitle.startBlinking();
+
+          if (isPomodoroMode(this.props.counter.currentTimer)) {
+            this.props.handleSavePomodoro();
+            this.setWorkerTime(initialConfig.shortBreakTime);
+          } else {
+            console.log('break end!');
+          }
         }
-      }
-    };
+      };
   }
 
   render() {

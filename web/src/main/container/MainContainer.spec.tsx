@@ -31,7 +31,7 @@ describe('MainContainer', () => {
     );
   });
 
-  it('Should be defined', () => {
+  it('Should match the snapshot', () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 });

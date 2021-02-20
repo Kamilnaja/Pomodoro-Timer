@@ -6,13 +6,13 @@ export const createAuthError: AuthError = {
   message: 'Gerarahia',
 };
 
-export const createAuthState: AuthState = {
+export const createAuthState = (): AuthState => ({
   error: createAuthError,
   isLoading: true,
   isLoggedIn: true,
   isSuccess: true,
   token: '***** ***',
-};
+});
 
 export const handleSubmit = (data: Login) => {};
 
