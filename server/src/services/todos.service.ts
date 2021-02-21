@@ -8,7 +8,7 @@ export const getTodos = async (req: RequestWithBody<{}>, res: Response<TaskSearc
   const sql = `SELECT todos.id, todos.title, todos.note, todos.datecreated "dateCreated", todos.isDone "isDone", subtasks.parentTaskId
                FROM todos 
                LEFT JOIN subtasks
-                ON todos.id = subtasks.parentTaskId
+               ON todos.id = subtasks.parentTaskId
                WHERE userID = ($1) and todos.isDone = false
                ORDER BY todos.dateCreated DESC`;
 

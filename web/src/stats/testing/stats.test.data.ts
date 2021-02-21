@@ -11,6 +11,6 @@ export const createStatsState = (): StatsState => ({
 export const createStats = (): PomodorosDoneInDay[] => [
   {
     count: 10,
-    date: new Date().toDateString(),
+    date: new Date('01-02-2020').toDateString(),
   },
 ];

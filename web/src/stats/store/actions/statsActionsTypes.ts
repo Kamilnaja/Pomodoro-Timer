@@ -1,4 +1,4 @@
-import StatsSearchResult from '../../../../../types/statisticsInterfaces';
+import { StatsSearchResult } from '../../../../../types/statisticsInterfaces';
 
 export const GET_STATISTIC_IN_PERIOD = 'GET_STATISTIC_IN_PERIOD';
 export const GET_STATISTIC_IN_PERIOD_SUCCESS = 'GET_STATISTIC_IN_PERIOD_SUCCESS';

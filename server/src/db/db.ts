@@ -42,6 +42,15 @@ const queries: TableQuery[] = [
     )`,
     tableName: 'subtasks',
   },
+  {
+    query: `settings (
+      id                         SERIAL PRIMARY KEY,
+      user_id                    text,
+      is_cookie_consent_accepted boolean DEFAULT false,
+      is_sound_enabled           boolean DEFAULT true
+    )`,
+    tableName: 'settings',
+  },
 ];
 
 queries.forEach((tableQuery: TableQuery) => {
@@ -49,7 +58,7 @@ queries.forEach((tableQuery: TableQuery) => {
     if (err) {
       console.log(`error while creating db: ${err.message}`);
     } else {
-      console.log(`table created: ${tableQuery.tableName} !`);
+      console.log(`table created or updated: ${tableQuery.tableName}`);
     }
   });
 });

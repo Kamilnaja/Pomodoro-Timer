@@ -49,7 +49,7 @@ exports[`StatsComponent Should match snapshot 1`] = `
         <td
           className="table__date"
         >
-          Sat Feb 20 2021
+          Thu Jan 02 2020
         </td>
         <td
           className="table__count"

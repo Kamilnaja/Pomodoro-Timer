@@ -10,7 +10,9 @@ import { ErrorComponent } from '../../shared/error/errorComponent/ErrorComponent
 
 class CookiesInfoContainer extends Component<CookiesInfoContainerProps> {
   componentDidMount() {
-    this.props.handleGetSettings();
+    if (this.props.authState.isLoggedIn) {
+      this.props.handleGetSettings();
+    }
   }
 
   handleAcceptCookieConsent = () => {

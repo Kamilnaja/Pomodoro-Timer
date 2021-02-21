@@ -1,6 +1,5 @@
 import { Settings } from '../../../../../types/settingsInterface';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
-import { config } from '../../../shared/settings/initialConfig';
 import {
   GET_SETTINGS,
   GET_SETTINGS_ERROR,
@@ -11,29 +10,29 @@ import {
   SettingsActionsType,
 } from './settingsActionsTypes';
 
-const getSettings = (): SettingsActionsType => ({
+export const getSettings = (): SettingsActionsType => ({
   type: GET_SETTINGS,
 });
 
-const getSettingsSuccess = (payload: Settings): SettingsActionsType => ({
+export const getSettingsSuccess = (payload: Settings): SettingsActionsType => ({
   type: GET_SETTINGS_SUCCESS,
   payload,
 });
 
-const getSettingsError = (payload: Error): SettingsActionsType => ({
+export const getSettingsError = (payload: Error): SettingsActionsType => ({
   type: GET_SETTINGS_ERROR,
   payload: payload,
 });
 
-const saveSettings = (): SettingsActionsType => ({
+export const saveSettings = (): SettingsActionsType => ({
   type: SAVE_SETTINGS,
 });
 
-const saveSettingsSuccess = (): SettingsActionsType => ({
+export const saveSettingsSuccess = (): SettingsActionsType => ({
   type: SAVE_SETTINGS_SUCCESS,
 });
 
-const saveSettingsError = (payload: Error): SettingsActionsType => ({
+export const saveSettingsError = (payload: Error): SettingsActionsType => ({
   type: SAVE_SETTINGS_ERROR,
   payload,
 });
@@ -41,7 +40,7 @@ const saveSettingsError = (payload: Error): SettingsActionsType => ({
 export const handleGetSettings = () => (dispatch: (action: SettingsActionsType) => void) => {
   dispatch(getSettings());
 
-  fetchData(`${config.url.API_URL}/settings`)
+  fetchData(`settings`)
     .then((payload: Settings) => {
       dispatch(getSettingsSuccess(payload));
     })
@@ -54,7 +53,7 @@ export const handleGetSettings = () => (dispatch: (action: SettingsActionsType) 
 export const handleSaveSettings = (settings: Settings) => (dispatch: (action: SettingsActionsType) => void) => {
   dispatch(saveSettings());
 
-  updateData(`${config.url.API_URL}/settings`, settings, 'PUT')
+  updateData(`settings`, settings, 'PUT')
     .then(() => {
       dispatch(saveSettingsSuccess());
     })
