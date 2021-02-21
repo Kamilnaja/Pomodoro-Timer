@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import { ActionWithPayload } from '../../../store/interfaces/actions/actionInterface';
-
+// todo - move to action Types
 export enum PomodoroCounterActions {
   PAUSE = 'PAUSE',
   RUN = 'RUN',

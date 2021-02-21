@@ -1,9 +1,11 @@
+import { Action } from 'redux';
 import { Settings } from '../../../../../types/settingsInterface';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
 import {
   GET_SETTINGS,
   GET_SETTINGS_ERROR,
   GET_SETTINGS_SUCCESS,
+  HIDE_COOKIE_INFO,
   SAVE_SETTINGS,
   SAVE_SETTINGS_ERROR,
   SAVE_SETTINGS_SUCCESS,
@@ -37,6 +39,10 @@ export const saveSettingsError = (payload: Error): SettingsActionsType => ({
   payload,
 });
 
+export const hideCookieInfo = (): SettingsActionsType => ({
+  type: HIDE_COOKIE_INFO,
+});
+
 export const handleGetSettings = () => (dispatch: (action: SettingsActionsType) => void) => {
   dispatch(getSettings());
 
@@ -50,10 +56,10 @@ export const handleGetSettings = () => (dispatch: (action: SettingsActionsType) 
 };
 
 // thunk
-export const handleSaveSettings = (settings: Settings) => (dispatch: (action: SettingsActionsType) => void) => {
+export const handleSaveSettings = (settings: Settings) => (dispatch: (arg: Action | any) => void) => {
   dispatch(saveSettings());
 
   updateData(`settings`, settings, 'PUT')
-    .then(() => dispatch(saveSettingsSuccess()))
+    .then(() => dispatch(handleGetSettings()))
     .catch((error: any) => dispatch(saveSettingsError(error)));
 };

@@ -2,6 +2,7 @@ import {
   GET_SETTINGS,
   GET_SETTINGS_ERROR,
   GET_SETTINGS_SUCCESS,
+  HIDE_COOKIE_INFO,
   SAVE_SETTINGS,
   SAVE_SETTINGS_ERROR,
   SAVE_SETTINGS_SUCCESS,
@@ -12,6 +13,7 @@ import { SettingsState } from '../interfaces/settingsInterfaces';
 const initialState: SettingsState = {
   isLoading: false,
   error: null,
+  isCookieAcceptInfoVisible: true,
   settings: {
     isCookieConsentAccepted: false,
     isSoundEnabled: true,
@@ -48,12 +50,18 @@ export const settingsReducer = (state = initialState, action: SettingsActionsTyp
         ...state,
         error: null,
         isLoading: false,
+        isCookieAcceptInfoVisible: false,
       };
     case SAVE_SETTINGS_ERROR:
       return {
         ...state,
         error: action.payload,
         isLoading: false,
+      };
+    case HIDE_COOKIE_INFO:
+      return {
+        ...state,
+        isCookieAcceptInfoVisible: false,
       };
     default:
       return state;

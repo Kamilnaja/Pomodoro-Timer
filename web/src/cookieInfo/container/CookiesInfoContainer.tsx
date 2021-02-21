@@ -1,22 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { handleGetSettings, handleSaveSettings, hideCookieInfo } from 'settings/store/actions/settingsActions';
+import { AuthState } from '../../auth/store/interfaces/authState';
 import { SettingsState } from '../../settings/store/interfaces/settingsInterfaces';
+import { isCookieConsentVisible } from '../../settings/store/selectors/settingsSelectors';
+import { ErrorComponent } from '../../shared/error/errorComponent/ErrorComponent';
+import { Loader } from '../../shared/loader/Loader';
+import { isCookieConsentAcceptedKey } from '../../shared/settings/initialConfig';
 import { CookiesInfoComponent } from '../component/CookiesInfoComponent';
 import { CookiesInfoContainerProps } from './CookiesInfoContainerProps';
-import { handleSaveSettings, handleGetSettings } from 'settings/store/actions/settingsActions';
-import { AuthState } from '../../auth/store/interfaces/authState';
-import { Loader } from '../../shared/loader/Loader';
-import { ErrorComponent } from '../../shared/error/errorComponent/ErrorComponent';
 
 class CookiesInfoContainer extends Component<CookiesInfoContainerProps> {
   componentDidMount() {
     if (this.props.authState.isLoggedIn) {
       this.props.handleGetSettings();
+    } else {
+      if (localStorage.getItem(isCookieConsentAcceptedKey)) {
+        this.props.hideCookieInfo();
+      }
     }
   }
 
   handleAcceptCookieConsent = () => {
-    this.props.handleSaveSettings({ ...this.props.settingsState.settings, isCookieConsentAccepted: true });
+    if (!this.props.authState.isLoggedIn) {
+      window.localStorage.setItem(isCookieConsentAcceptedKey, JSON.stringify(true));
+      this.props.hideCookieInfo();
+    } else {
+      this.props.handleSaveSettings({ ...this.props.settingsState.settings, isCookieConsentAccepted: true });
+    }
   };
 
   render() {
@@ -26,7 +37,7 @@ class CookiesInfoContainer extends Component<CookiesInfoContainerProps> {
       return <Loader />;
     } else if (settingsState.error) {
       return <ErrorComponent />;
-    } else if (!settingsState.settings.isCookieConsentAccepted) {
+    } else if (isCookieConsentVisible(settingsState)) {
       return (
         <CookiesInfoComponent
           settingsState={this.props.settingsState}
@@ -34,7 +45,7 @@ class CookiesInfoContainer extends Component<CookiesInfoContainerProps> {
         />
       );
     } else {
-      return <></>; // todo - check if needed
+      return null;
     }
   }
 }
@@ -48,6 +59,7 @@ const mapStateToProps = (state: { settings: SettingsState; auth: AuthState }) =>
 const mapDispatchToProps = {
   handleSaveSettings,
   handleGetSettings,
+  hideCookieInfo,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CookiesInfoContainer);

@@ -23,3 +23,5 @@ export const initialConfig: InitialConfig = {
   pomodoroTime: time ? time : 25 * 60 * 1000,
   refreshRate: 1000,
 };
+
+export const isCookieConsentAcceptedKey = 'isCookieConsentAccepted';

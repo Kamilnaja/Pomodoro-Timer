@@ -6,6 +6,7 @@ export const GET_SETTINGS_ERROR = 'GET_SETTINGS_ERROR';
 export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 export const SAVE_SETTINGS_SUCCESS = 'SAVE_SETTINGS_SUCCESS';
 export const SAVE_SETTINGS_ERROR = 'SAVE_SETTINGS_ERROR';
+export const HIDE_COOKIE_INFO = 'HIDE_COOKIE_INFO';
 
 interface GetSettingsAction {
   type: typeof GET_SETTINGS;
@@ -34,10 +35,15 @@ interface SaveSettingsErrorAction {
   payload: Error;
 }
 
+interface HideCookieInfoAction {
+  type: typeof HIDE_COOKIE_INFO;
+}
+
 export type SettingsActionsType =
   | GetSettingsAction
   | GetSettingsSuccessAction
   | GetSettingsErrorAction
   | SaveSettingsAction
   | SaveSettingsSuccessAction
-  | SaveSettingsErrorAction;
+  | SaveSettingsErrorAction
+  | HideCookieInfoAction;

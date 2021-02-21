@@ -4,4 +4,5 @@ export interface SettingsState {
   settings: Settings;
   isLoading: boolean;
   error: any;
+  isCookieAcceptInfoVisible: boolean;
 }

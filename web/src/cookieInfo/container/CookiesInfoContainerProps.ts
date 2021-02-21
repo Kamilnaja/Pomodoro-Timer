@@ -5,6 +5,7 @@ import { SettingsState } from '../../settings/store/interfaces/settingsInterface
 export interface CookiesInfoContainerProps {
   settingsState: SettingsState;
   authState: AuthState;
+  hideCookieInfo: () => void;
   handleSaveSettings: (settings: Settings) => void;
   handleGetSettings: () => void;
 }
