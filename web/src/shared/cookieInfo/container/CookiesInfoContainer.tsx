@@ -32,10 +32,7 @@ class CookiesInfoContainer extends Component<CookiesInfoContainerProps> {
 
   render() {
     const { settingsState } = this.props;
-
-    if (settingsState.isLoading) {
-      return <Loader />;
-    } else if (settingsState.error) {
+    if (settingsState.error) {
       return <ErrorComponent />;
     } else if (isCookieConsentVisible(settingsState)) {
       return (

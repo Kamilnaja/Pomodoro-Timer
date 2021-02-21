@@ -8,9 +8,9 @@ import CookiesInfoContainer from '../../shared/cookieInfo/container/CookiesInfoC
 export const MainComponent = (props: MainComponentProps) => {
   return (
     <div className="app">
-      <CookiesInfoContainer />
       <HeaderContainer handleOpenModal={props.handleOpenModal} isLoggedIn={props.isLoggedIn} />
       <Modal modalType={props.openedModal} closeModal={props.handleCloseModal} />
+      <CookiesInfoContainer />
     </div>
   );
 };

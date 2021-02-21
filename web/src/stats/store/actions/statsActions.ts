@@ -2,6 +2,7 @@ import { Action } from 'redux';
 import { StatsSearchResult } from '../../../../../types/statisticsInterfaces';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
 import { getCurrentDay, getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
+import { createStatsSearchResult } from '../../testing/stats.test.data';
 import {
   SAVE_POMODORO,
   SAVE_POMODORO_ERROR,
@@ -57,7 +58,7 @@ export const handleGetStatsInPeriod = (year: number, month: number) => async (di
   dispatch(getStatisticsInPeriod());
 
   fetchData(`stats/${year}/${month}`)
-    .then((payload: StatsSearchResult) => dispatch(getStatisticsInPeriodSuccess(payload)))
+    .then((payload: StatsSearchResult) => dispatch(getStatisticsInPeriodSuccess(createStatsSearchResult())))
     .catch(err => dispatch(getStatisticsInPeriodError(err)));
 };
 
