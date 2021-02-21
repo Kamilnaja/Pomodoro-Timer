@@ -58,7 +58,7 @@ export const handleGetStatsInPeriod = (year: number, month: number) => async (di
   dispatch(getStatisticsInPeriod());
 
   fetchData(`stats/${year}/${month}`)
-    .then((payload: StatsSearchResult) => dispatch(getStatisticsInPeriodSuccess(createStatsSearchResult())))
+    .then((payload: StatsSearchResult) => dispatch(getStatisticsInPeriodSuccess(payload)))
     .catch(err => dispatch(getStatisticsInPeriodError(err)));
 };
 
