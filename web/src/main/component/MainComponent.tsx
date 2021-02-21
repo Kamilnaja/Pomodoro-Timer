@@ -3,7 +3,7 @@ import HeaderContainer from '../../header/container/HeaderContainer';
 import { MainComponentProps } from './MainComponentProps';
 import './mainComponent.scss';
 import { Modal } from '../../shared/modal/Modal';
-import CookiesInfoContainer from '../../cookieInfo/container/CookiesInfoContainer';
+import CookiesInfoContainer from '../../shared/cookieInfo/container/CookiesInfoContainer';
 
 export const MainComponent = (props: MainComponentProps) => {
   return (

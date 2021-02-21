@@ -1,4 +1,4 @@
-import { SettingsState } from '../../settings/store/interfaces/settingsInterfaces';
+import { SettingsState } from '../../../settings/store/interfaces/settingsInterfaces';
 
 export interface CookiesInfoComponentProps {
   settingsState: SettingsState;
