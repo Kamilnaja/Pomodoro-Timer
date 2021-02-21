@@ -1,4 +1,4 @@
-import { AuthError, ErrorCodes, Login } from '../../../../types/authInterfaces';
+import { AuthError, ErrorCodes, Login, Registration } from '../../../../types/authInterfaces';
 import { AuthState } from '../store/interfaces/authState';
 
 export const createAuthError: AuthError = {
@@ -17,6 +17,12 @@ export const createAuthState = (): AuthState => ({
 export const createLoginData = (): Login => ({
   login: '',
   password: '',
+});
+
+export const createRegistrationData = (): Registration => ({
+  email: 'k@gmail.com',
+  login: 'k',
+  password: 'k',
 });
 
 export const handleSubmit = (data: Login) => {};

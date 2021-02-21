@@ -1,6 +1,8 @@
+import { RootStateOrAny } from 'react-redux';
 import { Action } from 'redux';
-import { config } from 'shared/settings/initialConfig';
+import { ThunkAction } from 'redux-thunk';
 import { AuthError, Login, LoginResponse, Registration } from '../../../../../types/authInterfaces';
+import { updateData } from '../../../shared/scripts/requests';
 import {
   AuthActionsTypes,
   LOGIN,
@@ -12,13 +14,10 @@ import {
   RESET_FORM,
   SET_LOGGED_OUT,
 } from './authActionsTypes';
-import { ThunkAction } from 'redux-thunk';
-import { RootStateOrAny } from 'react-redux';
-import { updateData } from '../../../shared/scripts/requests';
 
 const localStorageKey = 'token';
 
-const register = (payload: Registration): AuthActionsTypes => ({
+export const register = (payload: Registration): AuthActionsTypes => ({
   type: REGISTER,
   payload,
 });
@@ -32,12 +31,12 @@ const registerError = (error: any): AuthActionsTypes => ({
   payload: error,
 });
 
-const login = (payload: Login): AuthActionsTypes => ({
+export const login = (payload: Login): AuthActionsTypes => ({
   type: LOGIN,
   payload,
 });
 
-const loginSuccess = (payload: string): AuthActionsTypes => ({
+export const loginSuccess = (payload: string): AuthActionsTypes => ({
   type: LOGIN_SUCCESS,
   payload,
 });
@@ -51,7 +50,7 @@ export const resetForm = (): Action => ({
   type: RESET_FORM,
 });
 
-const setLoggedOut = (): Action => ({
+export const setLoggedOut = (): Action => ({
   type: SET_LOGGED_OUT,
 });
 
@@ -72,7 +71,7 @@ export const sendRegisterForm = (
     });
 };
 
-export const sendLoginForm = (formData: Login) => async (dispatch: (action: Action<any>) => void) => {
+export const sendLoginForm = (formData: Login) => async (dispatch: (action: AuthActionsTypes) => void) => {
   dispatch(login(formData));
 
   updateData('auth/login', formData, 'POST')
@@ -85,11 +84,11 @@ export const sendLoginForm = (formData: Login) => async (dispatch: (action: Acti
     });
 };
 
-export const setUserIsLoggedIn = () => (dispatch: (action: Action<any>) => void) => {
+export const setUserIsLoggedIn = () => (dispatch: (action: AuthActionsTypes) => void) => {
   const token = localStorage.getItem(localStorageKey);
 
   if (token) {
-    dispatch(loginSuccess(token));
+    return dispatch(loginSuccess(token));
   }
 };
 
@@ -98,5 +97,5 @@ export const setUserIsLoggedOut = (): ThunkAction<void, RootStateOrAny, unknown,
 ) => {
   localStorage.removeItem(localStorageKey);
 
-  return dispatch(setLoggedOut());
+  dispatch(setLoggedOut());
 };

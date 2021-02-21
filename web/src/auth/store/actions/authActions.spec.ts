@@ -1,11 +1,8 @@
 import { Action } from 'redux';
+import { createLoginData, createRegistrationData } from '../../testing/auth.testing.data';
 import * as actions from './authActions';
-import { setUserIsLoggedOut } from './authActions';
+import { login, register, setLoggedOut, setUserIsLoggedOut } from './authActions';
 import { RESET_FORM } from './authActionsTypes';
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-
-const mockStore = configureMockStore([thunk]);
 
 describe('actions', () => {
   it('should create an auth action', () => {
@@ -16,13 +13,39 @@ describe('actions', () => {
     expect(actions.resetForm()).toEqual(expectedAction);
   });
 
-  it('should remove token on logging out', async () => {
-    const store = mockStore();
-    jest.spyOn(window.localStorage.__proto__, 'removeItem');
+  it('should sendRegisterForm', () => {
+    const dispatch = jest.fn();
 
-    window.localStorage.__proto__.removeItem = jest.fn();
-    setUserIsLoggedOut();
-    store.dispatch();
-    expect(localStorage.removeItem).toHaveBeenCalled();
+    actions.sendRegisterForm(createRegistrationData())(dispatch, null, null);
+
+    expect(dispatch).toHaveBeenCalledWith(register(createRegistrationData()));
+  });
+
+  it('should sendLoginForm', () => {
+    jest.spyOn(localStorage.__proto__, 'setItem');
+
+    const dispatch = jest.fn();
+    actions.sendLoginForm(createLoginData())(dispatch);
+
+    // expect(localStorage.setItem).toHaveBeenCalledWith('token');
+    expect(dispatch).toHaveBeenCalledWith(login(createLoginData()));
+  });
+
+  it('should get token on logging in', () => {
+    jest.spyOn(localStorage.__proto__, 'getItem').mockReturnValue('hello');
+    const dispatch = jest.fn();
+    actions.setUserIsLoggedIn()(dispatch);
+
+    expect(localStorage.getItem).toHaveBeenCalledWith('token');
+    expect(dispatch).toHaveBeenCalledWith(actions.loginSuccess('hello'));
+  });
+
+  it('should remove token on logging out', () => {
+    jest.spyOn(localStorage.__proto__, 'removeItem');
+    const dispatch = jest.fn();
+    setUserIsLoggedOut()(dispatch, null, null);
+
+    expect(localStorage.removeItem).toHaveBeenCalledWith('token');
+    expect(dispatch).toHaveBeenCalledWith(setLoggedOut());
   });
 });
