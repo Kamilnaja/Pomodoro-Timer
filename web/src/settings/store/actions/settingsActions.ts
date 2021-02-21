@@ -1,6 +1,7 @@
 import { Action } from 'redux';
 import { Settings } from '../../../../../types/settingsInterface';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
+import { isCookieConsentAcceptedKey } from '../../../shared/settings/initialConfig';
 import {
   GET_SETTINGS,
   GET_SETTINGS_ERROR,
@@ -46,8 +47,9 @@ export const hideCookieInfo = (): SettingsActionsType => ({
 export const handleGetSettings = () => (dispatch: (action: SettingsActionsType) => void) => {
   dispatch(getSettings());
 
-  fetchData(`settings`)
+  fetchData('settings')
     .then((payload: Settings) => {
+      localStorage.setItem(isCookieConsentAcceptedKey, JSON.stringify(payload.isCookieConsentAccepted));
       dispatch(getSettingsSuccess(payload));
     })
     .catch(error => {
