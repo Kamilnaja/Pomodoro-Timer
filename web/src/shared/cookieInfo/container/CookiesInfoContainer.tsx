@@ -5,7 +5,6 @@ import { AuthState } from '../../../auth/store/interfaces/authState';
 import { SettingsState } from '../../../settings/store/interfaces/settingsInterfaces';
 import { isCookieConsentVisible } from '../../../settings/store/selectors/settingsSelectors';
 import { ErrorComponent } from '../../error/errorComponent/ErrorComponent';
-import { Loader } from '../../loader/Loader';
 import { isCookieConsentAcceptedKey } from '../../settings/initialConfig';
 import { CookiesInfoComponent } from '../component/CookiesInfoComponent';
 import { CookiesInfoContainerProps } from './CookiesInfoContainerProps';
