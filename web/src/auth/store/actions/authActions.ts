@@ -12,6 +12,9 @@ import {
   RESET_FORM,
   SET_LOGGED_OUT,
 } from './authActionsTypes';
+import { ThunkAction } from 'redux-thunk';
+import { RootStateOrAny } from 'react-redux';
+import { updateData } from '../../../shared/scripts/requests';
 
 const localStorageKey = 'token';
 
@@ -53,10 +56,14 @@ const setLoggedOut = (): Action => ({
 });
 
 // thunk
-export const sendRegisterForm = (formData: Registration) => (dispatch: (action: AuthActionsTypes) => void) => {
+export const sendRegisterForm = (
+  formData: Registration,
+): ThunkAction<void, RootStateOrAny, unknown, Action<AuthActionsTypes>> => (
+  dispatch: (action: AuthActionsTypes) => void,
+) => {
   dispatch(register(formData));
 
-  makeRegisterRequest(formData)
+  updateData('auth/register', formData, 'POST')
     .then(() => {
       dispatch(registerSuccess());
     })
@@ -65,24 +72,10 @@ export const sendRegisterForm = (formData: Registration) => (dispatch: (action: 
     });
 };
 
-const makeRegisterRequest = async (formData: Registration) => {
-  const response: Response = await fetch(`${config.url.API_URL}/auth/register`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(formData),
-  });
-
-  const responseBody = await response.json();
-
-  return response.ok ? Promise.resolve(responseBody) : Promise.reject(responseBody);
-};
-
 export const sendLoginForm = (formData: Login) => async (dispatch: (action: Action<any>) => void) => {
   dispatch(login(formData));
 
-  makeLoginRequest(formData)
+  updateData('auth/login', formData, 'POST')
     .then((response: LoginResponse) => {
       localStorage.setItem(localStorageKey, response.token);
       dispatch(loginSuccess(response.token));
@@ -90,20 +83,6 @@ export const sendLoginForm = (formData: Login) => async (dispatch: (action: Acti
     .catch((response: AuthError) => {
       dispatch(loginError(response));
     });
-};
-
-const makeLoginRequest = async (formData: Login) => {
-  const response: Response = await fetch(`${config.url.API_URL}/auth/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(formData),
-  });
-
-  const requestBody = await response.json();
-
-  return response.ok ? Promise.resolve(requestBody) : Promise.reject(requestBody);
 };
 
 export const setUserIsLoggedIn = () => (dispatch: (action: Action<any>) => void) => {
@@ -114,8 +93,10 @@ export const setUserIsLoggedIn = () => (dispatch: (action: Action<any>) => void)
   }
 };
 
-export const setUserIsLoggedOut = () => (dispatch: (action: AuthActionsTypes) => void) => {
+export const setUserIsLoggedOut = (): ThunkAction<void, RootStateOrAny, unknown, Action<AuthActionsTypes>> => (
+  dispatch: (action: AuthActionsTypes) => void,
+) => {
   localStorage.removeItem(localStorageKey);
 
-  dispatch(setLoggedOut());
+  return dispatch(setLoggedOut());
 };
