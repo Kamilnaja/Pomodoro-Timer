@@ -15,7 +15,7 @@ export const fetchData = async (url: string): Promise<any> => {
 
 export const updateData = async (url: string, payload: any, method: 'PUT' | 'POST'): Promise<any> => {
   const token = store.getState().auth.token;
-  const response = await fetch(`${config.url.API_URL}/${url}/`, {
+  const response = await fetch(`${config.url.API_URL}/${url}`, {
     method,
     headers: {
       Authorization: `Bearer ${token}`,

@@ -3,6 +3,6 @@ import { authenticateJWT } from '../../services/auth.service';
 import { handleGetSettings, handlePostSettings } from '../../services/settings.service';
 
 const router: Router = express.Router();
-router.route('/').get(authenticateJWT, handleGetSettings).post(authenticateJWT, handlePostSettings);
+router.route('/').get(authenticateJWT, handleGetSettings).put(authenticateJWT, handlePostSettings);
 
 export default router;

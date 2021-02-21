@@ -6,8 +6,6 @@ import { Response } from 'express-serve-static-core';
 import pool from '../db/db';
 
 export const handleGetSettings = async (req: Request<{}>, res: Response, next: NextFunction) => {
-  console.log('wchodzi ');
-
   const userId = req.user.id;
   await searchSettingsInDb(userId.toString(), res, next);
 };
@@ -47,4 +45,14 @@ export const initSettings = async (userId: string, res: Response<Settings>, next
   }
 };
 
-export const handlePostSettings = (req: Request<{}>, res: Response, next: NextFunction) => {};
+export const handlePostSettings = async (req: Request<Settings>, res: Response, next: NextFunction) => {
+  const sql = `UPDATE settings SET is_cookie_consent_accepted = ($1), is_sound_enabled = ($2) WHERE user_id = ($3)`;
+  const { isCookieConsentAccepted, isSoundEnabled } = req.body;
+  try {
+    await pool.query(sql, [isCookieConsentAccepted, isSoundEnabled, req.user.id]);
+    res.status(200).send({});
+  } catch (err: any) {
+    console.log('error while saving settings');
+    next(err);
+  }
+};

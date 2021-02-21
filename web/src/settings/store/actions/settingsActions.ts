@@ -54,10 +54,6 @@ export const handleSaveSettings = (settings: Settings) => (dispatch: (action: Se
   dispatch(saveSettings());
 
   updateData(`settings`, settings, 'PUT')
-    .then(() => {
-      dispatch(saveSettingsSuccess());
-    })
-    .catch((error: any) => {
-      dispatch(saveSettingsError(error));
-    });
+    .then(() => dispatch(saveSettingsSuccess()))
+    .catch((error: any) => dispatch(saveSettingsError(error)));
 };
