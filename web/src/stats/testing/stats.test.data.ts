@@ -1,4 +1,3 @@
-import { create } from 'react-test-renderer';
 import { PomodorosDoneInDay } from '../../../../types/statisticsInterfaces';
 import { StatsState } from '../store/models/StatsInterfaces';
 
