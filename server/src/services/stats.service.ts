@@ -18,7 +18,7 @@ export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | 
   }
 };
 
-const groupAndOrder = 'GROUP BY date ORDER BY date DESC';
+const groupAndOrder = 'GROUP BY date(date) ORDER BY date(date) DESC';
 
 export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<StatsSearchResult>, next: NextFunction) => {
   const userId = req.user.id;
@@ -55,7 +55,7 @@ const searchResultsInDb = async (
   res: Response<StatsSearchResult>,
   next: NextFunction,
 ) => {
-  const sql = `SELECT TO_CHAR(date, 'DD-MM-YYYY') as date, 
+  const sql = `SELECT date(date) as date, 
      COUNT (date) 
      FROM pomodoros 
      WHERE user_id = ($1) AND TO_CHAR(date, ($2)) = ($3) ${groupAndOrder}`;
