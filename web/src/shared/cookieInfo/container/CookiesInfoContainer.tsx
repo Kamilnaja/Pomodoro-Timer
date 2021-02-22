@@ -3,26 +3,25 @@ import { connect } from 'react-redux';
 import { handleGetSettings, handleSaveSettings, hideCookieInfo } from 'settings/store/actions/settingsActions';
 import { AuthState } from '../../../auth/store/interfaces/authState';
 import { SettingsState } from '../../../settings/store/interfaces/settingsInterfaces';
-import { isCookieConsentVisible } from '../../../settings/store/selectors/settingsSelectors';
+import {
+  isCookieConsentAcceptationSavedInStorage,
+  isCookieConsentVisible,
+} from '../../../settings/store/selectors/settingsSelectors';
 import { ErrorComponent } from '../../error/errorComponent/ErrorComponent';
-import { isCookieConsentAcceptedKey } from '../../settings/initialConfig';
+import { cookieConsentAcceptationKey } from '../../settings/initialConfig';
 import { CookiesInfoComponent } from '../component/CookiesInfoComponent';
 import { CookiesInfoContainerProps } from './CookiesInfoContainerProps';
 
 class CookiesInfoContainer extends Component<CookiesInfoContainerProps> {
   componentDidMount() {
-    if (this.props.authState.isLoggedIn) {
+    if (this.props.authState.isLoggedIn && !isCookieConsentAcceptationSavedInStorage()) {
       this.props.handleGetSettings();
-    } else {
-      if (JSON.parse(localStorage.getItem(isCookieConsentAcceptedKey))) {
-        this.props.hideCookieInfo();
-      }
     }
   }
 
   handleAcceptCookieConsent = () => {
     if (!this.props.authState.isLoggedIn) {
-      window.localStorage.setItem(isCookieConsentAcceptedKey, JSON.stringify(true));
+      window.localStorage.setItem(cookieConsentAcceptationKey, JSON.stringify(true));
       this.props.hideCookieInfo();
     } else {
       this.props.handleSaveSettings({ ...this.props.settingsState.settings, isCookieConsentAccepted: true });
