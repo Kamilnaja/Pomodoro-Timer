@@ -1,40 +1,32 @@
-import React from 'react';
 import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
-import MainContainer from './MainContainer';
 import thunk from 'redux-thunk';
-import { CounterState } from '../../pomodoroCounter/store/enums/CounterState';
-const mockStore = configureStore([thunk]);
+import CookiesInfoContainer from './CookiesInfoContainer';
 
-describe('MainContainer', () => {
+describe('CookiesInfoContainer', () => {
   let store;
   let component: renderer.ReactTestRenderer;
+  const mockStore = configureStore([thunk]);
 
   beforeEach(() => {
     store = mockStore({
-      auth: {
-        isLoggedIn: true,
-      },
-      pomodoroCounter: {
-        counterState: CounterState.RUNNING,
-      },
-      stats: {
-        isLoading: false,
-      },
       settings: {
         error: '',
+      },
+      auth: {
+        isLoggedIn: false,
       },
     });
 
     component = renderer.create(
       <Provider store={store}>
-        <MainContainer />
+        <CookiesInfoContainer />
       </Provider>,
     );
   });
 
-  it('Should match the snapshot', () => {
+  it('should match snapshot', () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 });

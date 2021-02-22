@@ -47,8 +47,9 @@ export const hideCookieInfo = (): SettingsActionsType => ({
 export const handleGetSettings = () => (dispatch: (action: SettingsActionsType) => void) => {
   dispatch(getSettings());
 
-  fetchData(`settings`)
+  fetchData('settings')
     .then((payload: Settings) => {
+      localStorage.setItem(isCookieConsentAcceptedKey, JSON.stringify(payload.isCookieConsentAccepted));
       dispatch(getSettingsSuccess(payload));
       window.localStorage.setItem(isCookieConsentAcceptedKey, JSON.stringify(payload.isCookieConsentAccepted));
     })

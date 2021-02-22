@@ -1,6 +1,13 @@
 import { initialConfig } from '../../../shared/settings/initialConfig';
-import { ActionWithPayload } from '../../../store/interfaces/actions/actionInterface';
-import { PomodoroCounterActions } from '../actions/pomodoroCounterAction';
+import {
+  END,
+  PAUSE,
+  PomodoroCounterActionsTypes,
+  RUN,
+  SET_MODE_BREAK,
+  SET_MODE_POMODORO,
+  UPDATE_TIME,
+} from '../actions/pomodoroCounterActionTypes';
 import { CounterState } from '../enums/CounterState';
 import { CurrentTimer, PomodoroCounterState } from '../interfaces/PomodoroCounterState';
 
@@ -12,36 +19,36 @@ export const timerState: PomodoroCounterState = {
 
 export const pomodoroCounterReducer = (
   state: PomodoroCounterState = timerState,
-  action: ActionWithPayload<PomodoroCounterActions, number | null>,
+  action: PomodoroCounterActionsTypes,
 ): PomodoroCounterState => {
   switch (action.type) {
-    case PomodoroCounterActions.RUN:
+    case RUN:
       return {
         ...state,
         counterState: CounterState.RUNNING,
       };
-    case PomodoroCounterActions.PAUSE:
+    case PAUSE:
       return {
         ...state,
         counterState: CounterState.PAUSE,
       };
-    case PomodoroCounterActions.END:
+    case END:
       return {
         ...state,
         counterState: CounterState.END,
       };
-    case PomodoroCounterActions.UPDATE_TIME:
+    case UPDATE_TIME:
       return {
         ...state,
         counterTime: action.payload,
       };
-    case PomodoroCounterActions.SET_MODE_POMODORO:
+    case SET_MODE_POMODORO:
       return {
         ...state,
         currentTimer: CurrentTimer.POMODORO,
         counterTime: initialConfig.pomodoroTime,
       };
-    case PomodoroCounterActions.SET_MODE_BREAK:
+    case SET_MODE_BREAK:
       return {
         ...state,
         currentTimer: CurrentTimer.SHORT_BREAK,

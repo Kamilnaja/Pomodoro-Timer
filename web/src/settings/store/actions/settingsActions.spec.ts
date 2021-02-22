@@ -1,11 +1,19 @@
 import { createError, createSettings } from '../../testing/settings.test.data';
 import * as actions from './settingsActions';
-import { SettingsActionsType } from './settingsActionsTypes';
+import {
+  GET_SETTINGS,
+  GET_SETTINGS_ERROR,
+  GET_SETTINGS_SUCCESS,
+  SAVE_SETTINGS,
+  SAVE_SETTINGS_ERROR,
+  SAVE_SETTINGS_SUCCESS,
+  SettingsActionsType,
+} from './settingsActionsTypes';
 
 describe('settingsActions', () => {
   it('should return getSettings', () => {
     const expectedAction: SettingsActionsType = {
-      type: 'GET_SETTINGS',
+      type: GET_SETTINGS,
     };
 
     expect(actions.getSettings()).toEqual(expectedAction);
@@ -15,7 +23,7 @@ describe('settingsActions', () => {
     const payload = createSettings();
 
     const expectedAction: SettingsActionsType = {
-      type: 'GET_SETTINGS_SUCCESS',
+      type: GET_SETTINGS_SUCCESS,
       payload,
     };
 
@@ -25,7 +33,7 @@ describe('settingsActions', () => {
   it('should return getSettingsError', () => {
     const payload = createError();
     const expectedAction: SettingsActionsType = {
-      type: 'GET_SETTINGS_ERROR',
+      type: GET_SETTINGS_ERROR,
       payload,
     };
 
@@ -33,19 +41,16 @@ describe('settingsActions', () => {
   });
 
   it('should return saveSettings', () => {
-    const payload = createSettings();
-
     const expectedAction: SettingsActionsType = {
-      type: 'SAVE_SETTINGS',
-      payload,
+      type: SAVE_SETTINGS,
     };
 
-    expect(actions.saveSettings(payload)).toEqual(expectedAction);
+    expect(actions.saveSettings()).toEqual(expectedAction);
   });
 
   it('should return saveSettingsSuccess', () => {
     const expectedAction: SettingsActionsType = {
-      type: 'SAVE_SETTINGS_SUCCESS',
+      type: SAVE_SETTINGS_SUCCESS,
     };
 
     expect(actions.saveSettingsSuccess()).toEqual(expectedAction);
@@ -55,7 +60,7 @@ describe('settingsActions', () => {
     const payload = createError();
 
     const expectedAction: SettingsActionsType = {
-      type: 'SAVE_SETTINGS_ERROR',
+      type: SAVE_SETTINGS_ERROR,
       payload,
     };
 
