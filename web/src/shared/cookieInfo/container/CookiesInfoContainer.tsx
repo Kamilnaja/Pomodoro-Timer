@@ -14,7 +14,7 @@ class CookiesInfoContainer extends Component<CookiesInfoContainerProps> {
     if (this.props.authState.isLoggedIn) {
       this.props.handleGetSettings();
     } else {
-      if (localStorage.getItem(isCookieConsentAcceptedKey)) {
+      if (JSON.parse(localStorage.getItem(isCookieConsentAcceptedKey))) {
         this.props.hideCookieInfo();
       }
     }

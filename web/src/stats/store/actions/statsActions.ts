@@ -2,16 +2,15 @@ import { Action } from 'redux';
 import { StatsSearchResult } from '../../../../../types/statisticsInterfaces';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
 import { getCurrentDay, getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
-import { createStatsSearchResult } from '../../testing/stats.test.data';
 import {
+  GET_STATISTIC_IN_PERIOD,
+  GET_STATISTIC_IN_PERIOD_ERROR,
+  GET_STATISTIC_IN_PERIOD_SUCCESS,
+  GET_TODAY_STATS,
+  GET_TODAY_STATS_ERROR,
+  GET_TODAY_STATS_SUCCESS,
   SAVE_POMODORO,
   SAVE_POMODORO_ERROR,
-  GET_STATISTIC_IN_PERIOD,
-  GET_STATISTIC_IN_PERIOD_SUCCESS,
-  GET_STATISTIC_IN_PERIOD_ERROR,
-  GET_TODAY_STATS,
-  GET_TODAY_STATS_SUCCESS,
-  GET_TODAY_STATS_ERROR,
   StatsActionsTypes,
 } from './statsActionsTypes';
 
@@ -58,7 +57,7 @@ export const handleGetStatsInPeriod = (year: number, month: number) => async (di
   dispatch(getStatisticsInPeriod());
 
   fetchData(`stats/${year}/${month}`)
-    .then((payload: StatsSearchResult) => dispatch(getStatisticsInPeriodSuccess(createStatsSearchResult())))
+    .then((payload: StatsSearchResult) => dispatch(getStatisticsInPeriodSuccess(payload)))
     .catch(err => dispatch(getStatisticsInPeriodError(err)));
 };
 

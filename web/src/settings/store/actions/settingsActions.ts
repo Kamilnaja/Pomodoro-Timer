@@ -51,6 +51,7 @@ export const handleGetSettings = () => (dispatch: (action: SettingsActionsType) 
     .then((payload: Settings) => {
       localStorage.setItem(isCookieConsentAcceptedKey, JSON.stringify(payload.isCookieConsentAccepted));
       dispatch(getSettingsSuccess(payload));
+      window.localStorage.setItem(isCookieConsentAcceptedKey, JSON.stringify(payload.isCookieConsentAccepted));
     })
     .catch(error => {
       dispatch(getSettingsError(error));
