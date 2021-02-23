@@ -2,6 +2,7 @@ import Table from 'react-bootstrap/Table';
 import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
 import './stats.component.scss';
 import { StatsComponentProps } from './StatsComponentProps';
+import { LineChart, Line } from 'recharts';
 
 let pageMonth = getCurrentMonth();
 let pageYear = getCurrentYear();
@@ -33,8 +34,15 @@ export const StatsComponent = (props: StatsComponentProps) => {
     return getCurrentYear() <= pageYear && getCurrentMonth() <= pageMonth;
   };
 
+  const renderLineChart = (
+    <LineChart width={600} height={300} data={props.stats}>
+      <Line type="monotone" dataKey="count" stroke="#8884d8" />
+    </LineChart>
+  );
+
   return (
     <div className="stats">
+      {/* {renderLineChart} */}
       <div className="stats__navigation navigation">
         <button className="navigation__button" onClick={() => getPreviousMonth()}>
           &lt; prev
