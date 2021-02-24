@@ -19,6 +19,9 @@ export interface TodayStats {
   result: number;
 }
 
-export interface StatsSearchResult extends SearchResult<PomodorosDoneInDay[]> {}
+export interface StatsSearchResult {
+  pomodoros: PomodorosDoneInDay[];
+  accountActiveFrom: Date;
+}
 
 export interface TodayStatsResult extends SearchResult<number> {}

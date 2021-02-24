@@ -1,4 +1,4 @@
-import Table from 'react-bootstrap/Table';
+import { Table, Button, ButtonGroup } from 'react-bootstrap';
 import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
 import './stats.component.scss';
 import { StatsComponentProps } from './StatsComponentProps';
@@ -30,8 +30,10 @@ export const StatsComponent = (props: StatsComponentProps) => {
     props.handleGetStats(pageYear, pageMonth);
   };
 
-  const shouldShowNextMonth = (): boolean => {
-    return getCurrentYear() <= pageYear && getCurrentMonth() <= pageMonth;
+  const shouldShowNextMonth = (): boolean => getCurrentYear() <= pageYear && getCurrentMonth() <= pageMonth;
+
+  const shouldShowPreviousMonth = (): boolean => {
+    return true;
   };
 
   const renderLineChart = (
@@ -43,14 +45,14 @@ export const StatsComponent = (props: StatsComponentProps) => {
   return (
     <div className="stats">
       {/* {renderLineChart} */}
-      <div className="stats__navigation navigation">
-        <button className="navigation__button" onClick={() => getPreviousMonth()}>
+      <ButtonGroup className="stats__navigation navigation">
+        <Button className="navigation__button" onClick={() => getPreviousMonth()}>
           &lt; prev
-        </button>
-        <button className="navigation__button" onClick={() => getNextMonth()} disabled={shouldShowNextMonth()}>
+        </Button>
+        <Button className="navigation__button" onClick={() => getNextMonth()} disabled={shouldShowNextMonth()}>
           next &gt;
-        </button>
-      </div>
+        </Button>
+      </ButtonGroup>
       <Table className="stats__table table">
         <caption>
           Results from: {pageMonth + 1}.{pageYear}

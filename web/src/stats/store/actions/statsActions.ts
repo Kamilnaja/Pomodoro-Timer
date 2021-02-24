@@ -66,7 +66,7 @@ export const handleGetTodayStats = () => async (dispatch: (args: Action) => void
 
   fetchData(`stats/${getCurrentYear()}/${getCurrentMonth()}/${getCurrentDay()}`)
     .then((payload: StatsSearchResult) =>
-      dispatch(getTodayStatsSuccess(payload.result[0] ? payload.result[0].count : 0)),
+      dispatch(getTodayStatsSuccess(payload.pomodoros[0] ? payload.pomodoros[0].count : 0)),
     )
     .catch(err => dispatch(getTodayStatsError(err)));
 };
