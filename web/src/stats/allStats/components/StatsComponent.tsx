@@ -46,7 +46,7 @@ export const StatsComponent = (props: StatsComponentProps) => {
     <div className="stats">
       {/* {renderLineChart} */}
       <ButtonGroup className="stats__navigation navigation">
-        <Button className="navigation__button" onClick={() => getPreviousMonth()}>
+        <Button className="navigation__button" onClick={() => getPreviousMonth()} disabled={shouldShowPreviousMonth()}>
           &lt; prev
         </Button>
         <Button className="navigation__button" onClick={() => getNextMonth()} disabled={shouldShowNextMonth()}>

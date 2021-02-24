@@ -17,6 +17,7 @@ export const initialState: StatsState = {
   error: '',
   results: [],
   todayResults: 0,
+  accountActiveFrom: null,
 };
 
 export const statsReducer = (state = initialState, action: StatsActionsTypes) => {
@@ -47,6 +48,7 @@ export const statsReducer = (state = initialState, action: StatsActionsTypes) =>
         ...state,
         isLoading: false,
         results: action.payload.pomodoros,
+        accountActiveFrom: action.payload.accountActiveFrom,
       };
     case GET_STATISTIC_IN_PERIOD_ERROR:
       return {
