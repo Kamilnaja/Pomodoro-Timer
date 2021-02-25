@@ -4,6 +4,7 @@ import { StatsSearchResult } from '../../../types/statisticsInterfaces';
 import { Request } from '../models/auth/request.interface';
 import { isDateError, normalizeMonth } from '../utils/service.util';
 import { pool } from '../db/client';
+import { Query, QueryConfig } from 'pg';
 
 export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | {}>, next: NextFunction) => {
   const sql = 'INSERT INTO pomodoros (user_id, date) VALUES ($1, $2)';
@@ -55,19 +56,24 @@ const searchResultsInDb = async (
   res: Response<StatsSearchResult>,
   next: NextFunction,
 ) => {
-  const sql = `SELECT date(pomodoros.date), 
-     COUNT (date) 
-     FROM pomodoros 
-     INNER JOIN users 
-     on pomodoros.user_id = users.id
-     WHERE user_id = ($1) AND TO_CHAR(date, ($2)) = ($3)
-     ${groupAndOrder}`;
+  const query: QueryConfig = {
+    text: `SELECT date(pomodoros.date), 
+    COUNT (date) 
+    FROM pomodoros 
+    INNER JOIN users 
+    on pomodoros.user_id = users.id
+    WHERE user_id = ($1) AND TO_CHAR(date, ($2)) = ($3)
+    ${groupAndOrder}`,
+    values: [userId.toString(), dateFormat, date],
+  };
 
   try {
-    const queryResult = await pool.query(sql, [userId.toString(), dateFormat, date]);
+    const queryResult = await pool.query(query);
 
     res.json({
-      pomodoros: queryResult.rows.map(item => (({ date, count }) => ({ date, count }))(item)),
+      pomodoros: queryResult.rows,
+      hasNextPeriod: true,
+      hasPreviousPeriod: true,
     });
   } catch (err) {
     console.log(`err fetching getStatsInGivenMonth ${err}`);
