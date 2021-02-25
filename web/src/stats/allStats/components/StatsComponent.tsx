@@ -29,9 +29,9 @@ export const StatsComponent = (props: StatsComponentProps) => {
 
     props.handleGetStats(pageYear, pageMonth);
   };
-
+  // todo - remove
   const shouldShowNextMonth = (): boolean => getCurrentYear() <= pageYear && getCurrentMonth() <= pageMonth;
-
+  // todo - remove
   const shouldShowPreviousMonth = (): boolean => {
     return true;
   };
