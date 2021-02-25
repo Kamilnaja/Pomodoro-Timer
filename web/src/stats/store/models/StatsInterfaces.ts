@@ -1,9 +1,9 @@
-import { PomodorosDoneInDay } from '../../../../../types/statisticsInterfaces';
+import { StatsSearchResult } from '../../../../../types/statisticsInterfaces';
 
 export interface StatsState {
   isLoading: boolean;
   error: string;
-  results: PomodorosDoneInDay[];
+  results: StatsSearchResult;
   todayResults: number;
 }
 
