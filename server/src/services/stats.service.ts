@@ -57,7 +57,7 @@ const searchResultsInDb = async (
   next: NextFunction,
 ) => {
   const query: QueryConfig = {
-    text: `SELECT date(pomodoros.date), 
+    text: `SELECT date(pomodoros.date), users.date_created,
     COUNT (date) 
     FROM pomodoros 
     INNER JOIN users on pomodoros.user_id = users.id
@@ -68,11 +68,22 @@ const searchResultsInDb = async (
 
   try {
     const queryResult = await pool.query(query);
+    const today = new Date();
+    const dateCreated: Date = queryResult.rows[0].date_created;
+
+    const searchedYear = Number(date.split('-')[0]);
+    const searchedMonth = Number(date.split('-')[1]);
+
+    const shouldShowNextPeriod = (): boolean =>
+      today.getFullYear() <= searchedYear && today.getMonth() <= searchedMonth;
+
+    const shouldShowPreviousPeriod = (): boolean =>
+      dateCreated.getFullYear() >= searchedYear && dateCreated.getMonth() + 1 >= searchedMonth;
 
     res.json({
-      pomodoros: queryResult.rows,
-      hasNextPeriod: true,
-      hasPreviousPeriod: true,
+      pomodoros: queryResult.rows.map(({ date, count }) => ({ date, count })),
+      hasNextPeriod: shouldShowNextPeriod(),
+      hasPreviousPeriod: shouldShowPreviousPeriod(),
     });
   } catch (err) {
     console.log(`err fetching getStatsInGivenMonth ${err}`);
