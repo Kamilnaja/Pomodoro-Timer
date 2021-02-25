@@ -14,7 +14,7 @@ class StatsContainer extends React.Component<StatsContainerProps> {
   }
 
   render = () => {
-    if (this.props.stats.isLoading) {
+    if (this.props.stats.isLoading || this.props.stats.results == null) {
       return <Loader />;
     } else if (this.props.stats.error) {
       return <ErrorComponent />;
