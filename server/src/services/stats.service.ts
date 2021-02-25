@@ -55,7 +55,7 @@ const searchResultsInDb = async (
   res: Response<StatsSearchResult>,
   next: NextFunction,
 ) => {
-  const sql = `SELECT date(pomodoros.date), users.date_created, 
+  const sql = `SELECT date(pomodoros.date), 
      COUNT (date) 
      FROM pomodoros 
      INNER JOIN users 
@@ -68,7 +68,6 @@ const searchResultsInDb = async (
 
     res.json({
       pomodoros: queryResult.rows.map(item => (({ date, count }) => ({ date, count }))(item)),
-      accountActiveFrom: queryResult.rows[0]?.date_created,
     });
   } catch (err) {
     console.log(`err fetching getStatsInGivenMonth ${err}`);
