@@ -1,5 +1,5 @@
-import client from './client';
 import { TableQuery } from '../models/db/TableQuery';
+import { pool } from './client';
 const createTableSql = 'CREATE TABLE IF NOT EXISTS';
 
 const queries: TableQuery[] = [
@@ -54,7 +54,7 @@ const queries: TableQuery[] = [
 ];
 
 queries.forEach((tableQuery: TableQuery) => {
-  client.query(`${createTableSql} ${tableQuery.query}`, (err: Error) => {
+  pool.query(`${createTableSql} ${tableQuery.query}`, (err: Error) => {
     if (err) {
       console.log(`error while creating db: ${err.message}`);
     } else {
@@ -62,5 +62,3 @@ queries.forEach((tableQuery: TableQuery) => {
     }
   });
 });
-
-export default client;

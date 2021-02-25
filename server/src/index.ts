@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import path from 'path';
 import route from './routes/route';
 import * as dotenv from 'dotenv';
+import './db/db';
 
 dotenv.config();
 

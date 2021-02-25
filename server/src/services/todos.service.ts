@@ -1,7 +1,7 @@
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import { TaskRequestBody, TaskSearchResults } from '../../../types/tasksAndNotesInterfaces';
-import client from '../db/db';
+import { pool } from '../db/client';
 import { Request as RequestWithBody } from '../models/auth/request.interface';
 
 export const getTodos = async (req: RequestWithBody<{}>, res: Response<TaskSearchResults>, next: NextFunction) => {
@@ -19,7 +19,7 @@ export const handleSelectTodos = async (sql: string, req: any, res: any, next: N
   const userId = req.user.id;
 
   try {
-    const queryResult = await client.query(sql, [userId]);
+    const queryResult = await pool.query(sql, [userId]);
     res.json({ result: queryResult.rows });
   } catch (err) {
     console.log(`error while get request:  ${err}`);
@@ -35,7 +35,7 @@ export const handleAddTodo = async (req: RequestWithBody<TaskRequestBody>, res: 
   const sqlSubtasks = `INSERT INTO subtasks (title, note, parent_task_id) VALUES ($1, $2, $3)`;
 
   try {
-    await client.query(sql, [title, note, isDone, userId]);
+    await pool.query(sql, [title, note, isDone, userId]);
     res.json({});
   } catch (err) {
     console.log(`Error when inserting todo: ${err}`);
@@ -44,7 +44,7 @@ export const handleAddTodo = async (req: RequestWithBody<TaskRequestBody>, res: 
 
   for (const item of subtasks) {
     try {
-      await client.query(sqlSubtasks, [item.title, item.note, new Date(), item.isDone, item.parentId]);
+      await pool.query(sqlSubtasks, [item.title, item.note, new Date(), item.isDone, item.parentId]);
       res.json({});
     } catch (err) {
       console.log(`Error when inserting todo: ${err}`);
@@ -63,7 +63,7 @@ export const handleEditTodo = async (req: RequestWithBody<TaskRequestBody>, res:
     WHERE userid = ($5) AND id = ($6)`;
 
   try {
-    await client.query(sql, [title, note, new Date(), isDone, userId, id]);
+    await pool.query(sql, [title, note, new Date(), isDone, userId, id]);
     res.json({});
   } catch (err) {
     console.log(`Error when updating todo: ${err}`);

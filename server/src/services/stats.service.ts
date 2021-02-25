@@ -1,17 +1,16 @@
-/* eslint-disable camelcase */
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import { StatsSearchResult } from '../../../types/statisticsInterfaces';
-import client from '../db/db';
 import { Request } from '../models/auth/request.interface';
 import { isDateError, normalizeMonth } from '../utils/service.util';
+import { pool } from '../db/client';
 
 export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | {}>, next: NextFunction) => {
   const sql = 'INSERT INTO pomodoros (user_id, date) VALUES ($1, $2)';
 
   const values = [req.user.id, new Date()];
   try {
-    await client.query(sql, values);
+    await pool.query(sql, values);
     res.json({});
   } catch (err) {
     console.log(err.stack);
@@ -65,7 +64,7 @@ const searchResultsInDb = async (
      ${groupAndOrder}`;
 
   try {
-    const queryResult = await client.query(sql, [userId.toString(), dateFormat, date]);
+    const queryResult = await pool.query(sql, [userId.toString(), dateFormat, date]);
 
     res.json({
       pomodoros: queryResult.rows.map(item => (({ date, count }) => ({ date, count }))(item)),

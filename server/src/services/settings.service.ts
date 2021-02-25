@@ -1,9 +1,8 @@
 import { NextFunction } from 'express';
-import client from '../db/db';
 import { Request } from '../models/auth/request.interface';
 import { Settings } from '../../../types/settingsInterface';
 import { Response } from 'express-serve-static-core';
-import pool from '../db/db';
+import { pool } from '../db/client';
 
 export const handleGetSettings = async (req: Request<{}>, res: Response, next: NextFunction) => {
   const userId = req.user.id;
@@ -17,7 +16,7 @@ const searchSettingsInDb = async (userId: string, res: Response<Settings>, next:
     FROM settings 
     WHERE user_id = ($1)`;
   try {
-    const queryResult = await client.query(sql, [userId.toString()]);
+    const queryResult = await pool.query(sql, [userId.toString()]);
     if (queryResult.rowCount === 0) {
       console.log('sending default values for settings');
       await initSettings(userId, res, next);
