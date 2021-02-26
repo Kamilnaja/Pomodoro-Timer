@@ -1,6 +1,6 @@
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
-import { QueryConfig } from 'pg';
+import { QueryConfig, QueryResult } from 'pg';
 import { TaskRequestBody, TaskSearchResults } from '../../../types/tasksAndNotesInterfaces';
 import { pool } from '../db/client';
 import { Request as RequestWithBody } from '../models/auth/request.interface';
@@ -20,7 +20,7 @@ export const handleSelectTodos = async (sql: string, req: any, res: any, next: N
   const userId = req.user.id;
 
   try {
-    const queryResult = await pool.query(sql, [userId]);
+    const queryResult: QueryResult = await pool.query(sql, [userId]);
     res.json({ result: queryResult.rows });
   } catch (err) {
     console.log(`error while get request:  ${err}`);

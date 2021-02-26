@@ -1,9 +1,9 @@
 import { NextFunction } from 'express';
-import { Request } from '../models/auth/request.interface';
-import { Settings } from '../../../types/settingsInterface';
 import { Response } from 'express-serve-static-core';
+import { QueryConfig, QueryResult } from 'pg';
+import { Settings } from '../../../types/settingsInterface';
 import { pool } from '../db/client';
-import { QueryConfig, QueryParse } from 'pg';
+import { Request } from '../models/auth/request.interface';
 
 export const handleGetSettings = async (req: Request<{}>, res: Response, next: NextFunction) => {
   const userId = req.user.id;
@@ -20,7 +20,7 @@ const searchSettingsInDb = async (userId: string, res: Response<Settings>, next:
     values: [userId.toString()],
   };
   try {
-    const queryResult = await pool.query(query);
+    const queryResult: QueryResult<Settings> = await pool.query(query);
     if (queryResult.rowCount === 0) {
       console.log('sending default values for settings');
       await initSettings(userId, res, next);

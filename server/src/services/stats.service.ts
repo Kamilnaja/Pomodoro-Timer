@@ -1,6 +1,6 @@
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
-import { QueryConfig } from 'pg';
+import { QueryConfig, QueryResult } from 'pg';
 import { StatsSearchResult } from '../../../types/statisticsInterfaces';
 import { pool } from '../db/client';
 import { Request } from '../models/auth/request.interface';
@@ -67,7 +67,7 @@ const searchResultsInDb = async (
   };
 
   try {
-    const queryResult = await pool.query(query);
+    const queryResult: QueryResult = await pool.query(query);
     const today = new Date();
     const dateCreated: Date = queryResult.rows[0].date_created;
 
