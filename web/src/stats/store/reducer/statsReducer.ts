@@ -17,6 +17,7 @@ export const initialState: StatsState = {
   error: '',
   results: [],
   todayResults: 0,
+  accountActiveFrom: null,
 };
 
 export const statsReducer = (state = initialState, action: StatsActionsTypes) => {
@@ -34,7 +35,7 @@ export const statsReducer = (state = initialState, action: StatsActionsTypes) =>
     case SAVE_POMODORO_ERROR:
       return {
         ...state,
-        error: 'todo handle error',
+        error: action.payload,
         isLoading: false,
       };
     case GET_STATISTIC_IN_PERIOD:
@@ -46,12 +47,13 @@ export const statsReducer = (state = initialState, action: StatsActionsTypes) =>
       return {
         ...state,
         isLoading: false,
-        results: action.payload.result,
+        results: action.payload.pomodoros,
+        accountActiveFrom: action.payload.accountActiveFrom,
       };
     case GET_STATISTIC_IN_PERIOD_ERROR:
       return {
         ...state,
-        error: 'something went wrong',
+        error: action.payload,
         isLoading: false,
       };
     case GET_TODAY_STATS:
@@ -63,7 +65,7 @@ export const statsReducer = (state = initialState, action: StatsActionsTypes) =>
       return {
         ...state,
         isLoading: false,
-        error: 'something wrong',
+        error: action.payload,
       };
     case GET_TODAY_STATS_SUCCESS:
       return {

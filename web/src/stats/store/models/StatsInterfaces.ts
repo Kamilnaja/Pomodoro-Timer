@@ -5,6 +5,7 @@ export interface StatsState {
   error: string;
   results: PomodorosDoneInDay[];
   todayResults: number;
+  accountActiveFrom: Date;
 }
 
 export type HandleGetStats = (year?: number, month?: number) => void;

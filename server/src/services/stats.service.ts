@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import { StatsSearchResult } from '../../../types/statisticsInterfaces';
@@ -18,7 +19,7 @@ export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | 
   }
 };
 
-const groupAndOrder = 'GROUP BY date ORDER BY date DESC';
+const groupAndOrder = `GROUP BY date(date), users.date_created ORDER BY date(date) DESC`;
 
 export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<StatsSearchResult>, next: NextFunction) => {
   const userId = req.user.id;
@@ -55,14 +56,21 @@ const searchResultsInDb = async (
   res: Response<StatsSearchResult>,
   next: NextFunction,
 ) => {
-  const sql = `SELECT TO_CHAR(date, 'DD-MM-YYYY') as date, 
+  const sql = `SELECT date(pomodoros.date), users.date_created, 
      COUNT (date) 
      FROM pomodoros 
-     WHERE user_id = ($1) AND TO_CHAR(date, ($2)) = ($3) ${groupAndOrder}`;
+     INNER JOIN users 
+     on pomodoros.user_id = users.id
+     WHERE user_id = ($1) AND TO_CHAR(date, ($2)) = ($3)
+     ${groupAndOrder}`;
 
   try {
     const queryResult = await client.query(sql, [userId.toString(), dateFormat, date]);
-    res.json({ result: queryResult.rows });
+
+    res.json({
+      pomodoros: queryResult.rows.map(item => (({ date, count }) => ({ date, count }))(item)),
+      accountActiveFrom: queryResult.rows[0]?.date_created,
+    });
   } catch (err) {
     console.log(`err fetching getStatsInGivenMonth ${err}`);
     next(err);

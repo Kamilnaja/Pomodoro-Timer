@@ -24,4 +24,4 @@ export const initialConfig: InitialConfig = {
   refreshRate: 1000,
 };
 
-export const isCookieConsentAcceptedKey = 'isCookieConsentAccepted';
+export const cookieConsentAcceptationKey = 'isCookieConsentAccepted';
