@@ -1,14 +1,20 @@
-import { PomodorosDoneInDay } from '../../../../types/statisticsInterfaces';
+import { PomodorosDoneInDay, StatsSearchResult } from '../../../../types/statisticsInterfaces';
 import { StatsState } from '../store/models/StatsInterfaces';
 
 export const createStatsState = (): StatsState => ({
   isLoading: false,
   error: null,
   todayResults: 10,
-  results: [],
+  results: null,
 });
 
-export const createStats = (): PomodorosDoneInDay[] => [
+export const createStatsSearchResult = (): StatsSearchResult => ({
+  hasNextPeriod: true,
+  hasPreviousPeriod: false,
+  pomodoros: createPomodorosDoneInDay(),
+});
+
+export const createPomodorosDoneInDay = (): PomodorosDoneInDay[] => [
   { date: '21-02-2021', count: 8 },
   { date: '20-02-2021', count: 15 },
   { date: '19-02-2021', count: 16 },
@@ -31,7 +37,3 @@ export const createStats = (): PomodorosDoneInDay[] => [
   { date: '02-02-2021', count: 15 },
   { date: '01-02-2021', count: 17 },
 ];
-
-export const createStatsSearchResult = () => ({
-  result: createStats(),
-});

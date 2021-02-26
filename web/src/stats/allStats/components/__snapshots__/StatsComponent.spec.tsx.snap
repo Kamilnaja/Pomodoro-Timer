@@ -4,23 +4,31 @@ exports[`StatsComponent Should match snapshot 1`] = `
 <div
   className="stats"
 >
-  <div
+  <ButtonGroup
     className="stats__navigation navigation"
+    role="group"
+    toggle={false}
+    vertical={false}
   >
-    <button
-      className="navigation__button"
-      onClick={[Function]}
-    >
-      &lt; prev
-    </button>
-    <button
+    <Button
+      active={false}
       className="navigation__button"
       disabled={true}
       onClick={[Function]}
+      variant="primary"
+    >
+      &lt; prev
+    </Button>
+    <Button
+      active={false}
+      className="navigation__button"
+      disabled={false}
+      onClick={[Function]}
+      variant="primary"
     >
       next &gt;
-    </button>
-  </div>
+    </Button>
+  </ButtonGroup>
   <ForwardRef
     className="stats__table table"
   >
