@@ -1,5 +1,6 @@
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
+import { QueryConfig } from 'pg';
 import { TaskRequestBody, TaskSearchResults } from '../../../types/tasksAndNotesInterfaces';
 import { pool } from '../db/client';
 import { Request as RequestWithBody } from '../models/auth/request.interface';
@@ -57,13 +58,16 @@ export const handleEditTodo = async (req: RequestWithBody<TaskRequestBody>, res:
   const { id } = req.params;
   const { title, note, isDone } = req.body;
   const userId = req.user.id;
-  const sql = `
+  const query: QueryConfig = {
+    text: `
     UPDATE todos 
     SET title = ($1), note = ($2), dateCreated = ($3), isDone = ($4) 
-    WHERE userid = ($5) AND id = ($6)`;
+    WHERE userid = ($5) AND id = ($6)`,
+    values: [title, note, new Date(), isDone, userId, id],
+  };
 
   try {
-    await pool.query(sql, [title, note, new Date(), isDone, userId, id]);
+    await pool.query(query);
     res.json({});
   } catch (err) {
     console.log(`Error when updating todo: ${err}`);

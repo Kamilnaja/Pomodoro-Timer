@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { Response } from 'express-serve-static-core';
 import jwt, { JsonWebTokenError, NotBeforeError, TokenExpiredError } from 'jsonwebtoken';
-import { QueryResult } from 'pg';
+import { QueryConfig, QueryResult } from 'pg';
 import {
   AuthError,
   ErrorCodes,
@@ -24,13 +24,16 @@ export const registerUser = async (
   req: Request<Registration>,
   res: Response<{ message: string } | AuthError>,
 ): Promise<void> => {
-  const insert = 'INSERT INTO users (date_created, login, email, password) VALUES($1, $2, $3, $4)';
+  const now = new Date();
+  const { email, login } = req.body;
+  // todo - do not use 'now', set default in db
+  const query: QueryConfig = {
+    text: 'INSERT INTO users (date_created, login, email, password) VALUES($1, $2, $3, $4)',
+    values: [now, login, email, userHash],
+  };
 
   try {
-    const now = new Date();
-    const { email, login } = req.body;
-
-    await pool.query(insert, [now, login, email, userHash]);
+    await pool.query(query);
     console.log('user registered');
     res.json({ message: 'success' });
   } catch (err: any) {
@@ -69,11 +72,11 @@ export const handlePostLogin = (req: Login, res: Response) => {
 };
 
 export const loginUser = async (req: LoginInterface, res: Response<LoginResponse | AuthError>): Promise<void> => {
-  const query = 'SELECT * FROM users where login = $1 LIMIT 1';
+  const { password, login } = req;
+  const query: QueryConfig = { text: 'SELECT * FROM users where login = $1 LIMIT 1', values: [login] };
 
   try {
-    const { password, login } = req;
-    const dbResult: QueryResult<any> = await pool.query(query, [login]);
+    const dbResult: QueryResult<any> = await pool.query(query);
     if (!dbResult.rows.length) {
       res.status(401).send({
         code: ErrorCodes.USER_NOT_FOUND,
