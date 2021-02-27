@@ -75,16 +75,10 @@ const searchResultsInDb = async (
     const searchedYear = Number(date.split('-')[0]);
     const searchedMonth = Number(date.split('-')[1]);
 
-    const shouldShowNextPeriod = (): boolean =>
-      today.getFullYear() <= searchedYear && today.getMonth() <= searchedMonth;
-
-    const shouldShowPreviousPeriod = (): boolean =>
-      dateCreated.getFullYear() >= searchedYear && dateCreated.getMonth() + 1 >= searchedMonth;
-
     res.json({
       pomodoros: queryResult.rows.map(({ date, count }) => ({ date, count })),
-      hasNextPeriod: shouldShowNextPeriod(),
-      hasPreviousPeriod: shouldShowPreviousPeriod(),
+      hasNextPeriod: shouldShowNextPeriod(today, searchedYear, searchedMonth),
+      hasPreviousPeriod: shouldShowPreviousPeriod(dateCreated, searchedYear, searchedMonth),
     });
   } catch (err) {
     console.log(`err when fetching stats: ${err}`);
@@ -96,4 +90,25 @@ const setError = (field: string, next: NextFunction) => {
   const info = `Wrong ${field}`;
   console.log(info);
   next(info);
+};
+
+export const shouldShowNextPeriod = (date: Date, searchedYear: number, searchedMonth: number): boolean => {
+  const month = date.getMonth() + 1;
+  if (searchedYear < date.getFullYear()) {
+    return true;
+  } else if (searchedYear === date.getFullYear() && searchedMonth < month) {
+    return true;
+  }
+  return false;
+};
+
+export const shouldShowPreviousPeriod = (dateCreated: Date, searchedYear: number, searchedMonth: number): boolean => {
+  const month = dateCreated.getMonth() + 1;
+
+  if (searchedYear > dateCreated.getFullYear()) {
+    return true;
+  } else if (searchedYear === dateCreated.getFullYear() && searchedMonth > month) {
+    return true;
+  }
+  return false;
 };
