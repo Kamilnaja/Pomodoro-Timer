@@ -5,7 +5,7 @@ const createTableSql = 'CREATE TABLE IF NOT EXISTS';
 const queries: TableQuery[] = [
   {
     query: `pomodoros (
-      user_id text,
+      user_id integer,
       created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
     )`,
     tableName: 'pomodoros',

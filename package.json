@@ -25,6 +25,7 @@
     "@types/cors": "^2.8.9",
     "@types/express": "^4.17.9",
     "@types/express-session": "^1.17.3",
+    "@types/jest": "^26.0.20",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/md5": "^2.2.1",
     "@types/morgan": "^1.9.2",
@@ -44,6 +45,7 @@
     "stylelint": "^13.9.0",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-standard": "^20.0.0",
+    "ts-jest": "^26.5.2",
     "ts-node": "^9.1.1"
   },
   "main": "./dist/src/index.js",
@@ -57,7 +59,7 @@
     "postinstall": "cd server && tsc",
     "heroku-postbuild": "tsc & cd web/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "watch-ts": "cd server && tsc -w",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest ./server",
     "deploy": "git add . && git commit -m Heroku && git push heroku master",
     "lint-all": "**/*.ts"
   },
