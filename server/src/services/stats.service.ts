@@ -70,11 +70,16 @@ const searchResultsInDb = async (
   try {
     const queryResult: QueryResult = await pool.query(query);
     const today = new Date();
-    const dateCreated: Date = queryResult.rows[0].date_created;
-
     const searchedYear = Number(date.split('-')[0]);
     const searchedMonth = Number(date.split('-')[1]);
+    let dateCreated: Date;
 
+    if (queryResult.rowCount) {
+      dateCreated = queryResult.rows[0].date_created;
+    } else {
+      // search by id once more on users table
+      dateCreated = await searchDateCreatedInDb(userId, dateCreated, next);
+    }
     res.json({
       pomodoros: queryResult.rows.map(({ date, count }) => ({ date, count })),
       hasNextPeriod: shouldShowNextPeriod(today, searchedYear, searchedMonth),
@@ -111,4 +116,19 @@ export const shouldShowPreviousPeriod = (dateCreated: Date, searchedYear: number
     return true;
   }
   return false;
+};
+
+const searchDateCreatedInDb = async (userId: string, dateCreated: Date, next: NextFunction) => {
+  const query: QueryConfig = {
+    text: `SELECT date_created from users where id = ($1)`,
+    values: [userId],
+  };
+  try {
+    const queryResult: QueryResult = await pool.query(query);
+    dateCreated = queryResult.rows[0].date_created;
+  } catch (err) {
+    console.log(`err when fetching stats: ${err}`);
+    next(err);
+  }
+  return dateCreated;
 };
