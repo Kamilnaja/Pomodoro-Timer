@@ -1,9 +1,9 @@
 import { NextFunction } from 'express';
-import client from '../db/db';
-import { Request } from '../models/auth/request.interface';
-import { Settings } from '../../../types/settingsInterface';
 import { Response } from 'express-serve-static-core';
-import pool from '../db/db';
+import { QueryConfig, QueryResult } from 'pg';
+import { Settings } from '../../../types/settingsInterface';
+import { pool } from '../db/client';
+import { Request } from '../models/auth/request.interface';
 
 export const handleGetSettings = async (req: Request<{}>, res: Response, next: NextFunction) => {
   const userId = req.user.id;
@@ -11,13 +11,16 @@ export const handleGetSettings = async (req: Request<{}>, res: Response, next: N
 };
 
 const searchSettingsInDb = async (userId: string, res: Response<Settings>, next: NextFunction) => {
-  const sql = `SELECT 
+  const query: QueryConfig = {
+    text: `SELECT 
     is_cookie_consent_accepted "isCookieConsentAccepted", 
     is_sound_enabled "isSoundEnabled" 
     FROM settings 
-    WHERE user_id = ($1)`;
+    WHERE user_id = ($1)`,
+    values: [userId.toString()],
+  };
   try {
-    const queryResult = await client.query(sql, [userId.toString()]);
+    const queryResult: QueryResult<Settings> = await pool.query(query);
     if (queryResult.rowCount === 0) {
       console.log('sending default values for settings');
       await initSettings(userId, res, next);
@@ -32,9 +35,10 @@ const searchSettingsInDb = async (userId: string, res: Response<Settings>, next:
 };
 
 export const initSettings = async (userId: string, res: Response<Settings>, next: NextFunction) => {
-  const sql = `INSERT INTO settings (user_id) values ($1)`;
+  const query: QueryConfig = { text: `INSERT INTO settings (user_id) values ($1)`, values: [userId] };
+
   try {
-    await pool.query(sql, [userId]);
+    await pool.query(query);
     res.json({
       isCookieConsentAccepted: false,
       isSoundEnabled: true,
@@ -46,10 +50,14 @@ export const initSettings = async (userId: string, res: Response<Settings>, next
 };
 
 export const handlePostSettings = async (req: Request<Settings>, res: Response, next: NextFunction) => {
-  const sql = `UPDATE settings SET is_cookie_consent_accepted = ($1), is_sound_enabled = ($2) WHERE user_id = ($3)`;
   const { isCookieConsentAccepted, isSoundEnabled } = req.body;
+  const query: QueryConfig = {
+    text: `UPDATE settings SET is_cookie_consent_accepted = ($1), is_sound_enabled = ($2) WHERE user_id = ($3)`,
+    values: [isCookieConsentAccepted, isSoundEnabled, req.user.id],
+  };
+
   try {
-    await pool.query(sql, [isCookieConsentAccepted, isSoundEnabled, req.user.id]);
+    await pool.query(query);
     res.status(200).send({});
   } catch (err: any) {
     console.log('error while saving settings');

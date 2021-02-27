@@ -1,25 +1,25 @@
-/* eslint-disable camelcase */
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
+import { QueryConfig, QueryResult } from 'pg';
 import { StatsSearchResult } from '../../../types/statisticsInterfaces';
-import client from '../db/db';
+import { pool } from '../db/client';
 import { Request } from '../models/auth/request.interface';
 import { isDateError, normalizeMonth } from '../utils/service.util';
 
 export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | {}>, next: NextFunction) => {
-  const sql = 'INSERT INTO pomodoros (user_id, date) VALUES ($1, $2)';
+  const query: QueryConfig = {
+    text: 'INSERT INTO pomodoros (user_id) VALUES ($1)',
+    values: [req.user.id],
+  };
 
-  const values = [req.user.id, new Date()];
   try {
-    await client.query(sql, values);
+    await pool.query(query);
     res.json({});
   } catch (err) {
     console.log(err.stack);
     next(err);
   }
 };
-
-const groupAndOrder = `GROUP BY date(date), users.date_created ORDER BY date(date) DESC`;
 
 export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<StatsSearchResult>, next: NextFunction) => {
   const userId = req.user.id;
@@ -56,20 +56,35 @@ const searchResultsInDb = async (
   res: Response<StatsSearchResult>,
   next: NextFunction,
 ) => {
-  const sql = `SELECT date(pomodoros.date), users.date_created, 
-     COUNT (date) 
-     FROM pomodoros 
-     INNER JOIN users 
-     on pomodoros.user_id = users.id
-     WHERE user_id = ($1) AND TO_CHAR(date, ($2)) = ($3)
-     ${groupAndOrder}`;
+  const query: QueryConfig = {
+    text: `SELECT date(pomodoros.created_at), users.date_created,
+    COUNT (created_at) 
+    FROM pomodoros 
+    INNER JOIN users on pomodoros.user_id = users.id
+    WHERE user_id = ($1) AND TO_CHAR(created_at, ($2)) = ($3)
+    GROUP BY date(created_at), users.date_created 
+    ORDER BY date(created_at) DESC`,
+    values: [userId.toString(), dateFormat, date],
+  };
 
   try {
-    const queryResult = await client.query(sql, [userId.toString(), dateFormat, date]);
+    const queryResult: QueryResult = await pool.query(query);
+    const today = new Date();
+    const dateCreated: Date = queryResult.rows[0].date_created;
+
+    const searchedYear = Number(date.split('-')[0]);
+    const searchedMonth = Number(date.split('-')[1]);
+
+    const shouldShowNextPeriod = (): boolean =>
+      today.getFullYear() <= searchedYear && today.getMonth() <= searchedMonth;
+
+    const shouldShowPreviousPeriod = (): boolean =>
+      dateCreated.getFullYear() >= searchedYear && dateCreated.getMonth() + 1 >= searchedMonth;
 
     res.json({
-      pomodoros: queryResult.rows.map(item => (({ date, count }) => ({ date, count }))(item)),
-      accountActiveFrom: queryResult.rows[0]?.date_created,
+      pomodoros: queryResult.rows.map(({ date, count }) => ({ date, count })),
+      hasNextPeriod: shouldShowNextPeriod(),
+      hasPreviousPeriod: shouldShowPreviousPeriod(),
     });
   } catch (err) {
     console.log(`err fetching getStatsInGivenMonth ${err}`);

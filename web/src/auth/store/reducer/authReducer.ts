@@ -52,7 +52,7 @@ export const authReducer = (state = authInitialState, action: AuthActionsTypes):
         token: action.payload,
         error: null as any,
       };
-    case RESET_FORM:
+    case RESET_FORM: //  maybe initial state for all
       return {
         ...state,
         isLoading: authInitialState.isLoading,

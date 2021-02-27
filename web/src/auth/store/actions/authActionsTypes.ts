@@ -33,7 +33,7 @@ export interface LoginAction {
 
 export interface LoginSuccessAction {
   type: typeof LOGIN_SUCCESS;
-  payload: string;
+  payload: string; // todo - maybe remove
 }
 
 export interface LoginErrorAction {

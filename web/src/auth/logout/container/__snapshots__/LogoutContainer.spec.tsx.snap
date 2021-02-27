@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LogoutContainer Should match the snapshot 1`] = `
+<div
+  className="logout"
+>
+  <p
+    className="logout__question"
+  >
+    Are you sure to logout?
+  </p>
+  <div
+    className="logout__buttons-wrapper"
+  >
+    <button
+      className="logout__button logout__button--no"
+      onClick={[Function]}
+    >
+      No
+    </button>
+    <button
+      className="logout__button logout__button-yes"
+      onClick={[Function]}
+    >
+      Yes
+    </button>
+  </div>
+</div>
+`;

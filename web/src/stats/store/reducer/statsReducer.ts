@@ -15,9 +15,8 @@ import { StatsState } from '../models/StatsInterfaces';
 export const initialState: StatsState = {
   isLoading: false,
   error: '',
-  results: [],
+  results: null,
   todayResults: 0,
-  accountActiveFrom: null,
 };
 
 export const statsReducer = (state = initialState, action: StatsActionsTypes) => {
@@ -47,8 +46,7 @@ export const statsReducer = (state = initialState, action: StatsActionsTypes) =>
       return {
         ...state,
         isLoading: false,
-        results: action.payload.pomodoros,
-        accountActiveFrom: action.payload.accountActiveFrom,
+        results: action.payload,
       };
     case GET_STATISTIC_IN_PERIOD_ERROR:
       return {

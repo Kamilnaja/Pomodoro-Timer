@@ -5,6 +5,7 @@ import configureStore from 'redux-mock-store';
 import MainContainer from './MainContainer';
 import thunk from 'redux-thunk';
 import { CounterState } from '../../pomodoroCounter/store/enums/CounterState';
+
 const mockStore = configureStore([thunk]);
 
 describe('MainContainer', () => {

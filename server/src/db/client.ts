@@ -1,6 +1,6 @@
-import { Client } from 'pg';
+import { Pool } from 'pg';
 
-const client: Client = new Client({
+export const pool: Pool = new Pool({
   port: 5432,
   host: process.env.DATABASE_HOST,
   password: process.env.DATABASE_PASSWORD,
@@ -8,12 +8,10 @@ const client: Client = new Client({
   database: process.env.DATABASE_DATABASE,
 });
 
-client.connect((err: Error) => {
+pool.connect((err: Error) => {
   if (err) {
     console.error(`connection error ${err.stack}`);
   } else {
     console.log('connected!');
   }
 });
-
-export default client;

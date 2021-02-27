@@ -21,7 +21,8 @@ export interface TodayStats {
 
 export interface StatsSearchResult {
   pomodoros: PomodorosDoneInDay[];
-  accountActiveFrom: Date;
+  hasPreviousPeriod: boolean;
+  hasNextPeriod: boolean;
 }
 
 export interface TodayStatsResult extends SearchResult<number> {}
