@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RegisterContainer Should match the snapshot 1`] = `
+<div
+  className="register"
+>
+  <form
+    className="register__form form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="form__row"
+    >
+      <label
+        className="form__label label"
+        htmlFor="login"
+      >
+        User login
+      </label>
+      <input
+        autoFocus={true}
+        className="form__input input"
+        id="login"
+        name="login"
+        placeholder="John Doe"
+        required={true}
+        type="text"
+      />
+    </div>
+    <div
+      className="form__row"
+    >
+      <label
+        className="form__label label"
+        htmlFor="email"
+      >
+        Email
+      </label>
+      <input
+        className="form__input input"
+        id="email"
+        name="email"
+        placeholder="johndoe@gmail.com"
+        required={true}
+        type="email"
+      />
+    </div>
+    <div
+      className="form__row"
+    >
+      <label
+        className="form__label label"
+        htmlFor="password"
+      >
+        Password
+      </label>
+      <input
+        className="form_input input"
+        id="password"
+        name="password"
+        required={true}
+        type="password"
+      />
+    </div>
+    <div
+      className="form__row"
+    >
+      <label
+        className="form__label label"
+        htmlFor="repeatedPassword"
+      >
+        Repeat password
+      </label>
+      <input
+        className="form__input input"
+        id="repeatedPassword"
+        name="repeatedPassword"
+        required={true}
+        type="password"
+      />
+    </div>
+    <button
+      className="form__button"
+      type="submit"
+      value="Wyślij"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+`;

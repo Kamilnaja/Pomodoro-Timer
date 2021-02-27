@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginContainer Should match the snapshot 1`] = `
+<div
+  className="login"
+>
+  <div>
+    <form
+      className="login__form form"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form__row"
+      >
+        <label
+          className="form__label label"
+          htmlFor="login"
+        >
+          User login
+        </label>
+        <input
+          autoFocus={true}
+          className="form__input input"
+          id="login"
+          name="login"
+          placeholder="John Doe"
+          required={true}
+          type="text"
+        />
+      </div>
+      <div
+        className="form__row"
+      >
+        <label
+          className="form__label label"
+          htmlFor="password"
+        >
+          Password
+        </label>
+        <input
+          className="form__input input"
+          id="password"
+          name="password"
+          required={true}
+          type="password"
+        />
+      </div>
+      <button
+        className="form__button"
+        type="submit"
+        value="Wyślij"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+`;
