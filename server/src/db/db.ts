@@ -6,7 +6,7 @@ const queries: TableQuery[] = [
   {
     query: `pomodoros (
       user_id text,
-      date    timestamp with time zone
+      created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
     )`,
     tableName: 'pomodoros',
   },

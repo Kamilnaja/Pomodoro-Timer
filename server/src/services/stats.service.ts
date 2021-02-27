@@ -8,8 +8,8 @@ import { isDateError, normalizeMonth } from '../utils/service.util';
 
 export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | {}>, next: NextFunction) => {
   const query: QueryConfig = {
-    text: 'INSERT INTO pomodoros (user_id, date) VALUES ($1, $2)',
-    values: [req.user.id, new Date()],
+    text: 'INSERT INTO pomodoros (user_id) VALUES ($1)',
+    values: [req.user.id],
   };
 
   try {
@@ -57,12 +57,13 @@ const searchResultsInDb = async (
   next: NextFunction,
 ) => {
   const query: QueryConfig = {
-    text: `SELECT date(pomodoros.date), users.date_created,
-    COUNT (date) 
+    text: `SELECT date(pomodoros.created_at), users.date_created,
+    COUNT (created_at) 
     FROM pomodoros 
     INNER JOIN users on pomodoros.user_id = users.id
-    WHERE user_id = ($1) AND TO_CHAR(date, ($2)) = ($3)
-    GROUP BY date(date), users.date_created ORDER BY date(date) DESC`,
+    WHERE user_id = ($1) AND TO_CHAR(created_at, ($2)) = ($3)
+    GROUP BY date(created_at), users.date_created 
+    ORDER BY date(created_at) DESC`,
     values: [userId.toString(), dateFormat, date],
   };
 

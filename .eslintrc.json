@@ -16,6 +16,7 @@
   "rules": {
     "new-cap": "off",
     "no-alert": "error",
-    "no-debugger": "error"
+    "no-debugger": "error",
+    "camelcase": "off"
   }
 }
