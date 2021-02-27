@@ -87,7 +87,7 @@ const searchResultsInDb = async (
       hasPreviousPeriod: shouldShowPreviousPeriod(),
     });
   } catch (err) {
-    console.log(`err fetching getStatsInGivenMonth ${err}`);
+    console.log(`err when fetching stats: ${err}`);
     next(err);
   }
 };
