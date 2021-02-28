@@ -1,9 +1,10 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
-import { PomodorosDoneInDay } from '../../../../../types/statisticsInterfaces';
-import { StatsTableProps } from './StatsTableProps';
+import { Button, ButtonGroup, Table } from 'react-bootstrap';
+import { PomodorosDoneInDay } from '../../../../../../types/statisticsInterfaces';
+import { StatsTableComponentProps } from './StatsTableComponentProps';
+import './StatsTableComponent.scss';
 
-export const StatsTable = (props: StatsTableProps) => {
+export const StatsTableComponent = (props: StatsTableComponentProps) => {
   const daysInMonth = (month: number, year: number) => new Date(year, month, 0).getDate();
 
   const findPomodorosInDay = (day: number): PomodorosDoneInDay =>
@@ -33,8 +34,16 @@ export const StatsTable = (props: StatsTableProps) => {
 
   return (
     <Table className="stats__table table">
-      <caption>
-        Results from: {props.pageMonth + 1}.{props.pageYear}
+      <caption className="table__caption caption">
+        <h2 className="caption__header">
+          Results from: {props.pageMonth + 1}.{props.pageYear}
+        </h2>
+
+        <ButtonGroup size="sm">
+          <Button>asc</Button>
+          <Button>desc</Button>
+          <Button>Show empty days</Button>
+        </ButtonGroup>
       </caption>
       <thead className="table__head">
         <tr>

@@ -1,6 +1,6 @@
 import { Button, ButtonGroup } from 'react-bootstrap';
 import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
-import { StatsTable } from '../statsTable/StatsTable';
+import { StatsTableContainer } from '../statsTable/container/StatsTableContainer';
 import './stats.component.scss';
 import { StatsComponentProps } from './StatsComponentProps';
 
@@ -51,7 +51,11 @@ export const StatsComponent = (props: StatsComponentProps) => {
           next &gt;
         </Button>
       </ButtonGroup>
-      <StatsTable pageMonth={pageMonth} pageYear={pageYear} pomodoros={props.stats.pomodoros}></StatsTable>
+      <StatsTableContainer
+        pageMonth={pageMonth}
+        pageYear={pageYear}
+        pomodoros={props.stats.pomodoros}
+      ></StatsTableContainer>
     </div>
   );
 };
