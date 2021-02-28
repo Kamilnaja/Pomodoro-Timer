@@ -40,8 +40,7 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
         </h2>
 
         <ButtonGroup size="sm">
-          <Button>asc</Button>
-          <Button>desc</Button>
+          <Button onClick={() => props.toggleSortDirection()}>desc</Button>
           <Button>Show empty days</Button>
         </ButtonGroup>
       </caption>
