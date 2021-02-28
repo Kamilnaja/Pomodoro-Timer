@@ -1,4 +1,5 @@
 import { Settings } from '../../../../../types/settingsInterface';
+import { DisplayDirection } from '../interfaces/settingsInterfaces';
 
 export const GET_SETTINGS = 'GET_SETTINGS';
 export const GET_SETTINGS_SUCCESS = 'GET_SETTINGS_SUCCESS';
@@ -7,6 +8,7 @@ export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 export const SAVE_SETTINGS_SUCCESS = 'SAVE_SETTINGS_SUCCESS';
 export const SAVE_SETTINGS_ERROR = 'SAVE_SETTINGS_ERROR';
 export const HIDE_COOKIE_INFO = 'HIDE_COOKIE_INFO';
+export const SET_DISPLAY_DIRECTION = 'SET_DISPLAY_DIRECTION';
 
 interface GetSettingsAction {
   type: typeof GET_SETTINGS;
@@ -39,6 +41,11 @@ interface HideCookieInfoAction {
   type: typeof HIDE_COOKIE_INFO;
 }
 
+interface SetDisplayDirection {
+  type: typeof SET_DISPLAY_DIRECTION;
+  payload: DisplayDirection;
+}
+
 export type SettingsActionsType =
   | GetSettingsAction
   | GetSettingsSuccessAction
@@ -46,4 +53,5 @@ export type SettingsActionsType =
   | SaveSettingsAction
   | SaveSettingsSuccessAction
   | SaveSettingsErrorAction
-  | HideCookieInfoAction;
+  | HideCookieInfoAction
+  | SetDisplayDirection;

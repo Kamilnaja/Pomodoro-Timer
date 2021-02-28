@@ -2,6 +2,7 @@ import { Action } from 'redux';
 import { Settings } from '../../../../../types/settingsInterface';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
 import { cookieConsentAcceptationKey } from '../../../shared/settings/initialConfig';
+import { DisplayDirection } from '../interfaces/settingsInterfaces';
 import {
   GET_SETTINGS,
   GET_SETTINGS_ERROR,
@@ -10,6 +11,7 @@ import {
   SAVE_SETTINGS,
   SAVE_SETTINGS_ERROR,
   SAVE_SETTINGS_SUCCESS,
+  SET_DISPLAY_DIRECTION,
   SettingsActionsType,
 } from './settingsActionsTypes';
 
@@ -42,6 +44,11 @@ export const saveSettingsError = (payload: Error): SettingsActionsType => ({
 
 export const hideCookieInfo = (): SettingsActionsType => ({
   type: HIDE_COOKIE_INFO,
+});
+
+export const toggleDisplayDirection = (payload: DisplayDirection): SettingsActionsType => ({
+  type: SET_DISPLAY_DIRECTION,
+  payload,
 });
 
 export const handleGetSettings = () => (dispatch: (action: SettingsActionsType) => void) => {

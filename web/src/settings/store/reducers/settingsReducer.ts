@@ -7,8 +7,9 @@ import {
   SAVE_SETTINGS_ERROR,
   SAVE_SETTINGS_SUCCESS,
   SettingsActionsType,
+  SET_DISPLAY_DIRECTION,
 } from '../actions/settingsActionsTypes';
-import { SettingsState, SortDirection } from '../interfaces/settingsInterfaces';
+import { SettingsState, DisplayDirection } from '../interfaces/settingsInterfaces';
 
 const initialState: SettingsState = {
   isLoading: false,
@@ -17,7 +18,7 @@ const initialState: SettingsState = {
   settings: {
     isCookieConsentAccepted: false,
     isSoundEnabled: true,
-    sortDirection: SortDirection.ASC,
+    displayDirection: DisplayDirection.ASC,
   },
 };
 
@@ -63,6 +64,14 @@ export const settingsReducer = (state = initialState, action: SettingsActionsTyp
       return {
         ...state,
         isCookieAcceptInfoVisible: false,
+      };
+    case SET_DISPLAY_DIRECTION:
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          displayDirection: action.payload,
+        },
       };
     default:
       return state;
