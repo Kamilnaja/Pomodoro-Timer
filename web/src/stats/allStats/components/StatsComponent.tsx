@@ -1,5 +1,6 @@
-import { Button, ButtonGroup, Table } from 'react-bootstrap';
+import { Button, ButtonGroup } from 'react-bootstrap';
 import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
+import { StatsTable } from '../statsTable/StatsTable';
 import './stats.component.scss';
 import { StatsComponentProps } from './StatsComponentProps';
 
@@ -50,25 +51,7 @@ export const StatsComponent = (props: StatsComponentProps) => {
           next &gt;
         </Button>
       </ButtonGroup>
-      <Table className="stats__table table">
-        <caption>
-          Results from: {pageMonth + 1}.{pageYear}
-        </caption>
-        <thead className="table__head">
-          <tr>
-            <th>Date</th>
-            <th>Number of pomodoros</th>
-          </tr>
-        </thead>
-        <tbody>
-          {props.stats.pomodoros?.map((v, idx) => (
-            <tr key={idx}>
-              <td className="table__date">{v.date}</td>
-              <td className="table__count">{v.count}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <StatsTable pageMonth={pageMonth} pageYear={pageYear} pomodoros={props.stats.pomodoros}></StatsTable>
     </div>
   );
 };
