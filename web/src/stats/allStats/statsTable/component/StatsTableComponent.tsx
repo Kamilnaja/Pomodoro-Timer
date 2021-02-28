@@ -7,15 +7,19 @@ import './StatsTableComponent.scss';
 export const StatsTableComponent = (props: StatsTableComponentProps) => {
   const daysInMonth = (month: number, year: number) => new Date(year, month, 0).getDate();
 
+  const daysInCurrentMonth = () => daysInMonth(props.pageMonth + 1, props.pageYear);
+
   const findPomodorosInDay = (day: number): PomodorosDoneInDay =>
     props.pomodoros.find(v => new Date(v.date).getDate() === day);
 
+  const getIndex = (i: number) => (props.sortDirection === 'DESC' ? daysInCurrentMonth() - i : i + 1);
+
   const longArr = (
     <>
-      {Array.from(Array(daysInMonth(props.pageMonth + 1, props.pageYear)), (e, i) => (
+      {Array.from(Array(daysInCurrentMonth()), (e, i) => (
         <tr key={i}>
-          <td className="table__date">{i + 1}</td>
-          <td className="table__count">{findPomodorosInDay(i + 1)?.count}</td>
+          <td className="table__date">{getIndex(i)}</td>
+          <td className="table__count">{findPomodorosInDay(getIndex(i))?.count}</td>
         </tr>
       ))}
     </>
@@ -40,7 +44,7 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
         </h2>
 
         <ButtonGroup size="sm">
-          <Button onClick={() => props.toggleSortDirection()}>desc</Button>
+          <Button onClick={() => props.toggleSortDirection()}>Toogle sort direction</Button>
           <Button>Show empty days</Button>
         </ButtonGroup>
       </caption>

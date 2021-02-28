@@ -4,6 +4,8 @@ import { SettingsState, SortDirection } from '../../../../settings/store/interfa
 import { StatsTableComponent } from '../component/StatsTableComponent';
 import { StatsTableContainerProps } from './StatsTableContainerProps';
 import { handleGetSettings, handleSaveSettings } from '../../../../settings/store/actions/settingsActions';
+import { Loader } from '../../../../shared/loader/Loader';
+import { ErrorComponent } from '../../../../shared/error/errorComponent/ErrorComponent';
 
 class StatsTableContainer extends React.Component<StatsTableContainerProps> {
   componentDidMount() {
@@ -19,15 +21,21 @@ class StatsTableContainer extends React.Component<StatsTableContainerProps> {
   };
 
   render() {
-    return (
-      <StatsTableComponent
-        pageMonth={this.props.pageMonth}
-        pageYear={this.props.pageYear}
-        pomodoros={this.props.pomodoros}
-        sortDirection={this.props.settingsState.settings.sortDirection}
-        toggleSortDirection={this.toggleSortDirection}
-      ></StatsTableComponent>
-    );
+    if (this.props.settingsState.isLoading) {
+      return <Loader />;
+    } else if (this.props.settingsState.error) {
+      return <ErrorComponent />;
+    } else {
+      return (
+        <StatsTableComponent
+          pageMonth={this.props.pageMonth}
+          pageYear={this.props.pageYear}
+          pomodoros={this.props.pomodoros}
+          sortDirection={this.props.settingsState.settings.sortDirection}
+          toggleSortDirection={this.toggleSortDirection}
+        ></StatsTableComponent>
+      );
+    }
   }
 }
 

@@ -2,6 +2,7 @@ import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import { QueryConfig, QueryResult } from 'pg';
 import { Settings } from '../../../types/settingsInterface';
+import { SortDirection } from '../../../web/src/settings/store/interfaces/settingsInterfaces';
 import { pool } from '../db/client';
 import { Request } from '../models/auth/request.interface';
 
@@ -14,11 +15,13 @@ const searchSettingsInDb = async (userId: string, res: Response<Settings>, next:
   const query: QueryConfig = {
     text: `SELECT 
     is_cookie_consent_accepted "isCookieConsentAccepted", 
-    is_sound_enabled "isSoundEnabled" 
+    is_sound_enabled "isSoundEnabled",
+    sort_direction "sortDirection"
     FROM settings 
     WHERE user_id = ($1)`,
     values: [userId.toString()],
   };
+
   try {
     const queryResult: QueryResult<Settings> = await pool.query(query);
     if (queryResult.rowCount === 0) {
@@ -29,7 +32,7 @@ const searchSettingsInDb = async (userId: string, res: Response<Settings>, next:
       res.json(queryResult.rows[0]);
     }
   } catch (err) {
-    console.log(`error when searching settings in dd ${err}`);
+    console.log(`error when searching settings in db: ${err}`);
     next(err);
   }
 };
@@ -42,6 +45,7 @@ export const initSettings = async (userId: string, res: Response<Settings>, next
     res.json({
       isCookieConsentAccepted: false,
       isSoundEnabled: true,
+      sortDirection: SortDirection.DESC,
     });
   } catch (err: any) {
     console.log('error while saving default user settings');
@@ -50,10 +54,12 @@ export const initSettings = async (userId: string, res: Response<Settings>, next
 };
 
 export const handlePostSettings = async (req: Request<Settings>, res: Response, next: NextFunction) => {
-  const { isCookieConsentAccepted, isSoundEnabled } = req.body;
+  const { isCookieConsentAccepted, isSoundEnabled, sortDirection } = req.body;
   const query: QueryConfig = {
-    text: `UPDATE settings SET is_cookie_consent_accepted = ($1), is_sound_enabled = ($2) WHERE user_id = ($3)`,
-    values: [isCookieConsentAccepted, isSoundEnabled, req.user.id],
+    text: `UPDATE settings 
+           SET is_cookie_consent_accepted = ($1), is_sound_enabled = ($2), sort_direction = ($3)
+           WHERE user_id = ($4)`,
+    values: [isCookieConsentAccepted, isSoundEnabled, sortDirection, req.user.id],
   };
 
   try {

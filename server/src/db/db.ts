@@ -47,7 +47,8 @@ const queries: TableQuery[] = [
       id                         SERIAL PRIMARY KEY,
       user_id                    text,
       is_cookie_consent_accepted boolean DEFAULT false,
-      is_sound_enabled           boolean DEFAULT true
+      is_sound_enabled           boolean DEFAULT true,
+      sort_direction             text DEFAULT 'ASC'
     )`,
     tableName: 'settings',
   },
