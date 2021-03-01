@@ -10,7 +10,7 @@ import { StatsTableComponentProps } from './StatsTableComponentProps';
 export const daysInMonth = (props: StatsTableComponentProps): number =>
   new Date(props.pageYear, props.pageMonth + 1, 0).getDate();
 
-export const getIndex = (i: number, props: StatsTableComponentProps) =>
+export const getPomodoroEntryAtIndex = (i: number, props: StatsTableComponentProps) =>
   props.displayDirection === 'DESC' ? daysInMonth(props) - i : i + 1;
 
 export const findPomodorosInDay = (day: number, props: StatsTableComponentProps): PomodorosDoneInDay =>
@@ -21,8 +21,8 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
     <>
       {Array.from(Array(daysInMonth(props)), (e, i) => (
         <tr key={i}>
-          <td className="table__date">{getIndex(i, props)}</td>
-          <td className="table__count">{findPomodorosInDay(getIndex(i, props), props)?.count}</td>
+          <td className="table__date">{getPomodoroEntryAtIndex(i, props)}</td>
+          <td className="table__count">{findPomodorosInDay(getPomodoroEntryAtIndex(i, props), props)?.count}</td>
         </tr>
       ))}
     </>
