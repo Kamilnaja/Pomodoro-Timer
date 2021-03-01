@@ -8,6 +8,10 @@ export const SAVE_SETTINGS_SUCCESS = 'SAVE_SETTINGS_SUCCESS';
 export const SAVE_SETTINGS_ERROR = 'SAVE_SETTINGS_ERROR';
 export const HIDE_COOKIE_INFO = 'HIDE_COOKIE_INFO';
 
+export type HandleGetSettings = () => void;
+export type HandleSaveSettings = (settings: Settings) => void;
+export type ToggleSortDirection = () => void;
+
 interface GetSettingsAction {
   type: typeof GET_SETTINGS;
 }

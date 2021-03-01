@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, ButtonGroup, Table } from 'react-bootstrap';
-import { PomodorosDoneInDay } from '../../../../../../types/statisticsInterfaces';
+import { PomodorosDoneInDay } from '../../../../../types/statisticsInterfaces';
 import { StatsTableComponentProps } from './StatsTableComponentProps';
 import './StatsTableComponent.scss';
 

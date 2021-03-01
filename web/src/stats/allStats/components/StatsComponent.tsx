@@ -2,7 +2,7 @@ import { Button, ButtonGroup } from 'react-bootstrap';
 import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
 import './stats.component.scss';
 import { StatsComponentProps } from './StatsComponentProps';
-import StatsTableContainer from '../../allStats/statsTable/container/StatsTableContainer';
+import StatsTableContainer from '../../statsTable/container/StatsTableContainer';
 
 let pageMonth = getCurrentMonth();
 let pageYear = getCurrentYear();
@@ -30,12 +30,6 @@ export const StatsComponent = (props: StatsComponentProps) => {
     props.handleGetStats(pageYear, pageMonth);
   };
 
-  // const renderLineChart = (
-  //   <LineChart width={600} height={300} data={props.stats}>
-  //     <Line type="monotone" dataKey="count" stroke="#8884d8" />
-  //   </LineChart>
-  // );
-
   return (
     <div className="stats">
       {/* {renderLineChart} */}
@@ -51,10 +45,15 @@ export const StatsComponent = (props: StatsComponentProps) => {
           next &gt;
         </Button>
       </ButtonGroup>
+
       <StatsTableContainer
         pageMonth={pageMonth}
         pageYear={pageYear}
         pomodoros={props.stats.pomodoros}
+        handleGetSettings={props.handleGetSettings}
+        handleSaveSettings={props.handleSaveSettings}
+        settingsState={props.settings}
+        toggleSortDirection={props.toggleSortDirection}
       ></StatsTableContainer>
     </div>
   );
