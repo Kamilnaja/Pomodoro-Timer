@@ -4,7 +4,7 @@ import { QueryConfig, QueryResult } from 'pg';
 import { StatsSearchResult } from '../../../types/statisticsInterfaces';
 import { pool } from '../db/client';
 import { Request } from '../models/auth/request.interface';
-import { isDateError, normalizeMonth } from '../utils/service.util';
+import { isDateError, normalizeDay, normalizeMonth } from '../utils/service.util';
 
 export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | {}>, next: NextFunction) => {
   const query: QueryConfig = {
@@ -45,6 +45,7 @@ export const getStatsInGivenDay = async (req: Request<{}>, res: Response<StatsSe
     setError('error', next);
   } else {
     month = normalizeMonth(month);
+    day = normalizeDay(day);
     await searchResultsInDb(userId.toString(), `${year}-${month}-${day}`, 'YYYY-MM-DD', res, next);
   }
 };
@@ -56,6 +57,7 @@ const searchResultsInDb = async (
   res: Response<StatsSearchResult>,
   next: NextFunction,
 ) => {
+  // todo - do not compare with to_char
   const query: QueryConfig = {
     text: `SELECT date(pomodoros.created_at), users.date_created,
     COUNT (created_at) 
