@@ -29,8 +29,10 @@ exports[`StatsComponent Should match snapshot 1`] = `
       next &gt;
     </Button>
   </ButtonGroup>
-  <StatsTable
-    pageMonth={1}
+  <StatsTableContainer
+    handleGetSettings={[Function]}
+    handleSaveSettings={[Function]}
+    pageMonth={2}
     pageYear={2021}
     pomodoros={
       Array [
@@ -120,6 +122,19 @@ exports[`StatsComponent Should match snapshot 1`] = `
         },
       ]
     }
+    settingsState={
+      Object {
+        "error": "",
+        "isCookieAcceptInfoVisible": false,
+        "isLoading": false,
+        "settings": Object {
+          "displayDirection": "ASC",
+          "isCookieConsentAccepted": true,
+          "isSoundEnabled": true,
+        },
+      }
+    }
+    toggleDisplayDirection={[Function]}
   />
 </div>
 `;

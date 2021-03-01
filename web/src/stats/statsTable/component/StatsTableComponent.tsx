@@ -1,25 +1,28 @@
 import React from 'react';
 import { Button, ButtonGroup, Table } from 'react-bootstrap';
 import { PomodorosDoneInDay } from '../../../../../types/statisticsInterfaces';
-import { StatsTableComponentProps } from './StatsTableComponentProps';
 import './StatsTableComponent.scss';
+import { StatsTableComponentProps } from './StatsTableComponentProps';
+/**
+ * @param month - for example january = 0
+ * @param year
+ */
+export const daysInMonth = (props: StatsTableComponentProps): number =>
+  new Date(props.pageYear, props.pageMonth + 1, 0).getDate();
+
+export const getIndex = (i: number, props: StatsTableComponentProps) =>
+  props.displayDirection === 'DESC' ? daysInMonth(props) - i : i + 1;
+
+export const findPomodorosInDay = (day: number, props: StatsTableComponentProps): PomodorosDoneInDay =>
+  props.pomodoros.find(v => new Date(v.date).getDate() === day);
 
 export const StatsTableComponent = (props: StatsTableComponentProps) => {
-  const daysInMonth = (month: number, year: number) => new Date(year, month, 0).getDate();
-
-  const daysInCurrentMonth = () => daysInMonth(props.pageMonth + 1, props.pageYear);
-
-  const findPomodorosInDay = (day: number): PomodorosDoneInDay =>
-    props.pomodoros.find(v => new Date(v.date).getDate() === day);
-
-  const getIndex = (i: number) => (props.displayDirection === 'DESC' ? daysInCurrentMonth() - i : i + 1);
-
   const longArr = (
     <>
-      {Array.from(Array(daysInCurrentMonth()), (e, i) => (
+      {Array.from(Array(daysInMonth(props)), (e, i) => (
         <tr key={i}>
-          <td className="table__date">{getIndex(i)}</td>
-          <td className="table__count">{findPomodorosInDay(getIndex(i))?.count}</td>
+          <td className="table__date">{getIndex(i, props)}</td>
+          <td className="table__count">{findPomodorosInDay(getIndex(i, props), props)?.count}</td>
         </tr>
       ))}
     </>
@@ -37,7 +40,7 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
   // );
 
   return (
-    <Table className="stats__table table">
+    <Table striped bordered hover className="stats__table table" size="sm">
       <caption className="table__caption caption">
         <h2 className="caption__header">
           Results from: {props.pageMonth + 1}.{props.pageYear}
