@@ -53,7 +53,7 @@ export const StatsComponent = (props: StatsComponentProps) => {
         handleGetSettings={props.handleGetSettings}
         handleSaveSettings={props.handleSaveSettings}
         settingsState={props.settings}
-        toggleSortDirection={props.toggleSortDirection}
+        toggleDisplayDirection={props.toggleDisplayDirection}
       ></StatsTableContainer>
     </div>
   );

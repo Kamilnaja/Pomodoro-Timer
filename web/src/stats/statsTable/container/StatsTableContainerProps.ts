@@ -2,7 +2,7 @@ import { PomodorosDoneInDay } from '../../../../../types/statisticsInterfaces';
 import {
   HandleGetSettings,
   HandleSaveSettings,
-  ToggleSortDirection,
+  ToggleDisplayDirection,
 } from '../../../settings/store/actions/settingsActionsTypes';
 import { SettingsState } from '../../../settings/store/interfaces/settingsInterfaces';
 
@@ -11,7 +11,7 @@ export interface StatsTableContainerProps {
   pageYear: number;
   pomodoros: PomodorosDoneInDay[];
   settingsState: SettingsState;
-  toggleSortDirection: ToggleSortDirection;
+  toggleDisplayDirection: ToggleDisplayDirection;
   handleGetSettings: HandleGetSettings;
   handleSaveSettings: HandleSaveSettings;
 }

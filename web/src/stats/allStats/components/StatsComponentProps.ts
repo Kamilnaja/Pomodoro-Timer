@@ -2,7 +2,7 @@ import { StatsSearchResult } from '../../../../../types/statisticsInterfaces';
 import {
   HandleGetSettings,
   HandleSaveSettings,
-  ToggleSortDirection,
+  ToggleDisplayDirection,
 } from '../../../settings/store/actions/settingsActionsTypes';
 import { SettingsState } from '../../../settings/store/interfaces/settingsInterfaces';
 import { HandleGetStats } from '../../store/models/StatsInterfaces';
@@ -12,6 +12,6 @@ export type StatsComponentProps = {
   settings: SettingsState;
   handleGetStats: HandleGetStats;
   handleGetSettings: HandleGetSettings;
-  toggleSortDirection: ToggleSortDirection;
+  toggleDisplayDirection: ToggleDisplayDirection;
   handleSaveSettings: HandleSaveSettings;
 };

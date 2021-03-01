@@ -9,7 +9,7 @@ describe('StatsTableContainer', () => {
       pageMonth={11}
       pageYear={2020}
       pomodoros={createPomodorosDoneInDay()}
-      toggleSortDirection={() => {}}
+      toggleDisplayDirection={() => {}}
     />,
   );
 

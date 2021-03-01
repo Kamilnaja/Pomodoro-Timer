@@ -17,7 +17,7 @@ class StatsTableContainer extends React.Component<StatsTableContainerProps> {
           pageYear={this.props.pageYear}
           pomodoros={this.props.pomodoros}
           sortDirection={this.props.settingsState.settings.sortDirection}
-          toggleSortDirection={this.props.toggleSortDirection}
+          toggleDisplayDirection={this.props.toggleDisplayDirection}
         ></StatsTableComponent>
       );
     }

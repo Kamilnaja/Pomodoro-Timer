@@ -10,7 +10,7 @@ export const HIDE_COOKIE_INFO = 'HIDE_COOKIE_INFO';
 
 export type HandleGetSettings = () => void;
 export type HandleSaveSettings = (settings: Settings) => void;
-export type ToggleSortDirection = () => void;
+export type ToggleDisplayDirection = () => void;
 
 interface GetSettingsAction {
   type: typeof GET_SETTINGS;

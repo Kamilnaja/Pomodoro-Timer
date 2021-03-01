@@ -1,5 +1,5 @@
 import { PomodorosDoneInDay } from '../../../../../types/statisticsInterfaces';
-import { ToggleSortDirection } from '../../../settings/store/actions/settingsActionsTypes';
+import { ToggleDisplayDirection } from '../../../settings/store/actions/settingsActionsTypes';
 import { SortDirection } from '../../../settings/store/interfaces/settingsInterfaces';
 
 export interface StatsTableComponentProps {
@@ -7,5 +7,5 @@ export interface StatsTableComponentProps {
   pageYear: number;
   pomodoros: PomodorosDoneInDay[];
   sortDirection: SortDirection;
-  toggleSortDirection: ToggleSortDirection;
+  toggleDisplayDirection: ToggleDisplayDirection;
 }

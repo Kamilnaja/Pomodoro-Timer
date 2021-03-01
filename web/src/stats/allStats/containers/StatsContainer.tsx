@@ -16,7 +16,7 @@ class StatsContainer extends React.Component<StatsContainerProps> {
     this.props.handleGetSettings();
   }
 
-  toggleSortDirection = (): void => {
+  toggleDisplayDirection = (): void => {
     const { settings } = this.props.settingsState;
     this.props.handleSaveSettings({
       ...settings,
@@ -37,7 +37,7 @@ class StatsContainer extends React.Component<StatsContainerProps> {
           settings={this.props.settingsState}
           handleGetSettings={this.props.handleGetSettings}
           handleSaveSettings={this.props.handleSaveSettings}
-          toggleSortDirection={this.toggleSortDirection}
+          toggleDisplayDirection={this.toggleDisplayDirection}
         />
       );
     }
