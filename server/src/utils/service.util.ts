@@ -18,6 +18,10 @@ export const normalizeMonth = (month: string): string => {
   return month.toString().length === 1 ? (month = `${0}${month}`) : month;
 };
 
+export const normalizeDay = (day: string): string => {
+  return day.toString().length === 1 ? (day = `${0}${day}`) : day;
+};
+
 export const isDateError = (year: string, month: string, day?: string): boolean => {
   if (day) {
     return !isYearCorrect(year) || !isMonthCorrect(month) || !isDayCorrect(day);

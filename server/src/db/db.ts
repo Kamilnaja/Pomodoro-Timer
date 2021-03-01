@@ -48,7 +48,7 @@ const queries: TableQuery[] = [
       user_id                    text,
       is_cookie_consent_accepted boolean DEFAULT false,
       is_sound_enabled           boolean DEFAULT true,
-      sort_direction             text DEFAULT 'ASC'
+      display_direction             text DEFAULT 'ASC'
     )`,
     tableName: 'settings',
   },

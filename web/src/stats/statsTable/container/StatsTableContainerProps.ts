@@ -1,17 +1,17 @@
-import { StatsSearchResult } from '../../../../../types/statisticsInterfaces';
+import { PomodorosDoneInDay } from '../../../../../types/statisticsInterfaces';
 import {
   HandleGetSettings,
   HandleSaveSettings,
   ToggleDisplayDirection,
 } from '../../../settings/store/actions/settingsActionsTypes';
 import { SettingsState } from '../../../settings/store/interfaces/settingsInterfaces';
-import { HandleGetStats } from '../../store/models/StatsInterfaces';
 
-export type StatsComponentProps = {
-  stats: StatsSearchResult;
-  settings: SettingsState;
-  handleGetStats: HandleGetStats;
-  handleGetSettings: HandleGetSettings;
+export interface StatsTableContainerProps {
+  pageMonth: number;
+  pageYear: number;
+  pomodoros: PomodorosDoneInDay[];
+  settingsState: SettingsState;
   toggleDisplayDirection: ToggleDisplayDirection;
+  handleGetSettings: HandleGetSettings;
   handleSaveSettings: HandleSaveSettings;
-};
+}

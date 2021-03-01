@@ -10,6 +10,10 @@ export const SAVE_SETTINGS_ERROR = 'SAVE_SETTINGS_ERROR';
 export const HIDE_COOKIE_INFO = 'HIDE_COOKIE_INFO';
 export const SET_DISPLAY_DIRECTION = 'SET_DISPLAY_DIRECTION';
 
+export type HandleGetSettings = () => void;
+export type HandleSaveSettings = (settings: Settings) => void;
+export type ToggleDisplayDirection = () => void;
+
 interface GetSettingsAction {
   type: typeof GET_SETTINGS;
 }

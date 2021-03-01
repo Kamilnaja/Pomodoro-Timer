@@ -1,14 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`StatsTable Should match snapshot 1`] = `
+exports[`StatsTableComponent should match snapshot 1`] = `
 <ForwardRef
+  bordered={true}
   className="stats__table table"
+  hover={true}
+  size="sm"
+  striped={true}
 >
-  <caption>
-    Results from: 
-    12
-    .
-    2020
+  <caption
+    className="table__caption caption"
+  >
+    <h2
+      className="caption__header"
+    >
+      Results from: 
+      2
+      .
+      2020
+    </h2>
+    <ButtonGroup
+      role="group"
+      size="sm"
+      toggle={false}
+      vertical={false}
+    >
+      <Button
+        active={false}
+        disabled={false}
+        onClick={[Function]}
+        variant="primary"
+      >
+        Toogle sort direction
+      </Button>
+      <Button
+        active={false}
+        disabled={false}
+        variant="primary"
+      >
+        Show empty days
+      </Button>
+    </ButtonGroup>
   </caption>
   <thead
     className="table__head"
@@ -368,30 +400,6 @@ exports[`StatsTable Should match snapshot 1`] = `
         className="table__date"
       >
         29
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="29"
-    >
-      <td
-        className="table__date"
-      >
-        30
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="30"
-    >
-      <td
-        className="table__date"
-      >
-        31
       </td>
       <td
         className="table__count"
