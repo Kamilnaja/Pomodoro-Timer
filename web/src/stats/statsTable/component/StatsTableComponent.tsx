@@ -12,7 +12,7 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
   const findPomodorosInDay = (day: number): PomodorosDoneInDay =>
     props.pomodoros.find(v => new Date(v.date).getDate() === day);
 
-  const getIndex = (i: number) => (props.sortDirection === 'DESC' ? daysInCurrentMonth() - i : i + 1);
+  const getIndex = (i: number) => (props.displayDirection === 'DESC' ? daysInCurrentMonth() - i : i + 1);
 
   const longArr = (
     <>
@@ -25,16 +25,16 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
     </>
   );
 
-  const shortArr = (
-    <>
-      {props.pomodoros?.map((v, idx) => (
-        <tr key={idx}>
-          <td className="table__date">{v.date}</td>
-          <td className="table__count">{v.count}</td>
-        </tr>
-      ))}
-    </>
-  );
+  // const shortArr = (
+  //   <>
+  //     {props.pomodoros?.map((v, idx) => (
+  //       <tr key={idx}>
+  //         <td className="table__date">{v.date}</td>
+  //         <td className="table__count">{v.count}</td>
+  //       </tr>
+  //     ))}
+  //   </>
+  // );
 
   return (
     <Table className="stats__table table">

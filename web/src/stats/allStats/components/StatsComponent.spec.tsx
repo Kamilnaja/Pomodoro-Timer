@@ -2,9 +2,12 @@ import { shallow } from 'enzyme';
 import { createStatsSearchResult } from '../../testing/stats.test.data';
 import { StatsComponent } from './StatsComponent';
 import { shallowToJson } from 'enzyme-to-json';
+import { createSettings } from '../../../settings/testing/settings.test.data';
 
 describe('StatsComponent', () => {
-  let statsComponent = shallow(<StatsComponent stats={createStatsSearchResult()} handleGetStats={() => {}} />);
+  let statsComponent = shallow(
+    <StatsComponent stats={createStatsSearchResult()} handleGetStats={() => {}} settings={createSettingsState()} />,
+  );
 
   it('Should match snapshot', () => {
     expect(shallowToJson(statsComponent)).toMatchSnapshot();

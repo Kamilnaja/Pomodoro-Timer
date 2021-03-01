@@ -2,7 +2,7 @@ import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import { QueryConfig, QueryResult } from 'pg';
 import { Settings } from '../../../types/settingsInterface';
-import { SortDirection } from '../../../web/src/settings/store/interfaces/settingsInterfaces';
+import { DisplayDirection } from '../../../web/src/settings/store/interfaces/settingsInterfaces';
 import { pool } from '../db/client';
 import { Request } from '../models/auth/request.interface';
 
@@ -16,7 +16,7 @@ const searchSettingsInDb = async (userId: string, res: Response<Settings>, next:
     text: `SELECT 
     is_cookie_consent_accepted "isCookieConsentAccepted", 
     is_sound_enabled "isSoundEnabled",
-    sort_direction "sortDirection"
+    display_direction "displayDirection"
     FROM settings 
     WHERE user_id = ($1)`,
     values: [userId.toString()],
@@ -45,7 +45,7 @@ export const initSettings = async (userId: string, res: Response<Settings>, next
     res.json({
       isCookieConsentAccepted: false,
       isSoundEnabled: true,
-      sortDirection: SortDirection.DESC,
+      displayDirection: DisplayDirection.DESC,
     });
   } catch (err: any) {
     console.log('error while saving default user settings');
@@ -54,12 +54,12 @@ export const initSettings = async (userId: string, res: Response<Settings>, next
 };
 
 export const handlePostSettings = async (req: Request<Settings>, res: Response, next: NextFunction) => {
-  const { isCookieConsentAccepted, isSoundEnabled, sortDirection } = req.body;
+  const { isCookieConsentAccepted, isSoundEnabled, displayDirection: displayDirection } = req.body;
   const query: QueryConfig = {
     text: `UPDATE settings 
-           SET is_cookie_consent_accepted = ($1), is_sound_enabled = ($2), sort_direction = ($3)
+           SET is_cookie_consent_accepted = ($1), is_sound_enabled = ($2), display_direction = ($3)
            WHERE user_id = ($4)`,
-    values: [isCookieConsentAccepted, isSoundEnabled, sortDirection, req.user.id],
+    values: [isCookieConsentAccepted, isSoundEnabled, displayDirection, req.user.id],
   };
 
   try {

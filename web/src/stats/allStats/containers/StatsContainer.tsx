@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ErrorComponent } from 'shared/error/errorComponent/ErrorComponent';
 import { Loader } from 'shared/loader/Loader';
-import { SettingsState, SortDirection } from '../../../settings/store/interfaces/settingsInterfaces';
+import { SettingsState, DisplayDirection } from '../../../settings/store/interfaces/settingsInterfaces';
 import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
 import { handleGetStatsInPeriod } from '../../store/actions/statsActions';
 import { StatsState } from '../../store/models/StatsInterfaces';
@@ -20,7 +20,8 @@ class StatsContainer extends React.Component<StatsContainerProps> {
     const { settings } = this.props.settingsState;
     this.props.handleSaveSettings({
       ...settings,
-      sortDirection: settings.sortDirection === SortDirection.ASC ? SortDirection.DESC : SortDirection.ASC,
+      displayDirection:
+        settings.displayDirection === DisplayDirection.ASC ? DisplayDirection.DESC : DisplayDirection.ASC,
     });
   };
 

@@ -1,6 +1,6 @@
 import { Settings } from '../../../../../types/settingsInterface';
 
-export enum SortDirection {
+export enum DisplayDirection {
   ASC = 'ASC',
   DESC = 'DESC',
 }

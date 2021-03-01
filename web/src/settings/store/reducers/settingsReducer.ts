@@ -8,7 +8,7 @@ import {
   SAVE_SETTINGS_SUCCESS,
   SettingsActionsType,
 } from '../actions/settingsActionsTypes';
-import { SettingsState, SortDirection } from '../interfaces/settingsInterfaces';
+import { SettingsState, DisplayDirection } from '../interfaces/settingsInterfaces';
 
 const initialState: SettingsState = {
   isLoading: false,
@@ -17,7 +17,7 @@ const initialState: SettingsState = {
   settings: {
     isCookieConsentAccepted: false,
     isSoundEnabled: true,
-    sortDirection: SortDirection.ASC,
+    displayDirection: DisplayDirection.ASC,
   },
 };
 
