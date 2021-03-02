@@ -14,9 +14,10 @@ export const handleGetSettings = async (req: Request<{}>, res: Response, next: N
 const searchSettingsInDb = async (userId: string, res: Response<Settings>, next: NextFunction) => {
   const query: QueryConfig = {
     text: `SELECT 
-    is_cookie_consent_accepted "isCookieConsentAccepted", 
-    is_sound_enabled "isSoundEnabled",
-    display_direction "displayDirection"
+      is_cookie_consent_accepted "isCookieConsentAccepted", 
+      is_sound_enabled "isSoundEnabled",
+      display_direction "displayDirection",
+      display_empty_days "displayEmptyDays"
     FROM settings 
     WHERE user_id = ($1)`,
     values: [userId.toString()],
@@ -46,6 +47,7 @@ export const initSettings = async (userId: string, res: Response<Settings>, next
       isCookieConsentAccepted: false,
       isSoundEnabled: true,
       displayDirection: DisplayDirection.DESC,
+      displayEmptyDays: false,
     });
   } catch (err: any) {
     console.log('error while saving default user settings');
@@ -54,12 +56,16 @@ export const initSettings = async (userId: string, res: Response<Settings>, next
 };
 
 export const handlePostSettings = async (req: Request<Settings>, res: Response, next: NextFunction) => {
-  const { isCookieConsentAccepted, isSoundEnabled, displayDirection: displayDirection } = req.body;
+  const { isCookieConsentAccepted, isSoundEnabled, displayDirection, displayEmptyDays } = req.body;
   const query: QueryConfig = {
     text: `UPDATE settings 
-           SET is_cookie_consent_accepted = ($1), is_sound_enabled = ($2), display_direction = ($3)
-           WHERE user_id = ($4)`,
-    values: [isCookieConsentAccepted, isSoundEnabled, displayDirection, req.user.id],
+           SET 
+              is_cookie_consent_accepted = ($1), 
+              is_sound_enabled = ($2), 
+              display_direction = ($3),
+              display_empty_days = ($4)
+           WHERE user_id = ($5)`,
+    values: [isCookieConsentAccepted, isSoundEnabled, displayDirection, displayEmptyDays, req.user.id],
   };
 
   try {

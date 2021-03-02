@@ -54,6 +54,7 @@ export const StatsComponent = (props: StatsComponentProps) => {
         handleSaveSettings={props.handleSaveSettings}
         settingsState={props.settings}
         toggleDisplayDirection={props.toggleDisplayDirection}
+        toggleDisplayEmptyDays={props.toggleDisplayEmptyDays}
       ></StatsTableContainer>
     </div>
   );

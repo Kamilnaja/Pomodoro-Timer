@@ -28,16 +28,16 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
     </>
   );
 
-  // const shortArr = (
-  //   <>
-  //     {props.pomodoros?.map((v, idx) => (
-  //       <tr key={idx}>
-  //         <td className="table__date">{v.date}</td>
-  //         <td className="table__count">{v.count}</td>
-  //       </tr>
-  //     ))}
-  //   </>
-  // );
+  const shortArr = (
+    <>
+      {props.pomodoros?.map((v, idx) => (
+        <tr key={idx}>
+          <td className="table__date">{v.date}</td>
+          <td className="table__count">{v.count}</td>
+        </tr>
+      ))}
+    </>
+  );
 
   return (
     <Table striped bordered hover className="stats__table table" size="sm">
@@ -48,7 +48,7 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
 
         <ButtonGroup size="sm">
           <Button onClick={() => props.toggleDisplayDirection()}>Toogle sort direction</Button>
-          <Button>Show empty days</Button>
+          <Button onClick={() => props.toggleDisplayEmptyDays()}>Show empty days</Button>
         </ButtonGroup>
       </caption>
       <thead className="table__head">

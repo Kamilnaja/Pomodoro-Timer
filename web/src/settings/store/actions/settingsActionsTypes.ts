@@ -9,10 +9,12 @@ export const SAVE_SETTINGS_SUCCESS = 'SAVE_SETTINGS_SUCCESS';
 export const SAVE_SETTINGS_ERROR = 'SAVE_SETTINGS_ERROR';
 export const HIDE_COOKIE_INFO = 'HIDE_COOKIE_INFO';
 export const SET_DISPLAY_DIRECTION = 'SET_DISPLAY_DIRECTION';
+export const SET_DISPLAY_EMPTY_DAYS = 'SET_DISPLAY_EMPTY_DAYS';
 
 export type HandleGetSettings = () => void;
 export type HandleSaveSettings = (settings: Settings) => void;
 export type ToggleDisplayDirection = () => void;
+export type ToggleDisplayEmptyDays = () => void;
 
 interface GetSettingsAction {
   type: typeof GET_SETTINGS;
@@ -50,6 +52,11 @@ interface SetDisplayDirection {
   payload: DisplayDirection;
 }
 
+interface SetDisplayEmptyDays {
+  type: typeof SET_DISPLAY_EMPTY_DAYS;
+  payload: boolean;
+}
+
 export type SettingsActionsType =
   | GetSettingsAction
   | GetSettingsSuccessAction
@@ -58,4 +65,5 @@ export type SettingsActionsType =
   | SaveSettingsSuccessAction
   | SaveSettingsErrorAction
   | HideCookieInfoAction
-  | SetDisplayDirection;
+  | SetDisplayDirection
+  | SetDisplayEmptyDays;

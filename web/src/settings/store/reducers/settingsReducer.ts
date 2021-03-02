@@ -8,6 +8,7 @@ import {
   SAVE_SETTINGS_SUCCESS,
   SettingsActionsType,
   SET_DISPLAY_DIRECTION,
+  SET_DISPLAY_EMPTY_DAYS,
 } from '../actions/settingsActionsTypes';
 import { SettingsState, DisplayDirection } from '../interfaces/settingsInterfaces';
 
@@ -19,6 +20,7 @@ const initialState: SettingsState = {
     isCookieConsentAccepted: false,
     isSoundEnabled: true,
     displayDirection: DisplayDirection.ASC,
+    displayEmptyDays: false,
   },
 };
 
@@ -71,6 +73,14 @@ export const settingsReducer = (state = initialState, action: SettingsActionsTyp
         settings: {
           ...state.settings,
           displayDirection: action.payload,
+        },
+      };
+    case SET_DISPLAY_EMPTY_DAYS:
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          displayEmptyDays: action.payload,
         },
       };
     default:

@@ -25,6 +25,14 @@ class StatsContainer extends React.Component<StatsContainerProps> {
     });
   };
 
+  toggleDisplayEmptyDays = (): void => {
+    const { settings } = this.props.settingsState;
+    this.props.handleSaveSettings({
+      ...settings,
+      displayEmptyDays: !settings.displayEmptyDays,
+    });
+  };
+
   render = () => {
     if (this.props.stats.error) {
       return <ErrorComponent />;
@@ -39,6 +47,7 @@ class StatsContainer extends React.Component<StatsContainerProps> {
           handleGetSettings={this.props.handleGetSettings}
           handleSaveSettings={this.props.handleSaveSettings}
           toggleDisplayDirection={this.toggleDisplayDirection}
+          toggleDisplayEmptyDays={this.toggleDisplayEmptyDays}
         />
       );
     }

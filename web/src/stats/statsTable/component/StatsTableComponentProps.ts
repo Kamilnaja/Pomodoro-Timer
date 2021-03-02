@@ -1,5 +1,5 @@
 import { PomodorosDoneInDay } from '../../../../../types/statisticsInterfaces';
-import { ToggleDisplayDirection } from '../../../settings/store/actions/settingsActionsTypes';
+import { ToggleDisplayDirection, ToggleDisplayEmptyDays } from '../../../settings/store/actions/settingsActionsTypes';
 import { DisplayDirection } from '../../../settings/store/interfaces/settingsInterfaces';
 
 export interface StatsTableComponentProps {
@@ -8,4 +8,5 @@ export interface StatsTableComponentProps {
   pomodoros: PomodorosDoneInDay[];
   displayDirection: DisplayDirection;
   toggleDisplayDirection: ToggleDisplayDirection;
+  toggleDisplayEmptyDays: ToggleDisplayEmptyDays;
 }

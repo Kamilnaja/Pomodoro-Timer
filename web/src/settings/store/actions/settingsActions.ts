@@ -13,6 +13,7 @@ import {
   SAVE_SETTINGS_SUCCESS,
   SET_DISPLAY_DIRECTION,
   SettingsActionsType,
+  SET_DISPLAY_EMPTY_DAYS,
 } from './settingsActionsTypes';
 
 export const getSettings = (): SettingsActionsType => ({
@@ -48,6 +49,11 @@ export const hideCookieInfo = (): SettingsActionsType => ({
 
 export const toggleDisplayDirection = (payload: DisplayDirection): SettingsActionsType => ({
   type: SET_DISPLAY_DIRECTION,
+  payload,
+});
+
+export const toggleDisplayEmptyDays = (payload: boolean): SettingsActionsType => ({
+  type: SET_DISPLAY_EMPTY_DAYS,
   payload,
 });
 
