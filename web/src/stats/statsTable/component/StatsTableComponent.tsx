@@ -11,7 +11,7 @@ export const daysInMonth = (props: StatsTableComponentProps): number =>
   new Date(props.pageYear, props.pageMonth + 1, 0).getDate();
 
 export const getPomodoroEntryAtIndex = (i: number, props: StatsTableComponentProps) =>
-  props.displayDirection === 'DESC' ? daysInMonth(props) - i : i + 1;
+  props.settings.displayDirection === 'DESC' ? daysInMonth(props) - i : i + 1;
 
 export const findPomodorosInDay = (day: number, props: StatsTableComponentProps): PomodorosDoneInDay =>
   props.pomodoros.find(v => new Date(v.date).getDate() === day);
@@ -45,7 +45,6 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
         <h2 className="caption__header">
           Results from: {props.pageMonth + 1}.{props.pageYear}
         </h2>
-
         <ButtonGroup size="sm">
           <Button onClick={() => props.toggleDisplayDirection()}>Toogle sort direction</Button>
           <Button onClick={() => props.toggleDisplayEmptyDays()}>Show empty days</Button>

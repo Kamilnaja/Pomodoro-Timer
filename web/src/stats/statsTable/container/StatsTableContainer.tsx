@@ -16,7 +16,7 @@ class StatsTableContainer extends React.Component<StatsTableContainerProps> {
           pageMonth={this.props.pageMonth}
           pageYear={this.props.pageYear}
           pomodoros={this.props.pomodoros}
-          displayDirection={this.props.settingsState.settings.displayDirection}
+          settings={this.props.settingsState.settings}
           toggleDisplayDirection={this.props.toggleDisplayDirection}
           toggleDisplayEmptyDays={this.props.toggleDisplayEmptyDays}
         ></StatsTableComponent>
