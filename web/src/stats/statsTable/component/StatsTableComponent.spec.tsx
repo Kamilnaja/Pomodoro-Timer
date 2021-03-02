@@ -3,7 +3,6 @@ import { shallowToJson } from 'enzyme-to-json';
 import { DisplayDirection } from '../../../settings/store/interfaces/settingsInterfaces';
 import { createDisplayDirection } from '../../../settings/testing/settings.test.data';
 import { createPomodorosDoneInDay } from '../../testing/stats.test.data';
-import { StatsTableContainerProps } from '../container/StatsTableContainerProps';
 import { daysInMonth, findPomodorosInDay, getPomodoroEntryAtIndex, StatsTableComponent } from './StatsTableComponent';
 import { StatsTableComponentProps } from './StatsTableComponentProps';
 
@@ -96,7 +95,7 @@ describe('StatsTableComponent', () => {
             count: 3,
           },
         ],
-      },
+      } as StatsTableComponentProps,
       3,
     ],
     [
@@ -111,7 +110,7 @@ describe('StatsTableComponent', () => {
             count: 30,
           },
         ],
-      },
+      } as StatsTableComponentProps,
       30,
     ],
   ])('should return find number of pomodoros for index: %s, props: %o, result: %s', (index, props, count) => {
