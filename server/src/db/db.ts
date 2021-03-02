@@ -5,7 +5,7 @@ const createTableSql = 'CREATE TABLE IF NOT EXISTS';
 const queries: TableQuery[] = [
   {
     query: `pomodoros (
-      user_id integer,
+      user_id    integer,
       created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
     )`,
     tableName: 'pomodoros',
@@ -13,7 +13,7 @@ const queries: TableQuery[] = [
   {
     query: `users (
         id            SERIAL PRIMARY KEY,
-        date_created  date,
+        date_created  DATE DEFAULT CURRENT_DATE,
         login         text UNIQUE,
         email         text UNIQUE,
         password      text NOT NULL
@@ -48,7 +48,7 @@ const queries: TableQuery[] = [
       user_id                    text,
       is_cookie_consent_accepted boolean DEFAULT false,
       is_sound_enabled           boolean DEFAULT true,
-      display_direction             text DEFAULT 'ASC'
+      display_direction          text DEFAULT 'ASC'
     )`,
     tableName: 'settings',
   },
