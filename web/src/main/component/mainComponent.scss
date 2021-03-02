@@ -1,5 +1,9 @@
 @import '~bootstrap/scss/bootstrap';
 
+body {
+  overflow: scroll;
+}
+
 .app {
   background-color: ivory;
   min-height: 100vh;

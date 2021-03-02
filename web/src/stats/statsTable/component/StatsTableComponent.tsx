@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, ButtonGroup, Table } from 'react-bootstrap';
 import { PomodorosDoneInDay } from '../../../../../types/statisticsInterfaces';
+import { DisplayDirection } from '../../../settings/store/interfaces/settingsInterfaces';
 import './StatsTableComponent.scss';
 import { StatsTableComponentProps } from './StatsTableComponentProps';
 /**
@@ -16,6 +17,14 @@ export const getPomodoroEntryAtIndex = (i: number, props: StatsTableComponentPro
 export const findPomodorosInDay = (day: number, props: StatsTableComponentProps): PomodorosDoneInDay =>
   props.pomodoros.find(v => new Date(v.date).getDate() === day);
 
+export const parseDateToDay = (date: string) => new Date(date).getDate();
+
+export const pomodorosArray = (props: StatsTableComponentProps): PomodorosDoneInDay[] => {
+  return props.settings.displayDirection === DisplayDirection.DESC
+    ? props.pomodoros
+    : props.pomodoros.slice(0).reverse();
+};
+
 export const StatsTableComponent = (props: StatsTableComponentProps) => {
   const longArr = (
     <>
@@ -30,9 +39,9 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
 
   const shortArr = (
     <>
-      {props.pomodoros?.map((v, idx) => (
+      {pomodorosArray(props).map((v, idx) => (
         <tr key={idx}>
-          <td className="table__date">{v.date}</td>
+          <td className="table__date">{parseDateToDay(v.date)}</td>
           <td className="table__count">{v.count}</td>
         </tr>
       ))}
@@ -47,7 +56,9 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
         </h2>
         <ButtonGroup size="sm">
           <Button onClick={() => props.toggleDisplayDirection()}>Toogle sort direction</Button>
-          <Button onClick={() => props.toggleDisplayEmptyDays()}>Show empty days</Button>
+          <Button onClick={() => props.toggleDisplayEmptyDays()}>
+            Show {props.settings.displayEmptyDays ? 'empty' : 'all'} days
+          </Button>
         </ButtonGroup>
       </caption>
       <thead className="table__head">
@@ -56,7 +67,7 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
           <th>Number of pomodoros</th>
         </tr>
       </thead>
-      <tbody>{longArr}</tbody>
+      <tbody>{props.settings.displayEmptyDays ? longArr : shortArr}</tbody>
     </Table>
   );
 };
