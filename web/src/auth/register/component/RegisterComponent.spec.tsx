@@ -4,7 +4,7 @@ import { createAuthState } from '../../testing/auth.testing.data';
 import { RegisterComponent } from './RegisterComponent';
 
 describe('RegisterComponent', () => {
-  let registerComponent = shallow(<RegisterComponent handleSubmit={() => {}} formState={createAuthState()} />);
+  let registerComponent = shallow(<RegisterComponent handleSubmit={() => {}} formState={createAuthState(false)} />);
 
   it('Should match snapshot', () => {
     expect(shallowToJson(registerComponent)).toMatchSnapshot();

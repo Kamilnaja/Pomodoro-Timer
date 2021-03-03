@@ -86,7 +86,9 @@ export const RegisterComponent = (props: RegisterComponentProps) => {
                 name="repeatedPassword"
                 id="repeatedPassword"
                 type="password"
-                ref={register({ validate: value => value === password.current || '😨The passwords do not match' })}
+                ref={register({
+                  validate: (value: {}) => value === password.current || '😨The passwords do not match',
+                })}
                 required
               />
               {errors.repeatedPassword && (
