@@ -5,6 +5,7 @@ export const createSettings = (): Settings => ({
   isCookieConsentAccepted: true,
   isSoundEnabled: true,
   displayDirection: DisplayDirection.ASC,
+  displayEmptyDays: false,
 });
 
 export const createError = (): Error => ({

@@ -1,7 +1,11 @@
 import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 import { DisplayDirection } from '../../../settings/store/interfaces/settingsInterfaces';
-import { createDisplayDirection } from '../../../settings/testing/settings.test.data';
+import {
+  createDisplayDirection,
+  createSettings,
+  createSettingsState,
+} from '../../../settings/testing/settings.test.data';
 import { createPomodorosDoneInDay } from '../../testing/stats.test.data';
 import { daysInMonth, findPomodorosInDay, getPomodoroEntryAtIndex, StatsTableComponent } from './StatsTableComponent';
 import { StatsTableComponentProps } from './StatsTableComponentProps';
@@ -17,8 +21,9 @@ describe('StatsTableComponent', () => {
       pageYear={pageYear}
       pageMonth={pageMonth}
       toggleDisplayDirection={toggleDisplayDirection}
+      toggleDisplayEmptyDays={() => {}}
       pomodoros={pomodoros}
-      displayDirection={displayDirection}
+      settings={createSettings()}
     />,
   );
 
@@ -37,18 +42,26 @@ describe('StatsTableComponent', () => {
   });
 
   it.each([
-    [10, { displayDirection: DisplayDirection.ASC, pageYear: 2020, pageMonth: 1 }, 11],
-    [0, { displayDirection: DisplayDirection.ASC, pageYear: 2020, pageMonth: 1 }, 1],
-    [1, { displayDirection: DisplayDirection.ASC, pageYear: 2020, pageMonth: 1 }, 2],
-    [30, { displayDirection: DisplayDirection.ASC, pageYear: 2020, pageMonth: 1 }, 31],
-    [10, { displayDirection: DisplayDirection.ASC, pageYear: 2020, pageMonth: 2 }, 11],
-    [0, { displayDirection: DisplayDirection.ASC, pageYear: 2020, pageMonth: 3 }, 1],
-    [1, { displayDirection: DisplayDirection.ASC, pageYear: 2020, pageMonth: 4 }, 2],
-    [30, { displayDirection: DisplayDirection.ASC, pageYear: 2020, pageMonth: 12 }, 31],
-    [10, { displayDirection: DisplayDirection.DESC, pageYear: 2020, pageMonth: 1 }, 19],
-    [0, { displayDirection: DisplayDirection.DESC, pageYear: 2020, pageMonth: 1 }, 29],
-    [1, { displayDirection: DisplayDirection.DESC, pageYear: 2020, pageMonth: 1 }, 28],
-    [28, { displayDirection: DisplayDirection.DESC, pageYear: 2020, pageMonth: 1 }, 1],
+    [
+      10,
+      {
+        settings: { displayDirection: DisplayDirection.ASC },
+        pageYear: 2020,
+        pageMonth: 1,
+      },
+      11,
+    ],
+    [0, { settings: { displayDirection: DisplayDirection.ASC }, pageYear: 2020, pageMonth: 1 }, 1],
+    [1, { settings: { displayDirection: DisplayDirection.ASC }, pageYear: 2020, pageMonth: 1 }, 2],
+    [30, { settings: { displayDirection: DisplayDirection.ASC }, pageYear: 2020, pageMonth: 1 }, 31],
+    [10, { settings: { displayDirection: DisplayDirection.ASC }, pageYear: 2020, pageMonth: 2 }, 11],
+    [0, { settings: { displayDirection: DisplayDirection.ASC }, pageYear: 2020, pageMonth: 3 }, 1],
+    [1, { settings: { displayDirection: DisplayDirection.ASC }, pageYear: 2020, pageMonth: 4 }, 2],
+    [30, { settings: { displayDirection: DisplayDirection.ASC }, pageYear: 2020, pageMonth: 12 }, 31],
+    [10, { settings: { displayDirection: DisplayDirection.DESC }, pageYear: 2020, pageMonth: 1 }, 19],
+    [0, { settings: { displayDirection: DisplayDirection.DESC }, pageYear: 2020, pageMonth: 1 }, 29],
+    [1, { settings: { displayDirection: DisplayDirection.DESC }, pageYear: 2020, pageMonth: 1 }, 28],
+    [28, { settings: { displayDirection: DisplayDirection.DESC }, pageYear: 2020, pageMonth: 1 }, 1],
   ])('should return index for day: %s for props: %o', (index, props, res) => {
     expect(getPomodoroEntryAtIndex(index, props as StatsTableComponentProps)).toBe(res);
   });
@@ -57,7 +70,9 @@ describe('StatsTableComponent', () => {
     [
       10,
       {
-        displayDirection: DisplayDirection.ASC,
+        settings: {
+          displayDirection: DisplayDirection.ASC,
+        },
         pageYear: 2020,
         pageMonth: 1,
         pomodoros: [
@@ -72,7 +87,9 @@ describe('StatsTableComponent', () => {
     [
       0,
       {
-        displayDirection: DisplayDirection.ASC,
+        settings: {
+          displayDirection: DisplayDirection.ASC,
+        },
         pageYear: 2020,
         pageMonth: 1,
         pomodoros: [],
@@ -82,7 +99,9 @@ describe('StatsTableComponent', () => {
     [
       21,
       {
-        displayDirection: DisplayDirection.ASC,
+        settings: {
+          displayDirection: DisplayDirection.ASC,
+        },
         pageYear: 2020,
         pageMonth: 1,
         pomodoros: [
@@ -95,13 +114,15 @@ describe('StatsTableComponent', () => {
             count: 3,
           },
         ],
-      } as StatsTableComponentProps,
+      },
       3,
     ],
     [
       30,
       {
-        displayDirection: DisplayDirection.ASC,
+        settings: {
+          displayDirection: DisplayDirection.ASC,
+        },
         pageYear: 2020,
         pageMonth: 1,
         pomodoros: [
@@ -110,7 +131,7 @@ describe('StatsTableComponent', () => {
             count: 30,
           },
         ],
-      } as StatsTableComponentProps,
+      },
       30,
     ],
   ])('should return find number of pomodoros for index: %s, props: %o, result: %s', (index, props, count) => {
