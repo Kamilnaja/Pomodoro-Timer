@@ -8,7 +8,7 @@ Array [
     41:40
   </p>,
   <button
-    className="btn btn-outline-primary"
+    className="btn--pause btn btn-outline-primary"
     disabled={false}
     onClick={[Function]}
     type="button"
