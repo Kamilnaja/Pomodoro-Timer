@@ -90,11 +90,11 @@ class CounterContainer extends React.Component<CounterComponentProps> {
       <>
         <p className="time text-light d-flex align-items-center">{msToTime(this.props.counter.counterTime)}</p>
         {isAnyTimerRunning(this.props.counter.counterState) ? (
-          <Button variant="outline-primary" onClick={this.handlePauseCounter}>
+          <Button className="btn--pause" variant="outline-primary" onClick={this.handlePauseCounter}>
             Pause timer
           </Button>
         ) : (
-          <Button variant="success" onClick={this.handleStartCounter}>
+          <Button className="btn--start" variant="success" onClick={this.handleStartCounter}>
             Start timer
           </Button>
         )}
