@@ -6,6 +6,7 @@ module.exports = {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },
   snapshotSerializers: ['enzyme-to-json/serializer'],
+  setupFiles: ['jsdom-worker'],
   setupFilesAfterEnv: ['<rootDir>/src/setupEnzyme.ts'],
   moduleNameMapper: {
     '^.+\\.(css|less|scss)$': 'identity-obj-proxy',

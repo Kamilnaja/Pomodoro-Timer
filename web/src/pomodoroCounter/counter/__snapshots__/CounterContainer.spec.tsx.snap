@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CounterContainer Should match snapshot 1`] = `
+Array [
+  <p
+    className="time text-light d-flex align-items-center"
+  >
+    41:40
+  </p>,
+  <button
+    className="btn btn-outline-primary"
+    disabled={false}
+    onClick={[Function]}
+    type="button"
+  >
+    Pause timer
+  </button>,
+]
+`;

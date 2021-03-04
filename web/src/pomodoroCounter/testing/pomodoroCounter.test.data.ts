@@ -3,6 +3,7 @@ import { CounterState } from '../store/enums/CounterState';
 import { CurrentTimer, PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 
 export const createCurrentState = (): CounterState => CounterState.END;
+
 export const createAuth = (): AuthState => ({
   error: null,
   isLoading: false,
@@ -10,8 +11,11 @@ export const createAuth = (): AuthState => ({
   isSuccess: false,
   token: 'asdf',
 });
-export const createPomodoroCounterState = (): PomodoroCounterState => ({
-  counterState: createCurrentState(),
+
+export const createPomodoroCounterState = (
+  counterState: CounterState = CounterState.RUNNING,
+): PomodoroCounterState => ({
+  counterState,
   counterTime: 100500100900,
   currentTimer: CurrentTimer.POMODORO,
 });
