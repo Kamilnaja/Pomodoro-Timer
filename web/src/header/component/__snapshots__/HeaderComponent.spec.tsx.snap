@@ -58,10 +58,93 @@ exports[`HeaderComponent Should match snapshot 1`] = `
                 "render": [Function],
               }
             }
+            className="button--logout"
             disabled={false}
             onClick={[Function]}
           >
             Logout
+          </NavLink>
+        </Nav>
+      </NavbarCollapse>
+    </Navbar>
+    <Switch>
+      <Route
+        path="/taskAndNotes"
+      >
+        <Connect(TaskAndNotesContainer) />
+      </Route>
+      <Route
+        path="/settings"
+      >
+        <SettingsContainer />
+      </Route>
+      <Route
+        path="/stats"
+      >
+        <Connect(StatsContainer) />
+      </Route>
+      <Route
+        path="/"
+      >
+        <Connect(PomodoroCounterScreen) />
+      </Route>
+    </Switch>
+  </Container>
+</BrowserRouter>
+`;
+
+exports[`HeaderComponent Should match snapshot 2`] = `
+<BrowserRouter>
+  <Container
+    fluid={false}
+  >
+    <Navbar
+      collapseOnSelect={false}
+      expand={true}
+      variant="light"
+    >
+      <NavbarBrand
+        href="/"
+      >
+        Tomatodone
+      </NavbarBrand>
+      <NavbarToggle
+        aria-controls="basic-navbar-nav"
+        label="Toggle navigation"
+      />
+      <NavbarCollapse
+        id="basic-navbar-nav"
+      >
+        <Nav
+          className="mr-auto"
+          fill={false}
+          justify={false}
+        >
+          <NavLink
+            as={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "render": [Function],
+              }
+            }
+            className="button--login"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Login
+          </NavLink>
+          <NavLink
+            as={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "render": [Function],
+              }
+            }
+            className="button--register"
+            disabled={false}
+            onClick={[Function]}
+          >
+            Register
           </NavLink>
         </Nav>
       </NavbarCollapse>

@@ -1,11 +1,7 @@
 import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 import { DisplayDirection } from '../../../settings/store/interfaces/settingsInterfaces';
-import {
-  createDisplayDirection,
-  createSettings,
-  createSettingsState,
-} from '../../../settings/testing/settings.test.data';
+import { createSettings } from '../../../settings/testing/settings.test.data';
 import { createPomodorosDoneInDay } from '../../testing/stats.test.data';
 import { daysInMonth, findPomodorosInDay, getPomodoroEntryAtIndex, StatsTableComponent } from './StatsTableComponent';
 import { StatsTableComponentProps } from './StatsTableComponentProps';
@@ -14,7 +10,6 @@ describe('StatsTableComponent', () => {
   const pomodoros = createPomodorosDoneInDay();
   const pageMonth = 1;
   const pageYear = 2020;
-  const displayDirection = createDisplayDirection();
   const toggleDisplayDirection = () => {};
   const wrapper = shallow(
     <StatsTableComponent

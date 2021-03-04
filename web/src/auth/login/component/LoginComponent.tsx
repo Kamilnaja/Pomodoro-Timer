@@ -53,7 +53,7 @@ export const LoginComponent = (props: LoginComponentProps) => {
               />
               {errors.password && <ValidationMessage type={'error'} message={'😱Password is required'} />}
             </div>
-            <button className="form__button" value="Wyślij" type="submit">
+            <button className="form__button" type="submit">
               Submit
             </button>
           </form>

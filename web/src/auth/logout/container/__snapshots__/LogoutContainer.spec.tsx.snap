@@ -19,7 +19,7 @@ exports[`LogoutContainer Should match the snapshot 1`] = `
       No
     </button>
     <button
-      className="logout__button logout__button-yes"
+      className="logout__button logout__button--yes"
       onClick={[Function]}
     >
       Yes

@@ -55,7 +55,7 @@ exports[`MainContainer Should match the snapshot 1`] = `
             Settings
           </a>
           <a
-            className="nav-link"
+            className="button--logout nav-link"
             data-rb-event-key={null}
             href="#"
             onClick={[Function]}

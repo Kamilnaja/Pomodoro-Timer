@@ -19,15 +19,21 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
           <Nav className="mr-auto">
             {!props.isLoggedIn ? (
               <>
-                <Nav.Link onClick={() => props.handleOpenModal(ModalType.LOGIN)}>Login</Nav.Link>
-                <Nav.Link onClick={() => props.handleOpenModal(ModalType.REGISTER)}>Register</Nav.Link>
+                <Nav.Link className="button--login" onClick={() => props.handleOpenModal(ModalType.LOGIN)}>
+                  Login
+                </Nav.Link>
+                <Nav.Link className="button--register" onClick={() => props.handleOpenModal(ModalType.REGISTER)}>
+                  Register
+                </Nav.Link>
               </>
             ) : (
               <>
                 {/* <Nav.Link href="/taskAndNotes">Tasks and notes</Nav.Link> */}
                 <Nav.Link href="/stats">Stats</Nav.Link>
                 <Nav.Link href="/settings">Settings</Nav.Link>
-                <Nav.Link onClick={() => props.handleOpenModal(ModalType.LOGOUT)}>Logout</Nav.Link>
+                <Nav.Link className="button--logout" onClick={() => props.handleOpenModal(ModalType.LOGOUT)}>
+                  Logout
+                </Nav.Link>
               </>
             )}
           </Nav>

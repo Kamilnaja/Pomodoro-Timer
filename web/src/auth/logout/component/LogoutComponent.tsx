@@ -8,7 +8,7 @@ export const LogoutComponent = (props: LogoutComponentProps) => (
       <button className="logout__button logout__button--no" onClick={() => props.handleCancel()}>
         No
       </button>
-      <button className="logout__button logout__button-yes" onClick={() => props.handleLogout()}>
+      <button className="logout__button logout__button--yes" onClick={() => props.handleLogout()}>
         Yes
       </button>
     </div>

@@ -48,7 +48,6 @@ exports[`LoginComponent Should match snapshot when form is visible 1`] = `
       <button
         className="form__button"
         type="submit"
-        value="Wyślij"
       >
         Submit
       </button>
@@ -120,7 +119,6 @@ exports[`LoginComponent should submit form 1`] = `
       <button
         className="form__button"
         type="submit"
-        value="Wyślij"
       >
         Submit
       </button>
