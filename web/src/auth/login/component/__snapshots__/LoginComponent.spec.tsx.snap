@@ -1,6 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoginComponent Should match snapshot 1`] = `
+exports[`LoginComponent Should match snapshot when form is visible 1`] = `
+<div
+  className="login"
+>
+  <div>
+    <form
+      className="login__form form"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form__row"
+      >
+        <label
+          className="form__label label"
+          htmlFor="login"
+        >
+          User login
+        </label>
+        <input
+          autoFocus={true}
+          className="form__input input"
+          id="login"
+          name="login"
+          placeholder="John Doe"
+          required={true}
+          type="text"
+        />
+      </div>
+      <div
+        className="form__row"
+      >
+        <label
+          className="form__label label"
+          htmlFor="password"
+        >
+          Password
+        </label>
+        <input
+          className="form__input input"
+          id="password"
+          name="password"
+          required={true}
+          type="password"
+        />
+      </div>
+      <button
+        className="form__button"
+        type="submit"
+        value="Wyślij"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`LoginComponent Should match snapshot when is success 1`] = `
 <div
   className="login"
 >
@@ -11,6 +68,63 @@ exports[`LoginComponent Should match snapshot 1`] = `
       message="😀Login successfull, now close the modal and do some work!"
       type="success"
     />
+  </div>
+</div>
+`;
+
+exports[`LoginComponent should submit form 1`] = `
+<div
+  className="login"
+>
+  <div>
+    <form
+      className="login__form form"
+      onSubmit={[Function]}
+    >
+      <div
+        className="form__row"
+      >
+        <label
+          className="form__label label"
+          htmlFor="login"
+        >
+          User login
+        </label>
+        <input
+          autoFocus={true}
+          className="form__input input"
+          id="login"
+          name="login"
+          placeholder="John Doe"
+          required={true}
+          type="text"
+        />
+      </div>
+      <div
+        className="form__row"
+      >
+        <label
+          className="form__label label"
+          htmlFor="password"
+        >
+          Password
+        </label>
+        <input
+          className="form__input input"
+          id="password"
+          name="password"
+          required={true}
+          type="password"
+        />
+      </div>
+      <button
+        className="form__button"
+        type="submit"
+        value="Wyślij"
+      >
+        Submit
+      </button>
+    </form>
   </div>
 </div>
 `;

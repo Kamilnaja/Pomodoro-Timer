@@ -2,7 +2,6 @@
 
 exports[`StatsTableContainer Should match snapshot 1`] = `
 <StatsTableComponent
-  displayDirection="ASC"
   pageMonth={11}
   pageYear={2020}
   pomodoros={
@@ -93,6 +92,15 @@ exports[`StatsTableContainer Should match snapshot 1`] = `
       },
     ]
   }
+  settings={
+    Object {
+      "displayDirection": "ASC",
+      "displayEmptyDays": false,
+      "isCookieConsentAccepted": true,
+      "isSoundEnabled": true,
+    }
+  }
   toggleDisplayDirection={[Function]}
+  toggleDisplayEmptyDays={[Function]}
 />
 `;

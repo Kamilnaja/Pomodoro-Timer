@@ -6,11 +6,11 @@ export const createAuthError: AuthError = {
   message: 'Gerarahia',
 };
 
-export const createAuthState = (): AuthState => ({
-  error: createAuthError,
-  isLoading: true,
-  isLoggedIn: true,
-  isSuccess: true,
+export const createAuthState = (isSuccess: boolean, isLoading?: boolean): AuthState => ({
+  error: null,
+  isLoading,
+  isLoggedIn: false,
+  isSuccess,
   token: '***** ***',
 });
 

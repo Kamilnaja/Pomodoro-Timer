@@ -36,9 +36,12 @@ exports[`StatsTableComponent should match snapshot 1`] = `
       <Button
         active={false}
         disabled={false}
+        onClick={[Function]}
         variant="primary"
       >
-        Show empty days
+        Show 
+        all
+         days
       </Button>
     </ButtonGroup>
   </caption>
@@ -61,14 +64,156 @@ exports[`StatsTableComponent should match snapshot 1`] = `
       <td
         className="table__date"
       >
-        1
+        2
       </td>
       <td
         className="table__count"
-      />
+      >
+        17
+      </td>
     </tr>
     <tr
       key="1"
+    >
+      <td
+        className="table__date"
+      >
+        2
+      </td>
+      <td
+        className="table__count"
+      >
+        15
+      </td>
+    </tr>
+    <tr
+      key="2"
+    >
+      <td
+        className="table__date"
+      >
+        2
+      </td>
+      <td
+        className="table__count"
+      >
+        16
+      </td>
+    </tr>
+    <tr
+      key="3"
+    >
+      <td
+        className="table__date"
+      >
+        2
+      </td>
+      <td
+        className="table__count"
+      >
+        12
+      </td>
+    </tr>
+    <tr
+      key="4"
+    >
+      <td
+        className="table__date"
+      >
+        2
+      </td>
+      <td
+        className="table__count"
+      >
+        13
+      </td>
+    </tr>
+    <tr
+      key="5"
+    >
+      <td
+        className="table__date"
+      >
+        2
+      </td>
+      <td
+        className="table__count"
+      >
+        16
+      </td>
+    </tr>
+    <tr
+      key="6"
+    >
+      <td
+        className="table__date"
+      >
+        2
+      </td>
+      <td
+        className="table__count"
+      >
+        14
+      </td>
+    </tr>
+    <tr
+      key="7"
+    >
+      <td
+        className="table__date"
+      >
+        2
+      </td>
+      <td
+        className="table__count"
+      >
+        18
+      </td>
+    </tr>
+    <tr
+      key="8"
+    >
+      <td
+        className="table__date"
+      >
+        2
+      </td>
+      <td
+        className="table__count"
+      >
+        13
+      </td>
+    </tr>
+    <tr
+      key="9"
+    >
+      <td
+        className="table__date"
+      >
+        2
+      </td>
+      <td
+        className="table__count"
+      >
+        13
+      </td>
+    </tr>
+    <tr
+      key="10"
+    >
+      <td
+        className="table__date"
+      >
+        2
+      </td>
+      <td
+        className="table__count"
+      >
+        11
+      </td>
+    </tr>
+    <tr
+      key="11"
     >
       <td
         className="table__date"
@@ -82,136 +227,18 @@ exports[`StatsTableComponent should match snapshot 1`] = `
       </td>
     </tr>
     <tr
-      key="2"
-    >
-      <td
-        className="table__date"
-      >
-        3
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="3"
-    >
-      <td
-        className="table__date"
-      >
-        4
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="4"
-    >
-      <td
-        className="table__date"
-      >
-        5
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="5"
-    >
-      <td
-        className="table__date"
-      >
-        6
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="6"
-    >
-      <td
-        className="table__date"
-      >
-        7
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="7"
-    >
-      <td
-        className="table__date"
-      >
-        8
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="8"
-    >
-      <td
-        className="table__date"
-      >
-        9
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="9"
-    >
-      <td
-        className="table__date"
-      >
-        10
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="10"
-    >
-      <td
-        className="table__date"
-      >
-        11
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="11"
-    >
-      <td
-        className="table__date"
-      >
-        12
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
       key="12"
     >
       <td
         className="table__date"
       >
-        13
+        NaN
       </td>
       <td
         className="table__count"
-      />
+      >
+        14
+      </td>
     </tr>
     <tr
       key="13"
@@ -219,11 +246,13 @@ exports[`StatsTableComponent should match snapshot 1`] = `
       <td
         className="table__date"
       >
-        14
+        NaN
       </td>
       <td
         className="table__count"
-      />
+      >
+        13
+      </td>
     </tr>
     <tr
       key="14"
@@ -231,11 +260,13 @@ exports[`StatsTableComponent should match snapshot 1`] = `
       <td
         className="table__date"
       >
-        15
+        NaN
       </td>
       <td
         className="table__count"
-      />
+      >
+        16
+      </td>
     </tr>
     <tr
       key="15"
@@ -243,11 +274,13 @@ exports[`StatsTableComponent should match snapshot 1`] = `
       <td
         className="table__date"
       >
-        16
+        NaN
       </td>
       <td
         className="table__count"
-      />
+      >
+        11
+      </td>
     </tr>
     <tr
       key="16"
@@ -255,11 +288,13 @@ exports[`StatsTableComponent should match snapshot 1`] = `
       <td
         className="table__date"
       >
-        17
+        NaN
       </td>
       <td
         className="table__count"
-      />
+      >
+        18
+      </td>
     </tr>
     <tr
       key="17"
@@ -267,11 +302,13 @@ exports[`StatsTableComponent should match snapshot 1`] = `
       <td
         className="table__date"
       >
-        18
+        NaN
       </td>
       <td
         className="table__count"
-      />
+      >
+        19
+      </td>
     </tr>
     <tr
       key="18"
@@ -279,11 +316,13 @@ exports[`StatsTableComponent should match snapshot 1`] = `
       <td
         className="table__date"
       >
-        19
+        NaN
       </td>
       <td
         className="table__count"
-      />
+      >
+        16
+      </td>
     </tr>
     <tr
       key="19"
@@ -291,11 +330,13 @@ exports[`StatsTableComponent should match snapshot 1`] = `
       <td
         className="table__date"
       >
-        20
+        NaN
       </td>
       <td
         className="table__count"
-      />
+      >
+        15
+      </td>
     </tr>
     <tr
       key="20"
@@ -303,107 +344,13 @@ exports[`StatsTableComponent should match snapshot 1`] = `
       <td
         className="table__date"
       >
-        21
+        NaN
       </td>
       <td
         className="table__count"
-      />
-    </tr>
-    <tr
-      key="21"
-    >
-      <td
-        className="table__date"
       >
-        22
+        8
       </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="22"
-    >
-      <td
-        className="table__date"
-      >
-        23
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="23"
-    >
-      <td
-        className="table__date"
-      >
-        24
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="24"
-    >
-      <td
-        className="table__date"
-      >
-        25
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="25"
-    >
-      <td
-        className="table__date"
-      >
-        26
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="26"
-    >
-      <td
-        className="table__date"
-      >
-        27
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="27"
-    >
-      <td
-        className="table__date"
-      >
-        28
-      </td>
-      <td
-        className="table__count"
-      />
-    </tr>
-    <tr
-      key="28"
-    >
-      <td
-        className="table__date"
-      >
-        29
-      </td>
-      <td
-        className="table__count"
-      />
     </tr>
   </tbody>
 </ForwardRef>

@@ -129,12 +129,14 @@ exports[`StatsComponent Should match snapshot 1`] = `
         "isLoading": false,
         "settings": Object {
           "displayDirection": "ASC",
+          "displayEmptyDays": false,
           "isCookieConsentAccepted": true,
           "isSoundEnabled": true,
         },
       }
     }
     toggleDisplayDirection={[Function]}
+    toggleDisplayEmptyDays={[Function]}
   />
 </div>
 `;
