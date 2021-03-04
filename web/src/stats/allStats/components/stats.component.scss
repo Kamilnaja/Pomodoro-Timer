@@ -1,7 +1,6 @@
 @import 'shared/styles/shared.scss';
 
 .stats {
-  @include font-fira-sans($size: 15px, $colour: $text-secondary);
   display: flex;
   flex-direction: column;
   justify-content: center;

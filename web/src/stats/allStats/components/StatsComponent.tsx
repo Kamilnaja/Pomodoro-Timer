@@ -1,4 +1,4 @@
-import { Button, ButtonGroup } from 'react-bootstrap';
+import { Button, ButtonGroup, Container } from 'react-bootstrap';
 import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
 import './stats.component.scss';
 import { StatsComponentProps } from './StatsComponentProps';
@@ -31,31 +31,34 @@ export const StatsComponent = (props: StatsComponentProps) => {
   };
 
   return (
-    <div className="stats">
-      {/* {renderLineChart} */}
-      <ButtonGroup className="stats__navigation navigation">
-        <Button
-          className="navigation__button"
-          onClick={() => getPreviousMonth()}
-          disabled={!props.stats.hasPreviousPeriod}
-        >
-          &lt; prev
-        </Button>
-        <Button className="navigation__button" onClick={() => getNextMonth()} disabled={!props.stats.hasNextPeriod}>
-          next &gt;
-        </Button>
-      </ButtonGroup>
+    <Container>
+      <h2>Statistics</h2>
+      <div className="stats">
+        {/* {renderLineChart} */}
+        <ButtonGroup className="stats__navigation navigation">
+          <Button
+            className="navigation__button"
+            onClick={() => getPreviousMonth()}
+            disabled={!props.stats.hasPreviousPeriod}
+          >
+            &lt; prev
+          </Button>
+          <Button className="navigation__button" onClick={() => getNextMonth()} disabled={!props.stats.hasNextPeriod}>
+            next &gt;
+          </Button>
+        </ButtonGroup>
 
-      <StatsTableContainer
-        pageMonth={pageMonth}
-        pageYear={pageYear}
-        pomodoros={props.stats.pomodoros}
-        handleGetSettings={props.handleGetSettings}
-        handleSaveSettings={props.handleSaveSettings}
-        settingsState={props.settings}
-        toggleDisplayDirection={props.toggleDisplayDirection}
-        toggleDisplayEmptyDays={props.toggleDisplayEmptyDays}
-      ></StatsTableContainer>
-    </div>
+        <StatsTableContainer
+          pageMonth={pageMonth}
+          pageYear={pageYear}
+          pomodoros={props.stats.pomodoros}
+          handleGetSettings={props.handleGetSettings}
+          handleSaveSettings={props.handleSaveSettings}
+          settingsState={props.settings}
+          toggleDisplayDirection={props.toggleDisplayDirection}
+          toggleDisplayEmptyDays={props.toggleDisplayEmptyDays}
+        ></StatsTableContainer>
+      </div>
+    </Container>
   );
 };
