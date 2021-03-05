@@ -58,7 +58,6 @@ exports[`HeaderComponent Should match snapshot 1`] = `
                 "render": [Function],
               }
             }
-            className="button--logout"
             disabled={false}
             onClick={[Function]}
           >
