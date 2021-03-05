@@ -12,7 +12,7 @@ import {
 } from '../actions/settingsActionsTypes';
 import { SettingsState, DisplayDirection } from '../interfaces/settingsInterfaces';
 
-const initialState: SettingsState = {
+export const settingsReducerInitialState: SettingsState = {
   isLoading: false,
   error: null,
   isCookieAcceptInfoVisible: true,
@@ -24,7 +24,7 @@ const initialState: SettingsState = {
   },
 };
 
-export const settingsReducer = (state = initialState, action: SettingsActionsType): SettingsState => {
+export const settingsReducer = (state = settingsReducerInitialState, action: SettingsActionsType): SettingsState => {
   switch (action.type) {
     case GET_SETTINGS:
       return {
@@ -54,7 +54,7 @@ export const settingsReducer = (state = initialState, action: SettingsActionsTyp
         ...state,
         error: null,
         isLoading: false,
-        isCookieAcceptInfoVisible: false,
+        isCookieAcceptInfoVisible: false, // todo - not always valid
       };
     case SAVE_SETTINGS_ERROR:
       return {

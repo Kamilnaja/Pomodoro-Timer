@@ -7,29 +7,27 @@ import StatsTableContainer from '../../statsTable/container/StatsTableContainer'
 let pageMonth = getCurrentMonth();
 let pageYear = getCurrentYear();
 
+export const getPreviousMonth = (props: StatsComponentProps, year: number, month: number) => {
+  if (month === 0) {
+    month = 11;
+    year = year - 1;
+  } else {
+    month = month - 1;
+  }
+  props.handleGetStats(year, month);
+};
+
+const getNextMonth = (props: StatsComponentProps): void => {
+  if (pageMonth === 11) {
+    pageMonth = 0;
+    pageYear = pageYear + 1;
+  } else {
+    pageMonth = pageMonth + 1;
+  }
+  props.handleGetStats(pageYear, pageMonth);
+};
+
 export const StatsComponent = (props: StatsComponentProps) => {
-  const getPreviousMonth = () => {
-    if (pageMonth === 0) {
-      pageMonth = 11;
-      pageYear = pageYear - 1;
-    } else {
-      pageMonth = pageMonth - 1;
-    }
-
-    props.handleGetStats(pageYear, pageMonth);
-  };
-
-  const getNextMonth = (): void => {
-    if (pageMonth === 11) {
-      pageMonth = 0;
-      pageYear = pageYear + 1;
-    } else {
-      pageMonth = pageMonth + 1;
-    }
-
-    props.handleGetStats(pageYear, pageMonth);
-  };
-
   return (
     <Container>
       <h2>Statistics</h2>
@@ -38,12 +36,16 @@ export const StatsComponent = (props: StatsComponentProps) => {
         <ButtonGroup className="stats__navigation navigation">
           <Button
             className="navigation__button"
-            onClick={() => getPreviousMonth()}
+            onClick={() => getPreviousMonth(props, pageYear, pageMonth)}
             disabled={!props.stats.hasPreviousPeriod}
           >
             &lt; prev
           </Button>
-          <Button className="navigation__button" onClick={() => getNextMonth()} disabled={!props.stats.hasNextPeriod}>
+          <Button
+            className="navigation__button"
+            onClick={() => getNextMonth(props)}
+            disabled={!props.stats.hasNextPeriod}
+          >
             next &gt;
           </Button>
         </ButtonGroup>
