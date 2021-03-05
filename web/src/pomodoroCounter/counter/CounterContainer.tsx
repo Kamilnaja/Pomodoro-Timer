@@ -73,16 +73,21 @@ class CounterContainer extends React.Component<CounterComponentProps> {
           this.tabTitle.setTitle = `${msToTime(time)}`;
           this.props.updateCounter(time);
         } else {
-          this.tabTitle.startBlinking();
-          playEndSound();
-          if (isPomodoroMode(this.props.counter.currentTimer)) {
-            this.props.handleSavePomodoro();
-            this.setWorkerTime(initialConfig.shortBreakTime);
-          } else {
-            console.log('break end!');
-          }
+          this.handleEndOfTime();
         }
       };
+  }
+
+  private handleEndOfTime() {
+    this.tabTitle.startBlinking();
+    playEndSound();
+    if (isPomodoroMode(this.props.counter.currentTimer)) {
+      new Notification('Pomodoro end');
+      this.props.handleSavePomodoro();
+      this.setWorkerTime(initialConfig.shortBreakTime);
+    } else {
+      new Notification('Break end');
+    }
   }
 
   render() {
