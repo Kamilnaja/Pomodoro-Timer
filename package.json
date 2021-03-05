@@ -24,7 +24,6 @@
     "@types/cors": "^2.8.9",
     "@types/express": "^4.17.9",
     "@types/express-session": "^1.17.3",
-    "@types/jest": "^26.0.20",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/md5": "^2.2.1",
     "@types/morgan": "^1.9.2",
@@ -40,12 +39,10 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.22.0",
     "husky": "^4.3.8",
-    "jest": "^26.6.3",
     "lint-staged": "^10.5.3",
     "stylelint": "^13.9.0",
     "stylelint-config-recommended": "^3.0.0",
     "stylelint-config-standard": "^20.0.0",
-    "ts-jest": "^26.5.3",
     "ts-node": "^9.1.1"
   },
   "main": "./dist/src/index.js",
@@ -59,7 +56,6 @@
     "postinstall": "cd server && tsc",
     "heroku-postbuild": "tsc & cd web/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "watch-ts": "cd server && tsc -w",
-    "test": "jest ./server",
     "deploy": "git add . && git commit -m Heroku && git push heroku master",
     "lint-all": "**/*.ts"
   },

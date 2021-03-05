@@ -1,3 +1,8 @@
+## 0.8.0 - 2021-03-05
+
+- showing notifications after pomodoro / break end
+- cookies info
+
 ## 0.7.0 - 2021-02-20
 
 - mode - ?time=3000 to setup shorter time

@@ -1,8 +1,13 @@
 node_modules
-web/.eslintcache
 package-lock.json
 dist/
 .idea/*
 .env
+
 web/junit.xml
 web/.env
+web/build
+web/coverage
+web/.eslintcache
+
+server/coverage
