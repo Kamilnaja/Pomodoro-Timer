@@ -53,8 +53,8 @@
   "scripts": {
     "start": "node dist/server/src/index.js",
     "dev": "node -r dotenv/config dist/server/src/index.js",
-    "postinstall": "cd server && tsc",
-    "heroku-postbuild": "tsc & cd web/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "postinstall": "cd server && npm i && tsc",
+    "heroku-postbuild": "tsc & cd web/ && npm i --only=dev --no-shrinkwrap && npm run build",
     "watch-ts": "cd server && tsc -w",
     "deploy": "git add . && git commit -m Heroku && git push heroku master",
     "lint-all": "**/*.ts"
