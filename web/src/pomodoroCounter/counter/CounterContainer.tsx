@@ -22,6 +22,7 @@ class CounterContainer extends React.Component<CounterComponentProps> {
 
   componentDidMount() {
     this.initializeWorker();
+    this.askForNotificationPermission();
   }
 
   handlePauseCounter = () => {
@@ -63,6 +64,12 @@ class CounterContainer extends React.Component<CounterComponentProps> {
       payload: time,
     });
   };
+
+  private askForNotificationPermission() {
+    Notification.requestPermission().then(result => {
+      console.log(result);
+    });
+  }
 
   private initializeWorker() {
     if (typeof Worker !== 'undefined')
