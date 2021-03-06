@@ -3,12 +3,7 @@ import { Response } from 'express-serve-static-core';
 import { QueryConfig, QueryResult } from 'pg';
 import { pool } from '../../db/client';
 import { Request } from '../../models/auth/request.interface';
-import { Settings } from '../../types/settingsInterface';
-
-export enum DisplayDirection {
-  ASC = 'ASC',
-  DESC = 'DESC',
-}
+import { DisplayDirection, Settings } from '../../types/settingsInterface';
 
 export const handleGetSettings = async (req: Request<{}>, res: Response, next: NextFunction) => {
   const userId = req.user?.id as number;
