@@ -1,33 +1,24 @@
 import { Button, ButtonGroup, Container } from 'react-bootstrap';
 import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
+import StatsTableContainer from '../../statsTable/container/StatsTableContainer';
 import './stats.component.scss';
 import { StatsComponentProps } from './StatsComponentProps';
-import StatsTableContainer from '../../statsTable/container/StatsTableContainer';
 
 let pageMonth = getCurrentMonth();
 let pageYear = getCurrentYear();
 
-export const getPreviousMonth = (props: StatsComponentProps, year: number, month: number) => {
-  if (month === 0) {
-    month = 11;
-    year = year - 1;
-  } else {
-    month = month - 1;
-  }
-  props.handleGetStats(year, month);
-};
-
-const getNextMonth = (props: StatsComponentProps): void => {
-  if (pageMonth === 11) {
-    pageMonth = 0;
-    pageYear = pageYear + 1;
-  } else {
-    pageMonth = pageMonth + 1;
-  }
-  props.handleGetStats(pageYear, pageMonth);
-};
-
 export const StatsComponent = (props: StatsComponentProps) => {
+  const handleChangeMonth = (isNext: boolean) => {
+    const nextOrPreviousMonth = isNext ? 1 : -1;
+    const dt = new Date(pageYear, pageMonth);
+    dt.setMonth(dt.getMonth() + nextOrPreviousMonth);
+
+    pageMonth = dt.getMonth();
+    pageYear = dt.getFullYear();
+
+    props.handleGetStats(dt.getFullYear(), dt.getMonth());
+  };
+
   return (
     <Container>
       <h2>Statistics</h2>
@@ -36,14 +27,14 @@ export const StatsComponent = (props: StatsComponentProps) => {
         <ButtonGroup className="stats__navigation navigation">
           <Button
             className="navigation__button"
-            onClick={() => getPreviousMonth(props, pageYear, pageMonth)}
+            onClick={() => handleChangeMonth(false)}
             disabled={!props.stats.hasPreviousPeriod}
           >
             &lt; prev
           </Button>
           <Button
             className="navigation__button"
-            onClick={() => getNextMonth(props)}
+            onClick={() => handleChangeMonth(true)}
             disabled={!props.stats.hasNextPeriod}
           >
             next &gt;
