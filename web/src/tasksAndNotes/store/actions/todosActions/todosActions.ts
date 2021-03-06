@@ -11,16 +11,16 @@ import {
   TodosActionsTypes,
 } from './todosActionsTypes';
 
-const saveTodo = (): TodosActionsTypes => ({
+export const saveTodo = (): TodosActionsTypes => ({
   type: SAVE_TODO,
 });
 
-const saveTodoError = (payload: any): TodosActionsTypes => ({
+export const saveTodoError = (payload: any): TodosActionsTypes => ({
   type: SAVE_TODO_ERROR,
   payload,
 });
 
-const getTodos = (): TodosActionsTypes => ({
+export const getTodos = (): TodosActionsTypes => ({
   type: GET_TODOS,
 });
 

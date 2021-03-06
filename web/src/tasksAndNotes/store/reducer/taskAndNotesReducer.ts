@@ -21,7 +21,7 @@ import {
 } from '../actions/todosActions/todosActionsTypes';
 import { TasksAndNotesState } from '../models/TasksAndNotesInterfaces';
 
-export const initialState: TasksAndNotesState = {
+export const taskAndNotesInitialState: TasksAndNotesState = {
   isLoading: false,
   error: '',
   todos: [],
@@ -31,7 +31,7 @@ export const initialState: TasksAndNotesState = {
 };
 
 export const taskAndNotesReducer = (
-  state = initialState,
+  state = taskAndNotesInitialState,
   action: TodosActionsTypes | NotesActionTypes | TaskActionTypes,
 ): TasksAndNotesState => {
   switch (action.type) {
@@ -50,6 +50,7 @@ export const taskAndNotesReducer = (
       return {
         ...state,
         isLoading: false,
+        error: action.payload,
       };
     case SAVE_TODO:
       return {

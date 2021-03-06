@@ -5,7 +5,6 @@ import { act } from 'react-dom/test-utils';
 import { createAuthState } from '../../testing/auth.testing.data';
 import { LoginComponent } from './LoginComponent';
 
-import React from 'react';
 import '@testing-library/jest-dom';
 
 describe('LoginComponent', () => {
