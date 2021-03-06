@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
-import { authenticateJWT } from '../../services/authService/auth.service';
-import { getStatsInGivenDay, getStatsInGivenMonth, handleAddPomodoro } from '../../services/statsService/stats.service';
+import { authenticateJWT } from '../../auth/services/auth.service';
+import { getStatsInGivenDay, getStatsInGivenMonth, handleAddPomodoro } from '../services/stats.service';
 
 const router: Router = express.Router();
 

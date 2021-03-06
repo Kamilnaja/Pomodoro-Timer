@@ -1,5 +1,5 @@
 import express from 'express';
-import { handlePostLogin, handleRegister } from '../../services/authService/auth.service';
+import { handlePostLogin, handleRegister } from '../services/auth.service';
 
 const router = express.Router();
 

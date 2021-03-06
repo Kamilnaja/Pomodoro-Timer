@@ -8,10 +8,10 @@ import {
   Login as LoginInterface,
   LoginResponse,
   Registration,
-} from '../../../../types/authInterfaces';
-import { pool } from '../../db/client';
-import { Login } from '../../models/auth/login.interface';
-import { Request } from '../../models/auth/request.interface';
+} from '../../../../../types/authInterfaces';
+import { pool } from '../../../db/client';
+import { Login } from '../models/login.interface';
+import { Request } from '../models/request.interface';
 
 export const handleRegister = (req: Request<Registration>, res: Response) => {
   const rounds = 10;

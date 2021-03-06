@@ -1,4 +1,4 @@
-import { TableQuery } from '../models/db/TableQuery';
+import { TableQuery } from './models/TableQuery';
 import { pool } from './client';
 const createTableSql = 'CREATE TABLE IF NOT EXISTS';
 

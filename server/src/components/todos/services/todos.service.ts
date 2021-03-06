@@ -1,9 +1,9 @@
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import { QueryConfig, QueryResult } from 'pg';
-import { TaskRequestBody, TaskSearchResults } from '../../../../types/tasksAndNotesInterfaces';
-import { pool } from '../../db/client';
-import { Request as RequestWithBody } from '../../models/auth/request.interface';
+import { TaskRequestBody, TaskSearchResults } from '../../../../../types/tasksAndNotesInterfaces';
+import { pool } from '../../../db/client';
+import { Request as RequestWithBody } from '../../auth/models/request.interface';
 
 export const getTodos = async (req: RequestWithBody<{}>, res: Response<TaskSearchResults>, next: NextFunction) => {
   const sql = `SELECT todos.id, todos.title, todos.note, todos.datecreated "dateCreated", todos.isDone "isDone", subtasks.parentTaskId

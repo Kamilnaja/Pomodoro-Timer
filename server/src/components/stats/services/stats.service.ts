@@ -1,10 +1,10 @@
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import { QueryConfig, QueryResult } from 'pg';
-import { StatsSearchResult } from '../../../../types/statisticsInterfaces';
-import { pool } from '../../db/client';
-import { Request } from '../../models/auth/request.interface';
-import { isDateError, normalizeDay, normalizeMonth } from '../../utils/service.util';
+import { StatsSearchResult } from '../../../../../types/statisticsInterfaces';
+import { pool } from '../../../db/client';
+import { Request } from '../../auth/models/request.interface';
+import { isDateError, normalizeDay, normalizeMonth } from '../../../utils/service.util';
 
 export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | {}>, next: NextFunction) => {
   const query: QueryConfig = {

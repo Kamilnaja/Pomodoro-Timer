@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
-import authRouter from './childRoutes/auth.route';
-import statsRouter from './childRoutes/stats.route';
-import settingsRouter from './childRoutes/settings.route';
+import authRouter from './components/auth/routes/auth.route';
+import statsRouter from './components/stats/routes/stats.route';
+import settingsRouter from './components/settings/routes/settings.route';
 
 const router: Router = express.Router();
 

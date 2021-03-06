@@ -2,7 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
-import route from './routes/route';
+import route from './route';
 import * as dotenv from 'dotenv';
 import './db/db';
 
