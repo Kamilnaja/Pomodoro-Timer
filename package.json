@@ -4,7 +4,15 @@
   "engines": {
     "node": "12.18.4"
   },
-  "dependencies": {},
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.5.1"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
@@ -27,11 +35,11 @@
   ],
   "types": "../types.d.ts",
   "scripts": {
-    "start": "node dist/server/src/index.js",
+    "start": "node dist/servercp/src/index.js",
     "dev": "node -r dotenv/config dist/server/src/index.js",
     "postinstall": "cd server && npm i && tsc",
     "heroku-postbuild": "tsc & cd web/ && npm i --only=dev --no-shrinkwrap && npm run build",
-    "watch-ts": "cd server && tsc -w",
+    "watch-ts": "cd servercp && tsc -w",
     "deploy": "git add . && git commit -m Heroku && git push heroku master",
     "lint-all": "**/*.ts"
   },

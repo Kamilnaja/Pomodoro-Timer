@@ -1,10 +1,14 @@
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import { QueryConfig, QueryResult } from 'pg';
-import { Settings } from '../../../../types/settingsInterface';
-import { DisplayDirection } from '../../../../web/src/settings/store/interfaces/settingsInterfaces';
 import { pool } from '../../db/client';
 import { Request } from '../../models/auth/request.interface';
+import { Settings } from '../../types/settingsInterface';
+
+export enum DisplayDirection {
+  ASC = 'ASC',
+  DESC = 'DESC',
+}
 
 export const handleGetSettings = async (req: Request<{}>, res: Response, next: NextFunction) => {
   const userId = req.user?.id as number;

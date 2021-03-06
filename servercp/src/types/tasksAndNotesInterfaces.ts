@@ -1,4 +1,4 @@
-import { SearchResult } from './commonInterfaces';
+import { SearchResult } from './statisticsInterfaces';
 
 export enum TaskType {
   CALENDAR,

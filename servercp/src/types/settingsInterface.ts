@@ -1,5 +1,7 @@
-import { DisplayDirection } from '../web/src/settings/store/interfaces/settingsInterfaces';
-
+export enum DisplayDirection {
+  ASC = 'ASC',
+  DESC = 'DESC',
+}
 export interface Settings {
   isCookieConsentAccepted: boolean;
   isSoundEnabled: boolean;

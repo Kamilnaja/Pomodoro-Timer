@@ -1,4 +1,4 @@
-import { Login as iLogin } from '../../../../types/authInterfaces';
+import { Login as iLogin } from '../../types/authInterfaces';
 
 export interface Login {
   body: iLogin;

@@ -1,7 +1,7 @@
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import { QueryConfig, QueryResult } from 'pg';
-import { TaskRequestBody, TaskSearchResults } from '../../../../types/tasksAndNotesInterfaces';
+import { TaskRequestBody, TaskSearchResults } from '../../types/tasksAndNotesInterfaces';
 import { pool } from '../../db/client';
 import { Request as RequestWithBody } from '../../models/auth/request.interface';
 

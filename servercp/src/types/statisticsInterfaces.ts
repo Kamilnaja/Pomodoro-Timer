@@ -1,4 +1,6 @@
-import { SearchResult } from './commonInterfaces';
+export interface SearchResult<T> {
+  result: T;
+}
 
 /*
  * Allows for searching in current year, month or day
