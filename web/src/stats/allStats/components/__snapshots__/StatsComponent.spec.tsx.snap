@@ -18,7 +18,7 @@ exports[`StatsComponent Should match snapshot 1`] = `
     >
       <Button
         active={false}
-        className="navigation__button"
+        className="navigation__button navigation__button--prev"
         disabled={true}
         onClick={[Function]}
         variant="primary"
@@ -27,7 +27,7 @@ exports[`StatsComponent Should match snapshot 1`] = `
       </Button>
       <Button
         active={false}
-        className="navigation__button"
+        className="navigation__button navigation__button--next"
         disabled={false}
         onClick={[Function]}
         variant="primary"
@@ -36,7 +36,7 @@ exports[`StatsComponent Should match snapshot 1`] = `
       </Button>
     </ButtonGroup>
     <StatsTableContainer
-      handleGetSettings={[Function]}
+      handleGetSettings={[MockFunction]}
       handleSaveSettings={[Function]}
       pageMonth={2}
       pageYear={2021}

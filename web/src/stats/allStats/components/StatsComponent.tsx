@@ -26,14 +26,14 @@ export const StatsComponent = (props: StatsComponentProps) => {
         {/* {renderLineChart} */}
         <ButtonGroup className="stats__navigation navigation">
           <Button
-            className="navigation__button"
+            className="navigation__button navigation__button--prev"
             onClick={() => handleChangeMonth(false)}
             disabled={!props.stats.hasPreviousPeriod}
           >
             &lt; prev
           </Button>
           <Button
-            className="navigation__button"
+            className="navigation__button navigation__button--next"
             onClick={() => handleChangeMonth(true)}
             disabled={!props.stats.hasNextPeriod}
           >
