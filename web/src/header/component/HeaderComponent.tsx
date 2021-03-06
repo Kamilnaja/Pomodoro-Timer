@@ -8,6 +8,7 @@ import TaskAndNotesContainer from '../../tasksAndNotes/taskAndNotesWrapper/taskA
 import { HeaderContainerProps } from '../container/HeaderContainerProps';
 import './headerComponent.scss';
 import PomodoroCounterScreen from '../../pomodoroCounter/pomodoroCounterScreen/PomodoroCounterScreen';
+import About from '../../about/About';
 
 export const HeaderComponent = (props: HeaderContainerProps) => (
   <Router>
@@ -17,16 +18,7 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            {!props.isLoggedIn ? (
-              <>
-                <Nav.Link className="button--login" onClick={() => props.handleOpenModal(ModalType.LOGIN)}>
-                  Login
-                </Nav.Link>
-                <Nav.Link className="button--register" onClick={() => props.handleOpenModal(ModalType.REGISTER)}>
-                  Register
-                </Nav.Link>
-              </>
-            ) : (
+            {props.isLoggedIn ? (
               <>
                 {/* <Nav.Link href="/taskAndNotes">Tasks and notes</Nav.Link> */}
                 <Nav.Link href="/stats">Stats</Nav.Link>
@@ -35,7 +27,17 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
                   Logout
                 </Nav.Link>
               </>
+            ) : (
+              <>
+                <Nav.Link className="button--login" onClick={() => props.handleOpenModal(ModalType.LOGIN)}>
+                  Login
+                </Nav.Link>
+                <Nav.Link className="button--register" onClick={() => props.handleOpenModal(ModalType.REGISTER)}>
+                  Register
+                </Nav.Link>
+              </>
             )}
+            <Nav.Link href="/about">About</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -48,6 +50,9 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
         </Route>
         <Route path="/stats">
           <StatsContainer />
+        </Route>
+        <Route path="/about">
+          <About />
         </Route>
         <Route path="/">
           <PomodoroCounterScreen />
