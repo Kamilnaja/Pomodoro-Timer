@@ -7,7 +7,7 @@ export const InfoComponent = (props: InfoComponentProps) => {
   let info = '';
   switch (props.currentState) {
     case CounterState.END:
-      info = 'Start new timer';
+      info = 'Select new pomodoro or break from blue buttons and start timer';
       break;
     case CounterState.RUNNING:
       info = 'Timer in progress';

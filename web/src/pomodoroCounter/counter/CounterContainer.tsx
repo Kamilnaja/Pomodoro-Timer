@@ -73,16 +73,21 @@ class CounterContainer extends React.Component<CounterComponentProps> {
           this.tabTitle.setTitle = `${msToTime(time)}`;
           this.props.updateCounter(time);
         } else {
-          this.tabTitle.startBlinking();
-          playEndSound();
-          if (isPomodoroMode(this.props.counter.currentTimer)) {
-            this.props.handleSavePomodoro();
-            this.setWorkerTime(initialConfig.shortBreakTime);
-          } else {
-            console.log('break end!');
-          }
+          this.handleEndTimer();
         }
       };
+  }
+
+  private handleEndTimer() {
+    this.tabTitle.startBlinking();
+    playEndSound();
+    if (isPomodoroMode(this.props.counter.currentTimer)) {
+      this.props.handleSavePomodoro();
+      this.props.end();
+      this.setWorkerTime(initialConfig.shortBreakTime);
+    } else {
+      console.log('break end!');
+    }
   }
 
   render() {
@@ -94,7 +99,12 @@ class CounterContainer extends React.Component<CounterComponentProps> {
             Pause timer
           </Button>
         ) : (
-          <Button className="btn--start" variant="success" onClick={this.handleStartCounter}>
+          <Button
+            className="btn--start"
+            variant="success"
+            onClick={this.handleStartCounter}
+            disabled={this.props.counter.counterTime === 0}
+          >
             Start timer
           </Button>
         )}
