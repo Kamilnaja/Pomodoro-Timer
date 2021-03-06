@@ -9,7 +9,6 @@ import { CounterState } from '../store/enums/CounterState';
 import { createPomodoroCounterState } from '../testing/pomodoroCounter.test.data';
 import CounterContainer from './CounterContainer';
 import * as Helpers from '../pomodoroCounterScreen/PomodoroCounterScreenHelpers';
-import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 
 const mockStore = configureStore([thunk]);
 
@@ -17,7 +16,6 @@ describe('CounterContainer', () => {
   let store: Store<any, PomodoroCounterActionsTypes>;
   let component: renderer.ReactTestRenderer;
   let playClickSoundSpy: any;
-  let pomodoroCounterState: PomodoroCounterState;
 
   const handleSavePomodoro = jest.fn();
 

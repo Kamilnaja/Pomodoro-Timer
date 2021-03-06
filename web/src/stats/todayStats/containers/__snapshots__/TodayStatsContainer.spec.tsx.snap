@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StatsContainer should match snapshot 1`] = `
+<p
+  className="text-white text-center mt-2"
+>
+  Today you have made: 
+  <span
+    className="badge badge-primary"
+  >
+    10
+  </span>
+   pomodoros
+</p>
+`;
