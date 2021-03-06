@@ -8,7 +8,7 @@ import { isDateError, normalizeDay, normalizeMonth } from '../../utils/service.u
 export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | {}>, next: NextFunction) => {
   const query: QueryConfig = {
     text: 'INSERT INTO pomodoros (user_id) VALUES ($1)',
-    values: [req.user.id],
+    values: [req.user?.id],
   };
 
   try {
@@ -21,7 +21,7 @@ export const handleAddPomodoro = async (req: Request<{}>, res: Response<Error | 
 };
 
 export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<any>, next: NextFunction) => {
-  const userId = req.user.id;
+  const userId = req.user?.id as number;
 
   let { year, month } = req.params;
 
@@ -35,7 +35,7 @@ export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<any>,
 };
 
 export const getStatsInGivenDay = async (req: Request<{}>, res: Response<any>, next: NextFunction) => {
-  const userId = req.user.id;
+  const userId = req.user?.id as number;
 
   let { year, month, day } = req.params;
 
@@ -73,7 +73,7 @@ const searchResultsInDb = async (
     const today = new Date();
     const searchedYear = Number(date.split('-')[0]);
     const searchedMonth = Number(date.split('-')[1]);
-    let dateCreated: Date;
+    let dateCreated: Date = new Date();
 
     if (queryResult.rowCount) {
       dateCreated = queryResult.rows[0].date_created;
