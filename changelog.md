@@ -1,3 +1,5 @@
+## 0.8.0 - 2021-03-06
+
 ## 0.7.0 - 2021-02-20
 
 - mode - ?time=3000 to setup shorter time
