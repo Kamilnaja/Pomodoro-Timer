@@ -64,6 +64,15 @@ exports[`MainContainer Should match the snapshot 1`] = `
           >
             Logout
           </a>
+          <a
+            className="nav-link"
+            data-rb-event-key="/about"
+            href="/about"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+          >
+            About
+          </a>
         </div>
       </div>
     </nav>

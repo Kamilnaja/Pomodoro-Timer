@@ -64,6 +64,18 @@ exports[`HeaderComponent Should match snapshot 1`] = `
           >
             Logout
           </NavLink>
+          <NavLink
+            as={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "render": [Function],
+              }
+            }
+            disabled={false}
+            href="/about"
+          >
+            About
+          </NavLink>
         </Nav>
       </NavbarCollapse>
     </Navbar>
@@ -82,6 +94,11 @@ exports[`HeaderComponent Should match snapshot 1`] = `
         path="/stats"
       >
         <Connect(StatsContainer) />
+      </Route>
+      <Route
+        path="/about"
+      >
+        <About />
       </Route>
       <Route
         path="/"
@@ -146,6 +163,18 @@ exports[`HeaderComponent Should match snapshot 2`] = `
           >
             Register
           </NavLink>
+          <NavLink
+            as={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "render": [Function],
+              }
+            }
+            disabled={false}
+            href="/about"
+          >
+            About
+          </NavLink>
         </Nav>
       </NavbarCollapse>
     </Navbar>
@@ -164,6 +193,11 @@ exports[`HeaderComponent Should match snapshot 2`] = `
         path="/stats"
       >
         <Connect(StatsContainer) />
+      </Route>
+      <Route
+        path="/about"
+      >
+        <About />
       </Route>
       <Route
         path="/"
