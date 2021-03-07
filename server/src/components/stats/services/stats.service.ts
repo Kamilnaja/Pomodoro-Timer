@@ -3,8 +3,8 @@ import { Response } from 'express-serve-static-core';
 import { QueryConfig, QueryResult } from 'pg';
 import { StatsSearchResult, Tag } from '../../../../../types/statisticsInterfaces';
 import { pool } from '../../../db/client';
+import { isDateError, normalizeDay } from '../../../utils/service.util';
 import { Request } from '../../auth/models/request.interface';
-import { isDateError, normalizeDay, normalizeMonth } from '../../../utils/service.util';
 import { setError, shouldShowNextPeriod, shouldShowPreviousPeriod } from './stats.serviceHelpers';
 
 export const handleAddPomodoro = async (req: Request<Tag>, res: Response<Error | {}>, next: NextFunction) => {
@@ -32,7 +32,7 @@ export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<Stats
     console.log('error');
     setError('error', next);
   } else {
-    await getResultsFromDb(userId, `${year}-${normalizeMonth(Number(month))}`, 'YYYY-MM', res, next);
+    await getResultsFromDb(userId, new Date(Number(year), Number(month)), res, next);
   }
 };
 
@@ -45,34 +45,27 @@ export const getStatsInGivenDay = async (req: Request<{}>, res: Response<StatsSe
     setError('error', next);
   } else {
     day = normalizeDay(day);
-    await getResultsFromDb(userId, `${year}-${normalizeMonth(Number(month))}-${day}`, 'YYYY-MM-DD', res, next);
+    await getResultsFromDb(userId, new Date(Number(year), Number(month)), res, next);
   }
 };
 
-const getResultsFromDb = async (
-  userId: string,
-  date: string,
-  dateFormat: string,
-  res: Response<StatsSearchResult>,
-  next: NextFunction,
-) => {
-  // todo - do not compare with to_char
+const getResultsFromDb = async (userId: string, date: Date, res: Response<StatsSearchResult>, next: NextFunction) => {
   const query: QueryConfig = {
     text: `SELECT date(pomodoros.created_at), users.date_created,
     COUNT (created_at) 
     FROM pomodoros 
     INNER JOIN users ON pomodoros.user_id = users.id
-    WHERE user_id = ($1) AND TO_CHAR(created_at, ($2)) = ($3)
+    WHERE user_id = ($1) AND DATE_TRUNC('month', created_at) = ($2)
     GROUP BY date(created_at), users.date_created 
     ORDER BY date(created_at) DESC`,
-    values: [userId, dateFormat, date],
+    values: [userId, date],
   };
-
+  console.log(`${date.getFullYear()}-${date.getMonth()}`);
   try {
     const queryResult: QueryResult = await pool.query(query);
     const today = new Date();
-    const searchedYear = Number(date.split('-')[0]);
-    const searchedMonth = Number(date.split('-')[1]);
+    const searchedYear = date.getFullYear();
+    const searchedMonth = date.getMonth();
     let dateCreated: Date;
 
     if (queryResult.rowCount) {
@@ -83,8 +76,8 @@ const getResultsFromDb = async (
     }
     res.json({
       pomodoros: queryResult.rows.map(({ date, count }) => ({ date, count })),
-      hasNextPeriod: shouldShowNextPeriod(today, searchedYear, searchedMonth),
-      hasPreviousPeriod: shouldShowPreviousPeriod(dateCreated, searchedYear, searchedMonth),
+      hasNextPeriod: shouldShowNextPeriod(today, searchedYear, searchedMonth + 1),
+      hasPreviousPeriod: shouldShowPreviousPeriod(dateCreated, searchedYear, searchedMonth + 1),
     });
   } catch (err) {
     console.log(`err when fetching stats: ${err}`);
