@@ -26,14 +26,13 @@ export const handleAddPomodoro = async (req: Request<Tag>, res: Response<Error |
 export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<StatsSearchResult>, next: NextFunction) => {
   const userId = req.user.id;
 
-  let { year, month } = req.params;
+  const { year, month } = req.params;
 
   if (isDateError(year, month)) {
     console.log('error');
     setError('error', next);
   } else {
-    month = normalizeMonth(month);
-    await getResultsFromDb(userId, `${year}-${month}`, 'YYYY-MM', res, next);
+    await getResultsFromDb(userId, `${year}-${normalizeMonth(Number(month))}`, 'YYYY-MM', res, next);
   }
 };
 
@@ -45,9 +44,8 @@ export const getStatsInGivenDay = async (req: Request<{}>, res: Response<StatsSe
     console.log('error');
     setError('error', next);
   } else {
-    month = normalizeMonth(month);
     day = normalizeDay(day);
-    await getResultsFromDb(userId, `${year}-${month}-${day}`, 'YYYY-MM-DD', res, next);
+    await getResultsFromDb(userId, `${year}-${normalizeMonth(Number(month))}-${day}`, 'YYYY-MM-DD', res, next);
   }
 };
 

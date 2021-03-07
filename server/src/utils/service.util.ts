@@ -13,9 +13,11 @@ export const handleSelect = async (sql: string, req: any, res: any, next: NextFu
   }
 };
 
-export const normalizeMonth = (month: string): string => {
-  month = (Number(month) + 1) as any;
-  return month.toString().length === 1 ? (month = `${0}${month}`) : month;
+export const normalizeMonth = (month: number): string => {
+  let res = '';
+  month++;
+  month.toString().length === 1 ? (res = `${0}${month}`) : (res = month.toString());
+  return res;
 };
 
 export const normalizeDay = (day: string): string => {
