@@ -5,17 +5,14 @@ import { StatsSearchResult, Tag } from '../../../../../types/statisticsInterface
 import { pool } from '../../../db/client';
 import { isDateError } from '../../../utils/service.util';
 import { Request } from '../../auth/models/request.interface';
+import { savePomodoroInDb, searchDateCreatedInDb } from '../queries/stats.queries';
 import { setError, shouldShowNextPeriod, shouldShowPreviousPeriod } from './stats.serviceHelpers';
 
 export const handleAddPomodoro = async (req: Request<Tag>, res: Response<Error | {}>, next: NextFunction) => {
   const { tagId } = req.body;
-  const query: QueryConfig = {
-    text: 'INSERT INTO pomodoros (tag_id, user_id) VALUES ($1, $2)',
-    values: [tagId, req.user.id],
-  };
 
   try {
-    await pool.query(query);
+    await savePomodoroInDb(req.user.id, tagId);
     res.json({});
   } catch (err) {
     console.log(err.stack);
@@ -78,7 +75,7 @@ const getResultsFromDb = async (
       dateCreated = queryResult.rows[0].date_created;
     } else {
       // search by id once more on users table
-      dateCreated = await searchDateCreatedInDb(userId, dateCreated, next);
+      dateCreated = await searchDateCreatedInDb(userId);
     }
     res.json({
       pomodoros: queryResult.rows.map(({ date, count }) => ({ date, count })),
@@ -89,21 +86,6 @@ const getResultsFromDb = async (
     console.log(`err when fetching stats: ${err}`);
     next(err);
   }
-};
-
-const searchDateCreatedInDb = async (userId: string, dateCreated: Date, next: NextFunction) => {
-  const query: QueryConfig = {
-    text: `SELECT date_created FROM users WHERE id = ($1)`,
-    values: [userId],
-  };
-  try {
-    const queryResult: QueryResult = await pool.query(query);
-    dateCreated = queryResult.rows[0].date_created;
-  } catch (err) {
-    console.log(`err when fetching stats: ${err}`);
-    next(err);
-  }
-  return dateCreated;
 };
 
 export const getAllStatsByMonth = async (req: Request<any>, res: Response, next: NextFunction) => {
