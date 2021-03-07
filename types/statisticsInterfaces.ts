@@ -26,3 +26,7 @@ export interface StatsSearchResult {
 }
 
 export interface TodayStatsResult extends SearchResult<number> {}
+
+export interface Tag {
+  tagId: number;
+}

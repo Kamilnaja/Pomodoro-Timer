@@ -5,7 +5,7 @@ export interface Login {
 
 export interface Registration extends Login {
   email: string;
-  id?: number;
+  id?: string;
 }
 
 export interface LoginResponse {
