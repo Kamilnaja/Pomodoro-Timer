@@ -5,7 +5,7 @@ import { StatsSearchResult, Tag } from '../../../../../types/statisticsInterface
 import { pool } from '../../../db/client';
 import { isDateError } from '../../../utils/service.util';
 import { Request } from '../../auth/models/request.interface';
-import { savePomodoroInDb, searchDateCreatedInDb } from '../queries/stats.queries';
+import { getFromDb, savePomodoroInDb, searchDateCreatedInDb } from '../queries/stats.queries';
 import { setError, shouldShowNextPeriod, shouldShowPreviousPeriod } from './stats.serviceHelpers';
 
 export const handleAddPomodoro = async (req: Request<Tag>, res: Response<Error | {}>, next: NextFunction) => {
@@ -29,62 +29,46 @@ export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<Stats
     console.log('error');
     setError('error', next);
   } else {
-    await getResultsFromDb(userId, 'month', new Date(Number(year), Number(month)), res, next);
+    const date = new Date(Number(year), Number(month));
+
+    try {
+      const queryResult: QueryResult = await getFromDb(userId, 'month', date);
+      const today = new Date();
+      const searchedYear = date.getFullYear();
+      const searchedMonth = date.getMonth();
+      const dateCreated: Date = await getDateCreated(queryResult, userId);
+      res.json({
+        pomodoros: queryResult.rows.map(({ date, count }) => ({ date, count })),
+        hasNextPeriod: shouldShowNextPeriod(today, searchedYear, searchedMonth + 1),
+        hasPreviousPeriod: shouldShowPreviousPeriod(dateCreated, searchedYear, searchedMonth + 1),
+      });
+    } catch (err) {
+      console.log(`err when fetching stats: ${err}`);
+      next(err);
+    }
   }
 };
 
 export const getStatsInGivenDay = async (req: Request<{}>, res: Response<StatsSearchResult>, next: NextFunction) => {
   const userId = req.user.id;
   const { year, month, day } = req.params;
+  const date = new Date(Number(year), Number(month), Number(day));
 
   if (isDateError(year, month, day)) {
     console.log('error');
-    setError('error', next);
+    next('date err');
   } else {
-    await getResultsFromDb(userId, 'day', new Date(Number(year), Number(month), Number(day)), res, next);
-  }
-};
-
-const getResultsFromDb = async (
-  userId: string,
-  period: 'day' | 'month',
-  date: Date,
-  res: Response<StatsSearchResult>,
-  next: NextFunction,
-) => {
-  const query: QueryConfig = {
-    text: `
-    SELECT date(pomodoros.created_at), users.date_created,
-    COUNT (created_at) 
-    FROM pomodoros 
-    INNER JOIN users ON pomodoros.user_id = users.id
-    WHERE user_id = ($1) 
-    AND DATE_TRUNC('${period}', created_at) = ($2)
-    GROUP BY date(created_at), users.date_created `,
-    values: [userId, date],
-  };
-
-  try {
-    const queryResult: QueryResult = await pool.query(query);
-    const today = new Date();
-    const searchedYear = date.getFullYear();
-    const searchedMonth = date.getMonth();
-    let dateCreated: Date;
-
-    if (queryResult.rowCount) {
-      dateCreated = queryResult.rows[0].date_created;
-    } else {
-      // search by id once more on users table
-      dateCreated = await searchDateCreatedInDb(userId);
+    try {
+      const queryResult: QueryResult = await getFromDb(userId, 'day', date);
+      res.json({
+        pomodoros: queryResult.rows.map(({ date, count }) => ({ date, count })),
+        hasNextPeriod: false,
+        hasPreviousPeriod: false,
+      });
+    } catch (err) {
+      console.log(`err when fetching stats: ${err}`);
+      next(err);
     }
-    res.json({
-      pomodoros: queryResult.rows.map(({ date, count }) => ({ date, count })),
-      hasNextPeriod: shouldShowNextPeriod(today, searchedYear, searchedMonth + 1),
-      hasPreviousPeriod: shouldShowPreviousPeriod(dateCreated, searchedYear, searchedMonth + 1),
-    });
-  } catch (err) {
-    console.log(`err when fetching stats: ${err}`);
-    next(err);
   }
 };
 
@@ -109,4 +93,16 @@ export const getAllStatsByMonth = async (req: Request<any>, res: Response, next:
   } catch (err) {
     console.log(`err when fetching all stats ${err}`);
   }
+};
+
+export const getDateCreated = async (queryResult: QueryResult<any>, userId: string) => {
+  let dateCreated: Date;
+
+  if (queryResult.rowCount) {
+    dateCreated = queryResult.rows[0].date_created;
+  } else {
+    // search by id once more on users table
+    dateCreated = await searchDateCreatedInDb(userId);
+  }
+  return dateCreated;
 };

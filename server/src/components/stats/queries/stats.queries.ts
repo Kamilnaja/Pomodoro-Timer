@@ -2,7 +2,7 @@ import { QueryConfig, QueryResult } from 'pg';
 import { PomodorosDoneInDay } from '../../../../../types/statisticsInterfaces';
 import { pool } from '../../../db/client';
 
-export const gfdb = async (
+export const getFromDb = async (
   userId: string,
   period: 'month' | 'day',
   date: Date,
