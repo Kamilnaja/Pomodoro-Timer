@@ -21,7 +21,6 @@ export const StatsComponent = (props: StatsComponentProps) => {
 
   return (
     <Container>
-      <h2>Statistics</h2>
       <div className="stats">
         {/* {renderLineChart} */}
         <ButtonGroup className="stats__navigation navigation">

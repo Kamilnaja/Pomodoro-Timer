@@ -2,13 +2,13 @@ import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ModalType } from 'shared/modal/modalEnum';
+import About from '../../about/About';
+import PomodoroCounterScreen from '../../pomodoroCounter/pomodoroCounterScreen/PomodoroCounterScreen';
 import SettingsContainer from '../../settings/container/SettingsContainer';
-import StatsContainer from '../../stats/allStats/containers/StatsContainer';
+import { StatsScreenComponent } from '../../stats/statsScreen/StatsScreenComponent';
 import TaskAndNotesContainer from '../../tasksAndNotes/taskAndNotesWrapper/taskAndNotesContainer/TaskAndNotesContainer';
 import { HeaderContainerProps } from '../container/HeaderContainerProps';
 import './headerComponent.scss';
-import PomodoroCounterScreen from '../../pomodoroCounter/pomodoroCounterScreen/PomodoroCounterScreen';
-import About from '../../about/About';
 
 export const HeaderComponent = (props: HeaderContainerProps) => (
   <Router>
@@ -49,7 +49,7 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
           <SettingsContainer />
         </Route>
         <Route path="/stats">
-          <StatsContainer />
+          <StatsScreenComponent />
         </Route>
         <Route path="/about">
           <About />
