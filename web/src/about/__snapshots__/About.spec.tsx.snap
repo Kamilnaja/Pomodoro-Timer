@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`About should match snapshot 1`] = `
+<Container
+  fluid={false}
+>
+  <h2>
+    About
+  </h2>
+  <h3>
+    What is this page made for?
+  </h3>
+  <p>
+    TomatoToDone is an pomodoro application, that helps you achieve more in live and work.
+  </p>
+  <p>
+    Due to pomodoro technique, work for 25 minutes and then take 5 minutes break.
+  </p>
+  <p>
+    Repeat!
+  </p>
+</Container>
+`;

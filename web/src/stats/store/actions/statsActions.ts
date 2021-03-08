@@ -97,6 +97,7 @@ export const handleGetTodayStats = () => async (dispatch: (args: Action) => void
 
 export const handleSavePomodoro = () => async (dispatch: (arg: Action | any) => void) => {
   dispatch(savePomodoro());
+
   updateData('stats', {}, 'POST')
     .then(() => dispatch(handleGetTodayStats()))
     .catch(err => dispatch(savePomodoroError(err)));

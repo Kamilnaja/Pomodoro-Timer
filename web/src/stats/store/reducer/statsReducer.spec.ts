@@ -52,7 +52,7 @@ describe('statsReducer', () => {
     });
   });
 
-  it('should handle GET_STATISTIC_IN_PERIOD', () => {
+  it('should handle GET_STATISTIC', () => {
     expect(
       statsReducer(undefined, {
         type: GET_STATS,
@@ -63,7 +63,7 @@ describe('statsReducer', () => {
     });
   });
 
-  it('should handle GET_STATISTIC_IN_PERIOD_SUCCESS', () => {
+  it('should handle GET_STATISTIC_SUCCESS', () => {
     expect(
       statsReducer(undefined, {
         type: GET_STATS_SUCCESS,
@@ -72,11 +72,11 @@ describe('statsReducer', () => {
     ).toEqual({
       ...initialState,
       isLoading: false,
-      results: createStatsSearchResult(),
+      stats: createStatsSearchResult(),
     });
   });
 
-  it('should handle GET_STATISTIC_IN_PERIOD_ERROR', () => {
+  it('should handle GET_STATISTIC_ERROR', () => {
     expect(
       statsReducer(undefined, {
         type: GET_STATS_ERROR,
