@@ -36,13 +36,13 @@ class StatsContainer extends React.Component<StatsContainerProps> {
   render = () => {
     if (this.props.stats.error) {
       return <ErrorComponent />;
-    } else if (this.props.stats.isLoading || !this.props.stats.results) {
+    } else if (this.props.stats.isLoading || !this.props.stats.stats) {
       return <Loader />;
     } else {
       return (
         <StatsComponent
           handleGetStats={this.props.handleGetStats}
-          stats={this.props.stats.results}
+          stats={this.props.stats.stats}
           settings={this.props.settingsState}
           handleGetSettings={this.props.handleGetSettings}
           handleSaveSettings={this.props.handleSaveSettings}

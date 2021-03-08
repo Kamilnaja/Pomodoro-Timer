@@ -5,7 +5,7 @@ export const createStatsState = (): StatsState => ({
   isLoading: false,
   error: null,
   todayResults: 10,
-  results: null,
+  stats: null,
 });
 
 export const createStatsSearchResult = (): StatsSearchResult => ({

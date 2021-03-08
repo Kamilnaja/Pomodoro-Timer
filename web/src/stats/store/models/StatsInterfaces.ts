@@ -1,9 +1,10 @@
-import { StatsSearchResult } from '../../../../../types/statsInterfaces';
+import { StatsSearchResult, Tag } from '../../../../../types/statsInterfaces';
 
 export interface StatsState {
   isLoading: boolean;
   error: string;
-  results: StatsSearchResult;
+  stats: StatsSearchResult;
+  statsWithTags: Tag[];
   todayResults: number;
 }
 
