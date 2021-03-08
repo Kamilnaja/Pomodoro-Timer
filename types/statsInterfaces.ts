@@ -30,7 +30,7 @@ export interface StatsWithTagsSearchResult {
 }
 
 export interface TodayStatsResult extends SearchResult<number> {}
-
+// todo - get previous, next
 export interface Tag extends Partial<TagPartial> {}
 
 interface TagPartial {

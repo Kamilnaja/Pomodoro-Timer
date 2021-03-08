@@ -1,3 +1,5 @@
-export const StatsWithTagsComponent = () => {
-  return <div>Hello stats with tags</div>;
+import { StatsWithTagsComponentProps } from './StatsWithTagsComponentProps';
+
+export const StatsWithTagsComponent = (props: StatsWithTagsComponentProps) => {
+  return <div>Hello stats with</div>;
 };

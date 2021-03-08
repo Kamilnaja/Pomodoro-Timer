@@ -5,6 +5,8 @@ import { StatsWithTagsComponent } from '../components/StatsWithTagsComponent';
 import { StatsWithTagsContainerProps } from './StatsWithTagsContainerProps';
 import { handleGetStatsWithTags } from '../../store/actions/statsActions';
 import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
+import { ErrorComponent } from '../../../shared/error/errorComponent/ErrorComponent';
+import { Loader } from '../../../shared/loader/Loader';
 
 class StatsWithTagsContainer extends Component<StatsWithTagsContainerProps> {
   componentDidMount() {
@@ -12,7 +14,13 @@ class StatsWithTagsContainer extends Component<StatsWithTagsContainerProps> {
   }
 
   render() {
-    return <StatsWithTagsComponent />;
+    if (this.props.stats.error) {
+      return <ErrorComponent />;
+    } else if (this.props.stats.isLoading || !this.props.stats.stats) {
+      return <Loader />;
+    } else {
+      return <StatsWithTagsComponent statsWithTags={this.props.stats.statsWithTags} />;
+    }
   }
 }
 
