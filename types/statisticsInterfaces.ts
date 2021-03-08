@@ -25,8 +25,15 @@ export interface StatsSearchResult {
   hasNextPeriod: boolean;
 }
 
+export interface StatsWithTagsSearchResult {
+  result: Tag[];
+}
+
 export interface TodayStatsResult extends SearchResult<number> {}
 
-export interface Tag {
+export interface Tag extends Partial<TagPartial> {}
+
+interface TagPartial {
   tagId: string;
+  tagText: string;
 }

@@ -1,11 +1,14 @@
 import { Action } from 'redux';
-import { StatsSearchResult } from '../../../../../types/statisticsInterfaces';
+import { StatsSearchResult, StatsWithTagsSearchResult } from '../../../../../types/statisticsInterfaces';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
 import { getCurrentDay, getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
 import {
   GET_STATISTIC_IN_PERIOD,
   GET_STATISTIC_IN_PERIOD_ERROR,
   GET_STATISTIC_IN_PERIOD_SUCCESS,
+  GET_STATISTIC_WITH_TAGS_IN_PERIOD,
+  GET_STATISTIC_WITH_TAGS_IN_PERIOD_ERROR,
+  GET_STATISTIC_WITH_TAGS_IN_PERIOD_SUCCESS,
   GET_TODAY_STATS,
   GET_TODAY_STATS_ERROR,
   GET_TODAY_STATS_SUCCESS,
@@ -51,7 +54,30 @@ const getTodayStatsError = (payload: any): StatsActionsTypes => ({
   payload,
 });
 
+const getStatisticsWithTagsInPeriod = () => ({
+  type: GET_STATISTIC_WITH_TAGS_IN_PERIOD,
+});
+
+const getStatisticsWithTagsInPeriodSuccess = (payload: StatsWithTagsSearchResult) => ({
+  type: GET_STATISTIC_WITH_TAGS_IN_PERIOD_SUCCESS,
+  payload,
+});
+
+const getStatisticsWithTagsInPeriodError = (payload: any) => ({
+  type: GET_STATISTIC_WITH_TAGS_IN_PERIOD_ERROR,
+  payload,
+});
 // thunk
+
+export const handleGetStatsWithTagsInPeriod = (year: number, month: number) => async (
+  dispatch: (args: Action) => void,
+) => {
+  dispatch(getStatisticsWithTagsInPeriod());
+
+  fetchData(`stats/tags/${year}/${month}`)
+    .then((payload: StatsWithTagsSearchResult) => dispatch(getStatisticsWithTagsInPeriodSuccess(payload)))
+    .catch(err => dispatch(getStatisticsWithTagsInPeriodError(err)));
+};
 
 export const handleGetStatsInPeriod = (year: number, month: number) => async (dispatch: (args: Action) => void) => {
   dispatch(getStatisticsInPeriod());
