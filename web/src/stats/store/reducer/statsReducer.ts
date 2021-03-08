@@ -1,7 +1,7 @@
 import {
-  GET_STATISTIC_IN_PERIOD,
-  GET_STATISTIC_IN_PERIOD_ERROR,
-  GET_STATISTIC_IN_PERIOD_SUCCESS,
+  GET_STATS,
+  GET_STATS_ERROR,
+  GET_STATS_SUCCESS,
   GET_TODAY_STATS,
   GET_TODAY_STATS_ERROR,
   GET_TODAY_STATS_SUCCESS,
@@ -37,18 +37,18 @@ export const statsReducer = (state = initialState, action: StatsActionsTypes) =>
         error: action.payload,
         isLoading: false,
       };
-    case GET_STATISTIC_IN_PERIOD:
+    case GET_STATS:
       return {
         ...state,
         isLoading: true,
       };
-    case GET_STATISTIC_IN_PERIOD_SUCCESS:
+    case GET_STATS_SUCCESS:
       return {
         ...state,
         isLoading: false,
         results: action.payload,
       };
-    case GET_STATISTIC_IN_PERIOD_ERROR:
+    case GET_STATS_ERROR:
       return {
         ...state,
         error: action.payload,

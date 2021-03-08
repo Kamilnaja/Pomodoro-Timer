@@ -1,8 +1,8 @@
 import { createStatsSearchResult } from '../../testing/stats.test.data';
 import {
-  GET_STATISTIC_IN_PERIOD,
-  GET_STATISTIC_IN_PERIOD_ERROR,
-  GET_STATISTIC_IN_PERIOD_SUCCESS,
+  GET_STATS,
+  GET_STATS_ERROR,
+  GET_STATS_SUCCESS,
   GET_TODAY_STATS,
   GET_TODAY_STATS_ERROR,
   GET_TODAY_STATS_SUCCESS,
@@ -55,7 +55,7 @@ describe('statsReducer', () => {
   it('should handle GET_STATISTIC_IN_PERIOD', () => {
     expect(
       statsReducer(undefined, {
-        type: GET_STATISTIC_IN_PERIOD,
+        type: GET_STATS,
       }),
     ).toEqual({
       ...initialState,
@@ -66,7 +66,7 @@ describe('statsReducer', () => {
   it('should handle GET_STATISTIC_IN_PERIOD_SUCCESS', () => {
     expect(
       statsReducer(undefined, {
-        type: GET_STATISTIC_IN_PERIOD_SUCCESS,
+        type: GET_STATS_SUCCESS,
         payload: createStatsSearchResult(),
       }),
     ).toEqual({
@@ -79,7 +79,7 @@ describe('statsReducer', () => {
   it('should handle GET_STATISTIC_IN_PERIOD_ERROR', () => {
     expect(
       statsReducer(undefined, {
-        type: GET_STATISTIC_IN_PERIOD_ERROR,
+        type: GET_STATS_ERROR,
         payload: 'error',
       }),
     ).toEqual({

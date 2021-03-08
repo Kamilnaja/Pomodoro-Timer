@@ -1,4 +1,4 @@
-import { StatsSearchResult } from '../../../../../types/statisticsInterfaces';
+import { StatsSearchResult } from '../../../../../types/statsInterfaces';
 
 export interface StatsState {
   isLoading: boolean;

@@ -1,4 +1,4 @@
-import { PomodorosDoneInDay, StatsSearchResult } from '../../../../types/statisticsInterfaces';
+import { PomodorosDoneInDay, StatsSearchResult } from '../../../../types/statsInterfaces';
 import { StatsState } from '../store/models/StatsInterfaces';
 
 export const createStatsState = (): StatsState => ({

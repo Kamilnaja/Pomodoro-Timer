@@ -1,5 +1,5 @@
 import { Settings } from '../../../../../types/settingsInterface';
-import { PomodorosDoneInDay } from '../../../../../types/statisticsInterfaces';
+import { PomodorosDoneInDay } from '../../../../../types/statsInterfaces';
 import { ToggleDisplayDirection, ToggleDisplayEmptyDays } from '../../../settings/store/actions/settingsActionsTypes';
 
 export interface StatsTableComponentProps {

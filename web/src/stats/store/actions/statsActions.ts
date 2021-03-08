@@ -1,14 +1,14 @@
 import { Action } from 'redux';
-import { StatsSearchResult, StatsWithTagsSearchResult } from '../../../../../types/statisticsInterfaces';
+import { StatsSearchResult, StatsWithTagsSearchResult } from '../../../../../types/statsInterfaces';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
 import { getCurrentDay, getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
 import {
-  GET_STATISTIC_IN_PERIOD,
-  GET_STATISTIC_IN_PERIOD_ERROR,
-  GET_STATISTIC_IN_PERIOD_SUCCESS,
-  GET_STATISTIC_WITH_TAGS_IN_PERIOD,
-  GET_STATISTIC_WITH_TAGS_IN_PERIOD_ERROR,
-  GET_STATISTIC_WITH_TAGS_IN_PERIOD_SUCCESS,
+  GET_STATS,
+  GET_STATS_ERROR,
+  GET_STATS_SUCCESS,
+  GET_STATS_WITH_TAGS,
+  GET_STATS_WITH_TAGS_ERROR,
+  GET_STATS_WITH_TAGS_SUCCESS,
   GET_TODAY_STATS,
   GET_TODAY_STATS_ERROR,
   GET_TODAY_STATS_SUCCESS,
@@ -17,7 +17,7 @@ import {
   StatsActionsTypes,
 } from './statsActionsTypes';
 
-const savePomodoro = (): StatsActionsTypes => ({
+export const savePomodoro = (): StatsActionsTypes => ({
   type: SAVE_POMODORO,
 });
 
@@ -26,17 +26,17 @@ const savePomodoroError = (error: any): StatsActionsTypes => ({
   payload: error,
 });
 
-const getStatisticsInPeriod = (): Action => ({
-  type: GET_STATISTIC_IN_PERIOD,
+const getStatsInPeriod = (): Action => ({
+  type: GET_STATS,
 });
 
-const getStatisticsInPeriodSuccess = (payload: StatsSearchResult): StatsActionsTypes => ({
-  type: GET_STATISTIC_IN_PERIOD_SUCCESS,
+const getStatsInPeriodSuccess = (payload: StatsSearchResult): StatsActionsTypes => ({
+  type: GET_STATS_SUCCESS,
   payload,
 });
 
-const getStatisticsInPeriodError = (payload: StatsSearchResult): StatsActionsTypes => ({
-  type: GET_STATISTIC_IN_PERIOD_ERROR,
+const getStatsInPeriodError = (payload: StatsSearchResult): StatsActionsTypes => ({
+  type: GET_STATS_ERROR,
   payload,
 });
 
@@ -54,17 +54,17 @@ const getTodayStatsError = (payload: any): StatsActionsTypes => ({
   payload,
 });
 
-const getStatisticsWithTagsInPeriod = () => ({
-  type: GET_STATISTIC_WITH_TAGS_IN_PERIOD,
+const getStatsWithTagsInPeriod = () => ({
+  type: GET_STATS_WITH_TAGS,
 });
 
-const getStatisticsWithTagsInPeriodSuccess = (payload: StatsWithTagsSearchResult) => ({
-  type: GET_STATISTIC_WITH_TAGS_IN_PERIOD_SUCCESS,
+const getStatsWithTagsInPeriodSuccess = (payload: StatsWithTagsSearchResult) => ({
+  type: GET_STATS_WITH_TAGS_SUCCESS,
   payload,
 });
 
-const getStatisticsWithTagsInPeriodError = (payload: any) => ({
-  type: GET_STATISTIC_WITH_TAGS_IN_PERIOD_ERROR,
+const getStatsWithTagsInPeriodError = (payload: any) => ({
+  type: GET_STATS_WITH_TAGS_ERROR,
   payload,
 });
 // thunk
@@ -72,19 +72,19 @@ const getStatisticsWithTagsInPeriodError = (payload: any) => ({
 export const handleGetStatsWithTagsInPeriod = (year: number, month: number) => async (
   dispatch: (args: Action) => void,
 ) => {
-  dispatch(getStatisticsWithTagsInPeriod());
+  dispatch(getStatsWithTagsInPeriod());
 
   fetchData(`stats/tags/${year}/${month}`)
-    .then((payload: StatsWithTagsSearchResult) => dispatch(getStatisticsWithTagsInPeriodSuccess(payload)))
-    .catch(err => dispatch(getStatisticsWithTagsInPeriodError(err)));
+    .then((payload: StatsWithTagsSearchResult) => dispatch(getStatsWithTagsInPeriodSuccess(payload)))
+    .catch(err => dispatch(getStatsWithTagsInPeriodError(err)));
 };
 
 export const handleGetStatsInPeriod = (year: number, month: number) => async (dispatch: (args: Action) => void) => {
-  dispatch(getStatisticsInPeriod());
+  dispatch(getStatsInPeriod());
 
   fetchData(`stats/${year}/${month}`)
-    .then((payload: StatsSearchResult) => dispatch(getStatisticsInPeriodSuccess(payload)))
-    .catch(err => dispatch(getStatisticsInPeriodError(err)));
+    .then((payload: StatsSearchResult) => dispatch(getStatsInPeriodSuccess(payload)))
+    .catch(err => dispatch(getStatsInPeriodError(err)));
 };
 
 export const handleGetTodayStats = () => async (dispatch: (args: Action) => void) => {

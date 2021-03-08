@@ -1,12 +1,12 @@
-import { StatsSearchResult, StatsWithTagsSearchResult } from '../../../../../types/statisticsInterfaces';
+import { StatsSearchResult, StatsWithTagsSearchResult } from '../../../../../types/statsInterfaces';
 
-export const GET_STATISTIC_IN_PERIOD = 'GET_STATISTIC_IN_PERIOD';
-export const GET_STATISTIC_IN_PERIOD_SUCCESS = 'GET_STATISTIC_IN_PERIOD_SUCCESS';
-export const GET_STATISTIC_IN_PERIOD_ERROR = 'GET_STATISTIC_IN_PERIOD_ERROR';
+export const GET_STATS = 'GET_STATS';
+export const GET_STATS_SUCCESS = 'GET_STATS_SUCCESS';
+export const GET_STATS_ERROR = 'GET_STATS_ERROR';
 
-export const GET_STATISTIC_WITH_TAGS_IN_PERIOD = 'GET_STATISTIC_WITH_TAGS_IN_PERIOD';
-export const GET_STATISTIC_WITH_TAGS_IN_PERIOD_SUCCESS = 'GET_STATISTIC_WITH_TAGS_IN_PERIOD_SUCCESS';
-export const GET_STATISTIC_WITH_TAGS_IN_PERIOD_ERROR = 'GET_STATISTIC_WITH_TAGS_IN_PERIOD_ERROR';
+export const GET_STATS_WITH_TAGS = 'GET_STATS_WITH_TAGS';
+export const GET_STATS_WITH_TAGS_SUCCESS = 'GET_STATS_WITH_TAGS_SUCCESS';
+export const GET_STATS_WITH_TAGS_ERROR = 'GET_STATS_WITH_TAGS_ERROR';
 
 export const GET_TODAY_STATS = 'GET_TODAY_STATS';
 export const GET_TODAY_STATS_SUCCESS = 'GET_TODAY_STATS_SUCCESS';
@@ -16,17 +16,17 @@ export const SAVE_POMODORO = 'SAVE_POMODORO';
 export const SAVE_POMODORO_SUCCESS = 'SAVE_POMODORO_SUCCESS';
 export const SAVE_POMODORO_ERROR = 'SAVE_POMODORO_ERROR';
 
-export interface GetStatisticsInPeriodAction {
-  type: typeof GET_STATISTIC_IN_PERIOD;
+export interface GetStatsAction {
+  type: typeof GET_STATS;
 }
 
-export interface GetStatisticsInPeriodSuccessAction {
-  type: typeof GET_STATISTIC_IN_PERIOD_SUCCESS;
+export interface GetStatsSuccessAction {
+  type: typeof GET_STATS_SUCCESS;
   payload: StatsSearchResult;
 }
 
-export interface GetStatisticsInPeriodErrorAction {
-  type: typeof GET_STATISTIC_IN_PERIOD_ERROR;
+export interface GetStatsErrorAction {
+  type: typeof GET_STATS_ERROR;
   payload: any;
 }
 
@@ -57,30 +57,30 @@ export interface SavePomodoroErrorAction {
   payload: any;
 }
 
-export interface GetStatisticsWithTagsInPeriodAction {
-  type: typeof GET_STATISTIC_WITH_TAGS_IN_PERIOD;
+export interface GetStatsWithTagsAction {
+  type: typeof GET_STATS_WITH_TAGS;
 }
 
-export interface GetStatisticsWithTagsInPeriodSuccessAction {
-  type: typeof GET_STATISTIC_WITH_TAGS_IN_PERIOD_SUCCESS;
+export interface GetStatsWithTagsSuccessAction {
+  type: typeof GET_STATS_WITH_TAGS_SUCCESS;
   payload: StatsWithTagsSearchResult; // todo - change me
 }
 
-export interface GetStatisticsWithTagsInPeriodErrorAction {
-  type: typeof GET_STATISTIC_WITH_TAGS_IN_PERIOD_ERROR;
+export interface GetStatsWithTagsErrorAction {
+  type: typeof GET_STATS_WITH_TAGS_ERROR;
   payload: any;
 }
 
 export type StatsActionsTypes =
-  | GetStatisticsInPeriodAction
-  | GetStatisticsInPeriodSuccessAction
-  | GetStatisticsInPeriodErrorAction
+  | GetStatsAction
+  | GetStatsSuccessAction
+  | GetStatsErrorAction
+  | GetStatsWithTagsAction
+  | GetStatsWithTagsSuccessAction
+  | GetStatsWithTagsErrorAction
   | GetTodayStatsAction
   | GetTodayStatsSuccessAction
   | GetTodayStatsErrorAction
   | SavePomodoroAction
   | SavePomodoroSuccessAction
-  | SavePomodoroErrorAction
-  | GetStatisticsWithTagsInPeriodAction
-  | GetStatisticsWithTagsInPeriodSuccessAction
-  | GetStatisticsWithTagsInPeriodErrorAction;
+  | SavePomodoroErrorAction;

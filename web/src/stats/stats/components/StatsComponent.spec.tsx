@@ -33,10 +33,6 @@ describe('StatsComponent', () => {
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 
-  it('Should have settings header', () => {
-    expect(wrapper.find('h2')).toHaveLength(1);
-  });
-
   it('Should trigger next month action', () => {
     wrapper.find('.navigation__button--next').simulate('click');
 

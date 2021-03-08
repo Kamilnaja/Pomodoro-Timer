@@ -1,5 +1,5 @@
 import { QueryConfig, QueryResult } from 'pg';
-import { PomodorosDoneInDay } from '../../../../../types/statisticsInterfaces';
+import { PomodorosDoneInDay } from '../../../../../types/statsInterfaces';
 import { pool } from '../../../db/client';
 import { Period } from '../models/period';
 

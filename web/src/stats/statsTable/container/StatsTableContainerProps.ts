@@ -1,4 +1,4 @@
-import { PomodorosDoneInDay } from '../../../../../types/statisticsInterfaces';
+import { PomodorosDoneInDay } from '../../../../../types/statsInterfaces';
 import {
   HandleGetSettings,
   HandleSaveSettings,

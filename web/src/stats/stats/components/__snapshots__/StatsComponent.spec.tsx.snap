@@ -4,9 +4,6 @@ exports[`StatsComponent Should match snapshot 1`] = `
 <Container
   fluid={false}
 >
-  <h2>
-    Statistics
-  </h2>
   <div
     className="stats"
   >

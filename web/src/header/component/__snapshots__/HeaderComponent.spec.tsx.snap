@@ -93,7 +93,7 @@ exports[`HeaderComponent Should match snapshot 1`] = `
       <Route
         path="/stats"
       >
-        <Connect(StatsContainer) />
+        <StatsScreenComponent />
       </Route>
       <Route
         path="/about"
@@ -192,7 +192,7 @@ exports[`HeaderComponent Should match snapshot 2`] = `
       <Route
         path="/stats"
       >
-        <Connect(StatsContainer) />
+        <StatsScreenComponent />
       </Route>
       <Route
         path="/about"

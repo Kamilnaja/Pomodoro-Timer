@@ -1,7 +1,7 @@
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import { QueryResult } from 'pg';
-import { StatsSearchResult, Tag } from '../../../../../types/statisticsInterfaces';
+import { StatsSearchResult, Tag } from '../../../../../types/statsInterfaces';
 import { isDateError } from '../../../utils/service.util';
 import { Request } from '../../auth/models/request.interface';
 import {
