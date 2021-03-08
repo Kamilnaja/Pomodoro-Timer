@@ -4,7 +4,7 @@ import { ErrorComponent } from 'shared/error/errorComponent/ErrorComponent';
 import { Loader } from 'shared/loader/Loader';
 import { SettingsState, DisplayDirection } from '../../../settings/store/interfaces/settingsInterfaces';
 import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
-import { handleGetStatsInPeriod } from '../../store/actions/statsActions';
+import { handleGetStats } from '../../store/actions/statsActions';
 import { StatsState } from '../../store/models/StatsInterfaces';
 import { StatsComponent } from '../components/StatsComponent';
 import { StatsContainerProps } from './StatsContainerProps';
@@ -63,7 +63,7 @@ const mapStateToProps = (state: { stats: StatsState; settings: SettingsState }) 
 const mapDispatchToProps = {
   handleSaveSettings,
   handleGetSettings,
-  handleGetStats: handleGetStatsInPeriod,
+  handleGetStats: handleGetStats,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(StatsContainer);

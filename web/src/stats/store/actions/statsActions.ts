@@ -26,16 +26,16 @@ const savePomodoroError = (error: any): StatsActionsTypes => ({
   payload: error,
 });
 
-const getStatsInPeriod = (): Action => ({
+const getStats = (): Action => ({
   type: GET_STATS,
 });
 
-const getStatsInPeriodSuccess = (payload: StatsSearchResult): StatsActionsTypes => ({
+const getStatsSuccess = (payload: StatsSearchResult): StatsActionsTypes => ({
   type: GET_STATS_SUCCESS,
   payload,
 });
 
-const getStatsInPeriodError = (payload: StatsSearchResult): StatsActionsTypes => ({
+const getStatsError = (payload: StatsSearchResult): StatsActionsTypes => ({
   type: GET_STATS_ERROR,
   payload,
 });
@@ -54,37 +54,35 @@ const getTodayStatsError = (payload: any): StatsActionsTypes => ({
   payload,
 });
 
-const getStatsWithTagsInPeriod = () => ({
+const getStatsWithTags = () => ({
   type: GET_STATS_WITH_TAGS,
 });
 
-const getStatsWithTagsInPeriodSuccess = (payload: StatsWithTagsSearchResult) => ({
+const getStatsWithTagsSuccess = (payload: StatsWithTagsSearchResult) => ({
   type: GET_STATS_WITH_TAGS_SUCCESS,
   payload,
 });
 
-const getStatsWithTagsInPeriodError = (payload: any) => ({
+const getStatsWithTagsError = (payload: any) => ({
   type: GET_STATS_WITH_TAGS_ERROR,
   payload,
 });
 // thunk
 
-export const handleGetStatsWithTagsInPeriod = (year: number, month: number) => async (
-  dispatch: (args: Action) => void,
-) => {
-  dispatch(getStatsWithTagsInPeriod());
+export const handleGetStatsWithTags = (year: number, month: number) => async (dispatch: (args: Action) => void) => {
+  dispatch(getStatsWithTags());
 
   fetchData(`stats/tags/${year}/${month}`)
-    .then((payload: StatsWithTagsSearchResult) => dispatch(getStatsWithTagsInPeriodSuccess(payload)))
-    .catch(err => dispatch(getStatsWithTagsInPeriodError(err)));
+    .then((payload: StatsWithTagsSearchResult) => dispatch(getStatsWithTagsSuccess(payload)))
+    .catch(err => dispatch(getStatsWithTagsError(err)));
 };
 
-export const handleGetStatsInPeriod = (year: number, month: number) => async (dispatch: (args: Action) => void) => {
-  dispatch(getStatsInPeriod());
+export const handleGetStats = (year: number, month: number) => async (dispatch: (args: Action) => void) => {
+  dispatch(getStats());
 
   fetchData(`stats/${year}/${month}`)
-    .then((payload: StatsSearchResult) => dispatch(getStatsInPeriodSuccess(payload)))
-    .catch(err => dispatch(getStatsInPeriodError(err)));
+    .then((payload: StatsSearchResult) => dispatch(getStatsSuccess(payload)))
+    .catch(err => dispatch(getStatsError(err)));
 };
 
 export const handleGetTodayStats = () => async (dispatch: (args: Action) => void) => {
