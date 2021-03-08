@@ -1,7 +1,7 @@
 import { NextFunction } from 'express';
 
-export const setError = (field: string, next: NextFunction) => {
-  const info = `Wrong ${field}`;
+export const setError = (next: NextFunction, ...fields: string[]) => {
+  const info = `Wrong ${fields}`;
   console.log(info);
   next(info);
 };

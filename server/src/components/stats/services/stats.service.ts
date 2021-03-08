@@ -1,11 +1,15 @@
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
-import { QueryConfig, QueryResult } from 'pg';
+import { QueryResult } from 'pg';
 import { StatsSearchResult, Tag } from '../../../../../types/statisticsInterfaces';
-import { pool } from '../../../db/client';
 import { isDateError } from '../../../utils/service.util';
 import { Request } from '../../auth/models/request.interface';
-import { getFromDb, savePomodoroInDb, searchDateCreatedInDb } from '../queries/stats.queries';
+import {
+  getNumberOfPomodorosDoneAtDayFromDb,
+  queryGetAllStatsByMonthsFromDb,
+  savePomodoroInDb,
+  searchDateCreatedInDb,
+} from '../queries/stats.queries';
 import { setError, shouldShowNextPeriod, shouldShowPreviousPeriod } from './stats.serviceHelpers';
 
 export const handleAddPomodoro = async (req: Request<Tag>, res: Response<Error | {}>, next: NextFunction) => {
@@ -27,12 +31,12 @@ export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<Stats
 
   if (isDateError(year, month)) {
     console.log('error');
-    setError('error', next);
+    setError(next, year, month);
   } else {
     const date = new Date(Number(year), Number(month));
 
     try {
-      const queryResult: QueryResult = await getFromDb(userId, 'month', date);
+      const queryResult: QueryResult = await getNumberOfPomodorosDoneAtDayFromDb(userId, 'month', date);
       const today = new Date();
       const searchedYear = date.getFullYear();
       const searchedMonth = date.getMonth();
@@ -56,10 +60,10 @@ export const getStatsInGivenDay = async (req: Request<{}>, res: Response<StatsSe
 
   if (isDateError(year, month, day)) {
     console.log('error');
-    next('date err');
+    next(`date err: ${year} ${month} ${day}`);
   } else {
     try {
-      const queryResult: QueryResult = await getFromDb(userId, 'day', date);
+      const queryResult: QueryResult = await getNumberOfPomodorosDoneAtDayFromDb(userId, 'day', date);
       res.json({
         pomodoros: queryResult.rows.map(({ date, count }) => ({ date, count })),
         hasNextPeriod: false,
@@ -74,24 +78,22 @@ export const getStatsInGivenDay = async (req: Request<{}>, res: Response<StatsSe
 
 export const getAllStatsByMonth = async (req: Request<any>, res: Response, next: NextFunction) => {
   const userId = req.user.id;
+  const { year, month } = req.params;
+  const date = new Date(Number(year), Number(month));
 
-  const query: QueryConfig = {
-    text: `
-      SELECT tags.text "tagText"
-      FROM pomodoros 
-      LEFT OUTER JOIN tags ON pomodoros.tag_id = tags.id
-      WHERE user_id = ($1) 
-      AND TO_CHAR(created_at, ($2)) = ($3)`, // todo- fixme
-    values: [userId],
-  };
-
-  try {
-    const queryResult: QueryResult = await pool.query(query);
-    res.json({
-      result: queryResult.rows,
-    });
-  } catch (err) {
-    console.log(`err when fetching all stats ${err}`);
+  if (isDateError(year, month)) {
+    console.log(`error`);
+    next(`date err: ${year} ${month}`);
+  } else {
+    try {
+      const queryResult: QueryResult = await queryGetAllStatsByMonthsFromDb(userId, 'month', date);
+      res.json({
+        result: queryResult.rows,
+      });
+    } catch (err) {
+      console.log(`err when fetching all stats ${err}`);
+      next(err);
+    }
   }
 };
 

@@ -1,10 +1,11 @@
 import { QueryConfig, QueryResult } from 'pg';
 import { PomodorosDoneInDay } from '../../../../../types/statisticsInterfaces';
 import { pool } from '../../../db/client';
+import { Period } from '../models/period';
 
-export const getFromDb = async (
+export const getNumberOfPomodorosDoneAtDayFromDb = async (
   userId: string,
-  period: 'month' | 'day',
+  period: Period,
   date: Date,
 ): Promise<QueryResult<PomodorosDoneInDay>> => {
   const query: QueryConfig = {
@@ -14,9 +15,9 @@ export const getFromDb = async (
     FROM pomodoros 
     INNER JOIN users ON pomodoros.user_id = users.id
     WHERE user_id = ($1) 
-    AND DATE_TRUNC('${period}', created_at) = ($2)
+    AND DATE_TRUNC(($2), created_at) = ($3)
     GROUP BY date(created_at), users.date_created `,
-    values: [userId, date],
+    values: [userId, period, date],
   };
   try {
     return await pool.query(query);
@@ -36,6 +37,30 @@ export const searchDateCreatedInDb = async (userId: string): Promise<Date> => {
     return queryResult.rows[0].date_created;
   } catch (err) {
     console.log(`err when fetching stats: ${err}`);
+    return Promise.reject(err);
+  }
+};
+
+export const queryGetAllStatsByMonthsFromDb = async (
+  userId: string,
+  period: Period,
+  date: Date,
+): Promise<QueryResult> => {
+  const query: QueryConfig = {
+    text: `
+      SELECT tags.text "tagText"
+      FROM pomodoros 
+      LEFT OUTER JOIN tags ON pomodoros.tag_id = tags.id
+      WHERE pomodoros.user_id = ($1)
+      AND DATE_TRUNC(($2), created_at) = ($3)
+      `,
+    values: [userId, period, date],
+  };
+
+  try {
+    const queryResult: QueryResult = await pool.query(query);
+    return queryResult;
+  } catch (err) {
     return Promise.reject(err);
   }
 };
