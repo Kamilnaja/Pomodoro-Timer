@@ -10,7 +10,7 @@ import {
   savePomodoroInDb,
   searchDateCreatedInDb,
 } from '../queries/stats.queries';
-import { setError, shouldShowNextPeriod, shouldShowPreviousPeriod } from './stats.serviceHelpers';
+import { setError, shouldShowNextPeriod, shouldShowPreviousPeriod } from './stats.service.helpers';
 
 export const handleAddPomodoro = async (req: Request<Tag>, res: Response<Error | {}>, next: NextFunction) => {
   const { tagId } = req.body;
@@ -80,7 +80,7 @@ export const getAllStatsByMonth = async (req: Request<any>, res: Response, next:
   const userId = req.user.id;
   const { year, month } = req.params;
   const date = new Date(Number(year), Number(month));
-
+  // todo - use error fn from helpers in all places
   if (isDateError(year, month)) {
     console.log(`error`);
     next(`date err: ${year} ${month}`);
