@@ -1,4 +1,4 @@
-import { Settings } from '../../../../../types/settingsInterface';
+import { Settings } from '../../../../../types/settingsInterfaces';
 import { AuthState } from '../../../auth/store/interfaces/authState';
 import { SettingsState } from '../../../settings/store/interfaces/settingsInterfaces';
 

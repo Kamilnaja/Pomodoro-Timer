@@ -1,4 +1,4 @@
-import { Settings } from '../../../../../types/settingsInterface';
+import { Settings } from '../../../../../types/settingsInterfaces';
 
 export enum DisplayDirection {
   ASC = 'ASC',

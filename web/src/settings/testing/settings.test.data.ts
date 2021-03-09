@@ -1,4 +1,4 @@
-import { Settings } from '../../../../types/settingsInterface';
+import { Settings } from '../../../../types/settingsInterfaces';
 import { DisplayDirection, SettingsState } from '../store/interfaces/settingsInterfaces';
 
 export const createSettings = (): Settings => ({

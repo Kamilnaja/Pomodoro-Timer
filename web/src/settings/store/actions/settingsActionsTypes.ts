@@ -1,4 +1,4 @@
-import { Settings } from '../../../../../types/settingsInterface';
+import { Settings } from '../../../../../types/settingsInterfaces';
 import { DisplayDirection } from '../interfaces/settingsInterfaces';
 
 export const GET_SETTINGS = 'GET_SETTINGS';

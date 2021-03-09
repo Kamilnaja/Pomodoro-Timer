@@ -1,4 +1,4 @@
-import { SearchResult } from './commonInterfaces';
+import { ResultInPeriod, SearchResult } from './commonInterfaces';
 
 /*
  * Allows for searching in current year, month or day
@@ -19,17 +19,24 @@ export interface TodayStats {
   result: number;
 }
 
-export interface StatsSearchResult {
+export interface StatsSearchResult extends ResultInPeriod {
   pomodoros: PomodorosDoneInDay[];
-  hasPreviousPeriod: boolean;
-  hasNextPeriod: boolean;
 }
 
-export interface PomodoroSearchResult extends SearchResult<Pomodoro> {}
+export interface PomodoroSearchResult extends ResultInPeriod {
+  result: Pomodoro[];
+}
 
 export interface TodayStatsResult extends SearchResult<number> {}
 
 export interface Pomodoro {
   tagText: string;
   createdAt: string;
+}
+
+export interface Tag extends Partial<TagPartial> {}
+
+interface TagPartial {
+  tagId: string;
+  tagText: string;
 }

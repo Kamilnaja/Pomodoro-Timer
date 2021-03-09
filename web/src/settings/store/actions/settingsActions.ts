@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { Settings } from '../../../../../types/settingsInterface';
+import { Settings } from '../../../../../types/settingsInterfaces';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
 import { cookieConsentAcceptationKey } from '../../../shared/settings/initialConfig';
 import { DisplayDirection } from '../interfaces/settingsInterfaces';

@@ -1,4 +1,4 @@
-import { Settings } from '../../../../../types/settingsInterface';
+import { Settings } from '../../../../../types/settingsInterfaces';
 import { PomodorosDoneInDay } from '../../../../../types/statsInterfaces';
 import { ToggleDisplayDirection, ToggleDisplayEmptyDays } from '../../../settings/store/actions/settingsActionsTypes';
 
