@@ -6,12 +6,10 @@ export const setError = (next: NextFunction, ...fields: string[]) => {
   next(info);
 };
 
-export const shouldShowNextPeriod = (date: Date, searchedYear: number, searchedMonth: number): boolean => {
-  const month = date.getMonth() + 1;
-
-  if (searchedYear < date.getFullYear()) {
+export const shouldShowNextPeriod = (date: Date, searchedDate: Date): boolean => {
+  if (searchedDate.getFullYear() < date.getFullYear()) {
     return true;
-  } else if (searchedYear === date.getFullYear() && searchedMonth < month) {
+  } else if (searchedDate.getFullYear() === date.getFullYear() && searchedDate.getMonth() < date.getMonth()) {
     return true;
   }
   return false;
