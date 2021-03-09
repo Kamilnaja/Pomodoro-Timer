@@ -1,0 +1,11 @@
+.table {
+  margin: 20px auto;
+  max-width: 600px;
+  table-layout: fixed;
+
+  & &__header {
+    display: inline-flex;
+    font-size: 18px;
+    margin-right: 20px;
+  }
+}
