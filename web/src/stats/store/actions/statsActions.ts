@@ -63,7 +63,7 @@ const getStatsWithTagsSuccess = (payload: PomodorosSearchResult) => ({
   payload,
 });
 
-const getStatsWithTagsError = (payload: any) => ({
+export const getStatsWithTagsError = (payload: any) => ({
   type: GET_STATS_WITH_TAGS_ERROR,
   payload,
 });

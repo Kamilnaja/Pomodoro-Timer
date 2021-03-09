@@ -16,7 +16,7 @@ class StatsWithTagsContainer extends Component<StatsWithTagsContainerProps> {
   render() {
     if (this.props.stats.error) {
       return <ErrorComponent />;
-    } else if (this.props.stats.isLoading || !this.props.stats.stats) {
+    } else if (this.props.stats.isLoadingWithTags || !this.props.stats.statsWithTags) {
       return <Loader />;
     } else {
       return <StatsWithTagsComponent statsWithTags={this.props.stats.statsWithTags} />;
