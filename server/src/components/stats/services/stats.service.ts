@@ -6,7 +6,7 @@ import { isDateError } from '../../../utils/service.util';
 import { Request } from '../../auth/models/request.interface';
 import {
   getNumberOfPomodorosDoneAtDayFromDb,
-  queryGetAllStatsByMonthsFromDb,
+  queryAllStatsByMonthFromDb,
   savePomodoroInDb,
   searchDateCreatedInDb,
 } from '../queries/stats.queries';
@@ -89,7 +89,7 @@ export const getAllStatsByMonth = async (req: Request<any>, res: Response, next:
   } else {
     try {
       const date = new Date(Number(year), Number(month));
-      const queryResult: QueryResult = await queryGetAllStatsByMonthsFromDb(userId, 'month', date);
+      const queryResult: QueryResult = await queryAllStatsByMonthFromDb(userId, 'month', date);
       const dateCreated: Date = await getDateCreated(userId);
 
       res.json({

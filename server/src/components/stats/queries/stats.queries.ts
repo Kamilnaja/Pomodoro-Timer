@@ -41,14 +41,10 @@ export const searchDateCreatedInDb = async (userId: string): Promise<Date> => {
   }
 };
 
-export const queryGetAllStatsByMonthsFromDb = async (
-  userId: string,
-  period: Period,
-  date: Date,
-): Promise<QueryResult> => {
+export const queryAllStatsByMonthFromDb = async (userId: string, period: Period, date: Date): Promise<QueryResult> => {
   const query: QueryConfig = {
     text: `
-      SELECT tags.text "tagText"
+      SELECT tags.text "tagText", created_at "createdAt"
       FROM pomodoros 
       LEFT OUTER JOIN tags ON pomodoros.tag_id = tags.id
       WHERE pomodoros.user_id = ($1)
