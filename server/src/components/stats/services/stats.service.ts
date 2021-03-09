@@ -40,7 +40,7 @@ export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<Stats
       if (queryResult.rowCount) {
         dateCreated = queryResult.rows[0].date_created;
       } else {
-        dateCreated = await getDateCreated(userId);
+        dateCreated = await searchDateCreatedInDb(userId);
       }
 
       res.json({
@@ -90,7 +90,7 @@ export const getAllStatsByMonth = async (req: Request<any>, res: Response, next:
     try {
       const date = new Date(Number(year), Number(month));
       const queryResult: QueryResult = await queryAllStatsByMonthFromDb(userId, 'month', date);
-      const dateCreated: Date = await getDateCreated(userId);
+      const dateCreated: Date = await searchDateCreatedInDb(userId);
 
       res.json({
         result: queryResult.rows,
@@ -102,8 +102,4 @@ export const getAllStatsByMonth = async (req: Request<any>, res: Response, next:
       next(err);
     }
   }
-};
-
-export const getDateCreated = async (userId: string): Promise<any> => {
-  return await searchDateCreatedInDb(userId);
 };

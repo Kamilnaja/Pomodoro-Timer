@@ -1,4 +1,4 @@
-import { StatsSearchResult, StatsWithTagsSearchResult } from '../../../../../types/statsInterfaces';
+import { StatsSearchResult, PomodoroSearchResult } from '../../../../../types/statsInterfaces';
 
 export const GET_STATS = 'GET_STATS';
 export const GET_STATS_SUCCESS = 'GET_STATS_SUCCESS';
@@ -63,7 +63,7 @@ export interface GetStatsWithTagsAction {
 
 export interface GetStatsWithTagsSuccessAction {
   type: typeof GET_STATS_WITH_TAGS_SUCCESS;
-  payload: StatsWithTagsSearchResult; // todo - change me
+  payload: PomodoroSearchResult;
 }
 
 export interface GetStatsWithTagsErrorAction {

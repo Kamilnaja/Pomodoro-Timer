@@ -25,15 +25,11 @@ export interface StatsSearchResult {
   hasNextPeriod: boolean;
 }
 
-export interface StatsWithTagsSearchResult {
-  result: Tag[];
-}
+export interface PomodoroSearchResult extends SearchResult<Pomodoro> {}
 
 export interface TodayStatsResult extends SearchResult<number> {}
-// todo - get previous, next
-export interface Tag extends Partial<TagPartial> {}
 
-interface TagPartial {
-  tagId: string;
+export interface Pomodoro {
   tagText: string;
+  createdAt: string;
 }

@@ -1,11 +1,11 @@
-import { StatsSearchResult, Tag } from '../../../../../types/statsInterfaces';
+import { PomodoroSearchResult, StatsSearchResult } from '../../../../../types/statsInterfaces';
 
 export interface StatsState {
   isLoading: boolean;
   isLoadingWithTags: boolean;
   error: string;
   stats: StatsSearchResult;
-  statsWithTags: Tag[];
+  statsWithTags: PomodoroSearchResult;
   todayResults: number;
 }
 
