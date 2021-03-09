@@ -1,8 +1,11 @@
-import { createStatsSearchResult } from '../../testing/stats.test.data';
+import { createPomodoroSearchResult, createStatsSearchResult } from '../../testing/stats.test.data';
 import {
   GET_STATS,
   GET_STATS_ERROR,
   GET_STATS_SUCCESS,
+  GET_STATS_WITH_TAGS,
+  GET_STATS_WITH_TAGS_ERROR,
+  GET_STATS_WITH_TAGS_SUCCESS,
   GET_TODAY_STATS,
   GET_TODAY_STATS_ERROR,
   GET_TODAY_STATS_SUCCESS,
@@ -123,6 +126,44 @@ describe('statsReducer', () => {
       ...initialState,
       isLoading: false,
       todayResults: 1,
+    });
+  });
+
+  it('should handle GET_STATS_WITH_TAGS', () => {
+    expect(
+      statsReducer(undefined, {
+        type: GET_STATS_WITH_TAGS,
+      }),
+    ).toEqual({
+      ...initialState,
+      isLoadingWithTags: true,
+    });
+  });
+
+  it('should handle GET_STATS_WITH_TAGS_ERROR', () => {
+    const err = 'something went wrong';
+    expect(
+      statsReducer(undefined, {
+        type: GET_STATS_WITH_TAGS_ERROR,
+        payload: err,
+      }),
+    ).toEqual({
+      ...initialState,
+      isLoadingWithTags: false,
+      error: err,
+    });
+  });
+
+  it('should handle GET_STATS_WITH_TAGS_SUCCESS', () => {
+    expect(
+      statsReducer(undefined, {
+        type: GET_STATS_WITH_TAGS_SUCCESS,
+        payload: createPomodoroSearchResult(),
+      }),
+    ).toEqual({
+      ...initialState,
+      isLoadingWithTags: false,
+      statsWithTags: createPomodoroSearchResult(),
     });
   });
 });

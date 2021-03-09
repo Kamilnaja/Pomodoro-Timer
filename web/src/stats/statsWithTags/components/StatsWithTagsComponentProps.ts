@@ -1,5 +1,5 @@
-import { PomodoroSearchResult } from '../../../../../types/statsInterfaces';
+import { PomodorosSearchResult } from '../../../../../types/statsInterfaces';
 
 export interface StatsWithTagsComponentProps {
-  statsWithTags: PomodoroSearchResult;
+  statsWithTags: PomodorosSearchResult;
 }

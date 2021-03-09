@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { StatsSearchResult, PomodoroSearchResult } from '../../../../../types/statsInterfaces';
+import { StatsSearchResult, PomodorosSearchResult } from '../../../../../types/statsInterfaces';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
 import { getCurrentDay, getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
 import {
@@ -58,7 +58,7 @@ const getStatsWithTags = () => ({
   type: GET_STATS_WITH_TAGS,
 });
 
-const getStatsWithTagsSuccess = (payload: PomodoroSearchResult) => ({
+const getStatsWithTagsSuccess = (payload: PomodorosSearchResult) => ({
   type: GET_STATS_WITH_TAGS_SUCCESS,
   payload,
 });
@@ -73,7 +73,7 @@ export const handleGetStatsWithTags = (year: number, month: number) => async (di
   dispatch(getStatsWithTags());
 
   fetchData(`stats/tags/${year}/${month}`)
-    .then((payload: PomodoroSearchResult) => dispatch(getStatsWithTagsSuccess(payload)))
+    .then((payload: PomodorosSearchResult) => dispatch(getStatsWithTagsSuccess(payload)))
     .catch(err => dispatch(getStatsWithTagsError(err)));
 };
 

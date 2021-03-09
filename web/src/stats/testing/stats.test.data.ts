@@ -1,4 +1,9 @@
-import { PomodorosDoneInDay, StatsSearchResult } from '../../../../types/statsInterfaces';
+import {
+  Pomodoro,
+  PomodorosDoneInDay,
+  PomodorosSearchResult,
+  StatsSearchResult,
+} from '../../../../types/statsInterfaces';
 import { StatsState } from '../store/models/StatsInterfaces';
 
 export const createStatsState = (): StatsState => ({
@@ -7,7 +12,7 @@ export const createStatsState = (): StatsState => ({
   error: null,
   todayResults: 10,
   stats: null,
-  statsWithTags: [],
+  statsWithTags: null,
 });
 
 export const createStatsSearchResult = (): StatsSearchResult => ({
@@ -39,3 +44,27 @@ export const createPomodorosDoneInDay = (): PomodorosDoneInDay[] => [
   { date: '02-02-2021', count: 15 },
   { date: '01-02-2021', count: 17 },
 ];
+
+export const createPomodoros = (): Pomodoro[] => [
+  { tagText: null, createdAt: '2021-03-01T05:47:01.476Z' },
+  { tagText: null, createdAt: '2021-03-01T06:13:36.785Z' },
+  { tagText: null, createdAt: '2021-03-01T17:28:16.182Z' },
+  { tagText: null, createdAt: '2021-03-02T19:59:00.403Z' },
+  { tagText: null, createdAt: '2021-03-05T17:34:54.939Z' },
+  { tagText: null, createdAt: '2021-03-05T18:46:11.134Z' },
+  { tagText: null, createdAt: '2021-03-05T20:04:58.401Z' },
+  { tagText: null, createdAt: '2021-03-05T20:05:10.852Z' },
+  { tagText: null, createdAt: '2021-03-05T20:06:04.279Z' },
+  { tagText: null, createdAt: '2021-03-05T20:07:08.271Z' },
+  { tagText: null, createdAt: '2021-03-05T20:07:20.693Z' },
+  { tagText: null, createdAt: '2021-03-05T20:12:39.566Z' },
+  { tagText: null, createdAt: '2021-03-05T20:12:53.137Z' },
+  { tagText: null, createdAt: '2021-03-05T20:16:10.800Z' },
+  { tagText: null, createdAt: '2021-03-05T20:16:53.842Z' },
+];
+
+export const createPomodoroSearchResult = (): PomodorosSearchResult => ({
+  result: createPomodoros(),
+  hasNextPeriod: false,
+  hasPreviousPeriod: true,
+});

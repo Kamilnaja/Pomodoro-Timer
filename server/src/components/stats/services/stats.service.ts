@@ -1,7 +1,7 @@
 import { NextFunction } from 'express';
 import { Response } from 'express-serve-static-core';
 import { QueryResult } from 'pg';
-import { PomodoroSearchResult, StatsSearchResult, Tag } from '../../../../../types/statsInterfaces';
+import { PomodorosSearchResult, StatsSearchResult, Tag } from '../../../../../types/statsInterfaces';
 import { isDateError } from '../../../utils/service.util';
 import { Request } from '../../auth/models/request.interface';
 import {
@@ -80,7 +80,7 @@ export const getStatsInGivenDay = async (req: Request<{}>, res: Response<StatsSe
 
 export const getAllStatsByMonth = async (
   req: Request<any>,
-  res: Response<PomodoroSearchResult>,
+  res: Response<PomodorosSearchResult>,
   next: NextFunction,
 ) => {
   const userId = req.user.id;

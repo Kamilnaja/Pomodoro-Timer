@@ -23,7 +23,7 @@ export interface StatsSearchResult extends ResultInPeriod {
   pomodoros: PomodorosDoneInDay[];
 }
 
-export interface PomodoroSearchResult extends ResultInPeriod {
+export interface PomodorosSearchResult extends ResultInPeriod {
   result: Pomodoro[];
 }
 
