@@ -6,21 +6,25 @@ export const setError = (next: NextFunction, ...fields: string[]) => {
   next(info);
 };
 
-export const shouldShowNextPeriod = (date: Date, searchedDate: Date): boolean => {
-  if (searchedDate.getFullYear() < date.getFullYear()) {
+export const shouldShowNextPeriod = (currentDate: Date, searchedDate: Date): boolean => {
+  if (searchedDate.getFullYear() < currentDate.getFullYear()) {
     return true;
-  } else if (searchedDate.getFullYear() === date.getFullYear() && searchedDate.getMonth() < date.getMonth()) {
+  } else if (
+    searchedDate.getFullYear() === currentDate.getFullYear() &&
+    searchedDate.getMonth() < currentDate.getMonth()
+  ) {
     return true;
   }
   return false;
 };
 
-export const shouldShowPreviousPeriod = (dateCreated: Date, searchedYear: number, searchedMonth: number): boolean => {
-  const month = dateCreated.getMonth() + 1;
-
-  if (searchedYear > dateCreated.getFullYear()) {
+export const shouldShowPreviousPeriod = (dateCreated: Date, searchedDate: Date): boolean => {
+  if (searchedDate.getFullYear() > dateCreated.getFullYear()) {
     return true;
-  } else if (searchedYear === dateCreated.getFullYear() && searchedMonth > month) {
+  } else if (
+    searchedDate.getFullYear() === dateCreated.getFullYear() &&
+    searchedDate.getMonth() > dateCreated.getMonth()
+  ) {
     return true;
   }
   return false;

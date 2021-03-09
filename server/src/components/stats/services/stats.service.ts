@@ -35,9 +35,8 @@ export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<Stats
     try {
       const date = new Date(Number(year), Number(month));
       const queryResult: QueryResult = await getNumberOfPomodorosDoneAtDayFromDb(userId, 'month', date);
-      const searchedYear = date.getFullYear();
-      const searchedMonth = date.getMonth();
       let dateCreated: Date;
+
       if (queryResult.rowCount) {
         dateCreated = queryResult.rows[0].date_created;
       } else {
@@ -47,7 +46,7 @@ export const getStatsInGivenMonth = async (req: Request<{}>, res: Response<Stats
       res.json({
         pomodoros: queryResult.rows.map(({ date, count }) => ({ date, count })),
         hasNextPeriod: shouldShowNextPeriod(new Date(), date),
-        hasPreviousPeriod: shouldShowPreviousPeriod(dateCreated, searchedYear, searchedMonth + 1),
+        hasPreviousPeriod: shouldShowPreviousPeriod(dateCreated, date),
       });
     } catch (err) {
       console.log(`err when fetching stats: ${err}`);
@@ -91,16 +90,12 @@ export const getAllStatsByMonth = async (req: Request<any>, res: Response, next:
     try {
       const date = new Date(Number(year), Number(month));
       const queryResult: QueryResult = await queryGetAllStatsByMonthsFromDb(userId, 'month', date);
-      const searchedYear = date.getFullYear();
-      const searchedMonth = date.getMonth();
       const dateCreated: Date = await getDateCreated(userId);
-
-      console.log(dateCreated);
 
       res.json({
         result: queryResult.rows,
         hasNextPeriod: shouldShowNextPeriod(new Date(), date),
-        hasPreviousPeriod: shouldShowPreviousPeriod(dateCreated, searchedYear, searchedMonth + 1),
+        hasPreviousPeriod: shouldShowPreviousPeriod(dateCreated, date),
       });
     } catch (err) {
       console.log(`err when fetching all stats ${err}`);
