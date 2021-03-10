@@ -140,6 +140,35 @@ exports[`MainContainer Should match the snapshot 1`] = `
           </p>
         </div>
       </div>
+      <form>
+        <span
+          className="text-white"
+        >
+          I'm focusing at :
+        </span>
+        <select
+          onChange={[Function]}
+        >
+          <option
+            value="reading"
+          >
+            Reading
+          </option>
+          <option
+            value="working"
+          >
+            Working
+          </option>
+          <option
+            value="working"
+          >
+            Own project
+          </option>
+        </select>
+        <button>
+          Submit
+        </button>
+      </form>
     </div>
   </div>
 </div>
