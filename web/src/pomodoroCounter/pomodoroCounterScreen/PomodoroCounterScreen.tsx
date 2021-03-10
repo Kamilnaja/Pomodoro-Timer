@@ -5,6 +5,7 @@ import 'shared/settings/initialConfig';
 import { initialConfig } from 'shared/settings/initialConfig';
 import { AuthState } from '../../auth/store/interfaces/authState';
 import { handleSavePomodoro } from '../../stats/store/actions/statsActions';
+import TagContainer from '../../tag/container/TagContainer';
 import CounterContainer from '../counter/CounterContainer';
 import { worker } from '../counter/Worker';
 import { InfoComponent } from '../info/InfoComponent';
@@ -44,15 +45,6 @@ class PomodoroCounterScreen extends React.Component<PomodoroCounterScreenProps> 
     });
   };
 
-  handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newValue = e.currentTarget.value;
-    this.setState({
-      tag: newValue,
-    });
-
-    console.log(this.state);
-  };
-
   render = () => (
     <Jumbotron className="align-items-center d-flex flex-column bg-dark">
       <ModeButtonsComponent
@@ -62,15 +54,7 @@ class PomodoroCounterScreen extends React.Component<PomodoroCounterScreenProps> 
       />
       <CounterContainer handleSavePomodoro={this.props.handleSavePomodoro}></CounterContainer>
       <InfoComponent currentState={this.props.pomodoroCounter.counterState} auth={this.props.auth} />
-      <form>
-        <span className="text-white">I'm focusing at :</span>
-        <select onChange={this.handleChange}>
-          <option value="reading">Reading</option>
-          <option value="working">Working</option>
-          <option value="working">Own project</option>
-        </select>
-        <button>Submit</button>
-      </form>
+      <TagContainer />
     </Jumbotron>
   );
 }

@@ -34,6 +34,8 @@ export interface Pomodoro {
   createdAt: string;
 }
 
+export interface TagSearchResult extends SearchResult<Tag[]> {}
+
 export interface Tag extends Partial<TagPartial> {}
 
 interface TagPartial {

@@ -18,4 +18,4 @@ export interface GetTagsError {
   payload: any;
 }
 
-export type TagActionTypes = GetTags | GetTagsSuccess | GetTagsError;
+export type TagsActionsTypes = GetTags | GetTagsSuccess | GetTagsError;

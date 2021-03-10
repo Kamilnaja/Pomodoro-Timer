@@ -5,6 +5,7 @@ import { authReducer } from '../../auth/store/reducer/authReducer';
 import { pomodoroCounterReducer } from '../../pomodoroCounter/store/reducer/pomodoroCounterReducer';
 import { settingsReducer } from '../../settings/store/reducers/settingsReducer';
 import { statsReducer } from '../../stats/store/reducer/statsReducer';
+import { tagsReducer } from '../../tag/store/reducers/tagsReducer';
 import { taskAndNotesReducer } from '../../tasksAndNotes/store/reducer/taskAndNotesReducer';
 
 export const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ export const rootReducer = combineReducers({
   tasksAndNotes: taskAndNotesReducer,
   pomodoroCounter: pomodoroCounterReducer,
   settings: settingsReducer,
+  tags: tagsReducer,
 });
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunkMiddleware)));

@@ -1,4 +1,3 @@
-import React from 'react';
 import HeaderContainer from '../../header/container/HeaderContainer';
 import { MainComponentProps } from './MainComponentProps';
 import './mainComponent.scss';

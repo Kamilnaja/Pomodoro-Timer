@@ -2,15 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { TagComponent } from '../component/TagComponent';
 import { TagContainerProps } from './TagContainer.props';
+import { handleGetTags } from '../store/actions/tagsActions';
+import { TagsState } from '../store/models/TagsStateInterface';
+import { Loader } from '../../shared/loader/Loader';
+import { ErrorComponent } from '../../shared/error/errorComponent/ErrorComponent';
 
 class TagContainer extends Component<TagContainerProps> {
+  componentDidMount() {
+    this.props.handleGetTags();
+  }
+
   render() {
-    return <TagComponent />;
+    if (this.props.tags.isLoading) return <Loader />;
+    else if (this.props.tags.error) return <ErrorComponent />;
+    else return <TagComponent tags={this.props.tags.tags} />;
   }
 }
 
-const mapStateToProps = (state: any) => ({});
+const mapStateToProps = (state: { tags: TagsState }) => {
+  const tags = state.tags;
+  return { tags };
+};
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  handleGetTags,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(TagContainer);
