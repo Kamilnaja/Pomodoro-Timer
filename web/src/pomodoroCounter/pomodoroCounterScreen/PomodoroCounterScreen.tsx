@@ -1,24 +1,20 @@
-import React from 'react';
+import React, { ChangeEventHandler } from 'react';
 import { Jumbotron } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import 'shared/settings/initialConfig';
+import { initialConfig } from 'shared/settings/initialConfig';
 import { AuthState } from '../../auth/store/interfaces/authState';
 import { handleSavePomodoro } from '../../stats/store/actions/statsActions';
 import CounterContainer from '../counter/CounterContainer';
+import { worker } from '../counter/Worker';
 import { InfoComponent } from '../info/InfoComponent';
 import { ModeButtonsComponent } from '../modeButtons/ModeButtonsComponent';
+import { handleSetModeBreak, handleSetModePomodoro } from '../store/actions/pomodoroCounterAction';
 import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 import { timerState } from '../store/state/timerState';
 import { PomodoroCounterScreenProps } from './PomodoroCounterScreenProps';
-import { handleSetModeBreak, handleSetModePomodoro } from '../store/actions/pomodoroCounterAction';
-import { initialConfig } from 'shared/settings/initialConfig';
-import { worker } from '../counter/Worker';
-import { TabTitle } from '../../shared/title/TabTitle';
 
 class PomodoroCounterScreen extends React.Component<PomodoroCounterScreenProps> {
-  private worker: Worker = worker;
-  private tabTitle: TabTitle = new TabTitle();
-
   constructor(props: PomodoroCounterScreenProps) {
     super(props);
     this.state = timerState;
@@ -43,9 +39,18 @@ class PomodoroCounterScreen extends React.Component<PomodoroCounterScreenProps> 
   handleSetModeShortBreak = () => {
     this.props.handleSetModeBreak(initialConfig.shortBreakTime);
     worker.postMessage({
-      type: 'SET_TIME',
+      type: 'SET_TIME', // todo - move to interface or something
       payload: initialConfig.shortBreakTime,
     });
+  };
+
+  handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newValue = e.currentTarget.value;
+    this.setState({
+      tag: newValue,
+    });
+
+    console.log(this.state);
   };
 
   render = () => (
@@ -57,6 +62,15 @@ class PomodoroCounterScreen extends React.Component<PomodoroCounterScreenProps> 
       />
       <CounterContainer handleSavePomodoro={this.props.handleSavePomodoro}></CounterContainer>
       <InfoComponent currentState={this.props.pomodoroCounter.counterState} auth={this.props.auth} />
+      <form>
+        <span className="text-white">I'm focusing at :</span>
+        <select onChange={this.handleChange}>
+          <option value="reading">Reading</option>
+          <option value="working">Working</option>
+          <option value="working">Own project</option>
+        </select>
+        <button>Submit</button>
+      </form>
     </Jumbotron>
   );
 }
