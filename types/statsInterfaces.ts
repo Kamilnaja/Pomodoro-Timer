@@ -37,6 +37,6 @@ export interface Pomodoro {
 export interface Tag extends Partial<TagPartial> {}
 
 interface TagPartial {
-  tagId: string;
-  tagText: string;
+  id: string;
+  text: string;
 }

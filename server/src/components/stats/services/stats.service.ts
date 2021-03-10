@@ -13,7 +13,7 @@ import {
 import { setError, shouldShowNextPeriod, shouldShowPreviousPeriod } from './stats.service.helpers';
 
 export const handleAddPomodoro = async (req: Request<Tag>, res: Response<Error | {}>, next: NextFunction) => {
-  const { tagId } = req.body;
+  const { id: tagId } = req.body;
 
   try {
     await savePomodoroInDb(req.user.id, tagId);
