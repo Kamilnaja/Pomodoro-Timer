@@ -1,5 +1,6 @@
 import { Action } from 'redux';
 import { StatsSearchResult, PomodorosSearchResult } from '../../../../../types/statsInterfaces';
+import { Tag } from '../../../../../types/tagsInterfaces';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
 import { getCurrentDay, getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
 import {
@@ -17,8 +18,9 @@ import {
   StatsActionsTypes,
 } from './statsActionsTypes';
 
-export const savePomodoro = (): StatsActionsTypes => ({
+export const savePomodoro = (payload: Tag): StatsActionsTypes => ({
   type: SAVE_POMODORO,
+  payload,
 });
 
 const savePomodoroError = (error: any): StatsActionsTypes => ({
@@ -95,10 +97,10 @@ export const handleGetTodayStats = () => async (dispatch: (args: Action) => void
     .catch(err => dispatch(getTodayStatsError(err)));
 };
 
-export const handleSavePomodoro = () => async (dispatch: (arg: Action | any) => void) => {
-  dispatch(savePomodoro());
+export const handleSavePomodoro = (tag: Tag) => async (dispatch: (arg: StatsActionsTypes | any) => void) => {
+  dispatch(savePomodoro(tag));
 
-  updateData('stats', {}, 'POST')
+  updateData('stats', { tag }, 'POST')
     .then(() => dispatch(handleGetTodayStats()))
     .catch(err => dispatch(savePomodoroError(err)));
 };

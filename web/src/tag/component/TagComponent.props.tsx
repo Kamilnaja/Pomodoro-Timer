@@ -1,4 +1,4 @@
-import { Tag } from '../../../../types/statsInterfaces';
+import { Tag } from '../../../../types/tagsInterfaces';
 
 export interface TagComponentProps {
   tags: Tag[];

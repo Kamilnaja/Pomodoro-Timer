@@ -1,4 +1,5 @@
 import { StatsSearchResult, PomodorosSearchResult } from '../../../../../types/statsInterfaces';
+import { Tag } from '../../../../../types/tagsInterfaces';
 
 export const GET_STATS = 'GET_STATS';
 export const GET_STATS_SUCCESS = 'GET_STATS_SUCCESS';
@@ -46,6 +47,7 @@ export interface GetTodayStatsErrorAction {
 
 export interface SavePomodoroAction {
   type: typeof SAVE_POMODORO;
+  payload: Tag; // tag id
 }
 
 export interface SavePomodoroSuccessAction {

@@ -11,7 +11,6 @@ export const TagComponent = (props: TagComponentProps) => (
           </option>
         ))}
       </select>
-      <button>Submit</button>
     </form>
   </div>
 );

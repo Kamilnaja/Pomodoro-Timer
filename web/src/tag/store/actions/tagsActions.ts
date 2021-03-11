@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { Tag, TagSearchResult } from '../../../../../types/statsInterfaces';
+import { Tag, TagSearchResult } from '../../../../../types/tagsInterfaces';
 import { fetchData } from '../../../shared/scripts/requests';
 import { GET_TAGS, GET_TAGS_ERROR, GET_TAGS_SUCCESS, SET_CURRENT_TAG, TagsActionsTypes } from './tagsActions.types';
 

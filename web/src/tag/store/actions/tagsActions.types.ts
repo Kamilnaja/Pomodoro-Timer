@@ -1,4 +1,4 @@
-import { Tag } from '../../../../../types/statsInterfaces';
+import { Tag } from '../../../../../types/tagsInterfaces';
 
 export const GET_TAGS = 'GET_TAGS';
 export const GET_TAGS_SUCCESS = 'GET_TAGS_SUCCESS';

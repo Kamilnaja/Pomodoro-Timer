@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { msToTime } from '../../shared/scripts/utils';
 import { initialConfig } from '../../shared/settings/initialConfig';
 import { TabTitle } from '../../shared/title/TabTitle';
+import { TagsState } from '../../tag/store/models/TagsStateInterface';
 import {
   isAnyTimerRunning,
   playClickSound,
@@ -53,10 +54,6 @@ class CounterContainer extends React.Component<CounterComponentProps> {
     this.props.end();
   };
 
-  handlePomodoroEnd = () => {
-    this.props.handleSavePomodoro();
-  };
-
   private setWorkerTime = (time: number = 0) => {
     this.worker.postMessage({
       type: 'SET_TIME',
@@ -82,7 +79,7 @@ class CounterContainer extends React.Component<CounterComponentProps> {
     this.tabTitle.startBlinking();
     playEndSound();
     if (isPomodoroMode(this.props.counter.currentTimer)) {
-      this.props.handleSavePomodoro();
+      this.props.handleSavePomodoro({ id: this.props.tags.currentTag });
       this.props.end();
       this.setWorkerTime(initialConfig.shortBreakTime);
     } else {
@@ -113,9 +110,9 @@ class CounterContainer extends React.Component<CounterComponentProps> {
   }
 }
 
-const mapStateToProps = (state: { pomodoroCounter: PomodoroCounterState }) => {
-  const { pomodoroCounter } = state;
-  return { counter: pomodoroCounter };
+const mapStateToProps = (state: { pomodoroCounter: PomodoroCounterState; tags: TagsState }) => {
+  const { pomodoroCounter, tags } = state;
+  return { counter: pomodoroCounter, tags };
 };
 
 const mapDispatchToProps = {
