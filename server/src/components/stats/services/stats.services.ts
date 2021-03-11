@@ -49,6 +49,7 @@ export const queryAllStatsByMonthFromDb = async (userId: string, period: Period,
       LEFT OUTER JOIN tags ON pomodoros.tag_id = tags.id
       WHERE pomodoros.user_id = ($1)
       AND DATE_TRUNC(($2), created_at) = ($3)
+      ORDER BY created_at DESC
       `,
     values: [userId, period, date],
   };
@@ -63,7 +64,9 @@ export const queryAllStatsByMonthFromDb = async (userId: string, period: Period,
 
 export const savePomodoroInDb = async (userId: string, tagId: string): Promise<void> => {
   const query: QueryConfig = {
-    text: 'INSERT INTO pomodoros (tag_id, user_id) VALUES ($1, $2)',
+    text: `
+      INSERT INTO pomodoros (tag_id, user_id) VALUES ($1, $2)
+    `,
     values: [tagId, userId],
   };
 
