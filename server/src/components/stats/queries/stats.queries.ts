@@ -67,6 +67,8 @@ export const savePomodoroInDb = async (userId: string, tagId: string): Promise<v
     values: [tagId, userId],
   };
 
+  console.log(tagId);
+
   try {
     await pool.query(query);
   } catch (err) {

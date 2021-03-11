@@ -1,5 +1,5 @@
 import { QueryConfig } from 'pg';
-import { Tag } from '../../../../../types/statsInterfaces';
+import { Tag } from '../../../../../types/tagsInterfaces';
 import { pool } from '../../../db/client';
 
 export const getTagsFromDb = async (id: string) => {
