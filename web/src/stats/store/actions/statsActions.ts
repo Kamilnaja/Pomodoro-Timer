@@ -18,9 +18,8 @@ import {
   StatsActionsTypes,
 } from './statsActionsTypes';
 
-export const savePomodoro = (payload: Tag): StatsActionsTypes => ({
+export const savePomodoro = (): StatsActionsTypes => ({
   type: SAVE_POMODORO,
-  payload,
 });
 
 const savePomodoroError = (error: any): StatsActionsTypes => ({
@@ -98,9 +97,9 @@ export const handleGetTodayStats = () => async (dispatch: (args: Action) => void
 };
 
 export const handleSavePomodoro = (tag: Tag) => async (dispatch: (arg: StatsActionsTypes | any) => void) => {
-  dispatch(savePomodoro(tag));
+  dispatch(savePomodoro());
 
-  updateData('stats', { tag }, 'POST')
+  updateData('stats', tag, 'POST')
     .then(() => dispatch(handleGetTodayStats()))
     .catch(err => dispatch(savePomodoroError(err)));
 };

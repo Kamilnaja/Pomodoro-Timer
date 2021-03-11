@@ -47,7 +47,6 @@ export interface GetTodayStatsErrorAction {
 
 export interface SavePomodoroAction {
   type: typeof SAVE_POMODORO;
-  payload: Tag; // tag id
 }
 
 export interface SavePomodoroSuccessAction {
