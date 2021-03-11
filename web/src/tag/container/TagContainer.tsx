@@ -18,17 +18,17 @@ class TagContainer extends Component<TagContainerProps> {
   };
 
   render() {
-    if (this.props.tags.isLoading) return <Loader />;
-    else if (this.props.tags.error) return <ErrorComponent />;
+    if (this.props.tagsState.isLoading) return <Loader />;
+    else if (this.props.tagsState.error) return <ErrorComponent />;
     else {
-      return <TagComponent tags={this.props.tags.tags} handleChange={this.handleChange} />;
+      return <TagComponent tags={this.props.tagsState.tags} handleChange={this.handleChange} />;
     }
   }
 }
 
 const mapStateToProps = (state: { tags: TagsState }) => {
-  const { tags } = state;
-  return { tags };
+  const tagsState = state.tags;
+  return { tagsState };
 };
 
 const mapDispatchToProps = {
