@@ -10,8 +10,8 @@ import {
   queryAllStatsByMonthFromDb,
   savePomodoroInDb,
   searchDateCreatedInDb,
-} from '../queries/stats.queries';
-import { setError, shouldShowNextPeriod, shouldShowPreviousPeriod } from './stats.service.helpers';
+} from '../services/stats.services';
+import { setError, shouldShowNextPeriod, shouldShowPreviousPeriod } from './stats.helpers';
 
 export const handleAddPomodoro = async (req: Request<Tag>, res: Response<Error | {}>, next: NextFunction) => {
   const { id: tagId } = req.body;

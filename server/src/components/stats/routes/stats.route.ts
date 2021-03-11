@@ -1,11 +1,11 @@
 import express, { Router } from 'express';
-import { authenticateJWT } from '../../auth/services/auth.service';
+import { authenticateJWT } from '../../auth/controllers/auth.controller';
 import {
   getAllStatsByMonth,
   getStatsInGivenDay,
   getStatsInGivenMonth,
   handleAddPomodoro,
-} from '../services/stats.service';
+} from '../controllers/stats.controller';
 
 const router: Router = express.Router();
 

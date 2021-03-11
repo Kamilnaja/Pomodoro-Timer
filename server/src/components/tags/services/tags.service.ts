@@ -1,30 +1,37 @@
-import { NextFunction } from 'express';
-import { Response } from 'express-serve-static-core';
-import { QueryResult } from 'pg';
+import { QueryConfig } from 'pg';
 import { Tag } from '../../../../../types/tagsInterfaces';
-import { Request } from '../../auth/models/request.interface';
-import { getTagsFromDb, insertTagToDb } from '../queries/tags.query';
+import { pool } from '../../../db/client';
 
-export const handleGetTags = async (req: Request<any>, res: Response<any>, next: NextFunction) => {
-  const { id } = req.user;
-
+export const getTagsFromDb = async (id: string) => {
+  const query: QueryConfig = {
+    text: `
+    SELECT tags.id, text 
+    FROM tags
+    INNER JOIN users ON tags.user_id = users.id
+    WHERE user_id = ($1)
+    `,
+    values: [id],
+  };
   try {
-    const queryResult: QueryResult = await getTagsFromDb(id);
-    res.json({
-      result: queryResult.rows,
-    });
-  } catch (err) {
-    next(err);
+    return await pool.query(query);
+  } catch (e) {
+    return Promise.reject(e);
   }
 };
 
-export const handleAddTag = async (req: Request<Tag>, res: Response<any>, next: NextFunction) => {
-  const { id } = req.user;
-  const tag = req.body;
+export const insertTagToDb = async (id: string, tag: Tag) => {
+  const query: QueryConfig = {
+    text: `
+    INSERT INTO tags (user_id, text) 
+    VALUES ($1)
+    WHERE user_id = ($2)
+    `,
+    values: [tag, id],
+  };
+
   try {
-    await insertTagToDb(id, tag);
-    res.status(201).json({});
-  } catch (err) {
-    next(err);
+    return await pool.query(query);
+  } catch (e) {
+    return Promise.reject(e);
   }
 };

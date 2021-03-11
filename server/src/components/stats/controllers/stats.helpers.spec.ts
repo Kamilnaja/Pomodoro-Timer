@@ -1,4 +1,4 @@
-import { shouldShowNextPeriod, shouldShowPreviousPeriod } from './stats.service.helpers';
+import { shouldShowNextPeriod, shouldShowPreviousPeriod } from './stats.helpers';
 
 describe('shouldShowNextPeriod', () => {
   it.each([

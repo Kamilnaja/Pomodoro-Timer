@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
-import { authenticateJWT } from '../../auth/services/auth.service';
-import { getTodos, handleAddTodo } from '../services/todos.service';
+import { authenticateJWT } from '../../auth/controllers/auth.controller';
+import { getTodos, handleAddTodo } from '../controllers/todos.controller';
 
 const router: Router = express.Router();
 
