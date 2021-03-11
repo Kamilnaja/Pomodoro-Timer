@@ -3,6 +3,7 @@ import { Tag } from '../../../../../types/statsInterfaces';
 export const GET_TAGS = 'GET_TAGS';
 export const GET_TAGS_SUCCESS = 'GET_TAGS_SUCCESS';
 export const GET_TAGS_ERROR = 'GET_TAGS_ERROR';
+export const SET_CURRENT_TAG = 'SET_CURRENT_TAG';
 
 export interface GetTags {
   type: typeof GET_TAGS;
@@ -18,4 +19,9 @@ export interface GetTagsError {
   payload: any;
 }
 
-export type TagsActionsTypes = GetTags | GetTagsSuccess | GetTagsError;
+export interface SetCurrentTag {
+  type: typeof SET_CURRENT_TAG;
+  payload: string;
+}
+
+export type TagsActionsTypes = GetTags | GetTagsSuccess | GetTagsError | SetCurrentTag;

@@ -5,4 +5,5 @@ export const tagsInitialState: TagsState = {
   isLoading: false,
   error: '',
   tags: [] as Tag[],
+  currentTag: '',
 };
