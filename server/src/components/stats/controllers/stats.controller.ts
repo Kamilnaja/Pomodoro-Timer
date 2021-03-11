@@ -14,10 +14,14 @@ import {
 import { setError, shouldShowNextPeriod, shouldShowPreviousPeriod } from './stats.helpers';
 
 export const handleAddPomodoro = async (req: Request<Tag>, res: Response<Error | {}>, next: NextFunction) => {
-  const { id: tagId } = req.body;
+  const tag = req.body;
+
+  if (!tag.id) {
+    tag.id = '1';
+  }
 
   try {
-    await savePomodoroInDb(req.user.id, tagId);
+    await savePomodoroInDb(req.user.id, tag.id);
     res.json({});
   } catch (err) {
     console.log(err.stack);

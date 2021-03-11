@@ -1,5 +1,4 @@
-import { StatsSearchResult, PomodorosSearchResult } from '../../../../../types/statsInterfaces';
-import { Tag } from '../../../../../types/tagsInterfaces';
+import { PomodorosSearchResult, StatsSearchResult } from '../../../../../types/statsInterfaces';
 
 export const GET_STATS = 'GET_STATS';
 export const GET_STATS_SUCCESS = 'GET_STATS_SUCCESS';

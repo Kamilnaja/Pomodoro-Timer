@@ -21,6 +21,7 @@ export const handleGetTags = async (req: Request<any>, res: Response<any>, next:
 export const handleAddTag = async (req: Request<Tag>, res: Response<any>, next: NextFunction) => {
   const { id } = req.user;
   const tag = req.body;
+
   try {
     await insertTagToDb(id, tag);
     res.status(201).json({});
