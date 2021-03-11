@@ -19,6 +19,8 @@ class TagContainer extends Component<TagContainerProps> {
 
   render() {
     if (this.props.tagsState.isLoading) return <Loader />;
+    else if (!this.props.tagsState.tags.length)
+      return <p className="text-white">Please add some items to db to see tags</p>;
     else if (this.props.tagsState.error) return <ErrorComponent />;
     else {
       return <TagComponent tags={this.props.tagsState.tags} handleChange={this.handleChange} />;
