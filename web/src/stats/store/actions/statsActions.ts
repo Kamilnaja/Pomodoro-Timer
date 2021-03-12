@@ -86,10 +86,10 @@ export const handleGetStats = (year: number, month: number) => async (dispatch: 
     .catch(err => dispatch(getStatsError(err)));
 };
 
-export const handleGetTodayStats = () => async (dispatch: (args: Action) => void) => {
+export const handleGetTodayStats = () => async (dispatch: (args: StatsActionsTypes) => void) => {
   dispatch(getTodayStats());
 
-  fetchData(`stats/${getCurrentYear()}/${getCurrentMonth()}/${getCurrentDay()}`)
+  return fetchData(`stats/${getCurrentYear()}/${getCurrentMonth()}/${getCurrentDay()}`)
     .then((payload: StatsSearchResult) =>
       dispatch(getTodayStatsSuccess(payload.pomodoros[0] ? payload.pomodoros[0].count : 0)),
     )

@@ -1,4 +1,5 @@
 import { Tag } from '../../../../types/tagsInterfaces';
+import { TagsState } from '../store/models/TagsStateInterface';
 
 export const createTags = (): Tag[] => [
   { id: '3', text: 'reading' },
@@ -7,3 +8,10 @@ export const createTags = (): Tag[] => [
 ];
 
 export const createEmptyTags = (): Tag[] => [];
+
+export const createTagsState = (): TagsState => ({
+  currentTag: '',
+  error: 'hello error',
+  isLoading: false,
+  tags: createTags(),
+});

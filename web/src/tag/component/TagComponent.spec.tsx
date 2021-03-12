@@ -1,6 +1,6 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
-import { Tag } from '../../../../types/statsInterfaces';
+import { Tag } from '../../../../types/tagsInterfaces';
 import { createTags } from '../testing/tags.test.data';
 import { TagComponent } from './TagComponent';
 

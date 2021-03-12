@@ -1,7 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TagComponent should match snapshot 1`] = `
-<div>
-  Hello tags
-</div>
+<FormGroup>
+  <FormLabel
+    className="text-white"
+    column={false}
+    htmlFor="tag"
+    srOnly={false}
+  >
+    I'm focusing at :
+  </FormLabel>
+  <FormControl
+    as="select"
+    id="tag"
+    onChange={[MockFunction]}
+  >
+    <option
+      key="0"
+      value="3"
+    >
+      reading
+    </option>
+    <option
+      key="1"
+      value="2"
+    >
+      working at own project
+    </option>
+    <option
+      key="2"
+      value="5"
+    >
+      exercising
+    </option>
+  </FormControl>
+</FormGroup>
 `;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MainContainer Should match the snapshot 1`] = `
+exports[`TagsContainer should match snapshot 1`] = `
 <div
   className="app"
 >
@@ -37,32 +37,24 @@ exports[`MainContainer Should match the snapshot 1`] = `
           onKeyDown={[Function]}
         >
           <a
-            className="nav-link"
-            data-rb-event-key="/stats"
-            href="/stats"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-          >
-            Stats
-          </a>
-          <a
-            className="nav-link"
-            data-rb-event-key="/settings"
-            href="/settings"
-            onClick={[Function]}
-            onKeyDown={[Function]}
-          >
-            Settings
-          </a>
-          <a
-            className="button--logout nav-link"
+            className="button--login nav-link"
             data-rb-event-key={null}
             href="#"
             onClick={[Function]}
             onKeyDown={[Function]}
             role="button"
           >
-            Logout
+            Login
+          </a>
+          <a
+            className="button--register nav-link"
+            data-rb-event-key={null}
+            href="#"
+            onClick={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+          >
+            Register
           </a>
           <a
             className="nav-link"
@@ -110,7 +102,7 @@ exports[`MainContainer Should match the snapshot 1`] = `
       <p
         className="time text-light d-flex align-items-center"
       >
-        aN:aN
+        41:40
       </p>
       <button
         className="btn--pause btn btn-outline-primary"
@@ -124,20 +116,11 @@ exports[`MainContainer Should match the snapshot 1`] = `
         className="info mt-4"
       >
         <div
-          className="text-white text-center"
+          className="text-danger text-center"
         >
           <span>
-            Timer in progress
+            Please login to save pomodoros
           </span>
-          <p
-            className="text-white text-center mt-2"
-          >
-            Today you have made: 
-            <span
-              className="badge badge-primary"
-            />
-             pomodoros
-          </p>
         </div>
       </div>
       <div
