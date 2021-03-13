@@ -55,7 +55,6 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
           Results from: {props.pageMonth + 1}.{props.pageYear}
         </h2>
         <ButtonGroup size="sm">
-          <Button onClick={() => props.toggleDisplayDirection()}>Toogle sort direction</Button>
           <Button onClick={() => props.toggleDisplayEmptyDays()}>
             Show {props.settings.displayEmptyDays ? 'non empty' : 'all'} days
           </Button>
@@ -63,7 +62,9 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
       </caption>
       <thead className="table__head">
         <tr>
-          <th>Day</th>
+          <th>
+            Day <Button onClick={() => props.toggleDisplayDirection()}>toggle sort</Button>
+          </th>
           <th>Number of pomodoros</th>
         </tr>
       </thead>

@@ -5,7 +5,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { StatsActionsTypes } from '../../store/actions/statsActionsTypes';
 import { StatsState } from '../../store/models/StatsInterfaces';
-import { createPomodoros, createPomodoroSearchResult, createStatsState } from '../../testing/stats.test.data';
+import { createPomodoroSearchResult, createStatsState } from '../../testing/stats.test.data';
 import StatsWithTagsContainer from './StatsWithTagsContainer';
 
 const mockStore = configureStore([thunk]);

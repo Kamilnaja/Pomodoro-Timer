@@ -91,7 +91,6 @@ export const getAllStatsByMonth = async (
   const userId = req.user.id;
   const { year, month } = req.params;
 
-  // todo - use error fn from helpers in all places
   if (isDateError(year, month)) {
     console.log(`error`);
     setError(next, year, month);
