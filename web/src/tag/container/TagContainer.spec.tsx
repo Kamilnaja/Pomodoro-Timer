@@ -3,14 +3,13 @@ import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { createComputedPropertyName } from 'typescript';
 import { createAuthState } from '../../auth/testing/auth.testing.data';
 import MainContainer from '../../main/container/MainContainer';
 import { createPomodoroCounterState } from '../../pomodoroCounter/testing/pomodoroCounter.test.data';
 import { createSettingsState } from '../../settings/testing/settings.test.data';
 import { createStatsState } from '../../stats/testing/stats.test.data';
-import { Reducers, ReducersCombined } from '../../store/models/ReducersCombined';
-import { createTags, createTagsState } from '../testing/tags.test.data';
+import { ReducersCombined } from '../../store/models/ReducersCombined';
+import { createTagsState } from '../testing/tags.test.data';
 
 const mockStore = configureStore([thunk]);
 
