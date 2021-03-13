@@ -9,7 +9,7 @@ import MainContainer from '../../main/container/MainContainer';
 import { createPomodoroCounterState } from '../../pomodoroCounter/testing/pomodoroCounter.test.data';
 import { createSettingsState } from '../../settings/testing/settings.test.data';
 import { createStatsState } from '../../stats/testing/stats.test.data';
-import { Reducers, ReducersCombined } from '../../store/reducers/ReducersCombined';
+import { Reducers, ReducersCombined } from '../../store/models/ReducersCombined';
 import { createTags, createTagsState } from '../testing/tags.test.data';
 
 const mockStore = configureStore([thunk]);

@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { CounterState } from '../../pomodoroCounter/store/enums/CounterState';
-import { ReducersCombined } from '../../store/reducers/ReducersCombined';
+import { ReducersCombined } from '../../store/models/ReducersCombined';
 import { createTagsState } from '../../tag/testing/tags.test.data';
 import MainContainer from './MainContainer';
 
