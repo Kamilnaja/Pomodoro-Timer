@@ -8,6 +8,7 @@ import SettingsContainer from '../../settings/container/SettingsContainer';
 import { StatsScreenContainer } from '../../stats/statsScreen/StatsScreenContainer';
 import TaskAndNotesContainer from '../../tasksAndNotes/taskAndNotesWrapper/taskAndNotesContainer/TaskAndNotesContainer';
 import { HeaderContainerProps } from '../container/HeaderContainerProps';
+import { GuardedRoute } from '../guardedRoute/GuardedRoute';
 import './headerComponent.scss';
 
 export const HeaderComponent = (props: HeaderContainerProps) => (
@@ -45,12 +46,8 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
         <Route path="/taskAndNotes">
           <TaskAndNotesContainer />
         </Route>
-        <Route path="/settings">
-          <SettingsContainer />
-        </Route>
-        <Route path="/stats">
-          <StatsScreenContainer />
-        </Route>
+        <GuardedRoute path="/settings" component={SettingsContainer} auth={true}></GuardedRoute>
+        <GuardedRoute path="/stats" component={StatsScreenContainer} auth={props.isLoggedIn}></GuardedRoute>
         <Route path="/about">
           <About />
         </Route>
