@@ -5,7 +5,7 @@ import { ModalType } from 'shared/modal/modalEnum';
 import About from '../../about/About';
 import PomodoroCounterScreen from '../../pomodoroCounter/pomodoroCounterScreen/PomodoroCounterScreen';
 import SettingsContainer from '../../settings/container/SettingsContainer';
-import { StatsScreenComponent } from '../../stats/statsScreen/StatsScreenComponent';
+import { StatsScreenContainer } from '../../stats/statsScreen/StatsScreenContainer';
 import TaskAndNotesContainer from '../../tasksAndNotes/taskAndNotesWrapper/taskAndNotesContainer/TaskAndNotesContainer';
 import { HeaderContainerProps } from '../container/HeaderContainerProps';
 import './headerComponent.scss';
@@ -49,7 +49,7 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
           <SettingsContainer />
         </Route>
         <Route path="/stats">
-          <StatsScreenComponent />
+          <StatsScreenContainer />
         </Route>
         <Route path="/about">
           <About />

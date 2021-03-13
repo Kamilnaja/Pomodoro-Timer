@@ -1,12 +1,12 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
-import { StatsScreenComponent } from './StatsScreenComponent';
+import { StatsScreenContainer } from './StatsScreenContainer';
 
-describe('StatsScreenComponent', () => {
+describe('StatsScreenContainer', () => {
   let wrapper: ShallowWrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<StatsScreenComponent />);
+    wrapper = shallow(<StatsScreenContainer />);
   });
 
   it('should match snapshot', () => {
