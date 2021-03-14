@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 import { createSettingsState } from '../../../settings/testing/settings.test.data';
 import { createPomodorosDoneInDay } from '../../testing/stats.test.data';
-import StatsTableContainer from './StatsTableContainer';
+import { StatsTableContainer } from './StatsTableContainer';
 
 describe('StatsTableContainer', () => {
   let wrapper = shallow(

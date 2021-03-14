@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChartWithTags should match snapshot 1`] = `
+<div>
+  <LineChart
+    barCategoryGap="10%"
+    barGap={4}
+    data={
+      Array [
+        Object {
+          "count": 3,
+          "createdAt": "2021-03-01T05:47:01.476Z",
+          "day": 1,
+          "month": 2,
+          "tagText": null,
+        },
+        Object {
+          "count": 3,
+          "createdAt": "2021-03-01T06:13:36.785Z",
+          "day": 1,
+          "month": 2,
+          "tagText": null,
+        },
+        Object {
+          "count": 3,
+          "createdAt": "2021-03-01T17:28:16.182Z",
+          "day": 1,
+          "month": 2,
+          "tagText": null,
+        },
+        Object {
+          "count": 1,
+          "createdAt": "2021-03-02T19:59:00.403Z",
+          "day": 2,
+          "month": 2,
+          "tagText": null,
+        },
+      ]
+    }
+    height={400}
+    layout="horizontal"
+    margin={
+      Object {
+        "bottom": 5,
+        "left": 5,
+        "right": 5,
+        "top": 5,
+      }
+    }
+    reverseStackOrder={false}
+    stackOffset="none"
+    syncMethod="index"
+    width={400}
+  >
+    <Line
+      activeDot={true}
+      animateNewValues={true}
+      animationBegin={0}
+      animationDuration={1500}
+      animationEasing="ease"
+      connectNulls={false}
+      dataKey="count"
+      dot={true}
+      fill="#fff"
+      hide={false}
+      isAnimationActive={true}
+      legendType="line"
+      points={Array []}
+      stroke="#8884d8"
+      strokeWidth={1}
+      type="monotone"
+      xAxisId={0}
+      yAxisId={0}
+    />
+  </LineChart>
+</div>
+`;

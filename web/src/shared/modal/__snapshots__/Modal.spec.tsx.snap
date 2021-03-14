@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal should work 1`] = `
+<Fragment>
+  <Modal
+    ariaHideApp={false}
+    bodyOpenClassName="ReactModal__Body--open"
+    className="modal__content"
+    closeTimeoutMS={0}
+    contentElement={[Function]}
+    isOpen={true}
+    onRequestClose={[MockFunction]}
+    overlayClassName="modal"
+    overlayElement={[Function]}
+    parentSelector={[Function]}
+    portalClassName="ReactModalPortal"
+    preventScroll={false}
+    role="dialog"
+    shouldCloseOnEsc={true}
+    shouldCloseOnOverlayClick={true}
+    shouldFocusAfterRender={true}
+    shouldReturnFocusAfterClose={true}
+  >
+    <div
+      className="modal__wrapper"
+    >
+      <header
+        className="modal__header"
+      >
+        <h2
+          className="modal__title"
+        >
+          Login
+        </h2>
+        <button
+          className="modal__button--close"
+          onClick={[MockFunction]}
+        >
+          ✕
+        </button>
+      </header>
+      <Connect(LoginContainer) />
+    </div>
+  </Modal>
+</Fragment>
+`;

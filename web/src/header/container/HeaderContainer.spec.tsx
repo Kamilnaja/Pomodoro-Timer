@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
-import HeaderContainer from './HeaderContainer';
+import { HeaderContainer } from './HeaderContainer';
 
 describe('LoginContainer', () => {
   const component = shallow(<HeaderContainer isLoggedIn={true} handleOpenModal={() => {}} />);
