@@ -2,7 +2,7 @@ import express, { Router } from 'express';
 import { authenticateJWT } from '../../auth/controllers/auth.controller';
 import { handleAddTag, handleGetTags } from '../controllers/tags.controller';
 
-const router: Router = express.Router();
-router.route('/').get(authenticateJWT, handleGetTags).post(authenticateJWT, handleAddTag);
+const tagsRouter: Router = express.Router();
+tagsRouter.route('/').get(authenticateJWT, handleGetTags).post(authenticateJWT, handleAddTag);
 
-export default router;
+export { tagsRouter };

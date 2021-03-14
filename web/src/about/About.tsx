@@ -1,6 +1,6 @@
 import { Container } from 'react-bootstrap';
 
-export default function About() {
+export const About = () => {
   return (
     <Container>
       <h2>About</h2>
@@ -10,4 +10,4 @@ export default function About() {
       <p>Repeat!</p>
     </Container>
   );
-}
+};

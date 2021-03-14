@@ -1,6 +1,6 @@
 import { Button, ButtonGroup, Container } from 'react-bootstrap';
 import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
-import StatsTableContainer from '../../statsTable/container/StatsTableContainer';
+import { StatsTableContainer } from '../../statsTable/container/StatsTableContainer';
 import './stats.component.scss';
 import { StatsComponentProps } from './StatsComponentProps';
 

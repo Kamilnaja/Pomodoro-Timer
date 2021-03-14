@@ -1,4 +1,4 @@
-import HeaderContainer from '../../header/container/HeaderContainer';
+import { HeaderContainer } from '../../header/container/HeaderContainer';
 import { MainComponentProps } from './MainComponentProps';
 import './mainComponent.scss';
 import { Modal } from '../../shared/modal/Modal';

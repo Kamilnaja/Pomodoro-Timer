@@ -2,7 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
-import route from './route';
+import { router } from './route';
 import * as dotenv from 'dotenv';
 import './db/db';
 
@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.use(morgan('dev'));
 
-app.use('/api', route);
+app.use('/api', router);
 
 app.use(express.static(path.join(__dirname, '../../../web/build'))); // the same directory as below
 

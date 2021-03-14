@@ -7,14 +7,14 @@ import {
   handleAddPomodoro,
 } from '../controllers/stats.controller';
 
-const router: Router = express.Router();
+const statsRouter: Router = express.Router();
 
-router.route('/').post(authenticateJWT, handleAddPomodoro);
+statsRouter.route('/').post(authenticateJWT, handleAddPomodoro);
 
-router.route('/tags/:year/:month').get(authenticateJWT, getAllStatsByMonth);
+statsRouter.route('/tags/:year/:month').get(authenticateJWT, getAllStatsByMonth);
 
-router.route('/:year/:month').get(authenticateJWT, getStatsInGivenMonth);
+statsRouter.route('/:year/:month').get(authenticateJWT, getStatsInGivenMonth);
 
-router.route('/:year/:month/:day').get(authenticateJWT, getStatsInGivenDay);
+statsRouter.route('/:year/:month/:day').get(authenticateJWT, getStatsInGivenDay);
 
-export default router;
+export { statsRouter };

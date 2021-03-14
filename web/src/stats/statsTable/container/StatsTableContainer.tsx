@@ -4,7 +4,7 @@ import { Loader } from '../../../shared/loader/Loader';
 import { StatsTableComponent } from '../component/StatsTableComponent';
 import { StatsTableContainerProps } from './StatsTableContainerProps';
 
-class StatsTableContainer extends React.Component<StatsTableContainerProps> {
+export class StatsTableContainer extends React.Component<StatsTableContainerProps> {
   render() {
     if (this.props.settingsState.isLoading) {
       return <Loader />;
@@ -24,5 +24,3 @@ class StatsTableContainer extends React.Component<StatsTableContainerProps> {
     }
   }
 }
-
-export default StatsTableContainer;

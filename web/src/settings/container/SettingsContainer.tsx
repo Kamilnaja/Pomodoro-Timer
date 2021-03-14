@@ -6,5 +6,3 @@ export class SettingsContainer extends React.Component {
     return <SettingsComponent></SettingsComponent>;
   }
 }
-
-export default SettingsContainer;
