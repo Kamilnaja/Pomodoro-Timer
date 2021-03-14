@@ -1,4 +1,3 @@
-import { link } from 'node:fs';
 import React from 'react';
 import { Button, ButtonGroup, Table } from 'react-bootstrap';
 import { PomodorosDoneInDay } from '../../../../../types/statsInterfaces';
@@ -64,7 +63,7 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
       <thead className="table__head">
         <tr>
           <th>
-            Day{' '}
+            Day
             <Button onClick={() => props.toggleDisplayDirection()} variant="link">
               toggle sort
             </Button>

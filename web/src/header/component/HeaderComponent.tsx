@@ -6,7 +6,6 @@ import About from '../../about/About';
 import PomodoroCounterScreen from '../../pomodoroCounter/pomodoroCounterScreen/PomodoroCounterScreen';
 import SettingsContainer from '../../settings/container/SettingsContainer';
 import { StatsScreenContainer } from '../../stats/statsScreen/StatsScreenContainer';
-import TaskAndNotesContainer from '../../tasksAndNotes/taskAndNotesWrapper/taskAndNotesContainer/TaskAndNotesContainer';
 import { HeaderContainerProps } from '../container/HeaderContainerProps';
 import { GuardedRoute } from '../guardedRoute/GuardedRoute';
 import './headerComponent.scss';
@@ -21,7 +20,6 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
           <Nav className="mr-auto">
             {props.isLoggedIn ? (
               <>
-                {/* <Nav.Link href="/taskAndNotes">Tasks and notes</Nav.Link> */}
                 <Nav.Link href="/stats">Stats</Nav.Link>
                 <Nav.Link href="/settings">Settings</Nav.Link>
                 <Nav.Link className="button--logout" onClick={() => props.handleOpenModal(ModalType.LOGOUT)}>
@@ -43,9 +41,6 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
         </Navbar.Collapse>
       </Navbar>
       <Switch>
-        <Route path="/taskAndNotes">
-          <TaskAndNotesContainer />
-        </Route>
         <GuardedRoute path="/settings" component={SettingsContainer} auth={true}></GuardedRoute>
         <GuardedRoute path="/stats" component={StatsScreenContainer} auth={props.isLoggedIn}></GuardedRoute>
         <Route path="/about">

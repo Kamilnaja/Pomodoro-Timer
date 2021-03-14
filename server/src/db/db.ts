@@ -30,28 +30,6 @@ const queries: TableQuery[] = [
     tableName: 'tags',
   },
   {
-    query: `todos (
-      id            SERIAL PRIMARY KEY,
-      date_created  timestamp,
-      user_id       text,
-      title         text,
-      note          text,
-      is_done       boolean
-    )`,
-    tableName: 'todos',
-  },
-  {
-    query: `subtasks (
-      id             SERIAL PRIMARY KEY,
-      date_created   timestamp,
-      parent_task_id integer,
-      title          text,
-      note           text,
-      is_done        boolean
-    )`,
-    tableName: 'subtasks',
-  },
-  {
     query: `settings (
       id                         SERIAL PRIMARY KEY,
       user_id                    text,

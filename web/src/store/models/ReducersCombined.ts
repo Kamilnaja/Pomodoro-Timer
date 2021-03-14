@@ -1,3 +1,3 @@
 export type ReducersCombined = Partial<Record<Reducers, Object>>;
 
-export type Reducers = 'stats' | 'auth' | 'tasksAndNotes' | 'tags' | 'settings' | 'pomodoroCounter';
+export type Reducers = 'stats' | 'auth' | 'tags' | 'settings' | 'pomodoroCounter';

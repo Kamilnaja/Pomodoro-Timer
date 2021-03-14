@@ -55,8 +55,7 @@ export const queryAllStatsByMonthFromDb = async (userId: string, period: Period,
   };
 
   try {
-    const queryResult: QueryResult = await pool.query(query);
-    return queryResult;
+    return await pool.query(query);
   } catch (err) {
     return Promise.reject(err);
   }

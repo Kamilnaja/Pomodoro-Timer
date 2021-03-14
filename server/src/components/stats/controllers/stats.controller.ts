@@ -98,6 +98,7 @@ export const getAllStatsByMonth = async (
     try {
       const date = new Date(Number(year), Number(month));
       const queryResult: QueryResult = await queryAllStatsByMonthFromDb(userId, 'month', date);
+      console.log(queryResult);
       const dateCreated: Date = await searchDateCreatedInDb(userId);
 
       res.json({
