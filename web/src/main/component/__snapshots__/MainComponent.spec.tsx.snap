@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainComponent should works 1`] = `
+<div
+  className="app"
+>
+  <HeaderContainer
+    handleOpenModal={[MockFunction]}
+    isLoggedIn={false}
+  />
+  <Modal
+    closeModal={[MockFunction]}
+    modalType={0}
+  />
+  <Connect(CookiesInfoContainer) />
+</div>
+`;
