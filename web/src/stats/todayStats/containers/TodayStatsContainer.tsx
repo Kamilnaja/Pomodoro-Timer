@@ -32,4 +32,4 @@ const mapDispatchToProps = {
   handleGetTodayStats,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodayStatsContainer);
+export const ConnectedTodayStatsContainer = connect(mapStateToProps, mapDispatchToProps)(TodayStatsContainer);

@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { store } from 'store/reducers/reducer';
-import MainContainer from './main/container/MainContainer';
+import { ConnectedMainContainer } from './main/container/MainContainer';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <MainContainer />
+      <ConnectedMainContainer />
     </React.StrictMode>
   </Provider>,
   document.getElementById('root'),

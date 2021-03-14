@@ -56,5 +56,4 @@ const mapDispatchToProps = {
   handleGetSettings,
   hideCookieInfo,
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(CookiesInfoContainer);
+export const ConnectedCookiesInfoContainer = connect(mapStateToProps, mapDispatchToProps)(CookiesInfoContainer);

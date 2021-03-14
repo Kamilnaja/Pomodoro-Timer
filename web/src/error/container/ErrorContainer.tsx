@@ -14,4 +14,4 @@ const mapStateToProps = (state: { error: ErrorState }) => {
   return { errorState };
 };
 
-export default connect(mapStateToProps, null)(ErrorContainer);
+export const ConnectedErrorContainer = connect(mapStateToProps, null)(ErrorContainer);

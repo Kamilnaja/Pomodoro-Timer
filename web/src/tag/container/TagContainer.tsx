@@ -44,4 +44,4 @@ const mapDispatchToProps = {
   setCurrentTag,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TagContainer);
+export const ConnectedTagContainer = connect(mapStateToProps, mapDispatchToProps)(TagContainer);

@@ -39,4 +39,4 @@ const mapDispatchToProps = {
   handleGetStatsWithTags,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StatsWithTagsContainer);
+export const ConnectedStatsWithTagsContainer = connect(mapStateToProps, mapDispatchToProps)(StatsWithTagsContainer);

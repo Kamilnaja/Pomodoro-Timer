@@ -65,5 +65,4 @@ const mapDispatchToProps = {
   handleGetSettings,
   handleGetStats: handleGetStats,
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(StatsContainer);
+export const ConnectedStatsContainer = connect(mapStateToProps, mapDispatchToProps)(StatsContainer);

@@ -5,8 +5,8 @@ import 'shared/settings/initialConfig';
 import { initialConfig } from 'shared/settings/initialConfig';
 import { AuthState } from '../../auth/store/interfaces/authState';
 import { handleSavePomodoro } from '../../stats/store/actions/statsActions';
-import TagContainer from '../../tag/container/TagContainer';
-import CounterContainer from '../counter/CounterContainer';
+import { ConnectedTagContainer } from '../../tag/container/TagContainer';
+import { ConnectedCounterContainer } from '../counter/CounterContainer';
 import { worker } from '../counter/Worker';
 import { InfoComponent } from '../info/InfoComponent';
 import { ModeButtonsComponent } from '../modeButtons/ModeButtonsComponent';
@@ -52,9 +52,9 @@ class PomodoroCounterScreen extends React.Component<PomodoroCounterScreenProps> 
         setModeLongBreak={this.handleSetModeLongBreak}
         setModeShortBreak={this.handleSetModeShortBreak}
       />
-      <CounterContainer handleSavePomodoro={this.props.handleSavePomodoro}></CounterContainer>
+      <ConnectedCounterContainer handleSavePomodoro={this.props.handleSavePomodoro}></ConnectedCounterContainer>
       <InfoComponent currentState={this.props.pomodoroCounter.counterState} auth={this.props.auth} />
-      <TagContainer />
+      <ConnectedTagContainer />
     </Jumbotron>
   );
 }
@@ -69,4 +69,4 @@ const mapStateToProps = (state: { auth: AuthState; pomodoroCounter: PomodoroCoun
   return { auth, pomodoroCounter };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PomodoroCounterScreen);
+export const ConnectedPomodoroCounterScreen = connect(mapStateToProps, mapDispatchToProps)(PomodoroCounterScreen);

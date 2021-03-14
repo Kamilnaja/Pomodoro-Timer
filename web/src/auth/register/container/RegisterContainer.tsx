@@ -35,4 +35,4 @@ const mapDispatchToProps = {
   handleSubmit: sendRegisterForm,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);
+export const ConnectedRegisterContainer = connect(mapStateToProps, mapDispatchToProps)(RegisterContainer);

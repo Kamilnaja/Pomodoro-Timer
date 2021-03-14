@@ -50,4 +50,4 @@ const mapStateToProps = (state: { auth: AuthState }) => {
   return { authState };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
+export const ConnectedMainContainer = connect(mapStateToProps, mapDispatchToProps)(MainContainer);

@@ -1,50 +1,181 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StatsContainer should match snapshot 1`] = `
-<div
-  className="table"
->
-  <table
-    className="stats__table table table table-sm table-striped table-bordered table-hover"
-  >
-    <thead
-      className="table__head"
+Array [
+  <div>
+    <div
+      className="recharts-wrapper"
+      style={
+        Object {
+          "cursor": "default",
+          "height": 400,
+          "position": "relative",
+          "width": 400,
+        }
+      }
     >
-      <tr>
-        <th>
-          Day
-        </th>
-        <th>
-          Tags
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          2021-03-01T05:47:01.476Z
-        </td>
-        <td />
-      </tr>
-      <tr>
-        <td>
-          2021-03-01T06:13:36.785Z
-        </td>
-        <td />
-      </tr>
-      <tr>
-        <td>
-          2021-03-01T17:28:16.182Z
-        </td>
-        <td />
-      </tr>
-      <tr>
-        <td>
-          2021-03-02T19:59:00.403Z
-        </td>
-        <td />
-      </tr>
-    </tbody>
-  </table>
-</div>
+      <svg
+        className="recharts-surface"
+        height={400}
+        version="1.1"
+        viewBox="0 0 400 400"
+        width={400}
+      >
+        <defs>
+          <clipPath
+            id="recharts1-clip"
+          >
+            <rect
+              height={390}
+              width={390}
+              x={5}
+              y={5}
+            />
+          </clipPath>
+        </defs>
+        <g
+          className="recharts-layer recharts-line"
+        >
+          <path
+            className="recharts-curve recharts-line-curve"
+            clipPath={null}
+            d="M5,5C48.333333333333336,5,91.66666666666666,5,135,5C178.33333333333334,5,221.66666666666666,5,265,5C308.3333333333333,5,351.6666666666667,135,395,265.00000000000006"
+            fill="none"
+            height={390}
+            points={
+              Array [
+                Object {
+                  "payload": Object {
+                    "count": 3,
+                    "createdAt": "2021-03-01T05:47:01.476Z",
+                    "day": 1,
+                    "month": 2,
+                    "tagText": null,
+                  },
+                  "value": 3,
+                  "x": 5,
+                  "y": 5,
+                },
+                Object {
+                  "payload": Object {
+                    "count": 3,
+                    "createdAt": "2021-03-01T06:13:36.785Z",
+                    "day": 1,
+                    "month": 2,
+                    "tagText": null,
+                  },
+                  "value": 3,
+                  "x": 135,
+                  "y": 5,
+                },
+                Object {
+                  "payload": Object {
+                    "count": 3,
+                    "createdAt": "2021-03-01T17:28:16.182Z",
+                    "day": 1,
+                    "month": 2,
+                    "tagText": null,
+                  },
+                  "value": 3,
+                  "x": 265,
+                  "y": 5,
+                },
+                Object {
+                  "payload": Object {
+                    "count": 1,
+                    "createdAt": "2021-03-02T19:59:00.403Z",
+                    "day": 2,
+                    "month": 2,
+                    "tagText": null,
+                  },
+                  "value": 1,
+                  "x": 395,
+                  "y": 265.00000000000006,
+                },
+              ]
+            }
+            stroke="#8884d8"
+            strokeDasharray="0px 0px"
+            strokeWidth={1}
+            type="monotone"
+            width={390}
+          />
+        </g>
+      </svg>
+    </div>
+  </div>,
+  <div
+    className="table"
+  >
+    <h3>
+      Detailed statistics
+    </h3>
+    <table
+      className="stats__table table table table-sm table-striped table-bordered table-hover"
+    >
+      <thead
+        className="table__head"
+      >
+        <tr>
+          <th>
+            Day
+          </th>
+          <th>
+            Time
+          </th>
+          <th>
+            Tags
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            1
+          </td>
+          <td>
+            6
+            :
+            47
+          </td>
+          <td />
+        </tr>
+        <tr>
+          <td>
+            1
+          </td>
+          <td>
+            7
+            :
+            13
+          </td>
+          <td />
+        </tr>
+        <tr>
+          <td>
+            1
+          </td>
+          <td>
+            18
+            :
+            28
+          </td>
+          <td />
+        </tr>
+        <tr>
+          <td>
+            2
+          </td>
+          <td>
+            20
+            :
+            59
+          </td>
+          <td />
+        </tr>
+      </tbody>
+    </table>
+  </div>,
+  ";",
+]
 `;

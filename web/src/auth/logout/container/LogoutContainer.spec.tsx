@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import renderer from 'react-test-renderer';
 import { createAuthState } from '../../testing/auth.testing.data';
 import { Provider } from 'react-redux';
-import LogoutContainer from './LogoutContainer';
+import { ConnectedLogoutContainer } from './LogoutContainer';
 
 const mockStore = configureStore([thunk]);
 
@@ -18,7 +18,7 @@ describe('LogoutContainer', () => {
 
     component = renderer.create(
       <Provider store={store}>
-        <LogoutContainer closeModal={() => {}} />
+        <ConnectedLogoutContainer closeModal={() => {}} />
       </Provider>,
     );
   });

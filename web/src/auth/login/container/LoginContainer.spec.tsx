@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import renderer from 'react-test-renderer';
 import { createAuthState } from '../../testing/auth.testing.data';
 import { Provider } from 'react-redux';
-import LoginContainer from './LoginContainer';
+import { ConnectedLoginContainer } from './LoginContainer';
 
 const mockStore = configureStore([thunk]);
 
@@ -18,7 +18,7 @@ describe('LoginContainer', () => {
 
     component = renderer.create(
       <Provider store={store}>
-        <LoginContainer />
+        <ConnectedLoginContainer />
       </Provider>,
     );
   });

@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import LoginContainer from '../../auth/login/container/LoginContainer';
-import LogoutContainer from '../../auth/logout/container/LogoutContainer';
-import RegisterContainer from '../../auth/register/container/RegisterContainer';
-import { ModalType as ModalEnum, ModalType } from './modalEnum';
+import { ConnectedLoginContainer } from '../../auth/login/container/LoginContainer';
+import { ConnectedLogoutContainer } from '../../auth/logout/container/LogoutContainer';
+import { ConnectedRegisterContainer } from '../../auth/register/container/RegisterContainer';
 import './modal.scss';
+import { ModalType as ModalEnum, ModalType } from './modalEnum';
 import { CreatedModal } from './ModalInterface';
 import { ModalProps } from './ModalProps';
 
@@ -12,11 +12,11 @@ export const Modal = (props: ModalProps) => {
   const createModalBodyFactory = (modalType: ModalType): CreatedModal => {
     switch (modalType) {
       case ModalEnum.LOGIN:
-        return { component: <LoginContainer />, title: 'Login' };
+        return { component: <ConnectedLoginContainer />, title: 'Login' };
       case ModalEnum.REGISTER:
-        return { component: <RegisterContainer />, title: 'Register' };
+        return { component: <ConnectedRegisterContainer />, title: 'Register' };
       case ModalEnum.LOGOUT:
-        return { component: <LogoutContainer closeModal={props.closeModal} />, title: 'Logout' };
+        return { component: <ConnectedLogoutContainer closeModal={props.closeModal} />, title: 'Logout' };
     }
   };
 

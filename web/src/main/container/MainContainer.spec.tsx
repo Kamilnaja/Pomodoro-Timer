@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import { CounterState } from '../../pomodoroCounter/store/enums/CounterState';
 import { ReducersCombined } from '../../store/models/ReducersCombined';
 import { createTagsState } from '../../tag/testing/tags.test.data';
-import MainContainer from './MainContainer';
+import { ConnectedMainContainer } from './MainContainer';
 
 const mockStore = configureStore([thunk]);
 
@@ -34,7 +34,7 @@ describe('MainContainer', () => {
 
     component = renderer.create(
       <Provider store={store}>
-        <MainContainer />
+        <ConnectedMainContainer />
       </Provider>,
     );
   });

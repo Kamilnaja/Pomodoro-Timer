@@ -7,7 +7,7 @@ import { pause, run } from '../store/actions/pomodoroCounterAction';
 import { PomodoroCounterActionsTypes } from '../store/actions/pomodoroCounterActionTypes';
 import { CounterState } from '../store/enums/CounterState';
 import { createPomodoroCounterState } from '../testing/pomodoroCounter.test.data';
-import CounterContainer from './CounterContainer';
+import { ConnectedCounterContainer } from './CounterContainer';
 import * as Helpers from '../pomodoroCounterScreen/PomodoroCounterScreenHelpers';
 
 const mockStore = configureStore([thunk]);
@@ -28,7 +28,7 @@ describe('CounterContainer', () => {
 
     component = renderer.create(
       <Provider store={store}>
-        <CounterContainer handleSavePomodoro={handleSavePomodoro} />
+        <ConnectedCounterContainer handleSavePomodoro={handleSavePomodoro} />
       </Provider>,
     );
   });
@@ -59,7 +59,7 @@ describe('CounterContainer', () => {
 
     component = renderer.create(
       <Provider store={store}>
-        <CounterContainer handleSavePomodoro={handleSavePomodoro} />
+        <ConnectedCounterContainer handleSavePomodoro={handleSavePomodoro} />
       </Provider>,
     );
 

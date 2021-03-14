@@ -80,21 +80,16 @@ exports[`HeaderComponent Should match snapshot 1`] = `
       </NavbarCollapse>
     </Navbar>
     <Switch>
-      <Route
-        path="/taskAndNotes"
-      >
-        <Connect(TaskAndNotesContainer) />
-      </Route>
-      <Route
+      <GuardedRoute
+        auth={true}
+        component={[Function]}
         path="/settings"
-      >
-        <SettingsContainer />
-      </Route>
-      <Route
+      />
+      <GuardedRoute
+        auth={true}
+        component={[Function]}
         path="/stats"
-      >
-        <StatsScreenComponent />
-      </Route>
+      />
       <Route
         path="/about"
       >
@@ -179,21 +174,16 @@ exports[`HeaderComponent Should match snapshot 2`] = `
       </NavbarCollapse>
     </Navbar>
     <Switch>
-      <Route
-        path="/taskAndNotes"
-      >
-        <Connect(TaskAndNotesContainer) />
-      </Route>
-      <Route
+      <GuardedRoute
+        auth={true}
+        component={[Function]}
         path="/settings"
-      >
-        <SettingsContainer />
-      </Route>
-      <Route
+      />
+      <GuardedRoute
+        auth={false}
+        component={[Function]}
         path="/stats"
-      >
-        <StatsScreenComponent />
-      </Route>
+      />
       <Route
         path="/about"
       >

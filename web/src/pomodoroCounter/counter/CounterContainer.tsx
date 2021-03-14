@@ -122,4 +122,4 @@ const mapDispatchToProps = {
   end,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CounterContainer);
+export const ConnectedCounterContainer = connect(mapStateToProps, mapDispatchToProps)(CounterContainer);

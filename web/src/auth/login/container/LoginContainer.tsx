@@ -34,4 +34,6 @@ const mapDispatchToProps = {
   handleSubmit: sendLoginForm,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+const ConnectedLoginContainer = connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+
+export { ConnectedLoginContainer };

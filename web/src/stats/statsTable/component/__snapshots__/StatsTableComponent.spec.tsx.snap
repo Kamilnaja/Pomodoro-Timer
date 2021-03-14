@@ -31,14 +31,6 @@ exports[`StatsTableComponent should match snapshot 1`] = `
         onClick={[Function]}
         variant="primary"
       >
-        Toogle sort direction
-      </Button>
-      <Button
-        active={false}
-        disabled={false}
-        onClick={[Function]}
-        variant="primary"
-      >
         Show 
         all
          days
@@ -51,6 +43,14 @@ exports[`StatsTableComponent should match snapshot 1`] = `
     <tr>
       <th>
         Day
+        <Button
+          active={false}
+          disabled={false}
+          onClick={[Function]}
+          variant="link"
+        >
+          toggle sort
+        </Button>
       </th>
       <th>
         Number of pomodoros

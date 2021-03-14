@@ -3,7 +3,7 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ModalType } from 'shared/modal/modalEnum';
 import { About } from '../../about/About';
-import PomodoroCounterScreen from '../../pomodoroCounter/pomodoroCounterScreen/PomodoroCounterScreen';
+import { ConnectedPomodoroCounterScreen } from '../../pomodoroCounter/pomodoroCounterScreen/PomodoroCounterScreen';
 import { SettingsContainer } from '../../settings/container/SettingsContainer';
 import { StatsScreenContainer } from '../../stats/statsScreen/StatsScreenContainer';
 import { HeaderContainerProps } from '../container/HeaderContainerProps';
@@ -47,7 +47,7 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
           <About />
         </Route>
         <Route path="/">
-          <PomodoroCounterScreen />
+          <ConnectedPomodoroCounterScreen />
         </Route>
       </Switch>
     </Container>

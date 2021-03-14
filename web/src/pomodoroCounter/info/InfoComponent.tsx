@@ -1,4 +1,4 @@
-import TodayStatsContainer from '../../stats/todayStats/containers/TodayStatsContainer';
+import { ConnectedTodayStatsContainer } from '../../stats/todayStats/containers/TodayStatsContainer';
 import { CounterState } from '../store/enums/CounterState';
 import './info.scss';
 import { InfoComponentProps } from './InfoComponentProps';
@@ -21,7 +21,7 @@ export const InfoComponent = (props: InfoComponentProps) => {
       {props.auth.isLoggedIn ? (
         <div className="text-white text-center">
           <span>{info}</span>
-          <TodayStatsContainer />
+          <ConnectedTodayStatsContainer />
         </div>
       ) : (
         <div className="text-danger text-center">

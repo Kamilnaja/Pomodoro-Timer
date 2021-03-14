@@ -29,4 +29,5 @@ const mapDispatchToProps = {
   handleLogout: setUserIsLoggedOut,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogoutContainer);
+const ConnectedLogoutContainer = connect(mapStateToProps, mapDispatchToProps)(LogoutContainer);
+export { ConnectedLogoutContainer };

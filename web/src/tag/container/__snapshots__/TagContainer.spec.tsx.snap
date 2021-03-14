@@ -123,13 +123,6 @@ exports[`TagsContainer should match snapshot 1`] = `
           </span>
         </div>
       </div>
-      <div
-        className="error"
-      >
-        <span>
-          Error while trying to synchronize
-        </span>
-      </div>
     </div>
   </div>
 </div>

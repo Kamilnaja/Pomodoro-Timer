@@ -2,7 +2,7 @@ import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import CookiesInfoContainer from './CookiesInfoContainer';
+import { ConnectedCookiesInfoContainer } from './CookiesInfoContainer';
 
 describe('CookiesInfoContainer', () => {
   let store;
@@ -21,7 +21,7 @@ describe('CookiesInfoContainer', () => {
 
     component = renderer.create(
       <Provider store={store}>
-        <CookiesInfoContainer />
+        <ConnectedCookiesInfoContainer />
       </Provider>,
     );
   });

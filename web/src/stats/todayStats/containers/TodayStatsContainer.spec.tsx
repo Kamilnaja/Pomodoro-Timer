@@ -5,8 +5,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { StatsActionsTypes } from '../../store/actions/statsActionsTypes';
 import { createStatsState } from '../../testing/stats.test.data';
-import { TodayStatsComponent } from '../components/TodayStatsComponent';
-import TodayStatsContainer from './TodayStatsContainer';
+import { ConnectedTodayStatsContainer } from './TodayStatsContainer';
 
 const mockStore = configureStore([thunk]);
 
@@ -23,7 +22,7 @@ describe('StatsContainer', () => {
 
     component = renderer.create(
       <Provider store={store}>
-        <TodayStatsContainer />
+        <ConnectedTodayStatsContainer />
       </Provider>,
     );
   });
