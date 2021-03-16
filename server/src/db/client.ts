@@ -6,6 +6,7 @@ export const pool: Pool = new Pool({
   password: process.env.DATABASE_PASSWORD,
   user: process.env.DATABASE_USER,
   database: process.env.DATABASE_DATABASE,
+  ssl: true,
 });
 
 pool.connect((err: Error) => {
