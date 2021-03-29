@@ -6,8 +6,7 @@ const queries: TableQuery[] = [
   {
     query: `pomodoros (
       user_id    integer,
-      created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-      tag_id     integer REFERENCES tags(id)
+      created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
     )`,
     tableName: 'pomodoros',
   },
@@ -20,14 +19,6 @@ const queries: TableQuery[] = [
         password      text NOT NULL
       )`,
     tableName: 'users',
-  },
-  {
-    query: `tags (
-      id         SERIAL PRIMARY KEY,
-      user_id    integer REFERENCES users(id),
-      text       text NOT NULL
-    )`,
-    tableName: 'tags',
   },
   {
     query: `settings (

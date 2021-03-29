@@ -63,6 +63,6 @@ const mapStateToProps = (state: { stats: StatsState; settings: SettingsState }) 
 const mapDispatchToProps = {
   handleSaveSettings,
   handleGetSettings,
-  handleGetStats: handleGetStats,
+  handleGetStats,
 };
 export const ConnectedStatsContainer = connect(mapStateToProps, mapDispatchToProps)(StatsContainer);

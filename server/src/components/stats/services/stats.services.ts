@@ -61,15 +61,13 @@ export const queryAllStatsByMonthFromDb = async (userId: string, period: Period,
   }
 };
 
-export const savePomodoroInDb = async (userId: string, tagId: string): Promise<void> => {
+export const savePomodoroInDb = async (userId: string): Promise<void> => {
   const query: QueryConfig = {
     text: `
-      INSERT INTO pomodoros (tag_id, user_id) VALUES ($1, $2)
+      INSERT INTO pomodoros (user_id) VALUES ($1)
     `,
-    values: [tagId, userId],
+    values: [userId],
   };
-
-  console.log(tagId);
 
   try {
     await pool.query(query);

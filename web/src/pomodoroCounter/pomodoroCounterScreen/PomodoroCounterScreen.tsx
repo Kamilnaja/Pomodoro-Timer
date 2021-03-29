@@ -5,7 +5,6 @@ import 'shared/settings/initialConfig';
 import { initialConfig } from 'shared/settings/initialConfig';
 import { AuthState } from '../../auth/store/interfaces/authState';
 import { handleSavePomodoro } from '../../stats/store/actions/statsActions';
-import { ConnectedTagContainer } from '../../tag/container/TagContainer';
 import { ConnectedCounterContainer } from '../counter/CounterContainer';
 import { worker } from '../counter/Worker';
 import { InfoComponent } from '../info/InfoComponent';
@@ -54,7 +53,6 @@ class PomodoroCounterScreen extends React.Component<PomodoroCounterScreenProps> 
       />
       <ConnectedCounterContainer handleSavePomodoro={this.props.handleSavePomodoro}></ConnectedCounterContainer>
       <InfoComponent currentState={this.props.pomodoroCounter.counterState} auth={this.props.auth} />
-      <ConnectedTagContainer />
     </Jumbotron>
   );
 }

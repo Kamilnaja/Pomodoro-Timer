@@ -21,7 +21,7 @@ export const handleAddPomodoro = async (req: Request<Tag>, res: Response<Error |
   }
 
   try {
-    await savePomodoroInDb(req.user.id, tag.id);
+    await savePomodoroInDb(req.user.id);
     res.json({});
   } catch (err) {
     console.log(err.stack);
