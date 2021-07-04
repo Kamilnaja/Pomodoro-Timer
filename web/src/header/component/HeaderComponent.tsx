@@ -20,7 +20,7 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
           <Nav className="mr-auto">
             {props.isLoggedIn ? (
               <>
-                <Nav.Link href="/stats">Stats</Nav.Link>
+                <Nav.Link onClick={() => props.handleOpenModal(ModalType.STATS)}>Stats</Nav.Link>
                 <Nav.Link href="/settings">Settings</Nav.Link>
                 <Nav.Link className="button--logout" onClick={() => props.handleOpenModal(ModalType.LOGOUT)}>
                   Logout
@@ -42,7 +42,6 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
       </Navbar>
       <Switch>
         <GuardedRoute path="/settings" component={SettingsContainer} auth={true}></GuardedRoute>
-        <GuardedRoute path="/stats" component={StatsScreenContainer} auth={props.isLoggedIn}></GuardedRoute>
         <Route path="/about">
           <About />
         </Route>
