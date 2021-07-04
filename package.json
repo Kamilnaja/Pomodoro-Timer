@@ -58,7 +58,7 @@
     "heroku-postbuild": "tsc & cd web/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "watch-ts": "cd server && tsc -w",
     "test": "jest ./server",
-    "deploy": "git add . && git commit -m Heroku && git push heroku master",
+    "deploy": "git add . && git commit --allow-empty -m Heroku && git push heroku master",
     "lint-all": "**/*.ts"
   },
   "husky": {
