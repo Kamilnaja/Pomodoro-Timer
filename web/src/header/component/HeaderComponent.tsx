@@ -5,7 +5,6 @@ import { ModalType } from 'shared/modal/modalEnum';
 import { About } from '../../about/About';
 import { ConnectedPomodoroCounterScreen } from '../../pomodoroCounter/pomodoroCounterScreen/PomodoroCounterScreen';
 import { SettingsContainer } from '../../settings/container/SettingsContainer';
-import { StatsScreenContainer } from '../../stats/statsScreen/StatsScreenContainer';
 import { HeaderContainerProps } from '../container/HeaderContainerProps';
 import { GuardedRoute } from '../guardedRoute/GuardedRoute';
 import './headerComponent.scss';
@@ -13,7 +12,7 @@ import './headerComponent.scss';
 export const HeaderComponent = (props: HeaderContainerProps) => (
   <Router>
     <Container>
-      <Navbar>
+      <Navbar variant="dark">
         <Navbar.Brand href="/">Tomatodone</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
