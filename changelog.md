@@ -1,3 +1,8 @@
+## 0.10.0 - 2021-07-04
+
+- dark bg
+- stats as modals
+
 ## 0.9.0 - 2021-03-11
 
 - tracking tags

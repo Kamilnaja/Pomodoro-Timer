@@ -1,5 +1,4 @@
 import { ConnectedTodayStatsContainer } from '../../stats/todayStats/containers/TodayStatsContainer';
-import { CounterState } from '../store/enums/CounterState';
 import './info.scss';
 import { InfoComponentProps } from './InfoComponentProps';
 

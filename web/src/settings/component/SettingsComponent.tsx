@@ -1,9 +1,10 @@
 import React from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
+import './settingsComponent.scss';
 
 export const SettingsComponent = () => {
   return (
-    <Container>
+    <Container className="settings">
       <h2>Settings</h2>
       <Form>
         <Form.Group controlId="formBasicCheckbox">

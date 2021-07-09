@@ -1,4 +1,6 @@
 import { Pool } from 'pg';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const pool: Pool = new Pool({
   port: 5432,
@@ -11,7 +13,7 @@ export const pool: Pool = new Pool({
 
 pool.connect((err: Error) => {
   if (err) {
-    console.error(`connection error ${err.stack}`);
+    console.error(`connection error: ${err.stack}`);
   } else {
     console.log('connected!');
   }

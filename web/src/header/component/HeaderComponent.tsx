@@ -5,7 +5,6 @@ import { ModalType } from 'shared/modal/modalEnum';
 import { About } from '../../about/About';
 import { ConnectedPomodoroCounterScreen } from '../../pomodoroCounter/pomodoroCounterScreen/PomodoroCounterScreen';
 import { SettingsContainer } from '../../settings/container/SettingsContainer';
-import { StatsScreenContainer } from '../../stats/statsScreen/StatsScreenContainer';
 import { HeaderContainerProps } from '../container/HeaderContainerProps';
 import { GuardedRoute } from '../guardedRoute/GuardedRoute';
 import './headerComponent.scss';
@@ -13,14 +12,14 @@ import './headerComponent.scss';
 export const HeaderComponent = (props: HeaderContainerProps) => (
   <Router>
     <Container>
-      <Navbar>
+      <Navbar variant="dark">
         <Navbar.Brand href="/">Tomatodone</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             {props.isLoggedIn ? (
               <>
-                <Nav.Link href="/stats">Stats</Nav.Link>
+                <Nav.Link onClick={() => props.handleOpenModal(ModalType.STATS)}>Stats</Nav.Link>
                 <Nav.Link href="/settings">Settings</Nav.Link>
                 <Nav.Link className="button--logout" onClick={() => props.handleOpenModal(ModalType.LOGOUT)}>
                   Logout
@@ -42,7 +41,6 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
       </Navbar>
       <Switch>
         <GuardedRoute path="/settings" component={SettingsContainer} auth={true}></GuardedRoute>
-        <GuardedRoute path="/stats" component={StatsScreenContainer} auth={props.isLoggedIn}></GuardedRoute>
         <Route path="/about">
           <About />
         </Route>
