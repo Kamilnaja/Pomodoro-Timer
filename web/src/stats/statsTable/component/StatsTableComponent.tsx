@@ -1,59 +1,27 @@
 import React from 'react';
 import { Button, ButtonGroup, Table } from 'react-bootstrap';
-import { PomodorosDoneInDay } from '../../../../../types/statsInterfaces';
-import { DisplayDirection } from '../../../settings/store/interfaces/settingsInterfaces';
 import './StatsTableComponent.scss';
 import { StatsTableComponentProps } from './StatsTableComponentProps';
-/**
- * @param month - for example january = 0
- * @param year
- */
-export const daysInMonth = (props: StatsTableComponentProps): number =>
-  new Date(props.pageYear, props.pageMonth + 1, 0).getDate();
+import {
+  convertPomodorosToTime,
+  daysInMonthArray,
+  getDayOfMonth,
+  getPomodoros,
+  isDescending,
+  parseDateToDay,
+  pomodorosArray,
+} from './StatsTableHelpers';
 
-export const getPomodoroEntryAtIndex = (i: number, props: StatsTableComponentProps) =>
-  props.settings.displayDirection === 'DESC' ? daysInMonth(props) - i : i + 1;
-
-export const findPomodorosInDay = (day: number, props: StatsTableComponentProps): PomodorosDoneInDay =>
-  props.pomodoros.find(v => new Date(v.date).getDate() === day);
-
-export const parseDateToDay = (date: string) => new Date(date).getDate();
-
-export const pomodorosArray = (props: StatsTableComponentProps): PomodorosDoneInDay[] =>
-  isDescending(props.settings.displayDirection) ? [...props.pomodoros] : [...props.pomodoros.slice(0).reverse()];
-
-const isDescending = (displayDirection: DisplayDirection) => displayDirection === DisplayDirection.DESC;
-
-const getPomodoros = (i: number, props: StatsTableComponentProps): number => {
-  return findPomodorosInDay(getPomodoroEntryAtIndex(i, props), props)?.count;
-};
-
-const convertPomodorosToTime = (pomodoros: number): string => {
-  const timeInMinutes = pomodoros * 25;
-  const hours = getHoursFromMinutes(timeInMinutes);
-  const minutes = getRemainingMinutes(timeInMinutes);
-
-  return `${hours}h ${addOffsetToNumber(minutes)}m`;
-};
-
-const getHoursFromMinutes = (minutes: number): number => Math.floor(minutes / 60);
-
-const getRemainingMinutes = (minutes: number): number => minutes % 60;
-
-const addOffsetToNumber = (minutes: number): string => (String(minutes).length === 1 ? `0${minutes}` : `${minutes}`);
-
-const getTimeTemplate = (numberOfPomodoros: number) => (
+export const getTimeTemplate = (numberOfPomodoros: number) => (
   <td className="table__time">{!!numberOfPomodoros && convertPomodorosToTime(numberOfPomodoros)}</td>
 );
-
-const daysInMonthArray = (props: StatsTableComponentProps) => Array(daysInMonth(props));
 
 export const StatsTableComponent = (props: StatsTableComponentProps) => {
   const longArr = (
     <>
-      {Array.from(daysInMonthArray(props), (e, i) => (
+      {Array.from(daysInMonthArray(props), (_, i) => (
         <tr key={i}>
-          <td className="table__date">{getPomodoroEntryAtIndex(i, props)}</td>
+          <td className="table__date">{getDayOfMonth(i, props)}</td>
           <td className="table__count">{getPomodoros(i, props)}</td>
           {getTimeTemplate(getPomodoros(i, props))}
         </tr>
