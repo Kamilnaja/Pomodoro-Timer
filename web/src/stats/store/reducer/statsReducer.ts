@@ -17,10 +17,8 @@ import { StatsState } from '../models/StatsInterfaces';
 
 export const initialState: StatsState = {
   isLoading: false,
-  isLoadingWithTags: false,
   error: '',
   stats: null,
-  statsWithTags: null,
   todayResults: 0,
 };
 
@@ -62,18 +60,15 @@ export const statsReducer = (state = initialState, action: StatsActionsTypes) =>
     case GET_STATS_WITH_TAGS:
       return {
         ...state,
-        isLoadingWithTags: true,
       };
     case GET_STATS_WITH_TAGS_ERROR:
       return {
         ...state,
-        isLoadingWithTags: false,
         error: action.payload,
       };
     case GET_STATS_WITH_TAGS_SUCCESS:
       return {
         ...state,
-        isLoadingWithTags: false,
         statsWithTags: action.payload,
       };
     case GET_TODAY_STATS:

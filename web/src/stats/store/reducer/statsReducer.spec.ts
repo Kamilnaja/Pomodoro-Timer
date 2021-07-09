@@ -136,7 +136,6 @@ describe('statsReducer', () => {
       }),
     ).toEqual({
       ...initialState,
-      isLoadingWithTags: true,
     });
   });
 
@@ -149,7 +148,6 @@ describe('statsReducer', () => {
       }),
     ).toEqual({
       ...initialState,
-      isLoadingWithTags: false,
       error: err,
     });
   });
@@ -162,7 +160,6 @@ describe('statsReducer', () => {
       }),
     ).toEqual({
       ...initialState,
-      isLoadingWithTags: false,
       statsWithTags: createPomodoroSearchResult(),
     });
   });
