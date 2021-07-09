@@ -42,18 +42,20 @@ const getRemainingMinutes = (minutes: number): number => minutes % 60;
 
 const addOffsetToNumber = (minutes: number): string => (String(minutes).length === 1 ? `0${minutes}` : `${minutes}`);
 
-const getTimeTemplate = (i: number, props: StatsTableComponentProps) => (
-  <td className="table__time">{getPomodoros(i, props) && convertPomodorosToTime(getPomodoros(i, props))}</td>
+const getTimeTemplate = (numberOfPomodoros: number) => (
+  <td className="table__time">{!!numberOfPomodoros && convertPomodorosToTime(numberOfPomodoros)}</td>
 );
+
+const daysInMonthArray = (props: StatsTableComponentProps) => Array(daysInMonth(props));
 
 export const StatsTableComponent = (props: StatsTableComponentProps) => {
   const longArr = (
     <>
-      {Array.from(Array(daysInMonth(props)), (e, i) => (
+      {Array.from(daysInMonthArray(props), (e, i) => (
         <tr key={i}>
           <td className="table__date">{getPomodoroEntryAtIndex(i, props)}</td>
           <td className="table__count">{getPomodoros(i, props)}</td>
-          {getTimeTemplate(i, props)}
+          {getTimeTemplate(getPomodoros(i, props))}
         </tr>
       ))}
     </>
@@ -65,7 +67,7 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
         <tr key={i}>
           <td className="table__date">{parseDateToDay(v.date)}</td>
           <td className="table__count">{v.count}</td>
-          {getTimeTemplate(i, props)}
+          {getTimeTemplate(v.count)}
         </tr>
       ))}
     </>

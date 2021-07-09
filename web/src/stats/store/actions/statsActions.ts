@@ -7,7 +7,6 @@ import {
   GET_STATS,
   GET_STATS_ERROR,
   GET_STATS_SUCCESS,
-  GET_STATS_WITH_TAGS_ERROR,
   GET_TODAY_STATS,
   GET_TODAY_STATS_ERROR,
   GET_TODAY_STATS_SUCCESS,
@@ -53,10 +52,6 @@ const getTodayStatsError = (payload: any): StatsActionsTypes => ({
   payload,
 });
 
-export const getStatsWithTagsError = (payload: any) => ({
-  type: GET_STATS_WITH_TAGS_ERROR,
-  payload,
-});
 // thunk
 
 export const handleGetStats = (year: number, month: number) => async (dispatch: (args: Action) => void) => {

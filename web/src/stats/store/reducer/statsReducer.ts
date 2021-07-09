@@ -2,9 +2,6 @@ import {
   GET_STATS,
   GET_STATS_ERROR,
   GET_STATS_SUCCESS,
-  GET_STATS_WITH_TAGS,
-  GET_STATS_WITH_TAGS_ERROR,
-  GET_STATS_WITH_TAGS_SUCCESS,
   GET_TODAY_STATS,
   GET_TODAY_STATS_ERROR,
   GET_TODAY_STATS_SUCCESS,
@@ -56,20 +53,6 @@ export const statsReducer = (state = initialState, action: StatsActionsTypes) =>
         ...state,
         error: action.payload,
         isLoading: false,
-      };
-    case GET_STATS_WITH_TAGS:
-      return {
-        ...state,
-      };
-    case GET_STATS_WITH_TAGS_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-      };
-    case GET_STATS_WITH_TAGS_SUCCESS:
-      return {
-        ...state,
-        statsWithTags: action.payload,
       };
     case GET_TODAY_STATS:
       return {

@@ -1,12 +1,8 @@
-import { PomodorosSearchResult, StatsSearchResult } from '../../../../../types/statsInterfaces';
+import { StatsSearchResult } from '../../../../../types/statsInterfaces';
 
 export const GET_STATS = 'GET_STATS';
 export const GET_STATS_SUCCESS = 'GET_STATS_SUCCESS';
 export const GET_STATS_ERROR = 'GET_STATS_ERROR';
-
-export const GET_STATS_WITH_TAGS = 'GET_STATS_WITH_TAGS';
-export const GET_STATS_WITH_TAGS_SUCCESS = 'GET_STATS_WITH_TAGS_SUCCESS';
-export const GET_STATS_WITH_TAGS_ERROR = 'GET_STATS_WITH_TAGS_ERROR';
 
 export const GET_TODAY_STATS = 'GET_TODAY_STATS';
 export const GET_TODAY_STATS_SUCCESS = 'GET_TODAY_STATS_SUCCESS';
@@ -57,27 +53,10 @@ export interface SavePomodoroErrorAction {
   payload: any;
 }
 
-export interface GetStatsWithTagsAction {
-  type: typeof GET_STATS_WITH_TAGS;
-}
-
-export interface GetStatsWithTagsSuccessAction {
-  type: typeof GET_STATS_WITH_TAGS_SUCCESS;
-  payload: PomodorosSearchResult;
-}
-
-export interface GetStatsWithTagsErrorAction {
-  type: typeof GET_STATS_WITH_TAGS_ERROR;
-  payload: any;
-}
-
 export type StatsActionsTypes =
   | GetStatsAction
   | GetStatsSuccessAction
   | GetStatsErrorAction
-  | GetStatsWithTagsAction
-  | GetStatsWithTagsSuccessAction
-  | GetStatsWithTagsErrorAction
   | GetTodayStatsAction
   | GetTodayStatsSuccessAction
   | GetTodayStatsErrorAction

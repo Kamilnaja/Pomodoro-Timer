@@ -8,11 +8,9 @@ import { StatsState } from '../store/models/StatsInterfaces';
 
 export const createStatsState = (): StatsState => ({
   isLoading: false,
-  isLoadingWithTags: false,
   error: null,
   todayResults: 10,
   stats: null,
-  statsWithTags: null,
 });
 
 export const createStatsSearchResult = (): StatsSearchResult => ({
