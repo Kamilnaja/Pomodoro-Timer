@@ -42,6 +42,10 @@ const getRemainingMinutes = (minutes: number): number => minutes % 60;
 
 const addOffsetToNumber = (minutes: number): string => (String(minutes).length === 1 ? `0${minutes}` : `${minutes}`);
 
+const getTimeTemplate = (i: number, props: StatsTableComponentProps) => (
+  <td className="table__time">{getPomodoros(i, props) && convertPomodorosToTime(getPomodoros(i, props))}</td>
+);
+
 export const StatsTableComponent = (props: StatsTableComponentProps) => {
   const longArr = (
     <>
@@ -49,7 +53,7 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
         <tr key={i}>
           <td className="table__date">{getPomodoroEntryAtIndex(i, props)}</td>
           <td className="table__count">{getPomodoros(i, props)}</td>
-          <td className="table__time">{getPomodoros(i, props) && convertPomodorosToTime(getPomodoros(i, props))}</td>
+          {getTimeTemplate(i, props)}
         </tr>
       ))}
     </>
@@ -57,10 +61,11 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
 
   const shortArr = (
     <>
-      {pomodorosArray(props).map((v, idx) => (
-        <tr key={idx}>
+      {pomodorosArray(props).map((v, i) => (
+        <tr key={i}>
           <td className="table__date">{parseDateToDay(v.date)}</td>
           <td className="table__count">{v.count}</td>
+          {getTimeTemplate(i, props)}
         </tr>
       ))}
     </>

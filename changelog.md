@@ -1,3 +1,7 @@
+## 0.10.1 - 2021-07-09
+
+- fix for amount of time in stats
+
 ## 0.10.0 - 2021-07-09
 
 - better sorting icon
