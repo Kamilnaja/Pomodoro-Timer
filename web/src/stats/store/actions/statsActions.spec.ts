@@ -2,7 +2,7 @@ import fetchMock from 'fetch-mock';
 import fetchMockJest from 'fetch-mock-jest';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { createPomodoros, createPomodoroSearchResult } from '../../testing/stats.test.data';
+import { createPomodoroSearchResult } from '../../testing/stats.test.data';
 import * as actions from './statsActions';
 import { GET_TODAY_STATS, GET_TODAY_STATS_SUCCESS, StatsActionsTypes } from './statsActionsTypes';
 

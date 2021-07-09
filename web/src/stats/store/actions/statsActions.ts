@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { StatsSearchResult, PomodorosSearchResult } from '../../../../../types/statsInterfaces';
+import { StatsSearchResult } from '../../../../../types/statsInterfaces';
 import { Tag } from '../../../../../types/tagsInterfaces';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
 import { getCurrentDay, getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
@@ -7,9 +7,7 @@ import {
   GET_STATS,
   GET_STATS_ERROR,
   GET_STATS_SUCCESS,
-  GET_STATS_WITH_TAGS,
   GET_STATS_WITH_TAGS_ERROR,
-  GET_STATS_WITH_TAGS_SUCCESS,
   GET_TODAY_STATS,
   GET_TODAY_STATS_ERROR,
   GET_TODAY_STATS_SUCCESS,
@@ -55,28 +53,11 @@ const getTodayStatsError = (payload: any): StatsActionsTypes => ({
   payload,
 });
 
-const getStatsWithTags = () => ({
-  type: GET_STATS_WITH_TAGS,
-});
-
-const getStatsWithTagsSuccess = (payload: PomodorosSearchResult) => ({
-  type: GET_STATS_WITH_TAGS_SUCCESS,
-  payload,
-});
-
 export const getStatsWithTagsError = (payload: any) => ({
   type: GET_STATS_WITH_TAGS_ERROR,
   payload,
 });
 // thunk
-
-export const handleGetStatsWithTags = (year: number, month: number) => async (dispatch: (args: Action) => void) => {
-  dispatch(getStatsWithTags());
-
-  fetchData(`stats/tags/${year}/${month}`)
-    .then((payload: PomodorosSearchResult) => dispatch(getStatsWithTagsSuccess(payload)))
-    .catch(err => dispatch(getStatsWithTagsError(err)));
-};
 
 export const handleGetStats = (year: number, month: number) => async (dispatch: (args: Action) => void) => {
   dispatch(getStats());

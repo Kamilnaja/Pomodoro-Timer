@@ -1,7 +1,13 @@
+## 0.10.0 - 2021-07-09
+
+- better sorting icon
+- amount of total time on stats
+
 ## 0.10.0 - 2021-07-04
 
 - dark bg
 - stats as modals
+- tracking tags removed
 
 ## 0.9.0 - 2021-03-11
 

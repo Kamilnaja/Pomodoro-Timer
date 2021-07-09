@@ -19,11 +19,28 @@ export const findPomodorosInDay = (day: number, props: StatsTableComponentProps)
 
 export const parseDateToDay = (date: string) => new Date(date).getDate();
 
-export const pomodorosArray = (props: StatsTableComponentProps): PomodorosDoneInDay[] => {
-  return props.settings.displayDirection === DisplayDirection.DESC
-    ? props.pomodoros
-    : props.pomodoros.slice(0).reverse();
+export const pomodorosArray = (props: StatsTableComponentProps): PomodorosDoneInDay[] =>
+  isDescending(props.settings.displayDirection) ? [...props.pomodoros] : [...props.pomodoros.slice(0).reverse()];
+
+const isDescending = (displayDirection: DisplayDirection) => displayDirection === DisplayDirection.DESC;
+
+const getPomodoros = (i: number, props: StatsTableComponentProps): number => {
+  return findPomodorosInDay(getPomodoroEntryAtIndex(i, props), props)?.count;
 };
+
+const convertPomodorosToTime = (pomodoros: number): string => {
+  const timeInMinutes = pomodoros * 25;
+  const hours = getHoursFromMinutes(timeInMinutes);
+  const minutes = getRemainingMinutes(timeInMinutes);
+
+  return `${hours}h ${addOffsetToNumber(minutes)}m`;
+};
+
+const getHoursFromMinutes = (minutes: number): number => Math.floor(minutes / 60);
+
+const getRemainingMinutes = (minutes: number): number => minutes % 60;
+
+const addOffsetToNumber = (minutes: number): string => (String(minutes).length === 1 ? `0${minutes}` : `${minutes}`);
 
 export const StatsTableComponent = (props: StatsTableComponentProps) => {
   const longArr = (
@@ -31,7 +48,8 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
       {Array.from(Array(daysInMonth(props)), (e, i) => (
         <tr key={i}>
           <td className="table__date">{getPomodoroEntryAtIndex(i, props)}</td>
-          <td className="table__count">{findPomodorosInDay(getPomodoroEntryAtIndex(i, props), props)?.count}</td>
+          <td className="table__count">{getPomodoros(i, props)}</td>
+          <td className="table__time">{getPomodoros(i, props) && convertPomodorosToTime(getPomodoros(i, props))}</td>
         </tr>
       ))}
     </>
@@ -63,12 +81,15 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
       <thead className="table__head">
         <tr>
           <th>
-            Day
-            <Button onClick={() => props.toggleDisplayDirection()} variant="link">
-              toggle sort
-            </Button>
+            <div className="table__head--day">
+              Day
+              <Button onClick={() => props.toggleDisplayDirection()} size="sm" className="table__head--btn">
+                {isDescending(props.settings.displayDirection) ? '⇑⇓' : '⇓⇑'}
+              </Button>
+            </div>
           </th>
           <th>Number of pomodoros</th>
+          <th>Amount of time</th>
         </tr>
       </thead>
       <tbody>{props.settings.displayEmptyDays ? longArr : shortArr}</tbody>

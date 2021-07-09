@@ -2,6 +2,15 @@
   margin: 20px auto;
   max-width: 600px;
   table-layout: fixed;
+
+  & &__head--day {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  thead th {
+    vertical-align: middle;
+  }
 }
 
 .caption {
