@@ -1,3 +1,7 @@
+## 0.11.1 - 2021-07-10
+
+- total amount of pomodoros and time of pomodoros in month
+
 ## 0.10.1 - 2021-07-09
 
 - fix for amount of time in stats

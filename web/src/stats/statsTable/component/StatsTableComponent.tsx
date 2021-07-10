@@ -2,28 +2,22 @@ import React from 'react';
 import { Button, ButtonGroup, Table } from 'react-bootstrap';
 import './StatsTableComponent.scss';
 import { StatsTableComponentProps } from './StatsTableComponentProps';
-import {
-  convertPomodorosToTime,
-  daysInMonthArray,
-  getDayOfMonth,
-  getPomodoros,
-  isDescending,
-  parseDateToDay,
-  pomodorosArray,
-} from './StatsTableHelpers';
+import * as helpers from './StatsTableHelpers';
 
 export const getTimeTemplate = (numberOfPomodoros: number) => (
-  <td className="table__time">{!!numberOfPomodoros && convertPomodorosToTime(numberOfPomodoros)}</td>
+  <td className="table__time">
+    {!!numberOfPomodoros && helpers.minutesToReadableTime(helpers.pomodorosToMinutes(numberOfPomodoros))}
+  </td>
 );
 
 export const StatsTableComponent = (props: StatsTableComponentProps) => {
   const longArr = (
     <>
-      {Array.from(daysInMonthArray(props), (_, i) => (
+      {Array.from(helpers.daysInMonthArray(props), (_, i) => (
         <tr key={i}>
-          <td className="table__date">{getDayOfMonth(i, props)}</td>
-          <td className="table__count">{getPomodoros(i, props)}</td>
-          {getTimeTemplate(getPomodoros(i, props))}
+          <td className="table__date">{helpers.getDayOfMonth(i, props)}</td>
+          <td className="table__count">{helpers.getPomodoros(i, props)}</td>
+          {getTimeTemplate(helpers.getPomodoros(i, props))}
         </tr>
       ))}
     </>
@@ -31,9 +25,9 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
 
   const shortArr = (
     <>
-      {pomodorosArray(props).map((v, i) => (
+      {helpers.sortPomodoros(props).map((v, i) => (
         <tr key={i}>
-          <td className="table__date">{parseDateToDay(v.date)}</td>
+          <td className="table__date">{helpers.parseDateToDay(v.date)}</td>
           <td className="table__count">{v.count}</td>
           {getTimeTemplate(v.count)}
         </tr>
@@ -59,7 +53,7 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
             <div className="table__head--day">
               Day
               <Button onClick={() => props.toggleDisplayDirection()} size="sm" className="table__head--btn">
-                {isDescending(props.settings.displayDirection) ? '⇑⇓' : '⇓⇑'}
+                {helpers.isDescending(props.settings.displayDirection) ? '⇑⇓' : '⇓⇑'}
               </Button>
             </div>
           </th>
@@ -68,6 +62,13 @@ export const StatsTableComponent = (props: StatsTableComponentProps) => {
         </tr>
       </thead>
       <tbody>{props.settings.displayEmptyDays ? longArr : shortArr}</tbody>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td>{helpers.totalPomodorosInMonth(props)}</td>
+          <td>{helpers.totalPomodorosToTime(props)}</td>
+        </tr>
+      </tfoot>
     </Table>
   );
 };
