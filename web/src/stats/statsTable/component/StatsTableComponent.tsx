@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, ButtonGroup, Table } from 'react-bootstrap';
 import './StatsTableComponent.scss';
 import { StatsTableComponentProps } from './StatsTableComponentProps';
-import * as helpers from './StatsTableHelpers';
+import * as helpers from '../../helpers/statsHelpers';
 
 export const getTimeTemplate = (numberOfPomodoros: number) => (
   <td className="table__time">

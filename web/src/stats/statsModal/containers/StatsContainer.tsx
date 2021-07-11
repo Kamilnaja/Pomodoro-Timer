@@ -9,6 +9,7 @@ import { StatsState } from '../../store/models/StatsInterfaces';
 import { StatsComponent } from '../components/StatsComponent';
 import { StatsContainerProps } from './StatsContainerProps';
 import { handleGetSettings, handleSaveSettings } from '../../../settings/store/actions/settingsActions';
+import { isDescending} from '../../helpers/statsHelpers';
 
 class StatsContainer extends React.Component<StatsContainerProps> {
   componentDidMount() {
@@ -21,7 +22,8 @@ class StatsContainer extends React.Component<StatsContainerProps> {
     this.props.handleSaveSettings({
       ...settings,
       displayDirection:
-        settings.displayDirection === DisplayDirection.ASC ? DisplayDirection.DESC : DisplayDirection.ASC,
+      isDescending(settings.displayDirection) 
+        ? DisplayDirection.ASC  : DisplayDirection.DESC,
     });
   };
 

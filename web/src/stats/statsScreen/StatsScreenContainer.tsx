@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap';
-import { ConnectedStatsContainer } from '../stats/containers/StatsContainer';
+import { ConnectedStatsContainer } from '../statsModal/containers/StatsContainer';
 
 export const StatsScreenContainer = () => (
   <Container>

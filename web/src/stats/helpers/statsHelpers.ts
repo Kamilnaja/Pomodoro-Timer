@@ -1,6 +1,6 @@
-import { PomodorosDoneInDay } from '../../../../../types/statsInterfaces';
-import { DisplayDirection } from '../../../settings/store/interfaces/settingsInterfaces';
-import { StatsTableComponentProps } from './StatsTableComponentProps';
+import { PomodorosDoneInDay } from '../../../../types/statsInterfaces';
+import { DisplayDirection } from '../../settings/store/interfaces/settingsInterfaces';
+import { StatsTableComponentProps } from '../statsTable/component/StatsTableComponentProps';
 
 /**
  * @param month - for example january = 0
