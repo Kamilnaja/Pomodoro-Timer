@@ -4,6 +4,7 @@ import { Tag } from '../../../../../types/tagsInterfaces';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
 import { getCurrentDay, getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
 import {
+  CLEAR_DATE,
   DECREMENT_MONTH,
   GET_STATS,
   GET_STATS_ERROR,
@@ -62,6 +63,10 @@ export const incrementMonth = (): StatsActionsTypes => ({
 export const decrementMonth = (): StatsActionsTypes => ({
   type: DECREMENT_MONTH,
   payload: -1,
+});
+
+export const clearDate = (): StatsActionsTypes => ({
+  type: CLEAR_DATE,
 });
 
 // thunk

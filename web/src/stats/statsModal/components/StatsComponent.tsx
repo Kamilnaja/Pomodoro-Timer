@@ -4,20 +4,25 @@ import './stats.component.scss';
 import { StatsComponentProps } from './StatsComponentProps';
 
 export const StatsComponent = (props: StatsComponentProps) => {
+  const changeMonth = (increment: boolean) => {
+    increment ? props.incrementMonth() : props.decrementMonth();
+    props.handleGetStats(props.date.getFullYear(), props.date.getMonth());
+  };
+
   return (
     <Container>
       <div className="stats">
         <ButtonGroup className="stats__navigation navigation">
           <Button
             className="navigation__button navigation__button--prev"
-            onClick={() => props.decrementMonth()}
+            onClick={() => changeMonth(false)}
             disabled={!props.stats.hasPreviousPeriod}
           >
             &lt; prev
           </Button>
           <Button
             className="navigation__button navigation__button--next"
-            onClick={() => props.incrementMonth()}
+            onClick={() => changeMonth(true)}
             disabled={!props.stats.hasNextPeriod}
           >
             next &gt;

@@ -67,6 +67,11 @@ export const statsReducer = (state = initialState, action: fromActions.StatsActi
         ...state,
         currentDate: new Date(state.currentDate.setMonth(state.currentDate.getMonth() + action.payload)),
       };
+    case fromActions.CLEAR_DATE:
+      return {
+        ...state,
+        currentDate: new Date(),
+      };
     default:
       return state;
   }

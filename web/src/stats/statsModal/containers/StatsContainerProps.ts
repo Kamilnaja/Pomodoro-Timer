@@ -12,4 +12,5 @@ export type StatsContainerProps = {
   settingsState: SettingsState;
   incrementMonth: () => void;
   decrementMonth: () => void;
+  clearDate: () => void;
 };
