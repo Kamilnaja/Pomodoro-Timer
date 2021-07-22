@@ -4,12 +4,14 @@ import { Tag } from '../../../../../types/tagsInterfaces';
 import { fetchData, updateData } from '../../../shared/scripts/requests';
 import { getCurrentDay, getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
 import {
+  DECREMENT_MONTH,
   GET_STATS,
   GET_STATS_ERROR,
   GET_STATS_SUCCESS,
   GET_TODAY_STATS,
   GET_TODAY_STATS_ERROR,
   GET_TODAY_STATS_SUCCESS,
+  INCREMENT_MONTH,
   SAVE_POMODORO,
   SAVE_POMODORO_ERROR,
   StatsActionsTypes,
@@ -50,6 +52,16 @@ const getTodayStatsSuccess = (payload: number): StatsActionsTypes => ({
 const getTodayStatsError = (payload: any): StatsActionsTypes => ({
   type: GET_TODAY_STATS_ERROR,
   payload,
+});
+
+export const incrementMonth = (): StatsActionsTypes => ({
+  type: INCREMENT_MONTH,
+  payload: 1,
+});
+
+export const decrementMonth = (): StatsActionsTypes => ({
+  type: DECREMENT_MONTH,
+  payload: -1,
 });
 
 // thunk

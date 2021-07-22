@@ -1,38 +1,23 @@
 import { Button, ButtonGroup, Container } from 'react-bootstrap';
-import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
 import { StatsTableContainer } from '../../statsTable/container/StatsTableContainer';
 import './stats.component.scss';
 import { StatsComponentProps } from './StatsComponentProps';
 
-let pageMonth = getCurrentMonth();
-let pageYear = getCurrentYear();
-
 export const StatsComponent = (props: StatsComponentProps) => {
-  const handleChangeMonth = (isNext: boolean) => {
-    const nextOrPreviousMonth = isNext ? 1 : -1;
-    const dt = new Date(pageYear, pageMonth);
-    dt.setMonth(dt.getMonth() + nextOrPreviousMonth);
-
-    pageMonth = dt.getMonth();
-    pageYear = dt.getFullYear();
-
-    props.handleGetStats(dt.getFullYear(), dt.getMonth());
-  };
-
   return (
     <Container>
       <div className="stats">
         <ButtonGroup className="stats__navigation navigation">
           <Button
             className="navigation__button navigation__button--prev"
-            onClick={() => handleChangeMonth(false)}
+            onClick={() => props.decrementMonth()}
             disabled={!props.stats.hasPreviousPeriod}
           >
             &lt; prev
           </Button>
           <Button
             className="navigation__button navigation__button--next"
-            onClick={() => handleChangeMonth(true)}
+            onClick={() => props.incrementMonth()}
             disabled={!props.stats.hasNextPeriod}
           >
             next &gt;
@@ -40,8 +25,8 @@ export const StatsComponent = (props: StatsComponentProps) => {
         </ButtonGroup>
 
         <StatsTableContainer
-          pageMonth={pageMonth}
-          pageYear={pageYear}
+          pageMonth={props.date.getMonth()}
+          pageYear={props.date.getFullYear()}
           pomodoros={props.stats.pomodoros}
           handleGetSettings={props.handleGetSettings}
           handleSaveSettings={props.handleSaveSettings}

@@ -3,7 +3,6 @@ import {
   GET_STATS,
   GET_STATS_ERROR,
   GET_STATS_SUCCESS,
-  GET_STATS_WITH_TAGS,
   GET_TODAY_STATS,
   GET_TODAY_STATS_ERROR,
   GET_TODAY_STATS_SUCCESS,
@@ -124,16 +123,6 @@ describe('statsReducer', () => {
       ...initialState,
       isLoading: false,
       todayResults: 1,
-    });
-  });
-
-  it('should handle GET_STATS_WITH_TAGS', () => {
-    expect(
-      statsReducer(undefined, {
-        type: GET_STATS_WITH_TAGS,
-      }),
-    ).toEqual({
-      ...initialState,
     });
   });
 });

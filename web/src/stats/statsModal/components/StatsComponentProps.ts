@@ -16,4 +16,7 @@ export type StatsComponentProps = {
   toggleDisplayDirection: ToggleDisplayDirection;
   toggleDisplayEmptyDays: ToggleDisplayEmptyDays;
   handleSaveSettings: HandleSaveSettings;
+  incrementMonth: () => void;
+  decrementMonth: () => void;
+  date: Date;
 };

@@ -5,6 +5,7 @@ export interface StatsState {
   error: string;
   stats: StatsSearchResult;
   todayResults: number;
+  currentDate: Date;
 }
 
 export type HandleGetStats = (year?: number, month?: number) => void;

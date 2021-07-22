@@ -12,6 +12,9 @@ export const SAVE_POMODORO = 'SAVE_POMODORO';
 export const SAVE_POMODORO_SUCCESS = 'SAVE_POMODORO_SUCCESS';
 export const SAVE_POMODORO_ERROR = 'SAVE_POMODORO_ERROR';
 
+export const INCREMENT_MONTH = 'INCREMENT_MONTH';
+export const DECREMENT_MONTH = 'DECREMENT_MONTH';
+
 export interface GetStatsAction {
   type: typeof GET_STATS;
 }
@@ -53,6 +56,16 @@ export interface SavePomodoroErrorAction {
   payload: any;
 }
 
+export interface IncrementMonth {
+  type: typeof INCREMENT_MONTH;
+  payload: number;
+}
+
+export interface DecrementMonth {
+  type: typeof DECREMENT_MONTH;
+  payload: number;
+}
+
 export type StatsActionsTypes =
   | GetStatsAction
   | GetStatsSuccessAction
@@ -62,4 +75,6 @@ export type StatsActionsTypes =
   | GetTodayStatsErrorAction
   | SavePomodoroAction
   | SavePomodoroSuccessAction
-  | SavePomodoroErrorAction;
+  | SavePomodoroErrorAction
+  | IncrementMonth
+  | DecrementMonth;

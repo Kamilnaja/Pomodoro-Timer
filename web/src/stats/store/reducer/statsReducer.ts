@@ -6,6 +6,7 @@ export const initialState: StatsState = {
   error: '',
   stats: null,
   todayResults: 0,
+  currentDate: new Date(),
 };
 
 export const statsReducer = (state = initialState, action: fromActions.StatsActionsTypes) => {
@@ -59,6 +60,12 @@ export const statsReducer = (state = initialState, action: fromActions.StatsActi
         ...state,
         isLoading: false,
         todayResults: action.payload,
+      };
+    case fromActions.INCREMENT_MONTH:
+    case fromActions.DECREMENT_MONTH:
+      return {
+        ...state,
+        currentDate: new Date(state.currentDate.setMonth(state.currentDate.getMonth() + action.payload)),
       };
     default:
       return state;

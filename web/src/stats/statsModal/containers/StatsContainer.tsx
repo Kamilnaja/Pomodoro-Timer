@@ -4,12 +4,13 @@ import { ErrorComponent } from 'shared/error/errorComponent/ErrorComponent';
 import { Loader } from 'shared/loader/Loader';
 import { SettingsState, DisplayDirection } from '../../../settings/store/interfaces/settingsInterfaces';
 import { getCurrentMonth, getCurrentYear } from '../../../shared/scripts/utils';
-import { handleGetStats } from '../../store/actions/statsActions';
+import { handleGetStats, incrementMonth, decrementMonth } from '../../store/actions/statsActions';
 import { StatsState } from '../../store/models/StatsInterfaces';
 import { StatsComponent } from '../components/StatsComponent';
 import { StatsContainerProps } from './StatsContainerProps';
 import { handleGetSettings, handleSaveSettings } from '../../../settings/store/actions/settingsActions';
-import { isDescending} from '../../helpers/statsHelpers';
+import { isDescending } from '../../helpers/statsHelpers';
+import { getCurrentDate } from '../../store/selectors/statsSelectors';
 
 class StatsContainer extends React.Component<StatsContainerProps> {
   componentDidMount() {
@@ -21,9 +22,7 @@ class StatsContainer extends React.Component<StatsContainerProps> {
     const { settings } = this.props.settingsState;
     this.props.handleSaveSettings({
       ...settings,
-      displayDirection:
-      isDescending(settings.displayDirection) 
-        ? DisplayDirection.ASC  : DisplayDirection.DESC,
+      displayDirection: isDescending(settings.displayDirection) ? DisplayDirection.ASC : DisplayDirection.DESC,
     });
   };
 
@@ -50,6 +49,9 @@ class StatsContainer extends React.Component<StatsContainerProps> {
           handleSaveSettings={this.props.handleSaveSettings}
           toggleDisplayDirection={this.toggleDisplayDirection}
           toggleDisplayEmptyDays={this.toggleDisplayEmptyDays}
+          incrementMonth={this.props.incrementMonth}
+          decrementMonth={this.props.decrementMonth}
+          date={getCurrentDate(this.props.stats)}
         />
       );
     }
@@ -66,5 +68,7 @@ const mapDispatchToProps = {
   handleSaveSettings,
   handleGetSettings,
   handleGetStats,
+  incrementMonth,
+  decrementMonth,
 };
 export const ConnectedStatsContainer = connect(mapStateToProps, mapDispatchToProps)(StatsContainer);

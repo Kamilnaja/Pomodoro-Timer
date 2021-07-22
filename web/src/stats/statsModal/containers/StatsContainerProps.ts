@@ -10,4 +10,6 @@ export type StatsContainerProps = {
   handleGetSettings: HandleGetSettings;
   stats: StatsState;
   settingsState: SettingsState;
+  incrementMonth: () => void;
+  decrementMonth: () => void;
 };
