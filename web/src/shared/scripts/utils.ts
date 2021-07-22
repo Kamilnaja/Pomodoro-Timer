@@ -14,9 +14,7 @@ export const msToTime = (s: number): string => {
   return pad(mins) + ':' + pad(secs);
 };
 
-export const getCurrentMonth = (givenMonth?: number): number => {
-  return givenMonth ? givenMonth : new Date().getMonth();
-};
+export const getCurrentMonth = (): number => new Date().getMonth();
 
 export const getCurrentYear = (): number => new Date().getFullYear();
 

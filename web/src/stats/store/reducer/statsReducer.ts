@@ -1,15 +1,4 @@
-import {
-  GET_STATS,
-  GET_STATS_ERROR,
-  GET_STATS_SUCCESS,
-  GET_TODAY_STATS,
-  GET_TODAY_STATS_ERROR,
-  GET_TODAY_STATS_SUCCESS,
-  SAVE_POMODORO,
-  SAVE_POMODORO_ERROR,
-  SAVE_POMODORO_SUCCESS,
-  StatsActionsTypes,
-} from '../actions/statsActionsTypes';
+import * as fromActions from '../actions/statsActionsTypes';
 import { StatsState } from '../models/StatsInterfaces';
 
 export const initialState: StatsState = {
@@ -19,53 +8,53 @@ export const initialState: StatsState = {
   todayResults: 0,
 };
 
-export const statsReducer = (state = initialState, action: StatsActionsTypes) => {
+export const statsReducer = (state = initialState, action: fromActions.StatsActionsTypes) => {
   switch (action.type) {
-    case SAVE_POMODORO:
+    case fromActions.SAVE_POMODORO:
       return {
         ...state,
         isLoading: true,
       };
-    case SAVE_POMODORO_SUCCESS:
+    case fromActions.SAVE_POMODORO_SUCCESS:
       return {
         ...state,
         isLoading: false,
       };
-    case SAVE_POMODORO_ERROR:
+    case fromActions.SAVE_POMODORO_ERROR:
       return {
         ...state,
         error: action.payload,
         isLoading: false,
       };
-    case GET_STATS:
+    case fromActions.GET_STATS:
       return {
         ...state,
         isLoading: true,
       };
-    case GET_STATS_SUCCESS:
+    case fromActions.GET_STATS_SUCCESS:
       return {
         ...state,
         isLoading: false,
         stats: action.payload,
       };
-    case GET_STATS_ERROR:
+    case fromActions.GET_STATS_ERROR:
       return {
         ...state,
         error: action.payload,
         isLoading: false,
       };
-    case GET_TODAY_STATS:
+    case fromActions.GET_TODAY_STATS:
       return {
         ...state,
         isLoading: true,
       };
-    case GET_TODAY_STATS_ERROR:
+    case fromActions.GET_TODAY_STATS_ERROR:
       return {
         ...state,
         isLoading: false,
         error: action.payload,
       };
-    case GET_TODAY_STATS_SUCCESS:
+    case fromActions.GET_TODAY_STATS_SUCCESS:
       return {
         ...state,
         isLoading: false,
