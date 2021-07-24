@@ -3,5 +3,6 @@ export enum ModalType {
   REGISTER,
   LOGOUT,
   STATS,
+  SETTINGS,
   NULL,
 }

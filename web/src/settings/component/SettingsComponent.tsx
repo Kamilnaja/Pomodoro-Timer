@@ -5,7 +5,6 @@ import './settingsComponent.scss';
 export const SettingsComponent = () => {
   return (
     <Container className="settings">
-      <h2>Settings</h2>
       <Form>
         <Form.Group controlId="formBasicCheckbox">
           <Form.Check type="checkbox" label="Enable sounds" />

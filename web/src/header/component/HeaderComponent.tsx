@@ -4,9 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ModalType } from 'shared/modal/modalEnum';
 import { About } from '../../about/About';
 import { ConnectedPomodoroCounterScreen } from '../../pomodoroCounter/pomodoroCounterScreen/PomodoroCounterScreen';
-import { SettingsContainer } from '../../settings/container/SettingsContainer';
 import { HeaderContainerProps } from '../container/HeaderContainerProps';
-import { GuardedRoute } from '../guardedRoute/GuardedRoute';
 import './headerComponent.scss';
 
 export const HeaderComponent = (props: HeaderContainerProps) => (
@@ -20,7 +18,7 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
             {props.isLoggedIn ? (
               <>
                 <Nav.Link onClick={() => props.handleOpenModal(ModalType.STATS)}>Stats</Nav.Link>
-                <Nav.Link href="/settings">Settings</Nav.Link>
+                <Nav.Link onClick={() => props.handleOpenModal(ModalType.SETTINGS)}>Settings</Nav.Link>
                 <Nav.Link className="button--logout" onClick={() => props.handleOpenModal(ModalType.LOGOUT)}>
                   Logout
                 </Nav.Link>
@@ -40,7 +38,6 @@ export const HeaderComponent = (props: HeaderContainerProps) => (
         </Navbar.Collapse>
       </Navbar>
       <Switch>
-        <GuardedRoute path="/settings" component={SettingsContainer} auth={true}></GuardedRoute>
         <Route path="/about">
           <About />
         </Route>
