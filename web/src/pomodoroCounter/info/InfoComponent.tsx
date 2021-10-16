@@ -11,7 +11,7 @@ export const InfoComponent = (props: InfoComponentProps) => {
         </div>
       ) : (
         <div className="text-danger text-center">
-          <span>Please login to save pomodoros</span>
+          <span className="text-white">Please login to save pomodoros</span>
         </div>
       )}
     </div>

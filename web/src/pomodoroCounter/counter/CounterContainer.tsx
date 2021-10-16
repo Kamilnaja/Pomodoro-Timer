@@ -4,12 +4,7 @@ import { connect } from 'react-redux';
 import { msToTime } from '../../shared/scripts/utils';
 import { initialConfig } from '../../shared/settings/initialConfig';
 import { TabTitle } from '../../shared/title/TabTitle';
-import {
-  isAnyTimerRunning,
-  playClickSound,
-  isPomodoroMode,
-  playEndSound,
-} from '../pomodoroCounterScreen/PomodoroCounterScreenHelpers';
+import { isAnyTimerRunning, isPomodoroMode, playSound } from '../pomodoroCounterScreen/PomodoroCounterScreenHelpers';
 import { end, pause, run, updateCounter } from '../store/actions/pomodoroCounterAction';
 import { PomodoroCounterState } from '../store/interfaces/PomodoroCounterState';
 import './counterContainer.scss';
@@ -32,7 +27,7 @@ class CounterContainer extends React.Component<CounterComponentProps> {
   handleStartCounter = () => {
     if (!isAnyTimerRunning(this.props.counter.counterState)) {
       this.tabTitle.stopBlinking();
-      playClickSound();
+      playSound('sounds/zapsplat_multimedia_game_sound_childrens_ping_high_pitched_soft_007_60676.mp3');
 
       this.props.run();
 
@@ -76,7 +71,7 @@ class CounterContainer extends React.Component<CounterComponentProps> {
 
   private handleEndTimer() {
     this.tabTitle.startBlinking();
-    playEndSound();
+    playSound('sounds/zapsplat_multimedia_game_sound_positive_award_bonus_bright_warm_synth_001_60698.mp3');
     if (isPomodoroMode(this.props.counter.currentTimer)) {
       this.props.handleSavePomodoro({ id: '1' });
       this.props.end();
