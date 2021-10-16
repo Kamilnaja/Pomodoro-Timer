@@ -72,7 +72,9 @@ class CounterContainer extends React.Component<CounterComponentProps> {
   private handleEndTimer() {
     this.tabTitle.startBlinking();
     playSound('sounds/zapsplat_multimedia_game_sound_positive_award_bonus_bright_warm_synth_001_60698.mp3');
+
     if (isPomodoroMode(this.props.counter.currentTimer)) {
+      new Notification('🍅🍅🍅 End of pomodoro 🍅🍅🍅');
       this.props.handleSavePomodoro({ id: '1' });
       this.props.end();
       this.setWorkerTime(initialConfig.shortBreakTime);

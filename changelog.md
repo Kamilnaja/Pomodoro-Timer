@@ -1,6 +1,7 @@
 ## 0.12.0 - 2021-10-16
 
 - decreasing sound volume for start and finish pomodoro
+- simple notification after pomodoro ends
 
 ## 0.11.1 - 2021-07-10
 
